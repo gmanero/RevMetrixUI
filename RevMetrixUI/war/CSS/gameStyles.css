@@ -99,7 +99,7 @@ body {
 		}
 		.scoreboard {
 		    display: grid;
-		    grid-template-columns: repeat(10, 10%); /* 5 columns */
+		    grid-template-columns: repeat(11, 9%); /* 5 columns */
 		    gap: 0; /* Gap between grid items */
 		    padding: 10px
 		}

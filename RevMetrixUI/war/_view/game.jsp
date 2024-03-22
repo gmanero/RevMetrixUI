@@ -30,12 +30,11 @@
     <div class="mainText">
         <div class="gameInfo">
             <h2>Welcome to the Bowling Game</h2>
-            <p>Game Number: 1</p>
-            <p>Lane Number: 5</p>
-            <p id="shotNumber">Shot Number: 1</p>
-            <p>Score: 0</p>
-            <p id="pinsKnockedDown">Pins Knocked Down: 0</p>
-            <p id="pinsRemaining">Pins Remaining: 10</p>
+            <p>Game Number: ${gameNumber }</p>
+            <p>Lane Number: ${laneNumber }</p>
+            <p id="shotNumber">Shot Number: ${shotNumber}</p>
+            <p id="pinsKnockedDown">Pins Knocked Down: ${pinsKnockedDown}</p>
+            <p id="pinsRemaining">Pins Remaining: ${pinsRemianing}</p>
             <button class="button" onclick="nextShot()">Next Shot</button>
         </div>
 	<div>
@@ -120,6 +119,12 @@
             </div>
             <div class="score-running">${tenthFrame_score}</div>
         </div>
+        <div class="score-box">
+            <div class="score-upper">
+                <div class="shot-box">${event_score}</div>
+            </div>
+            <div class="score-running">${current_score}</div>
+        </div>
     </div>
 		<div>
         <!-- Container for bowling pins -->
@@ -160,9 +165,9 @@
 	</div>
         <div class="stats">
             <h2>Game Statistics</h2>
-            <p>Total Strikes: 0</p>
-            <p>Total Spares: 0</p>
-            <p>Total Misses: 0</p>
+            <p>Total Strikes: ${strikes}</p>
+            <p>Total Spares: ${spares}</p>
+            <p>Total Misses: ${misses}</p>
         </div>
 	
         
