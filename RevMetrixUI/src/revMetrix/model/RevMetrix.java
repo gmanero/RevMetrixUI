@@ -9,7 +9,14 @@ public class RevMetrix {
     private List<Game> GamesList = new ArrayList<>();
     private List<Event> EventsList = new ArrayList<>();
     private List<Ball> BallsList = new ArrayList<>();
-  
+    
+    //constructor
+    public RevMetrix() {
+        AccountsList = new ArrayList<>();
+        GamesList = new ArrayList<>();
+        EventsList = new ArrayList<>();
+        BallsList = new ArrayList<>();
+    }
     
     //add to an arraylist
     public void addAccount(Account account) {
