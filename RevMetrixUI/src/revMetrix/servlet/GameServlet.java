@@ -18,4 +18,13 @@ public class GameServlet extends HttpServlet {
 		
 		req.getRequestDispatcher("/_view/game.jsp").forward(req, resp);
 	}
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		
+		System.out.println("Game Servlet: doPost");
+		
+		//RevMetrix game = new RevMetrix();
+		
+		
+	}
 }
