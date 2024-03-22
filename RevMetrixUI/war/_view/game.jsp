@@ -38,7 +38,91 @@
             <p id="pinsRemaining">Pins Remaining: 10</p>
             <button class="button" onclick="nextShot()">Next Shot</button>
         </div>
-
+	<div>
+	<div class="scoreboard">
+        <div class="score-box">
+            <div class="score-upper">
+                <div class="shot-gap">a</div>
+                <div class="shot-box">${firstFrame_shot1}</div>
+                <div class="shot-box">${firstFrame_shot2}</div>
+            </div>
+            <div class="score-running">${firstFrame_score}</div>
+        </div>
+        <div class="score-box">
+            <div class="score-upper">
+                <div class="shot-gap"></div>
+                <div class="shot-box">${secondFrame_shot1}</div>
+                <div class="shot-box">${secondFrame_shot2}</div>
+            </div>
+            <div class="score-running">${secondFrame_score}</div>
+        </div>
+        <div class="score-box">
+            <div class="score-upper">
+                <div class="shot-gap"></div>
+                <div class="shot-box">${thirdFrame_shot1}</div>
+                <div class="shot-box">${thirdFrame_shot2}</div>
+            </div>
+            <div class="score-running">${thirdFrame_score}</div>
+        </div>
+        <div class="score-box">
+            <div class="score-upper">
+                <div class="shot-gap"></div>
+                <div class="shot-box">${forthFrame_shot1}</div>
+                <div class="shot-box">${forthFrame_shot2}</div>
+            </div>
+            <div class="score-running">${forthFrame_score}</div>
+        </div>
+        <div class="score-box">
+            <div class="score-upper">
+                <div class="shot-gap"></div>
+                <div class="shot-box">${fifthFrame_shot1}</div>
+                <div class="shot-box">${fifthFrame_shot2}</div>
+            </div>
+            <div class="score-running">${fifthFrame_score}</div>
+        </div>
+        <div class="score-box">
+            <div class="score-upper">
+                <div class="shot-gap"></div>
+                <div class="shot-box">${sixthFrame_shot1}</div>
+                <div class="shot-box">${sixthFrame_shot2}</div>
+            </div>
+            <div class="score-running">${sixthFrame_score}</div>
+        </div>
+        <div class="score-box">
+            <div class="score-upper">
+                <div class="shot-gap"></div>
+                <div class="shot-box">${seventhFrame_shot1}</div>
+                <div class="shot-box">${seventhFrame_shot2}</div>
+            </div>
+            <div class="score-running">${seventhFrame_score}</div>
+        </div>
+        <div class="score-box">
+            <div class="score-upper">
+                <div class="shot-gap"></div>
+                <div class="shot-box">${eighthFrame_shot1}</div>
+                <div class="shot-box">${eighthFrame_shot2}</div>
+            </div>
+            <div class="score-running">${eigthFrame_score}</div>
+        </div>
+        <div class="score-box">
+            <div class="score-upper">
+                <div class="shot-gap"></div>
+                <div class="shot-box">${ninthFrame_shot1}</div>
+                <div class="shot-box">${ninthFrame_shot2}</div>
+            </div>
+            <div class="score-running">${ninethFrame_score}</div>
+        </div>
+        <div class="score-box">
+            <div class="score-upper">
+                <div class="shot-box">${tenthFrame_shot1}</div>
+                <div class="shot-box">${tenthFrame_shot2}</div>
+                <div class="shot-box">${tenthFrame_shot3}</div>
+            </div>
+            <div class="score-running">${tenthFrame_score}</div>
+        </div>
+    </div>
+		
+	</div>
         <div class="stats">
             <h2>Game Statistics</h2>
             <p>Total Strikes: 0</p>

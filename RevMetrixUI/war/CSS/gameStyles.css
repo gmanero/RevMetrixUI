@@ -89,3 +89,38 @@
             display: flex;
             justify-content: center;
         }
+        .score-box {
+		    display: flex;
+		    flex-direction: column;
+		    height: 100%;
+		    border: 1px solid white;
+		}
+        
+        .score-upper {
+		    display: flex;
+		    flex: 1;
+		}
+		
+		.shot-box {
+		    flex: 1;
+		    border: 1px solid white;
+		    width: 33%
+		}
+		.shot-gap{
+		    flex: 1;
+		    width: 34%;
+		    visibility: hidden;
+		}
+		
+		.score-running{
+		    flex: none;
+		
+		    padding: 10px;
+		    overflow: auto;
+		}
+		.scoreboard {
+		    display: grid;
+		    grid-template-columns: repeat(10, 10%); /* 5 columns */
+		    gap: 0; /* Gap between grid items */
+		    padding: 10px
+		}
