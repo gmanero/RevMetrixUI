@@ -1,0 +1,93 @@
+ 		body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #1f1f1f;
+            color: #fff;
+        }
+
+        /* Header Styles */
+        .topPage {
+            text-align: center;
+            background-color: #6a0dad;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .topPage h1 {
+            margin: 0;
+            font-size: 36px;
+            color: #fff;
+        }
+
+        /* Navigation Styles */
+        .links {
+            text-align: center;
+            padding: 10px;
+            background-color: #6a0dad;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            background-color: #af00ff;
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #8a00b3;
+        }
+
+        /* Tournaments Section */
+        .tournaments {
+            display: flex;
+            overflow-x: auto;
+            padding: 10px 20px;
+            margin-bottom: 20px;
+        }
+
+        .tournament {
+            flex: 0 0 auto;
+            width: 300px;
+            background-color: #333;
+            border-radius: 10px;
+            padding: 20px;
+            margin-right: 20px;
+            box-sizing: border-box;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .tournament:last-child {
+            margin-right: 0;
+        }
+
+        .tournament:hover {
+            background-color: #555;
+        }
+
+        .tournament h2 {
+            margin-top: 0;
+        }
+
+        /* Other Sections */
+        .section {
+            padding: 0 20px;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .section-content {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+        }
