@@ -5,10 +5,10 @@ import java.util.List;
 
 
 public class RevMetrix {
-    private List<Account> AccountsList = new ArrayList<>();
-    private List<Game> GamesList = new ArrayList<>();
-    private List<Event> EventsList = new ArrayList<>();
-    private List<Ball> BallsList = new ArrayList<>();
+    private ArrayList<Account> AccountsList = new ArrayList<>();
+    private ArrayList<Game> GamesList = new ArrayList<>();
+    private ArrayList<Event> EventsList = new ArrayList<>();
+    private ArrayList<Ball> BallsList = new ArrayList<>();
     
     //constructor
     public RevMetrix() {
@@ -32,6 +32,18 @@ public class RevMetrix {
         BallsList.add(ball);
     }
     
+    public ArrayList<Account> getAccountsList(){
+    	return AccountsList;
+    }
+    public ArrayList<Game> getGamesList(){
+    	return GamesList;
+    }
+    public ArrayList<Event> geEventsList(){
+    	return EventsList;
+    }
+    public ArrayList<Ball> getBallsList(){
+    	return BallsList;
+    }
     
 
     public static class Account {

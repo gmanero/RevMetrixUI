@@ -26,8 +26,8 @@ public class GameServlet extends HttpServlet {
 		
 		System.out.println("Game Servlet: doPost");
 		
-		
-		
+		String numbers = req.getParameter("clickedPins");
+		System.out.println(numbers);
 		
 		
 		req.getRequestDispatcher("/_view/game.jsp").forward(req, resp);
