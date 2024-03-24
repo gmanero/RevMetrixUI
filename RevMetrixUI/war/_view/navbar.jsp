@@ -16,7 +16,7 @@
         <form method="get">
             <button type="submit" name="destination" value="revMetrix" class="nav-item">RevMetrix</button>
             <div class="dropdown">
-                <button class="nav-item dropbtn">Events</button>
+                <button type="submit" class="nav-item dropbtn" name="destination" value="event">Events</button>
                 <div class="dropdown-content">
                     <a href="#">Tournaments</a>
                     <a href="#">Practices</a>
