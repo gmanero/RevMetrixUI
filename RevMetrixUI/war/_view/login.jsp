@@ -7,21 +7,16 @@
    	<link rel = "stylesheet" type ="text/css" href="CSS/loginStyles.css">
 </head>
 <body>
+
+ <!-- Navigation Bar -->
+    <jsp:include page="navbar.jsp" />
     <div class="topPage">
         <h1>RevMetrix</h1>
     </div>
-
-    <!-- Navigation Bar -->
-    <div class="links">
-        <button type="button" class="button">RevMetrix</button>
-        <button type="button" class="button">Events</button>
-        <button type="button" class="button">Register</button>
-        <button type="button" class="button">Stats</button>
-        <button type="button" class="button">Your Game</button>
-        <button type="button" class="button">Login</button>
-        <button type="button" class="button">Account</button>
-    </div>
-
+    
+    
+    
+    
     <!-- Login Form -->
     <form class="loginForm" onsubmit="return redirectIfCorrect()">
         <input type="text" id="username" name="username" placeholder="Username">

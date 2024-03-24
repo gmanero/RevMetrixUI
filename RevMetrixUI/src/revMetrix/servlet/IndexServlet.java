@@ -25,7 +25,7 @@ public class IndexServlet extends HttpServlet {
            destOut = "/_view/index.jsp";
         } else if ("login".equals(destIn)) {
         	 destOut = "/_view/login.jsp";
-        } else if ("events".equals(destIn)) {
+        } else if ("event".equals(destIn)) {
         	 destOut = "/_view/event.jsp";
         } else if ("register".equals(destIn)) {
         	destOut = "/_view/registration.jsp";

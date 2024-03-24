@@ -1,0 +1,90 @@
+/* Reset default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    background-color: #222; /* Dark background */
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    width: 100px; /* Adjust logo width */
+    height: auto;
+}
+
+.links {
+    display: flex;
+}
+
+.nav-item {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    margin-right: 20px;
+    padding: 10px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.nav-item:hover {
+    color: #26acca; /* Change color on hover */
+}
+
+.login-btn,
+.account-btn {
+    background: none;
+    border: 1px solid  #26acca; /* Purple border */
+    color:  #26acca; /* Purple text color */
+    padding: 8px 20px;
+    font-size: 16px;
+    margin-left: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.login-btn:hover,
+.account-btn:hover {
+    background-color:  #26acca; /* Purple background */
+    color: #fff; /* White text color */
+}
+
+/* Dropdown styles */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #222; /* Dark background */
+    min-width: 160px;
+    z-index: 1;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #26acca; /* Purple background */
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
