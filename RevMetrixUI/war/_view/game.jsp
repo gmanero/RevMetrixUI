@@ -24,7 +24,10 @@
             <p id="shotNumber">Shot Number: ${shotNumber}</p>
             <p id="pinsKnockedDown">Pins Knocked Down: ${pinsKnockedDown}</p>
             <p id="pinsRemaining">Pins Remaining: ${pinsRemianing}</p>
-            <button class="button" onclick="nextShot()">Next Shot</button>
+            <form  action="${pageContext.servletContext.contextPath}/game" method="post">
+            <button class="button" type="submit" value="submit">Next Shot</button>
+            </form>
+            
         </div>
 	<div>
 	<div class="scoreboard">
