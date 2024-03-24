@@ -26,6 +26,7 @@
             <p id="pinsRemaining">Pins Remaining: ${pinsRemianing}</p>
             <form  action="${pageContext.servletContext.contextPath}/game" method="post">
             <button class="button" type="submit" value="submit">Next Shot</button>
+            <input type="hidden" name = "clickedPins" id = "output" value="">
             </form>
             
         </div>
@@ -170,6 +171,7 @@
     <script>
     var clickedPins = [];
 
+
     function togglePin(pin, pinNumber) {
         // Toggle class to change background color
         pin.classList.toggle('clicked');
@@ -183,6 +185,7 @@
         clickedPins.sort();
         // Update display of clicked pins
         document.getElementById('clickedPins').textContent = clickedPins.join(', ');
+        document.getElementById('output').value = document.getElementById('clickedPins').textContent;
     }
 </script>
 </body>
