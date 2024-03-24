@@ -4,29 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Current Game</title>
+    <title>RevMetrix - Current Game</title>
     <link rel = "stylesheet" type ="text/css" href="CSS/gameStyles.css">
 </head>
 
 <body>
+ <jsp:include page="navbar.jsp" />
     <div class="topPage">
         <h1>Current Game</h1>
     </div>
     
     
-          <form method= "get">
-    <div class="links">
-        <button type="submit" name="destination" value="revMetrix" class="button">RevMetrix</button>
-        <button type="submit" name="destination" value="events" class="button">Events</button>
-        <button type="submit" name="destination" value="register" class="button">Register</button>
-        <button type="submit" name="destination" value="stats" class="button">Stats</button>
-        <button type="submit" name="destination" value="game" class="button">Your Game</button>
-         <button type="submit" name="destination" value="login" class="button">Login</button>
-          <button type="submit" name="destination" value="account" class="button">Account</button>
-    </div>
-     </form>
-    
-
+        
     <div class="mainText">
         <div class="gameInfo">
             <h2>Welcome to the Bowling Game</h2>
@@ -35,7 +24,11 @@
             <p id="shotNumber">Shot Number: ${shotNumber}</p>
             <p id="pinsKnockedDown">Pins Knocked Down: ${pinsKnockedDown}</p>
             <p id="pinsRemaining">Pins Remaining: ${pinsRemianing}</p>
-            <button class="button" onclick="nextShot()">Next Shot</button>
+            <form  action="${pageContext.servletContext.contextPath}/game" method="post">
+            <button class="button" type="submit" value="submit">Next Shot</button>
+            <input type="hidden" name = "clickedPins" id = "output" value="">
+            </form>
+            
         </div>
 	<div>
 	<div class="scoreboard">
@@ -178,6 +171,7 @@
     <script>
     var clickedPins = [];
 
+
     function togglePin(pin, pinNumber) {
         // Toggle class to change background color
         pin.classList.toggle('clicked');
@@ -191,6 +185,7 @@
         clickedPins.sort();
         // Update display of clicked pins
         document.getElementById('clickedPins').textContent = clickedPins.join(', ');
+        document.getElementById('output').value = document.getElementById('clickedPins').textContent;
     }
 </script>
 </body>

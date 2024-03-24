@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RevMetrixPage</title>
+    <title>RevMetrix - Registration</title>
     <link rel = "stylesheet" type ="text/css" href="CSS/registrationStyles.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -17,10 +17,14 @@
 </head>
 
 <body>
+
+            <jsp:include page="navbar.jsp" />
+
     <div class="topPage">
         <h1>Register</h1>
     </div>
 
+<<<<<<< HEAD
             <form method= "get">
     <div class="links">
         <button type="submit" name="destination" value="revMetrix" class="button">RevMetrix</button>
@@ -65,6 +69,13 @@
             <input type="submit" value="Register">
         </div>
     </form>
+=======
+    
+
+    <div class="mainText">
+        <p>This is Registration Page</p>
+    </div>
+>>>>>>> branch 'Feature' of git@github.com:gmanero/RevMetrixUI.git
 </body>
 
 </html>

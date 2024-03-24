@@ -4,6 +4,7 @@
     box-sizing: border-box;
 }
 
+<<<<<<< HEAD
 body {
     margin: 0;
     padding: 0;
@@ -11,7 +12,17 @@ body {
     background-color: #1f1f1f;
     color: #fff;
 }
+=======
+        /* Header Styles */
+        .topPage {
+            text-align: center;
+            background: linear-gradient(to bottom,  #562d7f, #26acca);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+>>>>>>> branch 'Feature' of git@github.com:gmanero/RevMetrixUI.git
 
+<<<<<<< HEAD
 /* Header Styles */
 .topPage {
     text-align: center;
@@ -48,6 +59,21 @@ body {
 .button:hover {
     background-color: #8a00b3;
 }
+=======
+        .topPage h1 {
+            margin: 0;
+            font-size: 36px;
+            color: #fff;
+        }
+        /* Establishment Styles */
+        .Establishment {
+            background-color: #3f3f3f;
+            padding: 20px;
+            margin: 0 auto;
+            max-width: 600px;
+            border-radius: 10px;
+        }
+>>>>>>> branch 'Feature' of git@github.com:gmanero/RevMetrixUI.git
 
 /* Establishment Styles */
 .Establishment {
