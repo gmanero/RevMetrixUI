@@ -10,7 +10,7 @@
 
 <div class="navbar">
     <div class="logo">
-        <img src="images/RevMetrixUILogo.png" alt="Logo">
+        <img class="logo" src="images/RevMetrixUI_Logo.png"  alt="Logo">
     </div>
     <div class="links">
         <form method="get">
