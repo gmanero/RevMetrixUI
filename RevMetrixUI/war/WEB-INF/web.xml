@@ -26,6 +26,10 @@
         <servlet-name>StatsServlet</servlet-name>
         <servlet-class>revMetrix.servlet.StatsServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>accountCreation</servlet-name>
+        <servlet-class>revMetrix.servlet.accountCreation</servlet-class>
+    </servlet>
 
     <!-- Servlet mappings -->
     <servlet-mapping>
@@ -52,4 +56,8 @@
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+    <servlet-mapping>
+        <servlet-name>accountCreation</servlet-name>
+        <url-pattern>/accountCreation</url-pattern>
+    </servlet-mapping>
 </web-app>

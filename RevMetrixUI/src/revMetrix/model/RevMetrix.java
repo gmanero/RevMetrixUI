@@ -5,10 +5,10 @@ import java.util.List;
 
 
 public class RevMetrix {
-    private List<Account> AccountsList = new ArrayList<>();
-    private List<Game> GamesList = new ArrayList<>();
-    private List<Event> EventsList = new ArrayList<>();
-    private List<Ball> BallsList = new ArrayList<>();
+    public static List<Account> AccountsList = new ArrayList<>();
+    public static List<Game> GamesList = new ArrayList<>();
+    public static List<Event> EventsList = new ArrayList<>();
+    public static List<Ball> BallsList = new ArrayList<>();
     
     //constructor
     public RevMetrix() {
@@ -35,43 +35,53 @@ public class RevMetrix {
     
 
     public static class Account {
-        private String username;
-        private String password;
-        private boolean isLoggedIn;
 
-        public Account(String username, String password, boolean isLoggedIn) {
-            this.username = username;
-            this.password = password;
-            this.isLoggedIn = isLoggedIn;
+		public static String email;
+    	public static String username;
+    	public static String password;
+    	public static boolean isLoggedIn;
+
+        public Account(String email, String username, String password, boolean isLoggedIn) {
+        	Account.email = email;
+            Account.username = username;
+            Account.password = password;
+            Account.isLoggedIn = isLoggedIn;
         }
         
         //getters
-        public String getUsername() {
+        public static String getEmail() {
+            return email;
+        }
+        public static String getUsername() {
             return username;
         }
-        public String getPassword() {
+        public static String getPassword() {
             return password;
         }
-        public boolean getIsLoggedIn() {
+        public static boolean getIsLoggedIn() {
             return isLoggedIn;
         }
         
         //setters
-        public void setUsername(String username) {
-            this.username = username;
+        public static void setEmail(String email) {
+            Account.email = email;
         }
-        public void setPassword(String password) {
-            this.password = password;
+        public static void setUsername(String username) {
+            Account.username = username;
         }
-        public void setLoggedIn(boolean isLoggedIn) {
-            this.isLoggedIn = isLoggedIn;
+        public static void setPassword(String password) {
+            Account.password = password;
+        }
+        public static void setLoggedIn(boolean isLoggedIn) {
+        	Account.isLoggedIn = isLoggedIn;
         }
     }
+    
     public static class Game{
-    	private String gameId;
-        private String playerName;
-        private int score;
-        private boolean[] pins;
+    	public String gameId;
+    	public String playerName;
+        public int score;
+        public boolean[] pins;
 
         public Game(String gameId, String playerName, int score, boolean[] pins) {
             this.gameId = gameId;
@@ -109,18 +119,18 @@ public class RevMetrix {
         }
     }
     public static class Event{
-    	private String eventId;
-        private String eventName;
-        private String eventDescription;
+    	public static String eventId;
+    	public static String eventName;
+    	public static String eventDescription;
 
         public Event(String eventId, String eventName, String eventDescription) {
-            this.eventId = eventId;
-            this.eventName = eventName;
-            this.eventDescription = eventDescription;
+            Event.eventId = eventId;
+            Event.eventName = eventName;
+            Event.eventDescription = eventDescription;
         }
         
         //getters
-        public String getEventId() {
+        public static String getEventId() {
             return eventId;
         }
         public String getEventName() {
@@ -131,47 +141,47 @@ public class RevMetrix {
         }
         
         //setters
-        public void setEventId(String eventId) {
-            this.eventId = eventId;
+        public static void setEventId(String eventId) {
+        	Event.eventId = eventId;
         }
-        public void setEventName(String eventName) {
-            this.eventName = eventName;
+        public static void setEventName(String eventName) {
+        	Event.eventName = eventName;
         }
-        public void setEventDescription(String eventDescription) {
-            this.eventDescription = eventDescription;
+        public static void setEventDescription(String eventDescription) {
+        	Event.eventDescription = eventDescription;
         }
     }
     public static class Ball{
-    	private String ballId;
-        private String brand;
-        private String weight;
+    	public static String ballId;
+    	public static String brand;
+    	public static String weight;
 
         public Ball(String ballId, String brand, String weight) {
-            this.ballId = ballId;
-            this.brand = brand;
-            this.weight = weight;
+            Ball.ballId = ballId;
+            Ball.brand = brand;
+            Ball.weight = weight;
         }
         
         //getters
-        public String getBallId() {
+        public static String getBallId() {
             return ballId;
         }
-        public String getBrand() {
+        public static String getBrand() {
             return brand;
         }
-        public String getWeight() {
+        public static String getWeight() {
             return weight;
         }
         
         //setters
-        public void setBallId(String ballId) {
-            this.ballId = ballId;
+        public static void setBallId(String ballId) {
+        	Ball.ballId = ballId;
         }
-        public void setBrand(String brand) {
-            this.brand = brand;
+        public static void setBrand(String brand) {
+        	Ball.brand = brand;
         }
-        public void setWeight(String weight) {
-            this.weight = weight;
+        public static void setWeight(String weight) {
+        	Ball.weight = weight;
         }
     }
 }
