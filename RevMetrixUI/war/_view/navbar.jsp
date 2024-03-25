@@ -3,29 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RevMetrixPage</title>
+    <title>RevMetrix</title>
     <link rel="stylesheet" type="text/css" href="CSS/navbarStyles.css">
 </head>
 <body>
 
 <div class="navbar">
     <div class="logo">
-        <img class="logo" src="images/RevMetrixUI_Logo.png"  alt="Logo">
+        <form method="get">
+            <button type="submit" name="destination" value="revMetrix" class="nav-item"><img class="logo" src="images/RevMetrixUI_Logo.png"  alt="Logo"></button>
+        </form>
     </div>
     <div class="links">
         <form method="get">
-            <button type="submit" name="destination" value="revMetrix" class="nav-item">RevMetrix</button>
             <div class="dropdown">
                 <button type="submit" class="nav-item dropbtn" name="destination" value="event">Events</button>
                 <div class="dropdown-content">
-                    <a href="#">Tournaments</a>
-                    <a href="#">Practices</a>
-                    <a href="#">Leagues</a>
+                    <button type="submit" name="destination" value="tournaments" class="nav-dropdown">Tournaments</button>
+                    <button type="submit" name="destination" value="practices" class="nav-dropdown">Practices</button>
+                    <button type="submit" name="destination" value="leagues" class="nav-dropdown">Leagues</button>
                 </div>
             </div>
-            <button type="submit" name="destination" value="register" class="nav-item">Register</button>
+            
+            <div class="dropdown">
+                <button type="submit" class="nav-item dropbtn" name="destination" value="create">Create</button>
+                <div class="dropdown-content">
+                    <button type="submit" name="destination" value="createTournament" class="nav-dropdown">Create Tournament</button>
+                    <button type="submit" name="destination" value="createPractice" class="nav-dropdown">Create Practice</button>
+                    <button type="submit" name="destination" value="createLeague" class="nav-dropdown">Create League</button>
+                </div>
+            </div>
+            
             <button type="submit" name="destination" value="stats" class="nav-item">Stats</button>
-            <button type="submit" name="destination" value="game" class="nav-item">Your Game</button>
+            <button type="submit" name="destination" value="game" class="nav-item">Your Games</button>
+            <button type="submit" name="destination" value="quickBowl" class="nav-item">Quick Bowl</button>
         </form>
     </div>
     <div class="login">

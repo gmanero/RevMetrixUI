@@ -32,7 +32,7 @@ body {
     border: none;
     color: #fff;
     font-size: 16px;
-    margin-right: 20px;
+    margin-right: 2rem;
     padding: 10px;
     cursor: pointer;
     transition: color 0.3s;
@@ -45,8 +45,8 @@ body {
 .login-btn,
 .account-btn {
     background: none;
-    border: 1px solid  #26acca; /* Purple border */
-    color:  #26acca; /* Purple text color */
+    border: 1px solid  #26acca; 
+    color:  #26acca; 
     padding: 8px 20px;
     font-size: 16px;
     margin-left: 20px;
@@ -56,7 +56,7 @@ body {
 
 .login-btn:hover,
 .account-btn:hover {
-    background-color:  #26acca; /* Purple background */
+    background-color:  #26acca; 
     color: #fff; /* White text color */
 }
 
@@ -64,6 +64,18 @@ body {
 .dropdown {
     position: relative;
     display: inline-block;
+}
+
+.nav-dropdown {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    width: 100%;
+    margin-right: 20px;
+    padding: 10px;
+    cursor: pointer;
+    transition: color 0.3s;
 }
 
 .dropdown-content {
@@ -75,15 +87,15 @@ body {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
-.dropdown-content a {
+.dropdown-content button {
     color: white;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
 }
 
-.dropdown-content a:hover {
-    background-color: #26acca; /* Purple background */
+.dropdown-content button:hover {
+    background-color: #26acca; 
 }
 
 .dropdown:hover .dropdown-content {
