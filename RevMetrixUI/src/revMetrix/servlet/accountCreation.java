@@ -64,7 +64,7 @@ public class accountCreation extends HttpServlet {
 				
 					
 			}
-		} catch (NumberFormatException e) {
+		} catch (Exception e) {
 			errorMessage = "Type Error - Needs fixing";
 		}
 		req.setAttribute("errorMessage", errorMessage);
