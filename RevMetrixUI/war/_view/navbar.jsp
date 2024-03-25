@@ -35,8 +35,8 @@
             </div>
             
             <button type="submit" name="destination" value="stats" class="nav-item">Stats</button>
-            <button type="submit" name="destination" value="game" class="nav-item">Your Games</button>
-            <button type="submit" name="destination" value="quickBowl" class="nav-item">Quick Bowl</button>
+            <button type="submit" name="destination" value="yourGames" class="nav-item">Your Games</button>
+            <button type="submit" name="destination" value="game" class="nav-item">Quick Bowl</button>
         </form>
     </div>
     <div class="login">

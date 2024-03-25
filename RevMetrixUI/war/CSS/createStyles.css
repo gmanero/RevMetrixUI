@@ -52,7 +52,7 @@ body {
 .button {
     display: block;
     text-align: center;
-    background-color: #af00ff;
+    background-color: #26acca;
     border: none;
     color: #fff;
     padding: 10px 20px;
@@ -63,5 +63,5 @@ body {
 }
 
 .button:hover {
-    background-color: #8a00b3;
+    background-color: #316477;
 }

@@ -39,14 +39,14 @@ body {
 }
 
 .nav-item:hover {
-    color: #26acca; /* Change color on hover */
+    color: #553180; /* Change color on hover */
 }
 
 .login-btn,
 .account-btn {
-    background: none;
-    border: 1px solid  #26acca; 
-    color:  #26acca; 
+	 background-color:  #553180; 
+	 border: none;
+    color: #fff;
     padding: 8px 20px;
     font-size: 16px;
     margin-left: 20px;
@@ -56,7 +56,7 @@ body {
 
 .login-btn:hover,
 .account-btn:hover {
-    background-color:  #26acca; 
+    background-color:  #412562; 
     color: #fff; /* White text color */
 }
 
@@ -95,7 +95,7 @@ body {
 }
 
 .dropdown-content button:hover {
-    background-color: #26acca; 
+    background-color: #553180; 
 }
 
 .dropdown:hover .dropdown-content {
