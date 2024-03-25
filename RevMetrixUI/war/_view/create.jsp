@@ -20,7 +20,7 @@
         <div class="box">
             <h2>Create Practice</h2>
             <p>Create a new practice session for your team. Enter details such as practice name, date, location, and description.</p>
-            <a href="createPractice.jsp" class="button">Create Practice</a>
+            <button name="destination" value="create" class="button">Create Practice</button>
         </div>
         <div class="box">
             <h2>Create Tournament</h2>
