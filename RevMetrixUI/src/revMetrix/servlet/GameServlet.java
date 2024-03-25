@@ -7,9 +7,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import revMetrix.model.RevMetrix;
+import revMetrix.model.RevMetrix.Game;
+
 public class GameServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+	RevMetrix revMetrix;
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -23,7 +26,31 @@ public class GameServlet extends HttpServlet {
 		
 		System.out.println("Game Servlet: doPost");
 		
-		//RevMetrix game = new RevMetrix();
+		String numbers = req.getParameter("clickedPins");
+		System.out.println(numbers);
+        
+		//parse {for controler}
+		if(numbers.compareTo("")!=0&&numbers.compareTo("G,")!=0&&numbers.compareTo("F,")!=0) {
+			String[] values = numbers.split(",");
+			boolean[] pins = {false,false,false,false,false,false,false,false,false,false};
+			for(String s: values) {
+				try {
+					pins[Integer.parseInt(s.trim())-1] = true;
+				}
+				finally{
+					
+				}
+				
+			}
+		}
+		
+		//splits
+		
+		
+		
+		req.getRequestDispatcher("/_view/game.jsp").forward(req, resp);
+		
+		
 		
 		
 	}
