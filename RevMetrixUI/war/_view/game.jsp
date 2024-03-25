@@ -24,10 +24,7 @@
             <p id="shotNumber">Shot Number: ${shotNumber}</p>
             <p id="pinsKnockedDown">Pins Knocked Down: ${pinsKnockedDown}</p>
             <p id="pinsRemaining">Pins Remaining: ${pinsRemianing}</p>
-            <form  action="${pageContext.servletContext.contextPath}/game" method="post">
-            <button class="button" type="submit" value="submit">Next Shot</button>
-            <input type="hidden" name = "clickedPins" id = "output" value="">
-            </form>
+            
             
         </div>
 	<div class = "stats">
@@ -134,7 +131,13 @@
             <div class="pin" id="pin9" onclick="togglePin(this, 9)"></div>
             <div class="pin" id="pin10" onclick="togglePin(this, 10)"></div>
         </div>
-        <br class="gap">
+         <br class="gap">
+         <p>Hit Pins: <span id="clickedPins"></span></p>
+        <div class=container>
+        	<form  action="${pageContext.servletContext.contextPath}/game" method="post">
+            <button class="button" type="submit" value="submit">Next Shot</button>
+            <input type="hidden" name = "clickedPins" id = "output" value="">
+            </form>
 		<form  action="${pageContext.servletContext.contextPath}/game" method="post">
             <button class="button" type="submit" value="submit">Foul</button>
             <input type="hidden" name = "clickedPins" id = "output" value="F,">
@@ -147,9 +150,12 @@
             <button class="button" type="submit" value="submit">Gutter</button>
             <input type="hidden" name = "clickedPins" id = "output" value="G,">
             </form>
+        </div>
+       
+        
     </div>
     
-    <p>Hit Pins: <span id="clickedPins"></span></p>
+    
 	</div>
         <div class="stats">
             <h2>Game Statistics</h2>
@@ -166,9 +172,7 @@
     <script>
     var clickedPins = [];
 
-    function Split(int i) {
-        document.getElementById("split"+i).className = "shot-box-split";
-    }
+    
     function togglePin(pin, pinNumber) {
         // Toggle class to change background color
         pin.classList.toggle('clicked');
@@ -183,6 +187,9 @@
         // Update display of clicked pins
         document.getElementById('clickedPins').textContent = clickedPins.join(', ');
         document.getElementsByID('output').value = document.getElementById('clickedPins').textContent;
+    }
+    function Split(i) {
+        document.getElementById("split"+i).className = "shot-box-split";
     }
 </script>
 </body>
