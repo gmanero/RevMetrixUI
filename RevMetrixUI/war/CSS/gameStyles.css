@@ -23,8 +23,21 @@ body {
      
 
         .button:hover {
-            background-color: #8a00b3;
+            background-color: #4891ac;
         }
+        .button {
+			  background-color: #26acca; /* fallback color */
+			  border: none;
+			  color: white;
+			  padding: 10px 20px;
+			  text-align: center;
+			  text-decoration: none;
+			  display: inline-block;
+			  font-size: 16px;
+			  margin: 4px 2px;
+			  cursor: pointer;
+			  border-radius: 4px;
+}
 
         /* Main Content Styles */
         .mainText {
@@ -68,6 +81,12 @@ body {
 		    border: 1px solid white;
 		    width: 33%
 		}
+		.shot-box-split {
+		    flex: 1;
+		    border: 1px solid white;
+		    width: 33%;
+		    background-color:red;
+		}
 		.shot-gap{
 		    flex: 1;
 		    width: 34%;
@@ -86,6 +105,7 @@ body {
 		    gap: 0; /* Gap between grid items */
 		    padding: 10px
 		}
+		
 		.pin-container {
 		    position: relative;
 		    width: 250px; /* Adjust as needed */
@@ -103,6 +123,13 @@ body {
 		}
 		.pin.clicked {
 		    background-color: white;
+		}
+		
+		.gap{
+			height: 100px; /* Adjust the height to make the break larger */
+    		width: 100%; /* Full width */
+    		margin-top: 100px; /* Adjust top margin to create space above the break */
+    		margin-bottom: 150px;
 		}
 		/* Positioning for individual pins */
 		#pin1  { top: 200px; left: 110px; }
