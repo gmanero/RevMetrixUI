@@ -29,21 +29,40 @@ public class GameServlet extends HttpServlet {
 		String numbers = req.getParameter("clickedPins");
 		System.out.println(numbers);
         
-		//parse {for controler}
+		//parse {for controller}
+		String output= "";
+		int count=0;
+		System.out.println(numbers);
 		if(numbers.compareTo("")!=0&&numbers.compareTo("G,")!=0&&numbers.compareTo("F,")!=0) {
 			String[] values = numbers.split(",");
 			boolean[] pins = {false,false,false,false,false,false,false,false,false,false};
+			
 			for(String s: values) {
 				try {
+					count++;
 					pins[Integer.parseInt(s.trim())-1] = true;
+					
 				}
 				finally{
 					
 				}
 				
 			}
+			if(count == 10) {
+				output = "X";
+			}
+			
+			
 		}
-		
+		else if (numbers.compareTo("")==0) {
+			output = "-";
+			
+		}
+		else {
+			output = numbers;
+		}
+		req.setAttribute("firstFrame_shot1", output);
+		System.out.println(output);
 		//splits
 		
 		
