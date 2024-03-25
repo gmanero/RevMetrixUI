@@ -26,38 +26,124 @@
         <servlet-name>StatsServlet</servlet-name>
         <servlet-class>revMetrix.servlet.StatsServlet</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>accountCreation</servlet-name>
-        <servlet-class>revMetrix.servlet.accountCreation</servlet-class>
+     <servlet>
+ <servlet-name>YourGamesServlet</servlet-name>
+        <servlet-class>revMetrix.servlet.YourGamesServlet</servlet-class>
     </servlet>
-
+    <servlet>
+ <servlet-name>AccountServlet</servlet-name>
+        <servlet-class>revMetrix.servlet.AccountServlet</servlet-class>
+    </servlet>
+     <servlet>
+ <servlet-name>CreateServlet</servlet-name>
+        <servlet-class>revMetrix.servlet.CreateServlet</servlet-class>
+    </servlet>
+     <servlet>
+ <servlet-name>CreateLeagueServlet</servlet-name>
+        <servlet-class>revMetrix.servlet.CreateLeagueServlet</servlet-class>
+    </servlet>
+     <servlet>
+ <servlet-name>CreatePracticeServlet</servlet-name>
+        <servlet-class>revMetrix.servlet.CreatePracticeServlet</servlet-class>
+    </servlet>
+     <servlet>
+ <servlet-name>CreateTournamentServlet</servlet-name>
+        <servlet-class>revMetrix.servlet.CreateTournamentServlet</servlet-class>
+    </servlet>
+    <servlet>
+    <servlet-name>TournamentsServlet</servlet-name>
+        <servlet-class>revMetrix.servlet.TournamentsServlet</servlet-class>
+    </servlet>
+    <servlet>
+    <servlet-name>PracticesServlet</servlet-name>
+        <servlet-class>revMetrix.servlet.PracticesServlet</servlet-class>
+    </servlet>
+    <servlet>
+    <servlet-name>LeaguesServlet</servlet-name>
+        <servlet-class>revMetrix.servlet.LeaguesServlet</servlet-class>
+    </servlet>
+    <servlet>
+    <servlet-name>AccountCreationServlet</servlet-name>
+        <servlet-class>revMetrix.servlet.AccountCreationServlet</servlet-class>
+    </servlet>
+    
     <!-- Servlet mappings -->
     <servlet-mapping>
         <servlet-name>IndexServlet</servlet-name>
         <url-pattern>/index</url-pattern>
     </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>EventServlet</servlet-name>
         <url-pattern>/event</url-pattern>
     </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>GameServlet</servlet-name>
         <url-pattern>/game</url-pattern>
     </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>StatsServlet</servlet-name>
         <url-pattern>/stats</url-pattern>
+    </servlet-mapping>
+    
+     <servlet-mapping>
+        <servlet-name>YourGamesServlet</servlet-name>
+        <url-pattern>/YourGames</url-pattern>
+    </servlet-mapping>
+    
+     <servlet-mapping>
+        <servlet-name>AccountServlet</servlet-name>
+        <url-pattern>/account</url-pattern>
+    </servlet-mapping>
+    
+     <servlet-mapping>
+        <servlet-name>CreateServlet</servlet-name>
+        <url-pattern>/create</url-pattern>
+    </servlet-mapping>
+    
+     <servlet-mapping>
+        <servlet-name>CreateLeagueServlet</servlet-name>
+        <url-pattern>/createLeague</url-pattern>
+    </servlet-mapping>
+    
+     <servlet-mapping>
+        <servlet-name>CreatePracticeServlet</servlet-name>
+        <url-pattern>/createPractice</url-pattern>
+    </servlet-mapping>
+    
+     <servlet-mapping>
+        <servlet-name>CreateTournamentServlet</servlet-name>
+        <url-pattern>/createTournament</url-pattern>
+    </servlet-mapping>
+    
+     <servlet-mapping>
+        <servlet-name>TournamentsServlet</servlet-name>
+        <url-pattern>/tournaments</url-pattern>
+    </servlet-mapping>
+    
+     <servlet-mapping>
+        <servlet-name>PracticesServlet</servlet-name>
+        <url-pattern>/practices</url-pattern>
+    </servlet-mapping>
+    
+     <servlet-mapping>
+        <servlet-name>LeaguesServlet</servlet-name>
+        <url-pattern>/leagues</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>AccountCreationServlet</servlet-name>
+        <url-pattern>/accountCreation</url-pattern>
     </servlet-mapping>
 
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
-    <servlet-mapping>
-        <servlet-name>accountCreation</servlet-name>
-        <url-pattern>/accountCreation</url-pattern>
-    </servlet-mapping>
 </web-app>

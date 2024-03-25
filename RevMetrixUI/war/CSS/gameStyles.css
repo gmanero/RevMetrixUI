@@ -37,7 +37,24 @@ body {
 			  margin: 4px 2px;
 			  cursor: pointer;
 			  border-radius: 4px;
-}
+			  flex: 1;
+			  width: 125px;
+		}
+		.buttons-container {
+			display: flex;
+			justify-content: center;
+			position: relative;
+			margin-bottom: 10px;
+		}
+		
+		
+		.buttons-container p {
+		position: absolute;
+    	top: 0;
+    	left: 0;
+    	text-align: center;
+		}
+		
 
         /* Main Content Styles */
         .mainText {
@@ -46,12 +63,20 @@ body {
             max-width: 600px;
         }
 
-        .gameInfo,
-        .stats {
+        .gameInfo, .stats {
+         background-color: #3f3f3f;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+        .interactions {
             background-color: #3f3f3f;
             padding: 20px;
             margin-bottom: 20px;
             border-radius: 10px;
+            width: 600px;
+			height: 454.667px;
+   			
         }
 
         .gameInfo h2,
@@ -122,8 +147,14 @@ body {
 		    cursor: pointer;
 		    transition: background-color 0.3s ease;
 		}
+		
 		.pin.clicked {
 		    background-color: white;
+		}
+		
+		.hit-pins {
+		margin: auto;
+		display: inline;
 		}
 		
 		.gap{
