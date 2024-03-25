@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import revMetrix.controller.GameController;
 import revMetrix.model.RevMetrix;
 import revMetrix.model.RevMetrix.Game;
 
@@ -31,7 +30,19 @@ public class GameServlet extends HttpServlet {
 		System.out.println(numbers);
         
 		//parse {for controler}
-		boolean[] pins = GameController.getPins(numbers);
+		if(numbers.compareTo("")!=0&&numbers.compareTo("G,")!=0&&numbers.compareTo("F,")!=0) {
+			String[] values = numbers.split(",");
+			boolean[] pins = {false,false,false,false,false,false,false,false,false,false};
+			for(String s: values) {
+				try {
+					pins[Integer.parseInt(s.trim())-1] = true;
+				}
+				finally{
+					
+				}
+				
+			}
+		}
 		
 		//splits
 		
