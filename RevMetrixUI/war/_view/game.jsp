@@ -24,10 +24,7 @@
             <p id="shotNumber">Shot Number: ${shotNumber}</p>
             <p id="pinsKnockedDown">Pins Knocked Down: ${pinsKnockedDown}</p>
             <p id="pinsRemaining">Pins Remaining: ${pinsRemianing}</p>
-            <form  action="${pageContext.servletContext.contextPath}/game" method="post">
-            <button class="button" type="submit" value="submit">Next Shot</button>
-            <input type="hidden" name = "clickedPins" id = "output" value="">
-            </form>
+            
             
         </div>
 	<div class = "stats">
@@ -35,7 +32,7 @@
         <div class="score-box">
             <div class="score-upper">
                 <div class="shot-gap">a</div>
-                <div class="shot-box">${firstFrame_shot1}2</div>
+                <div id = "split1" class="shot-box">${firstFrame_shot1}</div>
                 <div class="shot-box">${firstFrame_shot2}</div>
             </div>
             <div class="score-running">${firstFrame_score}</div>
@@ -43,7 +40,7 @@
         <div class="score-box">
             <div class="score-upper">
                 <div class="shot-gap"></div>
-                <div class="shot-box">${secondFrame_shot1}</div>
+                <div id = "split2" class="shot-box">${secondFrame_shot1}</div>
                 <div class="shot-box">${secondFrame_shot2}</div>
             </div>
             <div class="score-running">${secondFrame_score}</div>
@@ -51,7 +48,7 @@
         <div class="score-box">
             <div class="score-upper">
                 <div class="shot-gap"></div>
-                <div class="shot-box">${thirdFrame_shot1}</div>
+                <div id = "split3" class="shot-box">${thirdFrame_shot1}</div>
                 <div class="shot-box">${thirdFrame_shot2}</div>
             </div>
             <div class="score-running">${thirdFrame_score}</div>
@@ -59,7 +56,7 @@
         <div class="score-box">
             <div class="score-upper">
                 <div class="shot-gap"></div>
-                <div class="shot-box">${forthFrame_shot1}</div>
+                <div id = "split4" class="shot-box">${forthFrame_shot1}</div>
                 <div class="shot-box">${forthFrame_shot2}</div>
             </div>
             <div class="score-running">${forthFrame_score}</div>
@@ -67,7 +64,7 @@
         <div class="score-box">
             <div class="score-upper">
                 <div class="shot-gap"></div>
-                <div class="shot-box">${fifthFrame_shot1}</div>
+                <div id = "split5" class="shot-box">${fifthFrame_shot1}</div>
                 <div class="shot-box">${fifthFrame_shot2}</div>
             </div>
             <div class="score-running">${fifthFrame_score}</div>
@@ -75,7 +72,7 @@
         <div class="score-box">
             <div class="score-upper">
                 <div class="shot-gap"></div>
-                <div class="shot-box">${sixthFrame_shot1}</div>
+                <div id = "split6" class="shot-box">${sixthFrame_shot1}</div>
                 <div class="shot-box">${sixthFrame_shot2}</div>
             </div>
             <div class="score-running">${sixthFrame_score}</div>
@@ -83,7 +80,7 @@
         <div class="score-box">
             <div class="score-upper">
                 <div class="shot-gap"></div>
-                <div class="shot-box">${seventhFrame_shot1}</div>
+                <div id = "split7" class="shot-box">${seventhFrame_shot1}</div>
                 <div class="shot-box">${seventhFrame_shot2}</div>
             </div>
             <div class="score-running">${seventhFrame_score}</div>
@@ -91,7 +88,7 @@
         <div class="score-box">
             <div class="score-upper">
                 <div class="shot-gap"></div>
-                <div class="shot-box">${eighthFrame_shot1}</div>
+                <div id = "split8" class="shot-box">${eighthFrame_shot1}</div>
                 <div class="shot-box">${eighthFrame_shot2}</div>
             </div>
             <div class="score-running">${eighthFrame_score}</div>
@@ -99,15 +96,15 @@
         <div class="score-box">
             <div class="score-upper">
                 <div class="shot-gap"></div>
-                <div class="shot-box">${ninthFrame_shot1}</div>
+                <div id = "split9" class="shot-box">${ninthFrame_shot1}</div>
                 <div class="shot-box">${ninthFrame_shot2}</div>
             </div>
             <div class="score-running">${ninethFrame_score}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
-                <div class="shot-box">${tenthFrame_shot1}</div>
-                <div class="shot-box">${tenthFrame_shot2}</div>
+                <div id = "split10" class="shot-box">${tenthFrame_shot1}</div>
+                <div id = "split11" class="shot-box">${tenthFrame_shot2}</div>
                 <div class="shot-box">${tenthFrame_shot3}</div>
             </div>
             <div class="score-running">${tenthFrame_score}</div>
@@ -134,7 +131,13 @@
             <div class="pin" id="pin9" onclick="togglePin(this, 9)"></div>
             <div class="pin" id="pin10" onclick="togglePin(this, 10)"></div>
         </div>
-        <br class="gap">
+         <br class="gap">
+         <p>Hit Pins: <span id="clickedPins"></span></p>
+        <div class=container>
+        	<form  action="${pageContext.servletContext.contextPath}/game" method="post">
+            <button class="button" type="submit" value="submit">Next Shot</button>
+            <input type="hidden" name = "clickedPins" id = "output" value="">
+            </form>
 		<form  action="${pageContext.servletContext.contextPath}/game" method="post">
             <button class="button" type="submit" value="submit">Foul</button>
             <input type="hidden" name = "clickedPins" id = "output" value="F,">
@@ -147,9 +150,12 @@
             <button class="button" type="submit" value="submit">Gutter</button>
             <input type="hidden" name = "clickedPins" id = "output" value="G,">
             </form>
+        </div>
+       
+        
     </div>
     
-    <p>Hit Pins: <span id="clickedPins"></span></p>
+    
 	</div>
         <div class="stats">
             <h2>Game Statistics</h2>
@@ -166,7 +172,7 @@
     <script>
     var clickedPins = [];
 
-
+    
     function togglePin(pin, pinNumber) {
         // Toggle class to change background color
         pin.classList.toggle('clicked');
@@ -181,6 +187,9 @@
         // Update display of clicked pins
         document.getElementById('clickedPins').textContent = clickedPins.join(', ');
         document.getElementsByID('output').value = document.getElementById('clickedPins').textContent;
+    }
+    function Split(i) {
+        document.getElementById("split"+i).className = "shot-box-split";
     }
 </script>
 </body>
