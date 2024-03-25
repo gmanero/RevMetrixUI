@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package revMetrix.model;
 
 import java.util.ArrayList;
@@ -194,7 +194,7 @@ package revMetrix.model;
 import java.util.ArrayList;
 import java.util.List;
 
-
+ 
 public class RevMetrix {
     private ArrayList<Account> AccountsList = new ArrayList<>();
     private ArrayList<Game> GamesList = new ArrayList<>();
@@ -378,4 +378,3 @@ public class RevMetrix {
         }
     }
 }
->>>>>>> branch 'Feature' of git@github.com:gmanero/RevMetrixUI.git
