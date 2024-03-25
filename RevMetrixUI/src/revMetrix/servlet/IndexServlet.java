@@ -66,6 +66,9 @@ public class IndexServlet extends HttpServlet {
         else if ("yourGames".equals(destIn)) {
         	destOut = "/_view/yourGames.jsp";
         }
+        else if ("accountCreation".equals(destIn)) {
+        	destOut = "/_view/accountCreation.jsp";
+        }
         else {
            destOut = "/_view/index.jsp";
         }
