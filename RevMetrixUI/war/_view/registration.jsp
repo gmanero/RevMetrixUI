@@ -22,19 +22,8 @@
 
     <div class="topPage">
         <h1>Register</h1>
-    </div>
-
-<<<<<<< HEAD
-            <form method= "get">
-    <div class="links">
-        <button type="submit" name="destination" value="revMetrix" class="button">RevMetrix</button>
-        <button type="submit" name="destination" value="events" class="button">Events</button>
-        <button type="submit" name="destination" value="register" class="button">Register</button>
-        <button type="submit" name="destination" value="stats" class="button">Stats</button>
-        <button type="submit" name="destination" value="game" class="button">Your Game</button>
-         <button type="submit" name="destination" value="login" class="button">Login</button>
-          <button type="submit" name="destination" value="account" class="button">Account</button>
-    </div>
+       </div>
+       
     <form action="registrationServlet" method="post">
         <div class="container">
             <h2>Register for an Event</h2>
@@ -68,14 +57,8 @@
             </div>
             <input type="submit" value="Register">
         </div>
-    </form>
-=======
-    
+      </form>
 
-    <div class="mainText">
-        <p>This is Registration Page</p>
-    </div>
->>>>>>> branch 'Feature' of git@github.com:gmanero/RevMetrixUI.git
 </body>
 
 </html>
