@@ -32,14 +32,16 @@ public class GameServlet extends HttpServlet {
 		//parse {for controller}
 		String output= "";
 		int count=0;
+		System.out.println(numbers);
 		if(numbers.compareTo("")!=0&&numbers.compareTo("G,")!=0&&numbers.compareTo("F,")!=0) {
 			String[] values = numbers.split(",");
 			boolean[] pins = {false,false,false,false,false,false,false,false,false,false};
 			
 			for(String s: values) {
 				try {
-					pins[Integer.parseInt(s.trim())-1] = true;
 					count++;
+					pins[Integer.parseInt(s.trim())-1] = true;
+					
 				}
 				finally{
 					
