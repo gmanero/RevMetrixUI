@@ -27,7 +27,8 @@
             
             
         </div>
-	<div class = "stats">
+
+	<div class = "interactions">
 	<div class="scoreboard">
         <div class="score-box">
             <div class="score-upper">
@@ -116,7 +117,7 @@
             <div class="score-running">${current_score}</div>
         </div>
     </div>
-		<div>
+		<div class="main-container">
         <!-- Container for bowling pins -->
         <div class="pin-container">
             <!-- Set of bowling pins -->
@@ -131,9 +132,10 @@
             <div class="pin" id="pin9" onclick="togglePin(this, 9)"></div>
             <div class="pin" id="pin10" onclick="togglePin(this, 10)"></div>
         </div>
-         <br class="gap">
-         <p>Hit Pins: <span id="clickedPins"></span></p>
-        <div class=container>
+         <span class="gap"></span>
+         <div  class="hit-pins"><p>Hit Pins: <span id="clickedPins"></span></p></div>
+        <div class=buttons-container>
+         
         	<form  action="${pageContext.servletContext.contextPath}/game" method="post">
             <button class="button" type="submit" value="submit">Next Shot</button>
             <input type="hidden" name = "clickedPins" id = "output" value="">

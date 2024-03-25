@@ -3,7 +3,7 @@ package revMetrix.model;
 import java.util.ArrayList;
 import java.util.List;
 
-
+ 
 public class RevMetrix {
     private ArrayList<Account> AccountsList = new ArrayList<>();
     private ArrayList<Game> GamesList = new ArrayList<>();
