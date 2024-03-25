@@ -35,7 +35,7 @@
         <div class="score-box">
             <div class="score-upper">
                 <div class="shot-gap">a</div>
-                <div class="shot-box">${firstFrame_shot1}2</div>
+                <div id = "split1" class="shot-box">${firstFrame_shot1}</div>
                 <div class="shot-box">${firstFrame_shot2}</div>
             </div>
             <div class="score-running">${firstFrame_score}</div>
@@ -43,7 +43,7 @@
         <div class="score-box">
             <div class="score-upper">
                 <div class="shot-gap"></div>
-                <div class="shot-box">${secondFrame_shot1}</div>
+                <div id = "split2" class="shot-box">${secondFrame_shot1}</div>
                 <div class="shot-box">${secondFrame_shot2}</div>
             </div>
             <div class="score-running">${secondFrame_score}</div>
@@ -51,7 +51,7 @@
         <div class="score-box">
             <div class="score-upper">
                 <div class="shot-gap"></div>
-                <div class="shot-box">${thirdFrame_shot1}</div>
+                <div id = "split3" class="shot-box">${thirdFrame_shot1}</div>
                 <div class="shot-box">${thirdFrame_shot2}</div>
             </div>
             <div class="score-running">${thirdFrame_score}</div>
@@ -59,7 +59,7 @@
         <div class="score-box">
             <div class="score-upper">
                 <div class="shot-gap"></div>
-                <div class="shot-box">${forthFrame_shot1}</div>
+                <div id = "split4" class="shot-box">${forthFrame_shot1}</div>
                 <div class="shot-box">${forthFrame_shot2}</div>
             </div>
             <div class="score-running">${forthFrame_score}</div>
@@ -67,7 +67,7 @@
         <div class="score-box">
             <div class="score-upper">
                 <div class="shot-gap"></div>
-                <div class="shot-box">${fifthFrame_shot1}</div>
+                <div id = "split5" class="shot-box">${fifthFrame_shot1}</div>
                 <div class="shot-box">${fifthFrame_shot2}</div>
             </div>
             <div class="score-running">${fifthFrame_score}</div>
@@ -75,7 +75,7 @@
         <div class="score-box">
             <div class="score-upper">
                 <div class="shot-gap"></div>
-                <div class="shot-box">${sixthFrame_shot1}</div>
+                <div id = "split6" class="shot-box">${sixthFrame_shot1}</div>
                 <div class="shot-box">${sixthFrame_shot2}</div>
             </div>
             <div class="score-running">${sixthFrame_score}</div>
@@ -83,7 +83,7 @@
         <div class="score-box">
             <div class="score-upper">
                 <div class="shot-gap"></div>
-                <div class="shot-box">${seventhFrame_shot1}</div>
+                <div id = "split7" class="shot-box">${seventhFrame_shot1}</div>
                 <div class="shot-box">${seventhFrame_shot2}</div>
             </div>
             <div class="score-running">${seventhFrame_score}</div>
@@ -91,7 +91,7 @@
         <div class="score-box">
             <div class="score-upper">
                 <div class="shot-gap"></div>
-                <div class="shot-box">${eighthFrame_shot1}</div>
+                <div id = "split8" class="shot-box">${eighthFrame_shot1}</div>
                 <div class="shot-box">${eighthFrame_shot2}</div>
             </div>
             <div class="score-running">${eighthFrame_score}</div>
@@ -99,15 +99,15 @@
         <div class="score-box">
             <div class="score-upper">
                 <div class="shot-gap"></div>
-                <div class="shot-box">${ninthFrame_shot1}</div>
+                <div id = "split9" class="shot-box">${ninthFrame_shot1}</div>
                 <div class="shot-box">${ninthFrame_shot2}</div>
             </div>
             <div class="score-running">${ninethFrame_score}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
-                <div class="shot-box">${tenthFrame_shot1}</div>
-                <div class="shot-box">${tenthFrame_shot2}</div>
+                <div id = "split10" class="shot-box">${tenthFrame_shot1}</div>
+                <div id = "split11" class="shot-box">${tenthFrame_shot2}</div>
                 <div class="shot-box">${tenthFrame_shot3}</div>
             </div>
             <div class="score-running">${tenthFrame_score}</div>
@@ -166,7 +166,9 @@
     <script>
     var clickedPins = [];
 
-
+    function Split(int i) {
+        document.getElementById("split"+i).className = "shot-box-split";
+    }
     function togglePin(pin, pinNumber) {
         // Toggle class to change background color
         pin.classList.toggle('clicked');
