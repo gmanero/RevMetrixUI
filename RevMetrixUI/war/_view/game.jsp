@@ -142,15 +142,15 @@
             </form>
 		<form  action="${pageContext.servletContext.contextPath}/game" method="post">
             <button class="button" type="submit" value="submit">Foul</button>
-            <input type="hidden" name = "clickedPins" id = "output" value="F,">
+            <input type="hidden" name = "clickedPins"  value="F,">
             </form>
        	<form  action="${pageContext.servletContext.contextPath}/game" method="post">
             <button class="button" type="submit" value="submit">strikeSpare</button>
-            <input type="hidden" name = "clickedPins" id = "output" value="1,2,3,4,5,6,7,8,9,10">
+            <input type="hidden" name = "clickedPins"  value="1,2,3,4,5,6,7,8,9,10">
             </form>
 		<form  action="${pageContext.servletContext.contextPath}/game" method="post">
             <button class="button" type="submit" value="submit">Gutter</button>
-            <input type="hidden" name = "clickedPins" id = "output" value="G,">
+            <input type="hidden" name = "clickedPins"  value="G,">
             </form>
         </div>
        
