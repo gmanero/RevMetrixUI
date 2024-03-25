@@ -18,13 +18,20 @@
     
     
     <!-- Login Form -->
-    <form class="loginForm" onsubmit="return redirectIfCorrect()">
+   <div class="loginForm">
+    <form  onsubmit="return redirectIfCorrect()">
         <input type="text" id="username" name="username" placeholder="Username">
         <br>
         <input type="password" id="password" name="password" placeholder="Password">
         <br>
        <input type="submit" value="Log In">
+       </form>
+       <form method="get">
+       <button type= "submit" name = "destination" value = "accountCreation" class="signUp">SignUp</button>
     </form>
+    </div>
+    
+    
     
     <script>
         function redirectIfCorrect() {

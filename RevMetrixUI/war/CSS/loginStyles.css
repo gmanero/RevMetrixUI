@@ -44,7 +44,7 @@
         }
 
         .loginForm input[type="submit"] {
-            background-color: #af00ff;
+            background-color: #26acca;
             border: none;
             color: white;
             padding: 10px 20px;
@@ -55,5 +55,5 @@
         }
 
         .loginForm input[type="submit"]:hover {
-            background-color: #8a00b3;
+            background-color: #4891ac;
         }
