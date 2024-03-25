@@ -78,7 +78,8 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #4891ac; /* Adjusted hover color */
+    background-color: #4891ac;
+    color: #fff; /* Adjusted hover color */
 }
 
 textarea {
