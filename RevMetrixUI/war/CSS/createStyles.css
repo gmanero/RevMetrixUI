@@ -59,6 +59,7 @@ body {
     font-size: 18px;
     text-decoration: none;
     border-radius: 5px;
+    cursor: pointer;
     transition: background-color 0.3s;
 }
 
