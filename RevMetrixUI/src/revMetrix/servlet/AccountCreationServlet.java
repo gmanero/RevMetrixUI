@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import revMetrix.model.RevMetrix;
 import revMetrix.model.RevMetrix.Account;
+import java.util.ArrayList;  
+import java.util.Iterator;  
+import java.util.List;  
+import java.util.ListIterator;  
 
 public class AccountCreationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -40,21 +44,24 @@ public class AccountCreationServlet extends HttpServlet {
 			String Password = req.getParameter("pass");
 			
 			
+			
 			// check for errors in the form data 
 			if (Email == null || Username == null || Password == null) {
 				errorMessage = "Missing Required Data";
 			}else {
 				
 				// PUT IN CONTROLLER
-				while(true)
+				for(RevMetrix.Account account : RevMetrix.AccountsList)
 				{
-					if (Email == RevMetrix.Account.getEmail())
+					if (Email.equals(Account.getEmail()))
 	    			{
 						errorMessage = "Email Already In Uses";
+						break;
 	    			}else{
-	    				if (Username == RevMetrix.Account.getUsername())
+	    				if (Username.equals(Account.getUsername()) )
 		   				{
 		   					errorMessage = "Username Already Taken";
+		   					break;
 		   				}else{
 		    				RevMetrix.Account Account = new Account(Email, Username, Password, false);
 		    				RevMetrix.AccountsList.add(Account);
@@ -62,9 +69,15 @@ public class AccountCreationServlet extends HttpServlet {
 	    			}
 				}
 				
+				if (errorMessage.isEmpty())
+				{
+					RevMetrix.Account account = new RevMetrix.Account(Email, Username, Password, false);
+					RevMetrix.AccountsList.add(account);
+				}
+				
 					
 			}
-		} catch (NumberFormatException e) {
+		} catch (Exception e) {
 			errorMessage = "Type Error - Needs fixing";
 		}
 		req.setAttribute("errorMessage", errorMessage);
