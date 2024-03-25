@@ -27,6 +27,7 @@
             
             
         </div>
+
 	<div class = "interactions">
 	<div class="scoreboard">
         <div class="score-box">
@@ -134,7 +135,7 @@
          <span class="gap"></span>
          <div  class="hit-pins"><p>Hit Pins: <span id="clickedPins"></span></p></div>
         <div class=buttons-container>
-          
+         
         	<form  action="${pageContext.servletContext.contextPath}/game" method="post">
             <button class="button" type="submit" value="submit">Next Shot</button>
             <input type="hidden" name = "clickedPins" id = "output" value="">
