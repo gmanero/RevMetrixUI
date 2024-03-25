@@ -28,6 +28,24 @@ public class GameServlet extends HttpServlet {
 		
 		String numbers = req.getParameter("clickedPins");
 		System.out.println(numbers);
+        
+		//parse {for controler}
+		if(numbers.compareTo("")!=0&&numbers.compareTo("G,")!=0&&numbers.compareTo("F,")!=0) {
+			String[] values = numbers.split(",");
+			boolean[] pins = {false,false,false,false,false,false,false,false,false,false};
+			for(String s: values) {
+				try {
+					pins[Integer.parseInt(s.trim())-1] = true;
+				}
+				finally{
+					
+				}
+				
+			}
+		}
+		
+		//splits
+		
 		
 		
 		req.getRequestDispatcher("/_view/game.jsp").forward(req, resp);
