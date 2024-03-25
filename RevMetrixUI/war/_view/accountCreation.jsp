@@ -8,15 +8,10 @@
 </head>
 
 <body>
+<jsp:include page="navbar.jsp" />
     <div class="topPage">
         <h1>RevMetrix - Create an Account</h1>
     </div>
-
-    <form method= "get">
-        <div class="links">
-            <button type="submit" name="destination" value="revMetrix" class="button">RevMetrix</button>
-        </div>
-    </form>
     
     <!-- accountCreation form -->
         <form class="loginForm">

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import revMetrix.controller.GameController;
 import revMetrix.model.RevMetrix;
 import revMetrix.model.RevMetrix.Game;
 
@@ -31,38 +32,13 @@ public class GameServlet extends HttpServlet {
         
 		//parse {for controller}
 		String output= "";
-		int count=0;
 		System.out.println(numbers);
-		if(numbers.compareTo("")!=0&&numbers.compareTo("G,")!=0&&numbers.compareTo("F,")!=0) {
-			String[] values = numbers.split(",");
-			boolean[] pins = {false,false,false,false,false,false,false,false,false,false};
-			
-			for(String s: values) {
-				try {
-					count++;
-					pins[Integer.parseInt(s.trim())-1] = true;
-					
-				}
-				finally{
-					
-				}
-				
-			}
-			if(count == 10) {
-				output = "X";
-			}
-			
-			
-		}
-		else if (numbers.compareTo("")==0) {
-			output = "-";
-			
-		}
-		else {
-			output = numbers;
-		}
-		req.setAttribute("firstFrame_shot1", output);
-		System.out.println(output);
+		
+		boolean[] pins = GameController.getPins(numbers);
+		int score = GameController.getScore(pins);
+		
+		req.setAttribute("firstFrame_shot1", score);
+		
 		//splits
 		
 		
