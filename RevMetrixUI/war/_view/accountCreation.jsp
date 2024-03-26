@@ -30,31 +30,30 @@
 </div>
 
 <!-- accountCreation form -->
-<div class = "loginForm">
-<form onsubmit="return validateForm()">
-    <h1>Sign Up</h1>
+<div class="loginForm">
+    <form onsubmit="return validateForm()">
+        <h1>Register</h1>
 
-    <p>Enter your Email Address</p>                  
-    <input type="text" id="email" name="email" placeholder="Email">
+        <p>Enter your Email Address</p>                  
+        <input type="text" id="email" name="email" placeholder="Email">
 
-    <p>Enter your Username</p>                  
-    <input type="text" id="username" name="username" placeholder="Username">
+        <p>Enter your Username</p>                  
+        <input type="text" id="username" name="username" placeholder="Username">
 
-    <p>Enter your Password</p>     
-    <input type="password" id="password" name="password" placeholder="Password">
+        <p>Enter your Password</p>     
+        <input type="password" id="password" name="password" placeholder="Password">
 
-    <p>Retype your Password</p>     
-    <input type="password" id="password2" name="password2" placeholder="Password"><br><br>
+        <p>Retype your Password</p>     
+        <input type="password" id="password2" name="password2" placeholder="Password"><br><br>
 
-    <input type="submit" value="Sign Up">    
-</form>
+        <input type="submit" value="Sign Up">    
+    </form>
 
-<br/>
-    <form method ="get">
-    <button type = "submit" name = "destination" value = "login" class= "login">Already have an account?</button>
+    <br/>
+    <form method="get">
+        <button type="submit" name="destination" value="login" class="loginBtn">Already have an account?</button>
     </form>
 </div>   
-
 
 </body>
 </html>
