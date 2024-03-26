@@ -222,7 +222,7 @@ public class RevMetrix {
     
     public static class Tournament {
         private int tournamentId;
-        private String tournamentName;
+        public String tournamentName;
         private String tournamentStartDate;
         private String tournamentLocation;
         private String tournamentDescription;

@@ -24,7 +24,7 @@
         <h1>Create Tournament</h1>
     </div>
 
-    <form action= "/http://localhost:8081/revMetrix/index?destination=tournaments" method="post">
+    <form action= "${pageContext.servletContext.contextPath}/tournaments" method="post">
         <div class="container">
             <h2>Tournament Details</h2>
             <div class="form-group"> 

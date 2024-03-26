@@ -1,7 +1,7 @@
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="revMetrix.model.RevMetrix.Tournament" %>
 <!DOCTYPE html>
 <html lang="en">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 
 <head>
     <meta charset="UTF-8">
@@ -22,26 +22,30 @@
     <div class="section">
         <div class="section-title">Featured Tournaments</div>
         <div class="tournaments">
-            <% 
-                ArrayList<Tournament> tournaments = (ArrayList<Tournament>) request.getAttribute("tournaments");
-                if (tournaments != null){
-                    for (Tournament tournament : tournaments) { 
-            %>
-            <div class="tournament" onclick="location.href='https://example.com/tournament<%=tournament.getTournamentId()%>';">
-                <h2><%=tournament.getTournamentName()%></h2>
-                <p><strong>Date:</strong> <%=tournament.getTournamentStartDate()%></p>
-                <p><strong>Location:</strong> <%=tournament.getTournamentLocation()%></p>
-                <p><%=tournament.getTournamentDescription()%></p>
+            <div class="tournament" onclick="location.href='https://example.com/tournament2';">
+                <h2>Tournament 2</h2>
+                <p><strong>Date:</strong> June 20, 2024</p>
+                <p><strong>Location:</strong> Thunder Lanes, 456 Oak Ave, Townsville</p>
+                <p>An exciting competition with cash prizes for winners. Register now!</p>
             </div>
-            <%
-                 } 
-                } else{
-                    out.println("No tournaments available");
-
-                }
-        %>
+            <div class="tournament" onclick="location.href='https://example.com/tournament3';">
+                <h2>Tournament 3</h2>
+                <p><strong>Date:</strong> March 30, 2024</p>
+                <p><strong>Location:</strong> Strike Zone, 789 Elm St, Villageton</p>
+                <p>A charity tournament to support local causes. Join us for a fun-filled day!</p>
+            </div>
+                <c:forEach var="tournaments" items="${tournaments}">
+		            <div class="tournament">
+		                <h2>${tournaments.tournamentName}</h2>
+		                <p><strong>Date:</strong> ${tournaments.tournamentStartDate.toString()}</p>
+		                <p><strong>Location:</strong> ${tournaments.tournamentLocation}</p>
+		                <p><strong>Description:</strong> ${tournaments.tournamentDescription}</p>
+		                <p><strong>Capacity:</strong> ${tournaments.tournamentCapacity}</p>
+		            </div>
+        		</c:forEach>
+            </div>
+            <!-- Add more tournaments here -->
         </div>
-    </div>
 
 </body>
 
