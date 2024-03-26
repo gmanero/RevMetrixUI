@@ -25,10 +25,10 @@
             <input type="text" id="usename" name="username" placeholder="Username">
 
         <p>Enter your Password</p>     
-            <input type="text" id="password" name="password" placeholder="Password">
+            <input type="password" id="password" name="password" placeholder="Password">
 
-        <p>Retype your Password</p>     
-            <input type="text" id="password2" name="password2" placeholder="Password"><br><br>
+        <p>Confirm your Password</p>     
+            <input type="password" id="password2" name="password2" placeholder="Password"><br><br>
 
             <input type="submit" value="Sign Up">    
             
