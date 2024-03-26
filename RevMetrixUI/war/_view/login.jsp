@@ -24,10 +24,13 @@
         <br>
         <input type="password" id="password" name="password" placeholder="Password">
         <br>
-       <input type="submit" value="Log In">
+       <input type="submit" value="Sign In">
        </form>
+       
+       <br/>
+       
        <form method="get">
-       <button type= "submit" name = "destination" value = "accountCreation" class="signUp">SignUp</button>
+       <button type= "submit" name = "destination" value = "accountCreation" class="signUp">Sign Up</button>
     </form>
     </div>
     

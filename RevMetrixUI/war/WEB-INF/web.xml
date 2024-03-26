@@ -66,6 +66,10 @@
     <servlet-name>AccountCreationServlet</servlet-name>
         <servlet-class>revMetrix.servlet.AccountCreationServlet</servlet-class>
     </servlet>
+    <servlet>
+    <servlet-name>RegistrationServlet</servlet-name>
+        <servlet-class>revMetrix.servlet.RegistrationServlet</servlet-class>
+    </servlet>
     
     <!-- Servlet mappings -->
     <servlet-mapping>
@@ -141,6 +145,11 @@
     <servlet-mapping>
         <servlet-name>AccountCreationServlet</servlet-name>
         <url-pattern>/accountCreation</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>RegistrationServlet</servlet-name>
+        <url-pattern>/registration</url-pattern>
     </servlet-mapping>
 
     <welcome-file-list>
