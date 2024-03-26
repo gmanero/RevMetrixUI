@@ -31,9 +31,13 @@ public class AccountCreationServlet extends HttpServlet {
 		
 		// holds the error message text, if there is any
 		String errorMessage = null;
+		
+		
 
 		// decode POSTed form parameters and dispatch to controller
 		try {
+			RevMetrix.Account Account = new Account("djhake2@ycp.edu", "Don", "Hake", false);
+			RevMetrix.AccountsList.add(Account);
 			
 			String Email = req.getParameter("email");
 			String Username = req.getParameter("user");
@@ -47,20 +51,20 @@ public class AccountCreationServlet extends HttpServlet {
 			}else {
 				
 				// PUT IN CONTROLLER
-				for(RevMetrix.Account account : RevMetrix.AccountsList)
+				for(RevMetrix.Account Account1 : RevMetrix.AccountsList)
 				{
-					if (Email.equals(Account.getEmail()))
+					if (Email.equals(RevMetrix.Account.getEmail()))
 	    			{
 						errorMessage = "Email Already In Uses";
 						break;
 	    			}else{
-	    				if (Username.equals(Account.getUsername()) )
+	    				if (Username.equals(RevMetrix.Account.getUsername()) )
 		   				{
 		   					errorMessage = "Username Already Taken";
 		   					break;
 		   				}else{
-		    				RevMetrix.Account Account = new Account(Email, Username, Password, false);
-		    				RevMetrix.AccountsList.add(Account);
+		    				Account1 = new Account(Email, Username, Password, false);
+		    				RevMetrix.AccountsList.add(Account1);
 		   				}
 	    			}
 				}
@@ -71,7 +75,7 @@ public class AccountCreationServlet extends HttpServlet {
 					RevMetrix.AccountsList.add(account);
 				}
 				
-					
+				
 			}
 		} catch (Exception e) {
 			errorMessage = "Type Error - Needs fixing";
