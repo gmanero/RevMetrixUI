@@ -33,82 +33,82 @@
         <div class="score-box">
             <div class="score-upper">
                 <div class="shot-gap">a</div>
-                <div id = "split1" class="shot-box">${firstFrame_shot1}</div>
-                <div class="shot-box">${firstFrame_shot2}</div>
+                <div id = "split1" class="shot-box">${game.scoreBoard[0]}</div>
+                <div class="shot-box">${game.scoreBoard[1]}</div>
             </div>
-            <div class="score-running">${firstFrame_score}</div>
+            <div class="score-running">${Frame1_score}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
                 <div class="shot-gap"></div>
-                <div id = "split2" class="shot-box">${secondFrame_shot1}</div>
-                <div class="shot-box">${secondFrame_shot2}</div>
+                <div id = "split2" class="shot-box">${game.scoreBoard[2]}</div>
+                <div class="shot-box">${game.scoreBoard[3]}</div>
             </div>
-            <div class="score-running">${secondFrame_score}</div>
+            <div class="score-running">${Frame2_score}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
                 <div class="shot-gap"></div>
-                <div id = "split3" class="shot-box">${thirdFrame_shot1}</div>
-                <div class="shot-box">${thirdFrame_shot2}</div>
+                <div id = "split3" class="shot-box">${game.scoreBoard[4]}</div>
+                <div class="shot-box">${game.scoreBoard[5]}</div>
             </div>
-            <div class="score-running">${thirdFrame_score}</div>
+            <div class="score-running">${Frame3_score}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
                 <div class="shot-gap"></div>
-                <div id = "split4" class="shot-box">${forthFrame_shot1}</div>
-                <div class="shot-box">${forthFrame_shot2}</div>
+                <div id = "split4" class="shot-box">${game.scoreBoard[6]}</div>
+                <div class="shot-box">${game.scoreBoard[7]}</div>
             </div>
-            <div class="score-running">${forthFrame_score}</div>
+            <div class="score-running">${Frame4_score}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
                 <div class="shot-gap"></div>
-                <div id = "split5" class="shot-box">${fifthFrame_shot1}</div>
-                <div class="shot-box">${fifthFrame_shot2}</div>
+                <div id = "split5" class="shot-box">${game.scoreBoard[8]}</div>
+                <div class="shot-box">${game.scoreBoard[9]}</div>
             </div>
-            <div class="score-running">${fifthFrame_score}</div>
+            <div class="score-running">${Frame5_score}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
                 <div class="shot-gap"></div>
-                <div id = "split6" class="shot-box">${sixthFrame_shot1}</div>
-                <div class="shot-box">${sixthFrame_shot2}</div>
+                <div id = "split6" class="shot-box">${game.scoreBoard[10]}</div>
+                <div class="shot-box">${game.scoreBoard[11]}</div>
             </div>
-            <div class="score-running">${sixthFrame_score}</div>
+            <div class="score-running">${Frame6_score}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
                 <div class="shot-gap"></div>
-                <div id = "split7" class="shot-box">${seventhFrame_shot1}</div>
-                <div class="shot-box">${seventhFrame_shot2}</div>
+                <div id = "split7" class="shot-box">${game.scoreBoard[12]}</div>
+                <div class="shot-box">${game.scoreBoard[13]}</div>
             </div>
-            <div class="score-running">${seventhFrame_score}</div>
+            <div class="score-running">${Frame7_score}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
                 <div class="shot-gap"></div>
-                <div id = "split8" class="shot-box">${eighthFrame_shot1}</div>
-                <div class="shot-box">${eighthFrame_shot2}</div>
+                <div id = "split8" class="shot-box">${game.scoreBoard[14]}</div>
+                <div class="shot-box">${game.scoreBoard[15]}</div>
             </div>
-            <div class="score-running">${eighthFrame_score}</div>
+            <div class="score-running">${Frame8_score}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
                 <div class="shot-gap"></div>
-                <div id = "split9" class="shot-box">${ninthFrame_shot1}</div>
-                <div class="shot-box">${ninthFrame_shot2}</div>
+                <div id = "split9" class="shot-box">${game.scoreBoard[16]}</div>
+                <div class="shot-box">${game.scoreBoard[17]}</div>
             </div>
-            <div class="score-running">${ninethFrame_score}</div>
+            <div class="score-running">${Frame9_score}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
-                <div id = "split10" class="shot-box">${tenthFrame_shot1}</div>
-                <div id = "split11" class="shot-box">${tenthFrame_shot2}</div>
-                <div class="shot-box">${tenthFrame_shot3}</div>
+                <div id = "split10" class="shot-box">${game.scoreBoard[18]}</div>
+                <div id = "split11" class="shot-box">${game.scoreBoard[19]}</div>
+                <div class="shot-box">${game.scoreBoard[20]}</div>
             </div>
-            <div class="score-running">${tenthFrame_score}</div>
+            <div class="score-running">${Frame10_score}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
