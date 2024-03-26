@@ -1,0 +1,95 @@
+ * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #1f1f1f;
+    color: #fff;
+}
+
+/* Header Styles */
+.topPage {
+    text-align: center;
+    background: linear-gradient(to bottom, #562d7f, #26acca);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.topPage h1 {
+    margin: 0;
+    font-size: 36px;
+    color: #fff;
+}
+
+/* Form Styles */
+.loginForm {
+    width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #333;
+    border-radius: 10px;
+    background-color: #333;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.loginForm h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.loginForm p {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.loginForm input[type="text"],
+.loginForm input[type="password"] {
+    width: calc(100% - 10px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.loginForm input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #26acca;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.loginForm input[type="submit"]:hover {
+    background-color: #4891ac;
+}
+
+.loginBtn {
+    display: block;
+    margin: 5px auto 0; /* Center the button and add top margin */
+    width: 200px; /* Set button width */
+    padding: 10px;
+    border: none; /* Remove border */
+    border-radius: 5px;
+    background-color: transparent; /* Transparent background */
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center; /* Center text */
+    white-space: nowrap; /* Prevent text from splitting into multiple lines */
+}
+
+/* Add hover effect */
+.loginBtn:hover {
+    text-decoration: underline;
+}
+
