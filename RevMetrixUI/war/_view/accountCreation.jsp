@@ -40,6 +40,7 @@
     <p>Enter your Username</p>                  
     <input type="text" id="username" name="username" placeholder="Username">
 
+
     <p>Enter your Password</p>     
     <input type="password" id="password" name="password" placeholder="Password">
 
