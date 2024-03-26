@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import revMetrix.controller.GameController;
 import revMetrix.model.RevMetrix;
 import revMetrix.model.RevMetrix.Game;
 
@@ -28,6 +29,18 @@ public class GameServlet extends HttpServlet {
 		
 		String numbers = req.getParameter("clickedPins");
 		System.out.println(numbers);
+        
+		//parse {for controller}
+		String output= "";
+		System.out.println(numbers);
+		
+		boolean[] pins = GameController.getPins(numbers);
+		int score = GameController.getScore(pins);
+		
+		req.setAttribute("firstFrame_shot1", score);
+		
+		//splits
+		
 		
 		
 		req.getRequestDispatcher("/_view/game.jsp").forward(req, resp);

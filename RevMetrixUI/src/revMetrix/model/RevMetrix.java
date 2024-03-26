@@ -3,9 +3,10 @@ package revMetrix.model;
 import java.util.ArrayList;
 import java.util.List;
 
-
+ 
 public class RevMetrix {
-    private ArrayList<Account> AccountsList = new ArrayList<>();
+    public static final String AccountList = null;
+	public static ArrayList<Account> AccountsList = new ArrayList<>();
     private ArrayList<Game> GamesList = new ArrayList<>();
     private ArrayList<Event> EventsList = new ArrayList<>();
     private ArrayList<Ball> BallsList = new ArrayList<>();
@@ -47,36 +48,44 @@ public class RevMetrix {
     
 
     public static class Account {
-        private String username;
-        private String password;
-        private boolean isLoggedIn;
+        public static String email;
+		public static String username;
+		public static String password;
+		public static boolean isLoggedIn;
 
-        public Account(String username, String password, boolean isLoggedIn) {
-            this.username = username;
-            this.password = password;
-            this.isLoggedIn = isLoggedIn;
+        public Account(String email, String username, String password, boolean isLoggedIn) {
+        	Account.email = email;
+            Account.username = username;
+            Account.password = password;
+            Account.isLoggedIn = isLoggedIn;
         }
         
         //getters
-        public String getUsername() {
+        public static String getEmail() {
+            return email;
+        }
+        public static String getUsername() {
             return username;
         }
-        public String getPassword() {
+        public static String getPassword() {
             return password;
         }
-        public boolean getIsLoggedIn() {
+        public static boolean getIsLoggedIn() {
             return isLoggedIn;
         }
         
         //setters
+        public void setEmail(String email) {
+        	Account.email = email;
+        }
         public void setUsername(String username) {
-            this.username = username;
+        	Account.username = username;
         }
         public void setPassword(String password) {
-            this.password = password;
+        	Account.password = password;
         }
         public void setLoggedIn(boolean isLoggedIn) {
-            this.isLoggedIn = isLoggedIn;
+        	Account.isLoggedIn = isLoggedIn;
         }
     }
     public static class Game{

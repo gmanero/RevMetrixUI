@@ -70,14 +70,14 @@ input[type="submit"] {
     padding: 10px;
     border: none;
     border-radius: 5px;
-    background-color: none;
-    color: #26acca; /* Adjusted submit button color */
+    background-color: #26acca; /* Adjusted submit button color */
     font-size: 16px;
+    color: #fff;
     cursor: pointer;
 }
 
 input[type="submit"]:hover {
-    background-color: #4891ac;
+    background-color: #316477;
     color: #fff; /* Adjusted hover color */
 }
 
