@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import revMetrix.model.RevMetrix;
-import revMetrix.model.RevMetrix.Account;
+
+import revMetrix.model.RevMetrix.Account; 
+
 
 public class AccountCreationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -31,13 +33,18 @@ public class AccountCreationServlet extends HttpServlet {
 		
 		// holds the error message text, if there is any
 		String errorMessage = null;
+		
+		
 
 		// decode POSTed form parameters and dispatch to controller
 		try {
+			RevMetrix.Account Account = new Account("djhake2@ycp.edu", "Don", "Hake", false);
+			RevMetrix.AccountsList.add(Account);
 			
 			String Email = req.getParameter("email");
 			String Username = req.getParameter("user");
 			String Password = req.getParameter("pass");
+			
 			
 			
 			// check for errors in the form data 
@@ -46,25 +53,33 @@ public class AccountCreationServlet extends HttpServlet {
 			}else {
 				
 				// PUT IN CONTROLLER
-				while(true)
+				for(RevMetrix.Account Account1 : RevMetrix.AccountsList)
 				{
-					if (Email == RevMetrix.Account.getEmail())
+					if (Email.equals(RevMetrix.Account.getEmail()))
 	    			{
 						errorMessage = "Email Already In Uses";
+						break;
 	    			}else{
-	    				if (Username == RevMetrix.Account.getUsername())
+	    				if (Username.equals(RevMetrix.Account.getUsername()) )
 		   				{
 		   					errorMessage = "Username Already Taken";
+		   					break;
 		   				}else{
-		    				RevMetrix.Account Account = new Account(Email, Username, Password, false);
-		    				RevMetrix.AccountsList.add(Account);
+		    				Account1 = new Account(Email, Username, Password, false);
+		    				RevMetrix.AccountsList.add(Account1);
 		   				}
 	    			}
 				}
 				
-					
+				if (errorMessage.isEmpty())
+				{
+					RevMetrix.Account account = new RevMetrix.Account(Email, Username, Password, false);
+					RevMetrix.AccountsList.add(account);
+				}
+				
+				
 			}
-		} catch (NumberFormatException e) {
+		} catch (Exception e) {
 			errorMessage = "Type Error - Needs fixing";
 		}
 		req.setAttribute("errorMessage", errorMessage);

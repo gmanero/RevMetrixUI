@@ -5,7 +5,7 @@ import java.util.List;
 
  
 public class RevMetrix {
-    private ArrayList<Account> AccountsList = new ArrayList<>();
+	public static ArrayList<Account> AccountsList = new ArrayList<>();
     private ArrayList<Game> GamesList = new ArrayList<>();
     private ArrayList<Event> EventsList = new ArrayList<>();
     private ArrayList<Ball> BallsList = new ArrayList<>();
