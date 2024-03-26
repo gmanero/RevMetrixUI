@@ -109,6 +109,8 @@ public class GameServlet extends HttpServlet {
 	    
 	    int newShotNum = game.getShotNum() + 1;
 	    game.setShotNum(newShotNum);
+	    
+	    req.setAttribute("game", game);
 
 	    // Forwarding request and response to JSP page
 	    req.getRequestDispatcher("/_view/game.jsp").forward(req, resp);
