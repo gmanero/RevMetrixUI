@@ -1,3 +1,5 @@
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="revMetrix.model.RevMetrix.Tournament" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,25 +22,24 @@
     <div class="section">
         <div class="section-title">Featured Tournaments</div>
         <div class="tournaments">
-            <div class="tournament" onclick="location.href='https://example.com/tournament1';">
-                <h2>Tournament 1</h2>
-                <p><strong>Date:</strong> January 15, 2025</p>
-                <p><strong>Location:</strong> Bowling Palace, 123 Main St, Cityville</p>
-                <p>A friendly tournament for amateur bowlers. Come and showcase your skills!</p>
+            <% 
+                ArrayList<Tournament> tournaments = (ArrayList<Tournament>) request.getAttribute("tournaments");
+                if (tournaments != null){
+                    for (Tournament tournament : tournaments) { 
+            %>
+            <div class="tournament" onclick="location.href='https://example.com/tournament<%=tournament.getTournamentId()%>';">
+                <h2><%=tournament.getTournamentName()%></h2>
+                <p><strong>Date:</strong> <%=tournament.getTournamentStartDate()%></p>
+                <p><strong>Location:</strong> <%=tournament.getTournamentLocation()%></p>
+                <p><%=tournament.getTournamentDescription()%></p>
             </div>
-            <div class="tournament" onclick="location.href='https://example.com/tournament2';">
-                <h2>Tournament 2</h2>
-                <p><strong>Date:</strong> June 20, 2024</p>
-                <p><strong>Location:</strong> Thunder Lanes, 456 Oak Ave, Townsville</p>
-                <p>An exciting competition with cash prizes for winners. Register now!</p>
-            </div>
-            <div class="tournament" onclick="location.href='https://example.com/tournament3';">
-                <h2>Tournament 3</h2>
-                <p><strong>Date:</strong> March 30, 2024</p>
-                <p><strong>Location:</strong> Strike Zone, 789 Elm St, Villageton</p>
-                <p>A charity tournament to support local causes. Join us for a fun-filled day!</p>
-            </div>
-            <!-- Add more tournaments here -->
+            <%
+                 } 
+                } else{
+                    out.println("No tournaments available");
+
+                }
+        %>
         </div>
     </div>
 

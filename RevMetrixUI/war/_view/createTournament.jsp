@@ -24,7 +24,7 @@
         <h1>Create Tournament</h1>
     </div>
 
-    <form action="createTournamentServlet" method="post">
+    <form action="/createTournamentServlet" method="post">
         <div class="container">
             <h2>Tournament Details</h2>
             <div class="form-group">

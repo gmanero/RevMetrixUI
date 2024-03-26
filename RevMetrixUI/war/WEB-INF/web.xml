@@ -124,7 +124,7 @@
     
      <servlet-mapping>
         <servlet-name>CreateTournamentServlet</servlet-name>
-        <url-pattern>/createTournament</url-pattern>
+        <url-pattern>/createTournamentServlet</url-pattern>
     </servlet-mapping>
     
      <servlet-mapping>
