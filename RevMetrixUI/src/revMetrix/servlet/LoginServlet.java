@@ -42,13 +42,15 @@ public class LoginServlet extends HttpServlet {
 				
 				
 				
+				
+				
 				// check for errors in the form data 
 				if (Username == null || Password == null) {
 					errorMessage = "Missing Required Data";
 				}else {
 					
 					// PUT IN CONTROLLER
-					for(@SuppressWarnings("unused") Account Account : RevMetrix.AccountsList)
+					for(Account Account : RevMetrix.AccountsList)
 					{
 						if (Username.equals(RevMetrix.Account.getUsername()))
 		    			{

@@ -15,8 +15,9 @@
     </div>
     
     <!-- accountCreation form -->
-        <form class="loginForm">
+    <form class="loginForm" action="${pageContext.servletContext.contextPath}/LoginServlet" method="post">
         <h1>Register</h1>
+       
 
         <p>Enter your Email Address</p>                  
             <input type="text" id="email" name="email" placeholder="Email">
@@ -30,13 +31,14 @@
         <p>Retype your Password</p>     
             <input type="text" id="password2" name="password2" placeholder="Password"><br><br>
 
-            <input type="submit" value="Sign Up">    
+            <button type="submit" name="destination" value="account" class="signUp">Sign Up</button>  
             
             
               <div class="linkToAccount">
                 <a name="destination" value="login">Already have an login?</a> 
             </div>   
     </form>
+    
     
   
 
