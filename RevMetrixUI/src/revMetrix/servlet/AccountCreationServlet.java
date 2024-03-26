@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import revMetrix.model.RevMetrix;
+
 import revMetrix.model.RevMetrix.Account; 
+
 
 public class AccountCreationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
