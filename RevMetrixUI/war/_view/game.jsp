@@ -138,7 +138,7 @@
          
         	<form  action="${pageContext.servletContext.contextPath}/game" method="post">
             <button class="button" type="submit" value="submit">Next Shot</button>
-            <input type="hidden" name = "clickedPins" id = "output" value="">
+            <input type="hidden" name = "clickedPins" id = "score" value="">
             </form>
 		<form  action="${pageContext.servletContext.contextPath}/game" method="post">
             <button class="button" type="submit" value="submit">Foul</button>
@@ -188,7 +188,10 @@
         clickedPins.sort();
         // Update display of clicked pins
         document.getElementById('clickedPins').textContent = clickedPins.join(', ');
-        document.getElementsByID('output').value = document.getElementById('clickedPins').textContent;
+        var clickedPinsContent = document.getElementById("clickedPins").innerText;
+
+     // Set the value of the input element with id "score" to the content of the span element
+     document.getElementById("score").value = clickedPinsContent;
     }
     function Split(i) {
         document.getElementById("split"+i).className = "shot-box-split";
