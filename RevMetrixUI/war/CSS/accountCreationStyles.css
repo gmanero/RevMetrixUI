@@ -26,7 +26,6 @@ body {
     color: #fff;
 }
 
-
 /* Form Styles */
 .loginForm {
     width: 400px;
@@ -74,17 +73,23 @@ body {
     background-color: #4891ac;
 }
 
-.linkToAccount {
-    text-align: center;
-    margin-top: 20px;
-    cursor: pointer;
-}
-
-.linkToAccount a {
-    text-decoration: none;
+.loginBtn {
+    display: block;
+    margin: 5px auto 0; /* Center the button and add top margin */
+    width: 200px; /* Set button width */
+    padding: 10px;
+    border: none; /* Remove border */
+    border-radius: 5px;
+    background-color: transparent; /* Transparent background */
     color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center; /* Center text */
+    white-space: nowrap; /* Prevent text from splitting into multiple lines */
 }
 
-.linkToAccount a:hover {
+/* Add hover effect */
+.loginBtn:hover {
     text-decoration: underline;
 }
+
