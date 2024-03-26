@@ -9,6 +9,7 @@ public class RevMetrix {
     private ArrayList<Game> GamesList = new ArrayList<>();
     private ArrayList<Event> EventsList = new ArrayList<>();
     private ArrayList<Ball> BallsList = new ArrayList<>();
+    private ArrayList<Tournament> TournamentList = new ArrayList<>();
     
     //constructor
     public RevMetrix() {
@@ -16,6 +17,7 @@ public class RevMetrix {
         GamesList = new ArrayList<>();
         EventsList = new ArrayList<>();
         BallsList = new ArrayList<>();
+        TournamentList = new ArrayList<>();
     }
     
     //add to an arraylist
@@ -31,6 +33,9 @@ public class RevMetrix {
     public void addBall(Ball ball) {
         BallsList.add(ball);
     }
+    public void addTournament(Tournament tournament) {
+    	TournamentList.add(tournament);
+    }
     
     public ArrayList<Account> getAccountsList(){
     	return AccountsList;
@@ -43,6 +48,9 @@ public class RevMetrix {
     }
     public ArrayList<Ball> getBallsList(){
     	return BallsList;
+    }
+    public ArrayList<Tournament> getTournamentList(){
+    	return TournamentList;
     }
     
 
@@ -194,4 +202,74 @@ public class RevMetrix {
             this.weight = weight;
         }
     }
+    
+    public static class Tournament {
+        private int tournamentId;
+        private String tournamentName;
+        private String tournamentStartDate;
+        private String tournamentLocation;
+        private String tournamentDescription;
+        private int tournamentCapacity;
+    
+        public Tournament(int tournamentId, String tournamentName, String tournamentStartDate, String tournamentLocation, String tournamentDescription, int tournamentCapacity) {
+        this.tournamentId = tournamentId;
+        this.tournamentName = tournamentName;
+        this.tournamentStartDate = tournamentStartDate;
+        this.tournamentLocation = tournamentLocation;
+        this.tournamentDescription = tournamentDescription;
+        this.tournamentCapacity = tournamentCapacity;
+        }
+        
+        // Getter methods
+        public int getTournamentId() {
+            return tournamentId;
+        }
+
+        public String getTournamentName() {
+            return tournamentName;
+        }
+
+        public String getTournamentStartDate() {
+            return tournamentStartDate;
+        }
+
+        public String getTournamentLocation() {
+            return tournamentLocation;
+        }
+
+        public String getTournamentDescription() {
+            return tournamentDescription;
+        }
+
+        public int getTournamentCapacity() {
+            return tournamentCapacity;
+        }
+
+        // Setter methods
+        public void setTournamentId(int tournamentId) {
+            this.tournamentId = tournamentId;
+        }
+
+        public void setTournamentName(String tournamentName) {
+            this.tournamentName = tournamentName;
+        }
+
+        public void setTournamentStartDate(String tournamentStartDate) {
+            this.tournamentStartDate = tournamentStartDate;
+        }
+
+        public void setTournamentLocation(String tournamentLocation) {
+            this.tournamentLocation = tournamentLocation;
+        }
+
+        public void setTournamentDescription(String tournamentDescription) {
+            this.tournamentDescription = tournamentDescription;
+        }
+
+        public void setTournamentCapacity(int tournamentCapacity) {
+            this.tournamentCapacity = tournamentCapacity;
+        }
+        
+    }
+    
 }
