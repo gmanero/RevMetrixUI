@@ -1,77 +1,124 @@
-		body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: #1f1f1f;
-            color: #fff;
-        }
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #1f1f1f;
+    color: #fff;
+}
 
-        /* Header Styles */
-        .topPage {
-            text-align: center;
-            background-color: #6a0dad;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
+/* Header Styles */
+.topPage {
+    text-align: center;
+    background: linear-gradient(to bottom, #562d7f, #26acca);
+    padding: 20px;
+    margin-bottom: 20px;
+}
 
-        .topPage h1 {
-            margin: 0;
-            font-size: 36px;
-            color: #fff;
-        }
+.topPage h1 {
+    margin: 0;
+    font-size: 36px;
+    color: #fff;
+}
 
-        /* Navigation Styles */
-        .links {
-            text-align: center;
-            padding: 10px;
-            background-color: #6a0dad;
-            margin-bottom: 20px;
-        }
+/* Main Text Styles */
+.mainText {
+    text-align: center;
+    margin: 50px auto;
+    max-width: 800px;
+}
 
-        .button {
-            background-color: #af00ff;
-            border: none;
-            color: #fff;
-            padding: 10px 20px;
-            font-size: 18px;
-            cursor: pointer;
-            margin: 0 10px;
-            transition: background-color 0.3s;
-        }
+.mainText p {
+    font-size: 18px;
+    line-height: 1.5;
+}
 
-        .button:hover {
-            background-color: #8a00b3;
-        }
+/* Bowling Balls Styles */
+.bowlingBalls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 50px;
+}
 
-        /* Main Text Styles */
-        .mainText {
-            text-align: center;
-            margin: 50px auto;
-            max-width: 800px;
-        }
+.bowlingBall {
+    width: 120px;
+    height: 120px;
+    background-color: #555;
+    border-radius: 50%;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
-        .mainText p {
-            font-size: 18px;
-            line-height: 1.5;
-        }
+.bowlingBall:hover {
+    background-color: #777;
+}
 
-        /* Bowling Balls Styles */
-        .bowlingBalls {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 50px;
-        }
+.addBall {
+    width: 120px;
+    height: 120px;
+    background-color: #555;
+    border-radius: 50%;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 48px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
-        .bowlingBall {
-            width: 120px;
-            height: 120px;
-            background-color: #fff;
-            border-radius: 50%;
-            margin: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 24px;
-            color: #6a0dad;
-        }
+.addBall:hover {
+    background-color: #777;
+}
+
+
+.addBallForm {
+    display: none;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.addBallForm.show {
+    display: block;
+}
+
+.addBallForm h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.addBallForm form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.addBallForm label {
+    margin-bottom: 10px;
+}
+
+.addBallForm input {
+    margin-bottom: 20px;
+    padding: 5px;
+}
+
+.addBallForm button {
+    padding: 10px 20px;
+    background-color: #26acca;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.addBallForm button:hover {
+    background-color: #4891ac;
+}

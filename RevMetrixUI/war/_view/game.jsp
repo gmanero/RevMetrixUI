@@ -4,98 +4,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Current Game</title>
+    <title>RevMetrix - Current Game</title>
     <link rel = "stylesheet" type ="text/css" href="CSS/gameStyles.css">
 </head>
 
 <body>
+ <jsp:include page="navbar.jsp" />
     <div class="topPage">
         <h1>Current Game</h1>
     </div>
     
     
-          <form method= "get">
-    <div class="links">
-        <button type="submit" name="destination" value="revMetrix" class="button">RevMetrix</button>
-        <button type="submit" name="destination" value="events" class="button">Events</button>
-        <button type="submit" name="destination" value="register" class="button">Register</button>
-        <button type="submit" name="destination" value="stats" class="button">Stats</button>
-        <button type="submit" name="destination" value="game" class="button">Your Game</button>
-         <button type="submit" name="destination" value="login" class="button">Login</button>
-          <button type="submit" name="destination" value="account" class="button">Account</button>
-    </div>
-     </form>
-    
-
+        
     <div class="mainText">
         <div class="gameInfo">
             <h2>Welcome to the Bowling Game</h2>
             <p>Game Number: 1</p>
-            <p>Lane Number: 5</p>
-            <p id="shotNumber">Shot Number: 1</p>
-            <p>Score: 0</p>
-            <p id="pinsKnockedDown">Pins Knocked Down: 0</p>
-            <p id="pinsRemaining">Pins Remaining: 10</p>
-            <button class="button" onclick="nextShot()">Next Shot</button>
+            <p>Lane Number: 1</p>
+            <p id="shotNumber">Shot Number: ${game.getShotNum()}</p>
+            <p id="pinsRemaining">Pins Remaining: ${game.pinsRemain}</p>
+            
+            
         </div>
 
+	<div class = "interactions">
+	<div class="scoreboard">
+        <div class="score-box">
+            <div class="score-upper">
+                <div class="shot-gap">a</div>
+                <div id = "split1" class="shot-box">${game.scoreBoard[0]}</div>
+                <div class="shot-box">${game.scoreBoard[1]}</div>
+            </div>
+            <div class="score-running">${game.scoreBoardTot[0]}</div>
+        </div>
+        <div class="score-box">
+            <div class="score-upper">
+                <div class="shot-gap"></div>
+                <div id = "split2" class="shot-box">${game.scoreBoard[2]}</div>
+                <div class="shot-box">${game.scoreBoard[3]}</div>
+            </div>
+            <div class="score-running">${game.scoreBoardTot[1]}</div>
+        </div>
+        <div class="score-box">
+            <div class="score-upper">
+                <div class="shot-gap"></div>
+                <div id = "split3" class="shot-box">${game.scoreBoard[4]}</div>
+                <div class="shot-box">${game.scoreBoard[5]}</div>
+            </div>
+            <div class="score-running">${game.scoreBoardTot[2]}</div>
+        </div>
+        <div class="score-box">
+            <div class="score-upper">
+                <div class="shot-gap"></div>
+                <div id = "split4" class="shot-box">${game.scoreBoard[6]}</div>
+                <div class="shot-box">${game.scoreBoard[7]}</div>
+            </div>
+            <div class="score-running">${game.scoreBoardTot[3]}</div>
+        </div>
+        <div class="score-box">
+            <div class="score-upper">
+                <div class="shot-gap"></div>
+                <div id = "split5" class="shot-box">${game.scoreBoard[8]}</div>
+                <div class="shot-box">${game.scoreBoard[9]}</div>
+            </div>
+            <div class="score-running">${game.scoreBoardTot[4]}</div>
+        </div>
+        <div class="score-box">
+            <div class="score-upper">
+                <div class="shot-gap"></div>
+                <div id = "split6" class="shot-box">${game.scoreBoard[10]}</div>
+                <div class="shot-box">${game.scoreBoard[11]}</div>
+            </div>
+            <div class="score-running">${game.scoreBoardTot[5]}</div>
+        </div>
+        <div class="score-box">
+            <div class="score-upper">
+                <div class="shot-gap"></div>
+                <div id = "split7" class="shot-box">${game.scoreBoard[12]}</div>
+                <div class="shot-box">${game.scoreBoard[13]}</div>
+            </div>
+            <div class="score-running">${game.scoreBoardTot[6]}</div>
+        </div>
+        <div class="score-box">
+            <div class="score-upper">
+                <div class="shot-gap"></div>
+                <div id = "split8" class="shot-box">${game.scoreBoard[14]}</div>
+                <div class="shot-box">${game.scoreBoard[15]}</div>
+            </div>
+            <div class="score-running">${game.scoreBoardTot[7]}</div>
+        </div>
+        <div class="score-box">
+            <div class="score-upper">
+                <div class="shot-gap"></div>
+                <div id = "split9" class="shot-box">${game.scoreBoard[16]}</div>
+                <div class="shot-box">${game.scoreBoard[17]}</div>
+            </div>
+            <div class="score-running">${game.scoreBoardTot[8]}</div>
+        </div>
+        <div class="score-box">
+            <div class="score-upper">
+                <div id = "split10" class="shot-box">${game.scoreBoard[18]}</div>
+                <div id = "split11" class="shot-box">${game.scoreBoard[19]}</div>
+                <div class="shot-box">${game.scoreBoard[20]}</div>
+            </div>
+            <div class="score-running">${game.scoreBoardTot[9]}</div>
+        </div>
+        <div class="score-box">
+            <div class="score-upper">
+                <div class="shot-box">${event_score}</div>
+            </div>
+            <div class="score-running">${game.scoreBoardTot[10]}</div>
+        </div>
+    </div>
+		<div class="main-container">
+        <!-- Container for bowling pins -->
+        <div class="pin-container">
+            <!-- Set of bowling pins -->
+            <div class="pin" id="pin1" onclick="togglePin(this, 1)"></div>
+            <div class="pin" id="pin2" onclick="togglePin(this, 2)"></div>
+            <div class="pin" id="pin3" onclick="togglePin(this, 3)"></div>
+            <div class="pin" id="pin4" onclick="togglePin(this, 4)"></div>
+            <div class="pin" id="pin5" onclick="togglePin(this, 5)"></div>
+            <div class="pin" id="pin6" onclick="togglePin(this, 6)"></div>
+            <div class="pin" id="pin7" onclick="togglePin(this, 7)"></div>
+            <div class="pin" id="pin8" onclick="togglePin(this, 8)"></div>
+            <div class="pin" id="pin9" onclick="togglePin(this, 9)"></div>
+            <div class="pin" id="pin10" onclick="togglePin(this, 10)"></div>
+        </div>
+         <span class="gap"></span>
+         <div  class="hit-pins"><p>Hit Pins: <span id="clickedPins"></span></p></div>
+        <div class=buttons-container>
+         
+        	<form  action="${pageContext.servletContext.contextPath}/game" method="post">
+            <button class="button" type="submit" value="submit">Next Shot</button>
+            <input type="hidden" name = "clickedPins" id = "score" value="">
+            </form>
+		<form  action="${pageContext.servletContext.contextPath}/game" method="post">
+            <button class="button" type="submit" value="submit">Foul</button>
+            <input type="hidden" name = "clickedPins"  value="F,">
+            </form>
+       	<form  action="${pageContext.servletContext.contextPath}/game" method="post">
+            <button class="button" type="submit" value="submit">strikeSpare</button>
+            <input type="hidden" name = "clickedPins"  value="1,2,3,4,5,6,7,8,9,10">
+            </form>
+		<form  action="${pageContext.servletContext.contextPath}/game" method="post">
+            <button class="button" type="submit" value="submit">Gutter</button>
+            <input type="hidden" name = "clickedPins"  value="G,">
+            </form>
+        </div>
+       
+        
+    </div>
+    
+    
+	</div>
         <div class="stats">
             <h2>Game Statistics</h2>
-            <p>Total Strikes: 0</p>
-            <p>Total Spares: 0</p>
-            <p>Total Misses: 0</p>
+            <p>Total Strikes: ${game.getTotStrike()}</p>
+            <p>Total Spares: ${game.getTotSpare()}</p>
+            <p>Total Gutters: ${game.getTotGutter()}</p>
+            <p>Total Fouls: ${game.getTotFoul()}</p>
         </div>
-
-        <div class="bowling-pins">
-            <div class="pin-row">
-                <div class="pin">
-                    <input type="checkbox" id="Pin1" name="Pin1" value="Pin1">
-                </div>
-            </div>
-            <div class="pin-row">
-                <div class="pin">
-                    <input type="checkbox" id="Pin2" name="Pin2" value="Pin2">
-                </div>
-                <div class="pin">
-                    <input type="checkbox" id="Pin3" name="Pin3" value="Pin3">
-                </div>
-            </div>
-            <div class="pin-row">
-                <div class="pin">
-                    <input type="checkbox" id="Pin4" name="Pin4" value="Pin4">
-                </div>
-                <div class="pin">
-                    <input type="checkbox" id="Pin5" name="Pin5" value="Pin5">
-                </div>
-                <div class="pin">
-                    <input type="checkbox" id="Pin6" name="Pin6" value="Pin6">
-                </div>
-            </div>
-            <div class="pin-row">
-                <div class="pin">
-                    <input type="checkbox" id="Pin7" name="Pin7" value="Pin7">
-                </div>
-                <div class="pin">
-                    <input type="checkbox" id="Pin8" name="Pin8" value="Pin8">
-                </div>
-                <div class="pin">
-                    <input type="checkbox" id="Pin9" name="Pin9" value="Pin9">
-                </div>
-                <div class="pin">
-                    <input type="checkbox" id="Pin10" name="Pin10" value="Pin10">
-                </div>
-            </div>
-        </div>
+	
+        
+         
+   
     </div>
 
     <script>
-        let currentShot = 1;
-        
-        function nextShot() {
-            currentShot++;
-            document.getElementById('shotNumber').textContent = `Shot Number: ${currentShot}`;
+    var clickedPins = [];
+
+    
+    function togglePin(pin, pinNumber) {
+        // Toggle class to change background color
+        pin.classList.toggle('clicked');
+
+        // Update array of clicked pins
+        if (clickedPins.includes(pinNumber)) {
+            clickedPins = clickedPins.filter(num => num !== pinNumber);
+        } else {
+            clickedPins.push(pinNumber);
         }
-    </script>
+        clickedPins.sort();
+        // Update display of clicked pins
+        document.getElementById('clickedPins').textContent = clickedPins.join(', ');
+        var clickedPinsContent = document.getElementById("clickedPins").innerText;
+
+     // Set the value of the input element with id "score" to the content of the span element
+     document.getElementById("score").value = clickedPinsContent;
+    }
+    function Split(i) {
+        document.getElementById("split"+i).className = "shot-box-split";
+    }
+</script>
 </body>
 
 </html>
