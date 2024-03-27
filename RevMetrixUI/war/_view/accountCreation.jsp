@@ -25,14 +25,15 @@
 <body>
 <jsp:include page="navbar.jsp" />
 
-<div class="topPage">
-    <h1>RevMetrix - Create an Account</h1>
-</div>
+    <div class="topPage">
+        <h1>RevMetrix - Create an Account</h1>
+    </div>
+    
+    <!-- accountCreation form -->
+    <form class="loginForm" action="${pageContext.servletContext.contextPath}/LoginServlet" method="post">
 
-<!-- accountCreation form -->
-<div class="loginForm">
-    <form onsubmit="return validateForm()">
         <h1>Register</h1>
+       
 
         <p>Enter your Email Address</p>                  
         <input type="text" id="email" name="email" placeholder="Email">
@@ -44,16 +45,17 @@
         <input type="password" id="password" name="password" placeholder="Password">
 
         <p>Retype your Password</p>     
-        <input type="password" id="password2" name="password2" placeholder="Password"><br><br>
+            <input type="text" id="password2" name="password2" placeholder="Password"><br><br>
 
-        <input type="submit" value="Sign Up">    
+            <button type="submit" name="destination" value="account" class="signUp">Sign Up</button>  
+            
+            
+              <div class="linkToAccount">
+                <a name="destination" value="login">Already have an login?</a> 
+            </div>   
     </form>
-
-    <br/>
-    <form method="get">
-        <button type="submit" name="destination" value="login" class="loginBtn">Already have an account?</button>
-    </form>
-</div>   
+    
+    
 
 </body>
 </html>
