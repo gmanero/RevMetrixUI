@@ -1,4 +1,4 @@
-* {
+ * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -44,7 +44,7 @@ body {
 
 .loginForm p {
     margin: 0;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1.5;
 }
 
@@ -73,14 +73,14 @@ body {
     background-color: #4891ac;
 }
 
-.loginBtn {
+.signUpBtn {
     display: block;
     margin: 5px auto 0; /* Center the button and add top margin */
     width: 200px; /* Set button width */
     padding: 10px;
     border: none; /* Remove border */
     border-radius: 5px;
-    background-color: transparent; /* Transparent background */
+    background-color: #26acca; /* Transparent background */
     color: #fff;
     font-size: 16px;
     cursor: pointer;
@@ -89,7 +89,18 @@ body {
 }
 
 /* Add hover effect */
-.loginBtn:hover {
-    text-decoration: underline;
+.signUpBtn:hover {
+   background-color:  #4891ac;
+}
+
+
+.linkToAccount {
+	color: white;
+	text-align: center;
+	margin: 5px auto 0;
+	cursor: pointer;
+	background-color: transparent;
+	border: none;
+	text-decoration: underline;
 }
 
