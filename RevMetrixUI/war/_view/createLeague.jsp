@@ -13,6 +13,22 @@
         $(function () {
             $("#leagueStartDate").datepicker();
         });
+
+        // Function to check if all fields are filled
+        function validateForm() {
+            var leagueName = $("#leagueName").val();
+            var leagueStartDate = $("#leagueStartDate").val();
+            var leagueLocation = $("#leagueLocation").val();
+            var leagueDescription = $("#leagueDescription").val();
+            var leagueCapacity = $("#leagueCapacity").val();
+
+            // Check if any field is empty
+            if (leagueName == '' || leagueStartDate == '' || leagueLocation == '' || leagueDescription == '' || leagueCapacity == '') {
+                alert("All fields are required!");
+                return false;
+            }
+            return true;
+        }
     </script>
 </head>
 
@@ -24,7 +40,7 @@
         <h1>Create League</h1>
     </div>
 
-    <form action="createLeagueServlet" method="post">
+    <form action="${pageContext.servletContext.contextPath}/leagues" method="post" onsubmit="return validateForm()">
         <div class="container">
             <h2>League Details</h2>
             <div class="form-group">
