@@ -19,11 +19,10 @@
     <div class="mainText">
         <div class="gameInfo">
             <h2>Welcome to the Bowling Game</h2>
-            <p>Game Number: ${gameNumber }</p>
-            <p>Lane Number: ${laneNumber }</p>
-            <p id="shotNumber">Shot Number: ${shotNumber}</p>
-            <p id="pinsKnockedDown">Pins Knocked Down: ${pinsKnockedDown}</p>
-            <p id="pinsRemaining">Pins Remaining: ${pinsRemianing}</p>
+            <p>Game Number: 1</p>
+            <p>Lane Number: 1</p>
+            <p id="shotNumber">Shot Number: ${game.getShotNum()}</p>
+            <p id="pinsRemaining">Pins Remaining: ${game.pinsRemain}</p>
             
             
         </div>
@@ -36,7 +35,7 @@
                 <div id = "split1" class="shot-box">${game.scoreBoard[0]}</div>
                 <div class="shot-box">${game.scoreBoard[1]}</div>
             </div>
-            <div class="score-running">${Frame1_score}</div>
+            <div class="score-running">${game.scoreBoardTot[0]}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
@@ -44,7 +43,7 @@
                 <div id = "split2" class="shot-box">${game.scoreBoard[2]}</div>
                 <div class="shot-box">${game.scoreBoard[3]}</div>
             </div>
-            <div class="score-running">${Frame2_score}</div>
+            <div class="score-running">${game.scoreBoardTot[1]}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
@@ -52,7 +51,7 @@
                 <div id = "split3" class="shot-box">${game.scoreBoard[4]}</div>
                 <div class="shot-box">${game.scoreBoard[5]}</div>
             </div>
-            <div class="score-running">${Frame3_score}</div>
+            <div class="score-running">${game.scoreBoardTot[2]}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
@@ -60,7 +59,7 @@
                 <div id = "split4" class="shot-box">${game.scoreBoard[6]}</div>
                 <div class="shot-box">${game.scoreBoard[7]}</div>
             </div>
-            <div class="score-running">${Frame4_score}</div>
+            <div class="score-running">${game.scoreBoardTot[3]}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
@@ -68,7 +67,7 @@
                 <div id = "split5" class="shot-box">${game.scoreBoard[8]}</div>
                 <div class="shot-box">${game.scoreBoard[9]}</div>
             </div>
-            <div class="score-running">${Frame5_score}</div>
+            <div class="score-running">${game.scoreBoardTot[4]}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
@@ -76,7 +75,7 @@
                 <div id = "split6" class="shot-box">${game.scoreBoard[10]}</div>
                 <div class="shot-box">${game.scoreBoard[11]}</div>
             </div>
-            <div class="score-running">${Frame6_score}</div>
+            <div class="score-running">${game.scoreBoardTot[5]}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
@@ -84,7 +83,7 @@
                 <div id = "split7" class="shot-box">${game.scoreBoard[12]}</div>
                 <div class="shot-box">${game.scoreBoard[13]}</div>
             </div>
-            <div class="score-running">${Frame7_score}</div>
+            <div class="score-running">${game.scoreBoardTot[6]}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
@@ -92,7 +91,7 @@
                 <div id = "split8" class="shot-box">${game.scoreBoard[14]}</div>
                 <div class="shot-box">${game.scoreBoard[15]}</div>
             </div>
-            <div class="score-running">${Frame8_score}</div>
+            <div class="score-running">${game.scoreBoardTot[7]}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
@@ -100,7 +99,7 @@
                 <div id = "split9" class="shot-box">${game.scoreBoard[16]}</div>
                 <div class="shot-box">${game.scoreBoard[17]}</div>
             </div>
-            <div class="score-running">${Frame9_score}</div>
+            <div class="score-running">${game.scoreBoardTot[8]}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
@@ -108,13 +107,13 @@
                 <div id = "split11" class="shot-box">${game.scoreBoard[19]}</div>
                 <div class="shot-box">${game.scoreBoard[20]}</div>
             </div>
-            <div class="score-running">${Frame10_score}</div>
+            <div class="score-running">${game.scoreBoardTot[9]}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
                 <div class="shot-box">${event_score}</div>
             </div>
-            <div class="score-running">${current_score}</div>
+            <div class="score-running">${game.scoreBoardTot[10]}</div>
         </div>
     </div>
 		<div class="main-container">
@@ -161,9 +160,10 @@
 	</div>
         <div class="stats">
             <h2>Game Statistics</h2>
-            <p>Total Strikes: ${strikes}</p>
-            <p>Total Spares: ${spares}</p>
-            <p>Total Misses: ${misses}</p>
+            <p>Total Strikes: ${game.getTotStrike()}</p>
+            <p>Total Spares: ${game.getTotSpare()}</p>
+            <p>Total Gutters: ${game.getTotGutter()}</p>
+            <p>Total Fouls: ${game.getTotFoul()}</p>
         </div>
 	
         
