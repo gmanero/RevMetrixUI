@@ -44,7 +44,7 @@ body {
 
 .loginForm p {
     margin: 0;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1.5;
 }
 
@@ -73,17 +73,34 @@ body {
     background-color: #4891ac;
 }
 
-.loginBtn {
-    width: 100%;
+.signUpBtn {
+    display: block;
+    margin: 5px auto 0; /* Center the button and add top margin */
+    width: 200px; /* Set button width */
     padding: 10px;
-    border: none;
+    border: none; /* Remove border */
     border-radius: 5px;
-    background-color: transparent;
+    background-color: #26acca; /* Transparent background */
     color: #fff;
     font-size: 16px;
     cursor: pointer;
+    text-align: center; /* Center text */
+    white-space: nowrap; /* Prevent text from splitting into multiple lines */
 }
 
-.loginBtn:hover {
-    text-decoration: underline;
+/* Add hover effect */
+.signUpBtn:hover {
+   background-color:  #4891ac;
 }
+
+
+.linkToAccount {
+	color: white;
+	text-align: center;
+	margin: 5px auto 0;
+	cursor: pointer;
+	background-color: transparent;
+	border: none;
+	text-decoration: underline;
+}
+

@@ -13,6 +13,22 @@
         $(function () {
             $("#tournamentStartDate").datepicker();
         });
+
+        // Function to check if all fields are filled
+        function validateForm() {
+            var tournamentName = $("#tournamentName").val();
+            var tournamentStartDate = $("#tournamentStartDate").val();
+            var tournamentLocation = $("#tournamentLocation").val();
+            var tournamentDescription = $("#tournamentDescription").val();
+            var tournamentCapacity = $("#tournamentCapacity").val();
+
+            // Check if any field is empty
+            if (tournamentName == '' || tournamentStartDate == '' || tournamentLocation == '' || tournamentDescription == '' || tournamentCapacity == '') {
+                alert("All fields are required!");
+                return false;
+            }
+            return true;
+        }
     </script>
 </head>
 
@@ -24,10 +40,10 @@
         <h1>Create Tournament</h1>
     </div>
 
-    <form action="createTournamentServlet" method="post">
+    <form action= "${pageContext.servletContext.contextPath}/tournaments" method="post" onsubmit="return validateForm()">
         <div class="container">
             <h2>Tournament Details</h2>
-            <div class="form-group">
+            <div class="form-group"> 
                 <label for="tournamentName">Tournament Name:</label>
                 <input type="text" id="tournamentName" name="tournamentName">
             </div>

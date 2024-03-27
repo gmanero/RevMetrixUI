@@ -70,6 +70,10 @@
     <servlet-name>RegistrationServlet</servlet-name>
         <servlet-class>revMetrix.servlet.RegistrationServlet</servlet-class>
     </servlet>
+     <servlet>
+    <servlet-name>SessionsServlet</servlet-name>
+        <servlet-class>revMetrix.servlet.SessionsServlet</servlet-class>
+    </servlet>
     
     <!-- Servlet mappings -->
     <servlet-mapping>
@@ -150,6 +154,11 @@
     <servlet-mapping>
         <servlet-name>RegistrationServlet</servlet-name>
         <url-pattern>/registration</url-pattern>
+    </servlet-mapping>
+    
+     <servlet-mapping>
+        <servlet-name>SessionsServlet</servlet-name>
+        <url-pattern>/sessions</url-pattern>
     </servlet-mapping>
 
     <welcome-file-list>
