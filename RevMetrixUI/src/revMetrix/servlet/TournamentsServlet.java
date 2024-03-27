@@ -23,7 +23,9 @@ public class TournamentsServlet extends HttpServlet {
     public void init() throws ServletException {
         super.init();
         // Initialize RevMetrix instance
-        revMetrix = new RevMetrix();
+        if(revMetrix==null) {
+			revMetrix = new RevMetrix();
+		}
     }
 	
 	@Override
@@ -44,18 +46,18 @@ public class TournamentsServlet extends HttpServlet {
 		if(revMetrix==null) {
 			revMetrix = new RevMetrix();
 		}
-		
+		try {
 		String tournamentName = req.getParameter("tournamentName");
         String tournamentStartDate = req.getParameter("tournamentStartDate");
         String tournamentLocation = req.getParameter("tournamentLocation");
         String tournamentDescription = req.getParameter("tournamentDescription");
         int tournamentCapacity = Integer.parseInt(req.getParameter("tournamentCapacity"));
-        
+		
         //System.out.print("canary"+tournamentName+ tournamentStartDate+ tournamentLocation+ tournamentDescription+ tournamentCapacity);
         boolean flag = true;
         
         for(RevMetrix.Tournament check:revMetrix.getTournamentList()) {
-        	if(tournamentName == check.getTournamentName()) {
+        	if(tournamentName .equals( check.getTournamentName())) {
         		flag = false;
         	}
         }
@@ -72,10 +74,15 @@ public class TournamentsServlet extends HttpServlet {
     		
     		
         }
+		}
+		finally{
+			
+		}
         tournaments = revMetrix.getTournamentList();
         
-		
+		req.setAttribute("model", revMetrix);
 		req.setAttribute("tournaments", tournaments);
+		
 		req.getRequestDispatcher("/_view/tournaments.jsp").forward(req, resp);
 		
 		
