@@ -42,9 +42,12 @@ public class LoginServlet extends HttpServlet {
 				String Password = req.getParameter("pass");
 
 				
+				
+				
 				// check for errors in the form data 
 				if (Username == null || Password == null) {
 					errorMessage = "Missing Required Data";
+					
 				}else {
 					
 					// PUT IN CONTROLLER
