@@ -310,7 +310,7 @@ public class RevMetrix {
             this.weight = weight;
         }
     }
-<<<<<<< HEAD
+
     public static class Stats{
     	private int avgFrameScore;
         private int strikePer;
@@ -555,8 +555,4 @@ public class RevMetrix {
             this.leagueCapacity = leagueCapacity;
         }
     }
-
-    
-    
->>>>>>> branch 'Development' of git@github.com:gmanero/RevMetrixUI.git
 }
