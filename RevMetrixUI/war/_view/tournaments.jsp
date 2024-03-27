@@ -23,23 +23,23 @@
         <div class="section-title">Featured Tournaments</div>
         <div class="tournaments">
         
-            <div class="tournament">
-                <h2>Tournament 2</h2>
+            <div class="tournament" onclick ="redirectToRegistration('registration');">
+                <h2>Tournament 1</h2>
                 <p><strong>Date:</strong>03/27/2024</p>
                 <p><strong>Location:</strong> Thunder Lanes, 456 Oak Ave, Townsville</p>
                 <p><strong>Description:</strong>Only for RevmMetrix players, competitive tournament</p>
                 <p><strong>Capacity:</strong> 20</p>
             </div>
        
-            <div class="tournament" >
-                <h2>Tournament 3</h2>
+            <div class="tournament" onclick ="redirectToRegistration('registration');" >
+                <h2>Tournament 2</h2>
                 <p><strong>Date:</strong> 03/28/2024</p>
                 <p><strong>Location:</strong> Strike Zone, 789 Elm St, Villageton</p>
                 <p><strong>Description:</strong>Competitive tournament for friends and family to join!</p>
                 <p><strong>Capacity:</strong>10</p>
             </div>
                 <c:forEach var="tournaments" items="${tournaments}">
-		            <div class="tournament">
+		            <div class="tournament" onclick = "redirectToRegistration('registration');">
 		                <h2>${tournaments.tournamentName}</h2>
 		                <p><strong>Date:</strong> ${tournaments.tournamentStartDate.toString()}</p>
 		                <p><strong>Location:</strong> ${tournaments.tournamentLocation}</p>
@@ -50,7 +50,12 @@
             </div>
             <!-- Add more tournaments here -->
         </div>
-
+<script>
+        function redirectToRegistration(url) {
+            
+            window.location.href = url;
+        }
+    </script>
 </body>
 
 </html>

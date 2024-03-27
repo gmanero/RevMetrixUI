@@ -13,6 +13,22 @@
         $(function () {
             $("#practiceDate").datepicker();
         });
+
+        // Function to check if all fields are filled
+        function validateForm() {
+            var practiceName = $("#practiceName").val();
+            var practiceDate = $("#practiceStartDate").val();
+            var practiceLocation = $("#practiceLocation").val();
+            var practiceDescription = $("#practiceDescription").val();
+            var practiceCapacity = $("#practiceCapacity").val();
+
+            // Check if any field is empty
+            if (practiceName == '' || practiceDate == '' || practiceLocation == '' || practiceDescription == '' || practiceCapacity == '') {
+                alert("All fields are required!");
+                return false;
+            }
+            return true;
+        }
     </script>
 </head>
 
@@ -24,7 +40,7 @@
         <h1>Create Practice</h1>
     </div>
 
-    <form action="/createPracticeServlet" method="post">
+    <form action= "${pageContext.servletContext.contextPath}/practices" method="post" onsubmit="return validateForm()">
         <div class="container">
             <h2>Practice Details</h2>
             <div class="form-group">
@@ -33,7 +49,7 @@
             </div>
             <div class="form-group">
                 <label for="practiceDate">Practice Date:</label>
-                <input type="text" id="practiceDate" name="practiceDate">
+                <input type="text" id="practiceStartDate" name="practiceStartDate">
             </div>
             <div class="form-group">
                 <label for="practiceLocation">Practice Location:</label>

@@ -1,6 +1,7 @@
 package revMetrix.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 import javax.servlet.ServletException;
@@ -15,6 +16,7 @@ import revMetrix.model.RevMetrix;
 public class CreatePracticeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private RevMetrix revMetrix;
+	ArrayList<RevMetrix.Practice>  practices;
 	
 	@Override
     public void init() throws ServletException {
@@ -26,6 +28,11 @@ public class CreatePracticeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		
+		practices = revMetrix.getPracticeList();
+		
+		req.setAttribute("practices", practices);
+		
+
 		System.out.println("CreatePractice Servlet: doGet");
 		
 		req.getRequestDispatcher("/_view/createPractice.jsp").forward(req, resp);
@@ -39,9 +46,15 @@ public class CreatePracticeServlet extends HttpServlet {
         String practiceDescription = req.getParameter("practiceDescription");
         int practiceCapacity = Integer.parseInt(req.getParameter("practiceCapacity"));
         
-        RevMetrix.Practice newPractice = new RevMetrix.Practice(PracticeController.generateNewId(), practiceName, practiceStartDate, practiceLocation, practiceDescription, practiceCapacity);
+        int practiceId = PracticeController.generateNewId();
+        
+        RevMetrix.Practice newPractice = new RevMetrix.Practice(practiceId, practiceName, practiceStartDate, practiceLocation, practiceDescription, practiceCapacity);
         
         revMetrix.addPractice(newPractice);
+        
+        practices = revMetrix.getPracticeList();
+        
+        req.setAttribute("practices", practices);
 		
 		System.out.println("CreatePractice Servlet: doPost");
 		

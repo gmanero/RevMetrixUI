@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <head>
     <meta charset="UTF-8">
@@ -20,25 +21,39 @@
     <div class="section">
         <div class="section-title">Featured Leagues</div>
         <div class="tournaments">
-            <div class="tournament" onclick="location.href='https://example.com/league1';">
+        
+            <div class="tournament" onclick = "redirectToRegistration('registration');">
                 <h2>League 1</h2>
+                <p><strong>Date:</strong> 03/27/24</p>
                 <p><strong>Location:</strong> Bowling Palace, 123 Main St, Cityville</p>
-                <p>A friendly tournament for amateur bowlers. Come and showcase your skills!</p>
+                <p><strong>Description:</strong>Only for RevmMetrix players, competitive tournament</p>
+                <p><strong>Capacity:</strong> 20</p>
             </div>
-            <div class="tournament" onclick="location.href='https://example.com/league2';">
+            <div class="tournament" onclick = "redirectToRegistration('registration');">
                 <h2>League 2</h2>
+                <p><strong>Date:</strong> 03/28/24</p>
                 <p><strong>Location:</strong> Thunder Lanes, 456 Oak Ave, Townsville</p>
-                <p>An exciting competition with cash prizes for winners. Register now!</p>
+                <p><strong>Description:</strong>Competitive tournament for friends and family to join!</p>
+                <p><strong>Capacity:</strong> 20</p>
             </div>
-            <div class="tournament" onclick="location.href='https://example.com/league3';">
-                <h2>League 3</h2>
-                <p><strong>Location:</strong> Strike Zone, 789 Elm St, Villageton</p>
-                <p>A charity tournament to support local causes. Join us for a fun-filled day!</p>
+               <c:forEach var="leagues" items="${leagues}">
+		            <div class="tournament" onclick = "redirectToRegistration('registration');">
+		                <h2>${leagues.leagueName}</h2>
+		                <p><strong>Date:</strong> ${leagues.leagueStartDate.toString()}</p>
+		                <p><strong>Location:</strong> ${leagues.leagueLocation}</p>
+		                <p><strong>Description:</strong> ${leagues.leagueDescription}</p>
+		                <p><strong>Capacity:</strong> ${leagues.leagueCapacity}</p>
+		            </div>
+        		</c:forEach>
             </div>
             <!-- Add more leagues here -->
         </div>
-    </div>
-
+<script>
+        function redirectToRegistration(url) {
+            
+            window.location.href = url;
+        }
+    </script>
 </body>
 
 </html>
