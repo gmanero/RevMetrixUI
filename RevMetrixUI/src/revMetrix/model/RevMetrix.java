@@ -68,16 +68,16 @@ public class RevMetrix {
     
 
     public static class Account {
-        public static String email;
-		public static String username;
-		public static String password;
-		public static boolean isLoggedIn;
+        public String email;
+		public String username;
+		public String password;
+		public boolean isLoggedIn;
 
         public Account(String email, String username, String password, boolean isLoggedIn) {
-        	Account.email = email;
-            Account.username = username;
-            Account.password = password;
-            Account.isLoggedIn = isLoggedIn;
+        	this.email = email;
+        	this.username = username;
+        	this.password = password;
+        	this.isLoggedIn = isLoggedIn;
         }
         
         //getters
@@ -96,16 +96,16 @@ public class RevMetrix {
         
         //setters
         public void setEmail(String email) {
-        	Account.email = email;
+        	this.email = email;
         }
         public void setUsername(String username) {
-        	Account.username = username;
+        	this.username = username;
         }
         public void setPassword(String password) {
-        	Account.password = password;
+        	this.password = password;
         }
         public void setLoggedIn(boolean isLoggedIn) {
-        	Account.isLoggedIn = isLoggedIn;
+        	this.isLoggedIn = isLoggedIn;
         }
 
     }
