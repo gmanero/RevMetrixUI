@@ -36,27 +36,36 @@ body {
     color: #fff;
 }
 
-.section-content {
-    background-color: #333;
+.tournaments {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tournament {
+    flex: 0 0 calc(33.33% - 20px);
     padding: 20px;
+    background-color: #333;
     border-radius: 10px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    cursor: pointer;
 }
 
-.section-content p {
-    margin-bottom: 10px;
-    color: #fff;
+.tournament:last-child {
+    margin-right: 0;
 }
 
-.section-content ul {
-    list-style-type: none;
-    padding: 0;
+.tournament:hover {
+    background-color: #555;
 }
 
-.section-content ul li {
-    margin-bottom: 10px;
-    color: #fff;
+.tournament h2 {
+	margin-bottom:10px;
+    margin-top: 20px;
+    font-size: 20px;
 }
 
-.section-content ul li strong {
-    color: #26acca;
+.tournament p {
+    margin-bottom: 20px;
 }

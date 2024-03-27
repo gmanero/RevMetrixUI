@@ -205,23 +205,30 @@ public class RevMetrix {
             this.eventDescription = eventDescription;
         }
     }
+    
+    public void addBall(String ballId, String weight, String color) {
+        BallsList.add(new Ball(ballId, weight, color));
+    }
+    
     public static class Ball{
     	private String ballId;
-        private String brand;
         private String weight;
+        private String color;
+        
 
-        public Ball(String ballId, String brand, String weight) {
+
+        public Ball(String ballId, String weight, String color) {
             this.ballId = ballId;
-            this.brand = brand;
             this.weight = weight;
+            this.color = color;
         }
         
         //getters
         public String getBallId() {
             return ballId;
         }
-        public String getBrand() {
-            return brand;
+        public String getColor() {
+            return color;
         }
         public String getWeight() {
             return weight;
@@ -231,8 +238,8 @@ public class RevMetrix {
         public void setBallId(String ballId) {
             this.ballId = ballId;
         }
-        public void setBrand(String brand) {
-            this.brand = brand;
+        public void setBrand(String color) {
+            this.color = color;
         }
         public void setWeight(String weight) {
             this.weight = weight;

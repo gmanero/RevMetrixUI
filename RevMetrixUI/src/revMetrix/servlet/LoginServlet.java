@@ -48,6 +48,8 @@ public class LoginServlet extends HttpServlet {
 			    req.getRequestDispatcher("/_view/login.jsp").forward(req, resp);
 
 				
+				
+				
 				// check for errors in the form data 
 				if (Username == null || Password == null) {
 					errorMessage = "Missing Required Data";
