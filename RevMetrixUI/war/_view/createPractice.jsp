@@ -24,7 +24,7 @@
         <h1>Create Practice</h1>
     </div>
 
-    <form action="createPracticeServlet" method="post">
+    <form action="/createPracticeServlet" method="post">
         <div class="container">
             <h2>Practice Details</h2>
             <div class="form-group">
