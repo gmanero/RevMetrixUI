@@ -2,6 +2,7 @@ package revMetrix.servlet;
 
 import java.io.IOException;
 
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +19,9 @@ public class PracticesServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		System.out.println("Practices Servlet: doGet");
+		
+		ArrayList<RevMetrix.Practice> practices = revMetrix.getPracticeList();
+		req.setAttribute("practices", practices);
 		
 		req.getRequestDispatcher("/_view/practices.jsp").forward(req, resp);
 	}

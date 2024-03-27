@@ -1,13 +1,14 @@
 package revMetrix.model;
 
 import java.util.ArrayList;
-
- 
 public class RevMetrix {
 	public static ArrayList<Account> AccountsList = new ArrayList<>();
     private ArrayList<Game> GamesList = new ArrayList<>();
     private ArrayList<Event> EventsList = new ArrayList<>();
     private ArrayList<Ball> BallsList = new ArrayList<>();
+    private ArrayList<Tournament> TournamentList = new ArrayList<>();
+    private ArrayList<Practice> PracticeList = new ArrayList<>();
+    private ArrayList<League> LeagueList = new ArrayList<>();
     
     //constructor
     public RevMetrix() {
@@ -15,6 +16,9 @@ public class RevMetrix {
         GamesList = new ArrayList<>();
         EventsList = new ArrayList<>();
         BallsList = new ArrayList<>();
+        TournamentList = new ArrayList<>();
+        PracticeList = new ArrayList<>();
+        LeagueList = new ArrayList<>();
     }
     
     //add to an arraylist
@@ -30,6 +34,15 @@ public class RevMetrix {
     public void addBall(Ball ball) {
         BallsList.add(ball);
     }
+    public void addTournament(Tournament tournament) {
+    	TournamentList.add(tournament);
+    }
+    public void addPractice(Practice practice) {
+    	PracticeList.add(practice);
+    }
+    public void addLeague(League league) {
+    	LeagueList.add(league);
+    }
     
     public ArrayList<Account> getAccountsList(){
     	return AccountsList;
@@ -42,6 +55,15 @@ public class RevMetrix {
     }
     public ArrayList<Ball> getBallsList(){
     	return BallsList;
+    }
+    public ArrayList<Tournament> getTournamentList(){
+    	return TournamentList;
+    }
+    public ArrayList<Practice> getPracticeList(){
+    	return PracticeList;
+    }
+    public ArrayList<League> getLeagueList(){
+    	return LeagueList;
     }
     
 
@@ -79,12 +101,16 @@ public class RevMetrix {
         private String playerName;
         private int score;
         private boolean[] pins;
+        private int[] scoreBoard;
+        private int shotNum;
 
-        public Game(String gameId, String playerName, int score, boolean[] pins) {
+        public Game(String gameId, String playerName, int score, boolean[] pins, int[] scoreBoard, int shotNum) {
             this.gameId = gameId;
             this.playerName = playerName;
             this.score = score;
             this.pins = pins;
+            this.scoreBoard = scoreBoard;
+            this.shotNum = shotNum;
         }
         
       //getters
@@ -100,6 +126,15 @@ public class RevMetrix {
         public boolean[] getPins() {
             return pins;
         }
+        public int[] getScoreBoard() {
+            return scoreBoard;
+        }
+        public int getScoreBoardValue(int index) {
+            return scoreBoard[index];
+        }
+        public int getShotNum() {
+            return shotNum;
+        }
         
         //setters
         public void setGameId(String gameId) {
@@ -113,6 +148,15 @@ public class RevMetrix {
         }
         public void setPins(boolean[] pins) {
             this.pins = pins;
+        }
+        public void setScoreBoard(int[] value) {
+            this.scoreBoard = value;
+        }
+        public void setScoreBoardValue(int index, int value) {
+            this.scoreBoard[index] = value;
+        }
+        public void setShotNum(int shotnum) {
+            this.shotNum = shotnum;
         }
     }
     public static class Event{
@@ -181,4 +225,210 @@ public class RevMetrix {
             this.weight = weight;
         }
     }
+    
+    public static class Tournament {
+        private int tournamentId;
+        public String tournamentName;
+        private String tournamentStartDate;
+        private String tournamentLocation;
+        private String tournamentDescription;
+        private int tournamentCapacity;
+    
+        public Tournament(int tournamentId, String tournamentName, String tournamentStartDate, String tournamentLocation, String tournamentDescription, int tournamentCapacity) {
+        this.tournamentId = tournamentId;
+        this.tournamentName = tournamentName;
+        this.tournamentStartDate = tournamentStartDate;
+        this.tournamentLocation = tournamentLocation;
+        this.tournamentDescription = tournamentDescription;
+        this.tournamentCapacity = tournamentCapacity;
+        }
+        
+        // Getter methods
+        public int getTournamentId() {
+            return tournamentId;
+        }
+
+        public String getTournamentName() {
+            return tournamentName;
+        }
+
+        public String getTournamentStartDate() {
+            return tournamentStartDate;
+        }
+
+        public String getTournamentLocation() {
+            return tournamentLocation;
+        }
+
+        public String getTournamentDescription() {
+            return tournamentDescription;
+        }
+
+        public int getTournamentCapacity() {
+            return tournamentCapacity;
+        }
+
+        // Setter methods
+        public void setTournamentId(int tournamentId) {
+            this.tournamentId = tournamentId;
+        }
+
+        public void setTournamentName(String tournamentName) {
+            this.tournamentName = tournamentName;
+        }
+
+        public void setTournamentStartDate(String tournamentStartDate) {
+            this.tournamentStartDate = tournamentStartDate;
+        }
+
+        public void setTournamentLocation(String tournamentLocation) {
+            this.tournamentLocation = tournamentLocation;
+        }
+
+        public void setTournamentDescription(String tournamentDescription) {
+            this.tournamentDescription = tournamentDescription;
+        }
+
+        public void setTournamentCapacity(int tournamentCapacity) {
+            this.tournamentCapacity = tournamentCapacity;
+        }
+        
+    }
+    public static class Practice {
+        private int practiceId;
+        private String practiceName;
+        private String practiceStartDate;
+        private String practiceLocation;
+        private String practiceDescription;
+        private int practiceCapacity;
+    
+        public Practice(int practiceId, String practiceName, String practiceStartDate, String practiceLocation, String practiceDescription, int practiceCapacity) {
+        this.practiceId = practiceId;
+        this.practiceName = practiceName;
+        this.practiceStartDate = practiceStartDate;
+        this.practiceLocation = practiceLocation;
+        this.practiceDescription = practiceDescription;
+        this.practiceCapacity = practiceCapacity;
+        }
+        
+     // Getter methods
+        public int getPracticeId() {
+            return practiceId;
+        }
+
+        public String getPracticeName() {
+            return practiceName;
+        }
+
+        public String getPracticeStartDate() {
+            return practiceStartDate;
+        }
+
+        public String getPracticeLocation() {
+            return practiceLocation;
+        }
+
+        public String getPracticeDescription() {
+            return practiceDescription;
+        }
+
+        public int getPracticeCapacity() {
+            return practiceCapacity;
+        }
+
+        // Setter methods
+        public void setPracticeId(int practiceId) {
+            this.practiceId = practiceId;
+        }
+
+        public void setPracticeName(String practiceName) {
+            this.practiceName = practiceName;
+        }
+
+        public void setPracticeStartDate(String practiceStartDate) {
+            this.practiceStartDate = practiceStartDate;
+        }
+
+        public void setPracticeLocation(String practiceLocation) {
+            this.practiceLocation = practiceLocation;
+        }
+
+        public void setPracticeDescription(String practiceDescription) {
+            this.practiceDescription = practiceDescription;
+        }
+
+        public void setPracticeCapacity(int practiceCapacity) {
+            this.practiceCapacity = practiceCapacity;
+        }        
+    }
+    public static class League {
+        private int leagueId;
+        private String leagueName;
+        private String leagueStartDate;
+        private String leagueLocation;
+        private String leagueDescription;
+        private int leagueCapacity;
+
+        public League(int leagueId, String leagueName, String leagueStartDate, String leagueLocation, String leagueDescription, int leagueCapacity) {
+            this.leagueId = leagueId;
+            this.leagueName = leagueName;
+            this.leagueStartDate = leagueStartDate;
+            this.leagueLocation = leagueLocation;
+            this.leagueDescription = leagueDescription;
+            this.leagueCapacity = leagueCapacity;
+        }
+
+        // Getter methods
+        public int getLeagueId() {
+            return leagueId;
+        }
+
+        public String getLeagueName() {
+            return leagueName;
+        }
+
+        public String getLeagueStartDate() {
+            return leagueStartDate;
+        }
+
+        public String getLeagueLocation() {
+            return leagueLocation;
+        }
+
+        public String getLeagueDescription() {
+            return leagueDescription;
+        }
+
+        public int getLeagueCapacity() {
+            return leagueCapacity;
+        }
+
+        // Setter methods
+        public void setLeagueId(int leagueId) {
+            this.leagueId = leagueId;
+        }
+
+        public void setLeagueName(String leagueName) {
+            this.leagueName = leagueName;
+        }
+
+        public void setLeagueStartDate(String leagueStartDate) {
+            this.leagueStartDate = leagueStartDate;
+        }
+
+        public void setLeagueLocation(String leagueLocation) {
+            this.leagueLocation = leagueLocation;
+        }
+
+        public void setLeagueDescription(String leagueDescription) {
+            this.leagueDescription = leagueDescription;
+        }
+
+        public void setLeagueCapacity(int leagueCapacity) {
+            this.leagueCapacity = leagueCapacity;
+        }
+    }
+
+    
+    
 }
