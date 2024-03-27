@@ -1,6 +1,7 @@
 package revMetrix.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 import javax.servlet.ServletException;
@@ -15,6 +16,7 @@ import revMetrix.model.RevMetrix;
 public class CreateLeagueServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private RevMetrix revMetrix;
+	ArrayList<RevMetrix.League> leagues;
 	
 	@Override
     public void init() throws ServletException {
@@ -26,6 +28,10 @@ public class CreateLeagueServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		
+		leagues = revMetrix.getLeagueList();
+		
+		req.setAttribute("leagues", leagues);
 		
 		System.out.println("CreateLeague Servlet: doGet");
 		
@@ -39,10 +45,14 @@ public class CreateLeagueServlet extends HttpServlet {
         String leagueLocation = req.getParameter("leagueLocation");
         String leagueDescription = req.getParameter("leagueDescription");
         int leagueCapacity = Integer.parseInt(req.getParameter("leagueCapacity"));
+        
+        int leagueId = LeagueController.generateNewId();
 
-		RevMetrix.League newLeague = new RevMetrix.League(LeagueController.generateNewId(), leagueName, leagueStartDate, leagueLocation, leagueDescription, leagueCapacity);
+		RevMetrix.League newLeague = new RevMetrix.League(leagueId, leagueName, leagueStartDate, leagueLocation, leagueDescription, leagueCapacity);
 		
 		revMetrix.addLeague(newLeague);
+		
+		req.setAttribute("league", leagues);
 		
 		System.out.println("CreateLeague Servlet: doPost");
 		
