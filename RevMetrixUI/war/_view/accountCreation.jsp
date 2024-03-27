@@ -29,32 +29,32 @@
         <h1>RevMetrix - Create an Account</h1>
     </div>
     
-    <!-- accountCreation form -->
-    <form class="loginForm" action="${pageContext.servletContext.contextPath}/LoginServlet" method="post">
+  <form class="loginForm" action="${pageContext.servletContext.contextPath}/login" method="post">
 
-        <h1>Register</h1>
-       
+    <h1>Sign Up</h1>
 
-        <p>Enter your Email Address</p>                  
-        <input type="text" id="email" name="email" placeholder="Email">
+        <p>Enter your Email Address</p>
+    <input type="text" id="email" name="email" placeholder="Email">
 
-        <p>Enter your Username</p>                  
-        <input type="text" id="username" name="username" placeholder="Username">
+    <p>Enter your Username</p>
+    <input type="text" id="username" name="username" placeholder="Username">
 
-        <p>Enter your Password</p>     
-        <input type="password" id="password" name="password" placeholder="Password">
+    <p>Enter your Password</p>
+    <input type="password" id="password" name="password" placeholder="Password">
 
-        <p>Retype your Password</p>     
-            <input type="text" id="password2" name="password2" placeholder="Password"><br><br>
+    <p>Confirm your Password</p>
+    <input type="password" id="password2" name="password2" placeholder="Password"><br><br>
 
-            <button type="submit" name="destination" value="account" class="signUp">Sign Up</button>  
-            
-            
-              <div class="linkToAccount">
-                <a name="destination" value="login">Already have an login?</a> 
-            </div>   
-    </form>
+    <button type="submit" class="signUpBtn" onclick="submitForm()">Sign Up</button>
     
+    
+    <div class="linkToAccount">
+    <button type="submit" class="linkToAccount" name="destination" value="login" >Already have a login?</button>
+</div>
+
+</form>
+
+
     
 
 </body>

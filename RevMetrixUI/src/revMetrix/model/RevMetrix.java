@@ -1,10 +1,6 @@
 package revMetrix.model;
 
 import java.util.ArrayList;
-
-import java.util.List;
-
- 
 public class RevMetrix {
 	public static ArrayList<Account> AccountsList = new ArrayList<>();
     private ArrayList<Game> GamesList = new ArrayList<>();
@@ -72,44 +68,32 @@ public class RevMetrix {
     
 
     public static class Account {
-        public static String email;
-		public static String username;
-		public static String password;
-		public static boolean isLoggedIn;
+        private String email;
+        private String username;
+        private String password;
+        private boolean isLoggedIn;
 
         public Account(String email, String username, String password, boolean isLoggedIn) {
-        	Account.email = email;
-            Account.username = username;
-            Account.password = password;
-            Account.isLoggedIn = isLoggedIn;
+            this.email = email;
+            this.username = username;
+            this.password = password;
+            this.isLoggedIn = isLoggedIn;
         }
-        
-        //getters
-        public static String getEmail() {
+
+        public String getEmail() {
             return email;
         }
-        public static String getUsername() {
+
+        public String getUsername() {
             return username;
         }
-        public static String getPassword() {
+
+        public String getPassword() {
             return password;
         }
-        public static boolean getIsLoggedIn() {
+
+        public boolean getIsLoggedIn() {
             return isLoggedIn;
-        }
-        
-        //setters
-        public void setEmail(String email) {
-        	Account.email = email;
-        }
-        public void setUsername(String username) {
-        	Account.username = username;
-        }
-        public void setPassword(String password) {
-        	Account.password = password;
-        }
-        public void setLoggedIn(boolean isLoggedIn) {
-        	Account.isLoggedIn = isLoggedIn;
         }
     }
     public static class Game{
