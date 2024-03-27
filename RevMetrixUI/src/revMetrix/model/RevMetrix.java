@@ -68,33 +68,46 @@ public class RevMetrix {
     
 
     public static class Account {
-        private String email;
-        private String username;
-        private String password;
-        private boolean isLoggedIn;
+        public static String email;
+		public static String username;
+		public static String password;
+		public static boolean isLoggedIn;
 
         public Account(String email, String username, String password, boolean isLoggedIn) {
-            this.email = email;
-            this.username = username;
-            this.password = password;
-            this.isLoggedIn = isLoggedIn;
+        	Account.email = email;
+            Account.username = username;
+            Account.password = password;
+            Account.isLoggedIn = isLoggedIn;
         }
-
+        
+        //getters
         public String getEmail() {
             return email;
         }
-
         public String getUsername() {
             return username;
         }
-
         public String getPassword() {
             return password;
         }
-
         public boolean getIsLoggedIn() {
             return isLoggedIn;
         }
+        
+        //setters
+        public void setEmail(String email) {
+        	Account.email = email;
+        }
+        public void setUsername(String username) {
+        	Account.username = username;
+        }
+        public void setPassword(String password) {
+        	Account.password = password;
+        }
+        public void setLoggedIn(boolean isLoggedIn) {
+        	Account.isLoggedIn = isLoggedIn;
+        }
+
     }
     public static class Game{
     	private String gameId;
@@ -192,23 +205,30 @@ public class RevMetrix {
             this.eventDescription = eventDescription;
         }
     }
+    
+    public void addBall(String ballId, String weight, String color) {
+        BallsList.add(new Ball(ballId, weight, color));
+    }
+    
     public static class Ball{
     	private String ballId;
-        private String brand;
         private String weight;
+        private String color;
+        
 
-        public Ball(String ballId, String brand, String weight) {
+
+        public Ball(String ballId, String weight, String color) {
             this.ballId = ballId;
-            this.brand = brand;
             this.weight = weight;
+            this.color = color;
         }
         
         //getters
         public String getBallId() {
             return ballId;
         }
-        public String getBrand() {
-            return brand;
+        public String getColor() {
+            return color;
         }
         public String getWeight() {
             return weight;
@@ -218,8 +238,8 @@ public class RevMetrix {
         public void setBallId(String ballId) {
             this.ballId = ballId;
         }
-        public void setBrand(String brand) {
-            this.brand = brand;
+        public void setBrand(String color) {
+            this.color = color;
         }
         public void setWeight(String weight) {
             this.weight = weight;
