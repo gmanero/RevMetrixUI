@@ -92,16 +92,33 @@ public class RevMetrix {
         private String playerName;
         private int score;
         private boolean[] pins;
-        private int[] scoreBoard;
+        private Object[] scoreBoard;
         private int shotNum;
+        private int[] scoreBoardTot;
+        private int scoreBoardTotNum;
+        private int pinsRemain;
+        private int totStrike;
+        private int totSpare;
+        private int totGutter;
+        private int totFoul;
 
-        public Game(String gameId, String playerName, int score, boolean[] pins, int[] scoreBoard, int shotNum) {
+
+
+
+        public Game(String gameId, String playerName, int score, boolean[] pins, Object[] scoreBoard, int shotNum, int[]scoreBoardTot, int scoreBoardTotNum, int pinsRemain, int totStrike, int totSpare, int totGutter, int totFoul) {
             this.gameId = gameId;
             this.playerName = playerName;
             this.score = score;
             this.pins = pins;
             this.scoreBoard = scoreBoard;
             this.shotNum = shotNum;
+            this.scoreBoardTot = scoreBoardTot;
+            this.scoreBoardTotNum = scoreBoardTotNum;
+            this.pinsRemain = pinsRemain;
+            this.totStrike = totStrike;
+            this.totSpare = totSpare;
+            this.totGutter = totGutter;
+            this.totFoul = totFoul;
         }
         
       //getters
@@ -117,14 +134,38 @@ public class RevMetrix {
         public boolean[] getPins() {
             return pins;
         }
-        public int[] getScoreBoard() {
+        public Object[] getScoreBoard() {
             return scoreBoard;
         }
-        public int getScoreBoardValue(int index) {
+        public Object getScoreBoardValue(int index) {
             return scoreBoard[index];
         }
         public int getShotNum() {
             return shotNum;
+        }
+        public int[] getScoreBoardTot() {
+            return scoreBoardTot;
+        }
+        public int getScoreBoardTotValue(int index) {
+            return scoreBoardTot[index];
+        }
+        public int getScoreBoardTotNum() {
+            return scoreBoardTotNum;
+        }
+        public int getPinsRemain() {
+            return pinsRemain;
+        }
+        public int getTotStrike() {
+            return totStrike;
+        }
+        public int getTotSpare() {
+            return totSpare;
+        }
+        public int getTotGutter() {
+            return totGutter;
+        }
+        public int getTotFoul() {
+            return totFoul;
         }
         
         //setters
@@ -140,14 +181,38 @@ public class RevMetrix {
         public void setPins(boolean[] pins) {
             this.pins = pins;
         }
-        public void setScoreBoard(int[] value) {
+        public void setScoreBoard(Object[] value) {
             this.scoreBoard = value;
         }
-        public void setScoreBoardValue(int index, int value) {
+        public void setScoreBoardValue(int index, Object value) {
             this.scoreBoard[index] = value;
         }
         public void setShotNum(int shotnum) {
             this.shotNum = shotnum;
+        }
+        public void setScoreBoardTot(int[] scoreBoardTot) {
+            this.scoreBoardTot = scoreBoardTot;
+        }
+        public void setScoreBoardTotValue(int index, int value) {
+            this.scoreBoardTot[index] = value;
+        }
+        public void setScoreBoardTotNum(int scoreBoardTotNum) {
+            this.scoreBoardTotNum = scoreBoardTotNum;
+        }
+        public void setPinsRemain(int pinsRemain) {
+            this.pinsRemain = pinsRemain;
+        }
+        public void setTotStrike(int totStrike) {
+            this.totStrike = totStrike;
+        }
+        public void setTotSpare(int totSpare) {
+            this.totSpare = totSpare;
+        }
+        public void setTotGutter(int totGutter) {
+            this.totGutter = totGutter;
+        }
+        public void setTotFoul(int totFoul) {
+            this.totFoul = totFoul;
         }
     }
     public static class Event{
