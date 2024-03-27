@@ -1,0 +1,283 @@
+[33mcommit fd522a3849bd57bd38a3e49d5f8caaa697ee47c7[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mJakeb[m[33m)[m
+Author: Jakeban17 <jnielsen1@ycp.edu>
+Date:   Mon Mar 25 17:01:07 2024 -0400
+
+    Base controller
+
+[33mcommit 41f19f4596797c72f3492209b37a7f4a99d0236b[m
+Merge: 3b70c5a 5bd697d
+Author: Jakeban17 <159505439+Jakeban17@users.noreply.github.com>
+Date:   Mon Mar 25 15:34:12 2024 -0400
+
+    Merge pull request #46 from gmanero/matt
+    
+    Matt
+
+[33mcommit 3b70c5a85acd110b932da74938b6f52f3cbb68b3[m
+Merge: 4d8c0d3 244bfbb
+Author: Jakeban17 <159505439+Jakeban17@users.noreply.github.com>
+Date:   Mon Mar 25 15:30:49 2024 -0400
+
+    Merge pull request #44 from gmanero/Development
+    
+    Development
+
+[33mcommit 5bd697d7d14aa3d723b0ae3a541d354dc3e36f10[m
+Merge: 83816a3 244bfbb
+Author: mattbrown64 <152343311+mattbrown64@users.noreply.github.com>
+Date:   Mon Mar 25 15:29:50 2024 -0400
+
+    Merge pull request #42 from gmanero/Development
+    
+    Development
+
+[33mcommit 83816a36af194421b1ca9fed8884b7ec72720cf7[m
+Merge: b0fc179 f42f22c
+Author: mattbrown64 <152343311+mattbrown64@users.noreply.github.com>
+Date:   Mon Mar 25 13:28:19 2024 -0400
+
+    Merge pull request #41 from gmanero/Feature
+    
+    Feature
+
+[33mcommit 244bfbb5b7cf8a5531e65760c8cf0a33b43d1b4b[m
+Merge: 7fe46ce 8d812da
+Author: Gabe <158784648+gmanero@users.noreply.github.com>
+Date:   Mon Mar 25 02:01:27 2024 -0400
+
+    Merge pull request #38 from gmanero/Gabe
+    
+    Dev Update
+
+[33mcommit 8d812da72ac45193e57611a1d20d6e259112ca0e[m
+Author: gmanero <gmanero@ycp.edu>
+Date:   Mon Mar 25 02:00:24 2024 -0400
+
+    Added Servlets. Fixed connections
+
+[33mcommit f42f22c994805fb8509e24ccdff35d80358315b6[m[33m ([m[1;31morigin/Feature[m[33m)[m
+Merge: 6707c4e b0fc179
+Author: mattbrown64 <152343311+mattbrown64@users.noreply.github.com>
+Date:   Sun Mar 24 23:30:34 2024 -0400
+
+    Merge pull request #37 from gmanero/matt
+    
+    sytle
+
+[33mcommit b0fc17980616739bef1e885fd9a19fd312908eac[m
+Author: mattbrown64 <152343311+mattbrown64@users.noreply.github.com>
+Date:   Sun Mar 24 23:17:13 2024 -0400
+
+    sytle
+
+[33mcommit 6707c4ef67abf0c792302b70c72772d609246781[m
+Merge: 14337d2 eaf696f
+Author: mattbrown64 <152343311+mattbrown64@users.noreply.github.com>
+Date:   Sun Mar 24 22:49:54 2024 -0400
+
+    Merge pull request #36 from gmanero/matt
+    
+    split compatabilty
+
+[33mcommit eaf696f47c49c399a26c3a63bf7a973ffeaa8672[m
+Author: mattbrown64 <152343311+mattbrown64@users.noreply.github.com>
+Date:   Sun Mar 24 22:47:56 2024 -0400
+
+    split compatabilty
+
+[33mcommit 14337d2c06734f930372dbb640f5437ce2e0e6ae[m
+Merge: 50dc638 be464e6
+Author: mattbrown64 <152343311+mattbrown64@users.noreply.github.com>
+Date:   Sun Mar 24 22:35:57 2024 -0400
+
+    Merge pull request #35 from gmanero/matt
+    
+    colors update
+
+[33mcommit be464e69c115fb2e5d45d4fe00c882a14fc2c4aa[m
+Author: mattbrown64 <152343311+mattbrown64@users.noreply.github.com>
+Date:   Sun Mar 24 22:34:48 2024 -0400
+
+    colors update
+
+[33mcommit b7817e8baa46a2eb9fa799ae165b02a6cce73f6e[m
+Merge: 6cb75be f9a5316
+Author: Gabe <158784648+gmanero@users.noreply.github.com>
+Date:   Sun Mar 24 22:05:57 2024 -0400
+
+    Merge pull request #32 from gmanero/Charles
+    
+    Charles
+
+[33mcommit 6cb75beefe245b7058793991625eb278f2df15e2[m
+Author: gmanero <gmanero@ycp.edu>
+Date:   Sun Mar 24 22:03:33 2024 -0400
+
+    Adding additional navigations for the navbar
+
+[33mcommit f9a5316d11d2cc4b2c4c93dfd6116d589ede8e2c[m
+Author: Charles Carroll <ccarroll4@ycp.edu>
+Date:   Sun Mar 24 21:58:10 2024 -0400
+
+    new jsp and styles
+
+[33mcommit e5e7a1aea715cafdaf0102d57a3e51b8cf95f261[m
+Merge: 02e65dd 50dc638
+Author: Charles Carroll <158611220+CharlesBCarroll@users.noreply.github.com>
+Date:   Sun Mar 24 21:13:37 2024 -0400
+
+    Merge pull request #28 from gmanero/Feature
+    
+    Feature
+
+[33mcommit 02e65dd21a733e1bb3a2cbf83dd2b262923c8f63[m
+Author: Charles Carroll <ccarroll4@ycp.edu>
+Date:   Sun Mar 24 21:12:25 2024 -0400
+
+    updated registration
+
+[33mcommit 4d8c0d303f048f6053912d463eca614da6f7e2d0[m
+Merge: f62700f 1b86849
+Author: Jakeban17 <159505439+Jakeban17@users.noreply.github.com>
+Date:   Sun Mar 24 20:58:18 2024 -0400
+
+    Merge pull request #27 from gmanero/matt
+    
+    Matt
+
+[33mcommit 1dee3176c330dc76561b4adbedc57136afa1385d[m
+Merge: d25845d 1b86849
+Author: Gabe <158784648+gmanero@users.noreply.github.com>
+Date:   Sun Mar 24 20:51:55 2024 -0400
+
+    Merge pull request #25 from gmanero/matt
+    
+    added logo image
+
+[33mcommit 50dc638ca8fac8824980271cea057830046b6962[m
+Merge: 5d11852 1b86849
+Author: mattbrown64 <152343311+mattbrown64@users.noreply.github.com>
+Date:   Sun Mar 24 20:51:53 2024 -0400
+
+    Merge pull request #26 from gmanero/matt
+    
+    added logo image
+
+[33mcommit 1b86849a6a5f0d82b7a481538942aa1493b1a9f9[m
+Author: mattbrown64 <152343311+mattbrown64@users.noreply.github.com>
+Date:   Sun Mar 24 20:51:05 2024 -0400
+
+    added logo image
+
+[33mcommit d25845d3aa19d2c9a1572e7dcf1689c743dc11f8[m
+Merge: ea4f8eb 9e1d66b
+Author: Gabe <158784648+gmanero@users.noreply.github.com>
+Date:   Sun Mar 24 19:34:56 2024 -0400
+
+    Merge pull request #24 from gmanero/matt
+    
+    Matt
+
+[33mcommit e088052a125ac81cf03f62e4515d8c2c222dc50e[m
+Merge: 0d78f4c 5d11852
+Author: Charles Carroll <ccarroll4@ycp.edu>
+Date:   Sun Mar 24 19:32:43 2024 -0400
+
+    Merge branch 'Feature' of git@github.com:gmanero/RevMetrixUI.git into
+    Charles
+    
+    Conflicts:
+            RevMetrixUI/war/CSS/registrationStyles.css
+            RevMetrixUI/war/_view/registration.jsp
+
+[33mcommit 5d118529c4316334a07dcd7b40654f26dd9d0b5a[m
+Merge: d963633 9e1d66b
+Author: mattbrown64 <152343311+mattbrown64@users.noreply.github.com>
+Date:   Sun Mar 24 19:27:14 2024 -0400
+
+    Merge pull request #22 from gmanero/matt
+    
+    Matt
+
+[33mcommit 9e1d66bbefa552a1c4c6532bed0a4cf274bcfc21[m
+Author: mattbrown64 <152343311+mattbrown64@users.noreply.github.com>
+Date:   Sun Mar 24 19:23:57 2024 -0400
+
+    getter methods for revmetrix
+
+[33mcommit 0f3500442aa05d60beb9b0682fa7a6dddc570e3d[m
+Author: mattbrown64 <152343311+mattbrown64@users.noreply.github.com>
+Date:   Sun Mar 24 19:02:50 2024 -0400
+
+    pass pins to servlet
+
+[33mcommit d963633b6ab385fe022ccbfdcc1b5beec5e83d97[m
+Merge: 89e2fe4 53a9653
+Author: mattbrown64 <152343311+mattbrown64@users.noreply.github.com>
+Date:   Sun Mar 24 18:29:11 2024 -0400
+
+    Merge pull request #20 from gmanero/matt
+    
+    Matt
+
+[33mcommit 53a96533175865d13fd77b546febb6b0c87cef79[m
+Author: mattbrown64 <152343311+mattbrown64@users.noreply.github.com>
+Date:   Sun Mar 24 18:28:16 2024 -0400
+
+    Fixed Logo
+
+[33mcommit f62700ffd330fab90503c500626233af51beaaf3[m
+Merge: dbdd634 ea4f8eb
+Author: Jakeban17 <159505439+Jakeban17@users.noreply.github.com>
+Date:   Sun Mar 24 18:02:40 2024 -0400
+
+    Merge pull request #19 from gmanero/Gabe
+    
+    Gabe
+
+[33mcommit dbdd6349c7cf58b5c2ff4bac4aa98b3c9198f268[m
+Merge: ae9188e 89e2fe4
+Author: Jakeban17 <159505439+Jakeban17@users.noreply.github.com>
+Date:   Sun Mar 24 18:00:41 2024 -0400
+
+    Merge pull request #18 from gmanero/Feature
+    
+    Merge pull request #13 from gmanero/Jakeb
+
+[33mcommit 38ad94980b3cd0dd3dd462a44e310bc7e5480220[m
+Merge: ca4f0e9 ea4f8eb
+Author: mattbrown64 <152343311+mattbrown64@users.noreply.github.com>
+Date:   Sun Mar 24 16:43:28 2024 -0400
+
+    Merge pull request #17 from gmanero/Gabe
+    
+    Gabe
+
+[33mcommit ea4f8eb27fc6b4c0553cdc9c854c501f2196e2a8[m
+Author: gmanero <gmanero@ycp.edu>
+Date:   Sun Mar 24 16:37:31 2024 -0400
+
+    fixed errors
+
+[33mcommit 6f2eb8ce66b738a566daece109037a8e9bee8ece[m
+Author: gmanero <gmanero@ycp.edu>
+Date:   Sun Mar 24 16:11:31 2024 -0400
+
+    Added jsp and edits to navigation
+
+[33mcommit ca4f0e90ec396f273e24038d20e12e19eb254e18[m
+Merge: 64d422f 89e2fe4
+Author: mattbrown64 <152343311+mattbrown64@users.noreply.github.com>
+Date:   Sun Mar 24 16:07:09 2024 -0400
+
+    Merge pull request #16 from gmanero/Feature
+    
+    Feature
+
+[33mcommit 0d78f4ca302dec0a35ab3491ecea417523fde7ef[m
+Author: Charles Carroll <charscarroll@gmail.com>
+Date:   Sat Mar 23 00:00:39 2024 -0400
+
+    registration page and updated css
+
+[33mcommit 8a20204e3

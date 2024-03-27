@@ -61,10 +61,11 @@ body {
 }
 
 .tournament h2 {
-    margin-top: 0;
+	margin-bottom:10px;
+    margin-top: 20px;
     font-size: 20px;
 }
 
 .tournament p {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }

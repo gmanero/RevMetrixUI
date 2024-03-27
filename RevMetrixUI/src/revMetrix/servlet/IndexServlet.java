@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import revMetrix.model.RevMetrix;
+
 public class IndexServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     
@@ -19,6 +21,10 @@ public class IndexServlet extends HttpServlet {
         String destIn = req.getParameter("destination");
         String destOut = null;
         
+      
+        
+		
+		
         
         // Forward based on the action parameter
         if ("revMetrix".equals(destIn)) {
