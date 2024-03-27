@@ -281,4 +281,45 @@ public class RevMetrix {
             this.weight = weight;
         }
     }
+    public static class Stats{
+    	private int avgFrameScore;
+        private int strikePer;
+        private int sparePer;
+        private int openFrame;
+
+        public Stats(int avgFrameScore, int strikePer, int sparePer, int openFrame) {
+            this.avgFrameScore = avgFrameScore;
+            this.strikePer = strikePer;
+            this.sparePer = sparePer;
+            this.openFrame = openFrame;
+        }
+        
+        //getters
+        public int getAvgFrameScore() {
+            return avgFrameScore;
+        }
+        public int getBrand() {
+            return strikePer;
+        }
+        public int getSparePer() {
+            return sparePer;
+        }
+        public int getOpenFrame() {
+            return openFrame;
+        }
+        
+        //setters
+        public void setBallId(int avgFrameScore) {
+            this.avgFrameScore = avgFrameScore;
+        }
+        public void strikePer(int strikePer) {
+            this.strikePer = strikePer;
+        }
+        public void setSparePer(int sparePer) {
+            this.sparePer = sparePer;
+        }
+        public void setOpenFrame(int openFrame) {
+            this.openFrame = openFrame;
+        }
+    }
 }
