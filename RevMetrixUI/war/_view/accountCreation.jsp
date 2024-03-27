@@ -4,7 +4,22 @@
     <title>Account</title>    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   	<link rel = "stylesheet" type ="text/css" href="CSS/accountCreationStyles.css">
+    <link rel="stylesheet" type="text/css" href="CSS/accountCreationStyles.css">
+    
+    <script>
+        function validateForm() {
+            var email = document.getElementById("email").value;
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            var password2 = document.getElementById("password2").value;
+
+            if (email === "" || username === "" || password === "" || password2 === "") {
+                alert("All fields are required");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </head>
 
 <body>
@@ -14,31 +29,33 @@
         <h1>RevMetrix - Create an Account</h1>
     </div>
     
-    <!-- accountCreation form -->
-        <form class="loginForm">
-        <h1>Register</h1>
+  <form class="loginForm" action="${pageContext.servletContext.contextPath}/login" method="post">
 
-        <p>Enter your Email Address</p>                  
-            <input type="text" id="email" name="email" placeholder="Email">
+    <h1>Sign Up</h1>
 
-        <p>Enter your Username</p>                  
-            <input type="text" id="usename" name="username" placeholder="Username">
+        <p>Enter your Email Address</p>
+    <input type="text" id="email" name="email" placeholder="Email">
 
-        <p>Enter your Password</p>     
-            <input type="text" id="password" name="password" placeholder="Password">
+    <p>Enter your Username</p>
+    <input type="text" id="username" name="username" placeholder="Username">
 
-        <p>Retype your Password</p>     
-            <input type="text" id="password2" name="password2" placeholder="Password"><br><br>
+    <p>Enter your Password</p>
+    <input type="password" id="password" name="password" placeholder="Password">
 
-            <input type="submit" value="Sign Up">    
-            
-            
-              <div class="linkToAccount">
-                <a name="destination" value="login">Already have an login?</a> 
-            </div>   
-    </form>
+    <p>Confirm your Password</p>
+    <input type="password" id="password2" name="password2" placeholder="Password"><br><br>
+
+    <button type="submit" class="signUpBtn" onclick="submitForm()">Sign Up</button>
     
-  
+    
+    <div class="linkToAccount">
+    <button type="submit" class="linkToAccount" name="destination" value="login" >Already have a login?</button>
+</div>
+
+</form>
+
+
+    
 
 </body>
 </html>

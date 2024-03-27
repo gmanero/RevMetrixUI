@@ -20,6 +20,7 @@ public class GameServlet extends HttpServlet {
 		
 		System.out.println("Game Servlet: doGet");
 		
+		
 		req.getRequestDispatcher("/_view/game.jsp").forward(req, resp);
 	}
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)

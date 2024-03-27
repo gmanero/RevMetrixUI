@@ -25,6 +25,7 @@
         <input type="password" id="password" name="password" placeholder="Password">
         <br>
        <input type="submit" value="Sign In">
+       
        </form>
        
        <br/>
@@ -38,11 +39,11 @@
     
     <script>
         function redirectIfCorrect() {
-            var User = document.getElementById('username').value;
-            var Pass = document.getElementById('password').value;
+            var User = document.getElementById('correctUser').value;
+            var Pass = document.getElementById('correctPass').value;
             
-            var correctUser = "Don";
-            var correctPass = "Hake";
+            var correctUser = "correctUser";
+            var correctPass = "correctPass";
             
             if (User === correctUser && Pass === correctPass) {
                 window.location.href = "http://localhost:8081/revMetrix/index";
@@ -53,5 +54,6 @@
             }
         }
     </script>
+    
 </body>
 </html>

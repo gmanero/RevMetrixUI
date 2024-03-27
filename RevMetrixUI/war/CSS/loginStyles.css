@@ -19,9 +19,6 @@
             font-size: 36px;
             color: #fff;
         }
-
-       
-
         /* Login Form Styles */
         .loginForm {
             background-color: #3f3f3f;
@@ -30,6 +27,7 @@
             max-width: 400px;
             border-radius: 10px;
         }
+        
 
         .loginForm input[type="text"],
         .loginForm input[type="password"] {

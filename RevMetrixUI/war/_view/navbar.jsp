@@ -15,7 +15,7 @@
         </form>
     </div>
     <div class="links">
-        <form method="get">
+        <form action="${pageContext.servletContext.contextPath}/index" method="get">
             <div class="dropdown">
                 <button type="submit" class="nav-item dropbtn" name="destination" value="event">Events</button>
                 <div class="dropdown-content">
