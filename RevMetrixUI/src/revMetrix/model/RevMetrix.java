@@ -79,12 +79,16 @@ public class RevMetrix {
         private String playerName;
         private int score;
         private boolean[] pins;
+        private int[] scoreBoard;
+        private int shotNum;
 
-        public Game(String gameId, String playerName, int score, boolean[] pins) {
+        public Game(String gameId, String playerName, int score, boolean[] pins, int[] scoreBoard, int shotNum) {
             this.gameId = gameId;
             this.playerName = playerName;
             this.score = score;
             this.pins = pins;
+            this.scoreBoard = scoreBoard;
+            this.shotNum = shotNum;
         }
         
       //getters
@@ -100,6 +104,15 @@ public class RevMetrix {
         public boolean[] getPins() {
             return pins;
         }
+        public int[] getScoreBoard() {
+            return scoreBoard;
+        }
+        public int getScoreBoardValue(int index) {
+            return scoreBoard[index];
+        }
+        public int getShotNum() {
+            return shotNum;
+        }
         
         //setters
         public void setGameId(String gameId) {
@@ -113,6 +126,15 @@ public class RevMetrix {
         }
         public void setPins(boolean[] pins) {
             this.pins = pins;
+        }
+        public void setScoreBoard(int[] value) {
+            this.scoreBoard = value;
+        }
+        public void setScoreBoardValue(int index, int value) {
+            this.scoreBoard[index] = value;
+        }
+        public void setShotNum(int shotnum) {
+            this.shotNum = shotnum;
         }
     }
     public static class Event{
