@@ -20,8 +20,10 @@
     <!-- Login Form -->
    <div class="loginForm">
     <form  onsubmit="return redirectIfCorrect()">
-        <input type="text" id="username" name="username" placeholder="Username">
+        <!--<input type="text" id="username" name="username" placeholder="Username" value="<%=session.getAttribute("username")%>">  -->
+        <input type="text" id="username" name="username" placeholder="Username"">
         <br>
+        <!--<input type="password" id="password" name="password" placeholder="Password" value="<%=session.getAttribute("password")%>">  -->
         <input type="password" id="password" name="password" placeholder="Password">
         <br>
        <input type="submit" value="Sign In">
@@ -38,14 +40,21 @@
     
     
     <script>
-        function redirectIfCorrect() {
-            var User = document.getElementById('correctUser').value;
-            var Pass = document.getElementById('correctPass').value;
+		function redirectIfCorrect() {
+            var User = document.getElementById('username').value;
+            var Pass = document.getElementById('password').value;
             
-            var correctUser = "correctUser";
-            var correctPass = "correctPass";
+            if (User.trim() === '' || Pass.trim() === '') {
+                alert("Please fill in both username and password fields.");
+                return false; // Prevent form submission
+            }
             
-            if (User === correctUser && Pass === correctPass) {
+            var correctUser = "Don";
+            var correctPass = "Hake";
+            var correctUser1 = "Charles";
+            var correctPass1 = "12345";
+            
+            if ((User === correctUser && Pass === correctPass) || (User === correctUser1 && Pass === correctPass1) ) {
                 window.location.href = "http://localhost:8081/revMetrix/index";
                 return false; // Prevent form submission
             } else {
@@ -53,6 +62,7 @@
                 return false; // Prevent form submission
             }
         }
+
     </script>
     
 </body>

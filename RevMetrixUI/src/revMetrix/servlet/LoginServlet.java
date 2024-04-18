@@ -40,6 +40,12 @@ public class LoginServlet extends HttpServlet {
 			try {
 				String Username = req.getParameter("user");
 				String Password = req.getParameter("pass");
+				
+				String correctUser = "correctUser";
+			    String correctPass = "correctPass";
+			    
+			    // Forward the request to the JSP page
+			    req.getRequestDispatcher("/_view/login.jsp").forward(req, resp);
 
 				
 				
@@ -59,8 +65,8 @@ public class LoginServlet extends HttpServlet {
 							if (Password.equals(accounts.getPassword()))
 			   				{
 								System.out.println("RedirectServlet");
-								req.getSession().setAttribute("username", Username);
-								req.getSession().setAttribute("password", Password);
+								req.setAttribute("username", correctUser);
+							    req.setAttribute("password", correctPass);
 								found = true;
 								break;
 			   				}else{
@@ -76,13 +82,15 @@ public class LoginServlet extends HttpServlet {
 					}
 					
 					
+					
+					
 				}
 			} catch (Exception e) {
 				errorMessage = "Type Error - Needs fixing";
 			}
 			req.setAttribute("errorMessage", errorMessage);
 			
-			req.getRequestDispatcher("/_view/addNumbers.jsp").forward(req, resp);
+			req.getRequestDispatcher("/_view/login.jsp").forward(req, resp);
 		}
 	
 }
