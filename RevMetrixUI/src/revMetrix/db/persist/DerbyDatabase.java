@@ -38,6 +38,50 @@ public class DerbyDatabase implements IDatabase {
 	private static final int MAX_ATTEMPTS = 10;
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// wrapper SQL transaction function that calls actual transaction function (which has retries)
 	public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
 		try {
