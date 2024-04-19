@@ -82,6 +82,122 @@ public class DerbyDatabase implements IDatabase {
 		});
 	}
 	
+	public List<Ball> findAllBalls() {
+	    return executeTransaction(new Transaction<List<Ball>>() {
+	        @Override
+	        public List<Ball> execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            try {
+	                stmt = conn.prepareStatement("SELECT * FROM balls");
+	                
+	                List<Ball> result = new ArrayList<Ball>();
+	                
+	                resultSet = stmt.executeQuery();
+	                
+	                Boolean found = false;
+	                
+	                while (resultSet.next()) {
+	                    found = true;
+	                    
+	                    Ball ball = new Ball();
+	                    loadBall(ball, resultSet, 1);
+	                    
+	                    result.add(ball);
+	                }
+	                
+	                if (!found) {
+	                    System.out.println("No balls were found in the database");
+	                }
+	                
+	                return result;
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
+	
+	public List<Establishment> findAllEstablishments() {
+	    return executeTransaction(new Transaction<List<Establishment>>() {
+	        @Override
+	        public List<Establishment> execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            try {
+	                stmt = conn.prepareStatement("SELECT * FROM establishments");
+	                
+	                List<Establishment> result = new ArrayList<Establishment>();
+	                
+	                resultSet = stmt.executeQuery();
+	                
+	                Boolean found = false;
+	                
+	                while (resultSet.next()) {
+	                    found = true;
+	                    
+	                    Establishment establishment = new Establishment();
+	                    loadEstablishment(establishment, resultSet, 1);
+	                    
+	                    result.add(establishment);
+	                }
+	                
+	                if (!found) {
+	                    System.out.println("No establishments were found in the database");
+	                }
+	                
+	                return result;
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
+	
+	public List<Event> findAllEvents() {
+	    return executeTransaction(new Transaction<List<Event>>() {
+	        @Override
+	        public List<Event> execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            try {
+	                stmt = conn.prepareStatement("SELECT * FROM events");
+	                
+	                List<Event> result = new ArrayList<Event>();
+	                
+	                resultSet = stmt.executeQuery();
+	                
+	                Boolean found = false;
+	                
+	                while (resultSet.next()) {
+	                    found = true;
+	                    
+	                    Event event = new Event();
+	                    loadEvent(event, resultSet, 1);
+	                    
+	                    result.add(event);
+	                }
+	                
+	                if (!found) {
+	                    System.out.println("No events were found in the database");
+	                }
+	                
+	                return result;
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
+
+
+	
 	public Integer insertAccountIntoAccountsTable(final String email, final String password, final String lastName, final String firstName) {
 		return executeTransaction(new Transaction<Integer>() {
 			@Override
