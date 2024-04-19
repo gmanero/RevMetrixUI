@@ -3,6 +3,7 @@ package revMetrix.db.persist;
 import java.io.IOException;
 
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import revMetrix.db.persist.DBUtil;
 import revMetrix.db.model.Account;
 import revMetrix.db.model.Ball;
 import revMetrix.db.model.Establishment;
@@ -36,6 +38,168 @@ public class DerbyDatabase implements IDatabase {
 	}
 
 	private static final int MAX_ATTEMPTS = 10;
+	
+	
+	public List<Account> findAllAccounts() {
+		return executeTransaction(new Transaction<List<Account>>() {
+			@Override
+			public List<Account> execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
+				
+				try {
+					stmt = conn.prepareStatement(
+							"select * from accounts " 
+					);
+					
+					List<Account> result = new ArrayList<Account>();
+					
+					resultSet = stmt.executeQuery();
+					
+					// for testing that a result was returned
+					Boolean found = false;
+					
+					while (resultSet.next()) {
+						found = true;
+						
+						Account account = new Account();
+						loadAccount(account, resultSet, 1);
+						
+						result.add(account);
+					}
+					
+					// check if any authors were found
+					if (!found) {
+						System.out.println("No accounts were found in the database");
+					}
+					
+					return result;
+				} finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});
+	}
+	
+	public Integer insertAccountIntoAccountsTable(final String email, final String password, final String lastName, final String firstName) {
+		return executeTransaction(new Transaction<Integer>() {
+			@Override
+			public Integer execute(Connection conn) throws SQLException {
+				Boolean isLoggedIn = false;
+				PreparedStatement stmt1 = null;
+				PreparedStatement stmt2 = null;
+				PreparedStatement stmt3 = null;			
+				
+				ResultSet resultSet1 = null;
+				ResultSet resultSet3 = null;				
+				
+				// for saving author ID and book ID
+				Integer account_id = -1;
+
+				// try to retrieve author_id (if it exists) from DB, for Author's full name, passed into query
+				try {
+					stmt1 = conn.prepareStatement(
+							"select account_id from accounts " +
+							"  where email = ? and password = ? "
+					);
+					stmt1.setString(1, email);
+					stmt1.setString(2, password);
+					
+					// execute the query, get the result
+					resultSet1 = stmt1.executeQuery();
+
+					
+					// if Author was found then save author_id					
+					if (resultSet1.next())
+					{
+						account_id = resultSet1.getInt(1);
+						System.out.println("Account <" + email + ", " + password + "> found with ID: " + account_id);						
+					}
+					else
+					{
+						System.out.println("Account <" + email + ", " + password + "> not found");
+				
+						// if the Author is new, insert new Author into Authors table
+						if (account_id <= 0) {
+							// prepare SQL insert statement to add Author to Authors table
+							stmt2 = conn.prepareStatement(
+									"insert into accounts (email, password, firstname, lastname, isLoggedIn)" +
+									"  values(?, ?, ?, ?, ?) "
+							);
+							stmt2.setString(1, email);
+							stmt2.setString(2, password);
+							stmt2.setString(3, firstName);
+							stmt2.setString(4, lastName);
+							stmt2.setBoolean(5, isLoggedIn);
+							
+							// execute the update
+							stmt2.executeUpdate();
+							
+							System.out.println("New account <" + email + ", " + password + "> inserted into Accounts table");						
+						
+							// try to retrieve author_id for new Author - DB auto-generates author_id
+							stmt3 = conn.prepareStatement(
+									"select account_id from accounts " +
+									"  where email = ? and password = ? "
+							);
+							stmt3.setString(1, email);
+							stmt3.setString(2, password);
+							
+							// execute the query							
+							resultSet3 = stmt3.executeQuery();
+							
+							// get the result - there had better be one							
+							if (resultSet3.next())
+							{
+								account_id = resultSet3.getInt(1);
+								System.out.println("New account <" + email + ", " + password + "> ID: " + account_id);						
+							}
+							else	// really should throw an exception here - the new author should have been inserted, but we didn't find them
+							{
+								System.out.println("New account <" + email + ", " + password + "> not found in Account table (ID: " + account_id);
+							}
+						}
+					}
+					return account_id;
+				} finally {
+					DBUtil.closeQuietly(resultSet1);
+					DBUtil.closeQuietly(stmt1);
+					DBUtil.closeQuietly(stmt2);					
+					DBUtil.closeQuietly(resultSet3);
+					DBUtil.closeQuietly(stmt3);					
+				}
+			}
+		});
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	// wrapper SQL transaction function that calls actual transaction function (which has retries)
@@ -376,7 +540,7 @@ public class DerbyDatabase implements IDatabase {
 						insertAccount.setString(2, account.getPassword());
 						insertAccount.setString(3, account.getFirstname());
 						insertAccount.setString(4, account.getLastname());
-						insertAccount.setBoolean(2, account.isLoggedIn());
+						insertAccount.setBoolean(5, account.isLoggedIn());
 						insertAccount.addBatch();
 					}
 					insertAccount.executeBatch();
