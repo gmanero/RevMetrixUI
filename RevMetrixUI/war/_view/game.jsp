@@ -355,7 +355,8 @@
 
       // clear secondShot whenever firstShot changes
       clearSecondShot();
-      first_Remaining = [1,2,3,4,5,6,7,8,9,10];
+      first_Remaining = [1,2,3,4,5,6,7,8,9,0];
+      document.getElementById('firstExtra').value= 'F';
       // display 'F', rather than '0' in first shot
       document.querySelector('.firstShot span').textContent = 'F';
     }
@@ -363,6 +364,7 @@
     else {
       // display 'F', rather than '0' in second shot
       document.querySelector('.secondShot span').textContent = 'F';
+      document.getElementById('secondExtra').value = 'F';
       second_Remaining= first_Remaining;
     }
     first_Remaining.sort();

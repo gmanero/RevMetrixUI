@@ -30,8 +30,13 @@ public class GameServlet extends HttpServlet {
 	    // Retrieving parameter from request
 	    String first = req.getParameter("firstRemaining");
 	    System.out.println("Remaining Pins: " + first);
+	    String firstFoul = req.getParameter("firstExtra");
+	    System.out.println("foul: " + firstFoul);
+	    
 	    String second = req.getParameter("secondRemaining");
 	    System.out.println("Remaining Pins: " + second);
+	    String secondFoul = req.getParameter("secondExtra");
+	    System.out.println("foul: " + secondFoul);
 	    // Parse pins and calculate score
 	    
 	    // Create an instance of the Game class if it doesn't exist
