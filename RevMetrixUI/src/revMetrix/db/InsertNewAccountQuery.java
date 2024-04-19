@@ -1,12 +1,12 @@
 package revMetrix.db;
 
-
 import java.util.Scanner;
 
 import revMetrix.db.persist.DatabaseProvider;
 import revMetrix.db.persist.IDatabase;
 
 public class InsertNewAccountQuery {
+
 	public static void main(String[] args) throws Exception {
 		Scanner keyboard = new Scanner(System.in);
 
@@ -37,6 +37,7 @@ public class InsertNewAccountQuery {
 		else
 		{
 			System.out.println("Failed to insert new Account (ID: " + account_id + ") into Accounts table: <" + password + ">");			
+
 		}
 	}
 }
