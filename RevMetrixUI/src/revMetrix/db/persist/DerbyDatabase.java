@@ -39,7 +39,7 @@ public class DerbyDatabase implements IDatabase {
 
 	private static final int MAX_ATTEMPTS = 10;
 	
-	
+
 	public List<Account> findAllAccounts() {
 		return executeTransaction(new Transaction<List<Account>>() {
 			@Override
@@ -288,6 +288,7 @@ public class DerbyDatabase implements IDatabase {
 			}
 		});
 	}
+
 	
 	
 	
