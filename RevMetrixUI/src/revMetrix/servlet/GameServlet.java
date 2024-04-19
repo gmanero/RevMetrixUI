@@ -28,15 +28,14 @@ public class GameServlet extends HttpServlet {
 	    System.out.println("Game Servlet: doPost");
 
 	    // Retrieving parameter from request
-	    String numbers = req.getParameter("clickedPins");
-	    System.out.println("Clicked Pins: " + numbers);
-
+	    String first = req.getParameter("firstRemaining");
+	    System.out.println("Remaining Pins: " + first);
+	    String second = req.getParameter("secondRemaining");
+	    System.out.println("Remaining Pins: " + second);
 	    // Parse pins and calculate score
-	    boolean[] pins = GameController.getPins(numbers);
-	    int score = GameController.getScore(pins);
-	    System.out.println("Calculated Score: " + score);
-
+	    
 	    // Create an instance of the Game class if it doesn't exist
+	    /*
 	    if (game == null) {
 	        game = new Game(null, null, 0, new boolean[10], new Object[21], 0, new int[11], 0, 10, 0, 0, 0, 0);
 	    }
@@ -106,6 +105,7 @@ public class GameServlet extends HttpServlet {
 	    
 	    int newShotNum = game.getShotNum() + 1;
 	    game.setShotNum(newShotNum);
+	    */
 
 	    req.setAttribute("game", game);
 
