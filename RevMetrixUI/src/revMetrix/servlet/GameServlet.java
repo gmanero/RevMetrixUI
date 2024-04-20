@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import revMetrix.controller.GameController;
+import revMetrix.db.model.Shot;
 import revMetrix.model.RevMetrix;
 import revMetrix.model.RevMetrix.Game;
 
@@ -37,6 +38,8 @@ public class GameServlet extends HttpServlet {
 	    System.out.println("Remaining Pins: " + second);
 	    String secondFoul = req.getParameter("secondExtra");
 	    System.out.println("foul: " + secondFoul);
+	    
+	    System.out.println("Output:"+GameController.getShotScore(2,"0","0,1",""));
 	    // Parse pins and calculate score
 	    
 	    // Create an instance of the Game class if it doesn't exist

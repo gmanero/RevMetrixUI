@@ -239,6 +239,7 @@
     if (shot == FIRST_SHOT) {
       // update first shot count
       firstShotCount = pinCount;
+      document.getElementById('firstExtra').value= '';
       if (first_Remaining.includes(num)) {
         first_Remaining = first_Remaining.filter(n => n !== num);
         second_Remaining = second_Remaining.filter(n => n !== num);
@@ -267,6 +268,7 @@
       // pins left standing after first shot - pins left standing after second shot
       // reduces to pinCount - firstShotCount
       secondShotCount = pinCount - firstShotCount
+      document.getElementById('secondExtra').value = '';
       if (second_Remaining.includes(num)) {
 
         second_Remaining = second_Remaining.filter(n => n !== num);
@@ -290,6 +292,7 @@
         document.querySelector('.secondShot span').textContent = secondShotCount;
       }
     }
+    
     first_Remaining.sort();
     second_Remaining.sort();
     var firstLoaction = document.getElementById('firstRemaining');
