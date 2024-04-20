@@ -32,88 +32,88 @@
         <div class="score-box">
             <div class="score-upper">
                 <div class="shot-gap">a</div>
-                <div id = "split1" class="shot-box">${game.scoreBoard[0]}</div>
-                <div class="shot-box">${game.frame[0].frameScore}</div>
+                <div id = "split1" class="shot-box">${shotScores[0]}</div>
+                <div class="shot-box">${shotScores[1]}</div>
             </div>
-            <div class="score-running">${game.scoreBoardTot[0]}</div>
+            <div class="score-running">${scores[0]}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
                 <div class="shot-gap"></div>
-                <div id = "split2" class="shot-box">${game.scoreBoard[2]}</div>
-                <div class="shot-box">${game.scoreBoard[3]}</div>
+                <div id = "split2" class="shot-box">${shotScores[2]}</div>
+                <div class="shot-box">${shotScores[3]}</div>
             </div>
-            <div class="score-running">${game.scoreBoardTot[1]}</div>
+            <div class="score-running">${scores[1]}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
                 <div class="shot-gap"></div>
-                <div id = "split3" class="shot-box">${game.scoreBoard[4]}</div>
-                <div class="shot-box">${game.scoreBoard[5]}</div>
+                <div id = "split3" class="shot-box">${shotScores[4]}</div>
+                <div class="shot-box">${shotScores[5]}</div>
             </div>
-            <div class="score-running">${game.scoreBoardTot[2]}</div>
+            <div class="score-running">${scores[2]}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
                 <div class="shot-gap"></div>
-                <div id = "split4" class="shot-box">${game.scoreBoard[6]}</div>
-                <div class="shot-box">${game.scoreBoard[7]}</div>
+                <div id = "split4" class="shot-box">${shotScores[6]}</div>
+                <div class="shot-box">${shotScores[7]}</div>
             </div>
-            <div class="score-running">${game.scoreBoardTot[3]}</div>
+            <div class="score-running">${scores[3]}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
                 <div class="shot-gap"></div>
-                <div id = "split5" class="shot-box">${game.scoreBoard[8]}</div>
-                <div class="shot-box">${game.scoreBoard[9]}</div>
+                <div id = "split5" class="shot-box">${shotScores[8]}</div>
+                <div class="shot-box">${shotScores[9]}</div>
             </div>
-            <div class="score-running">${game.scoreBoardTot[4]}</div>
+            <div class="score-running">${scores[4]}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
                 <div class="shot-gap"></div>
-                <div id = "split6" class="shot-box">${game.scoreBoard[10]}</div>
-                <div class="shot-box">${game.scoreBoard[11]}</div>
+                <div id = "split6" class="shot-box">${shotScores[10]}</div>
+                <div class="shot-box">${shotScores[11]}</div>
             </div>
-            <div class="score-running">${game.scoreBoardTot[5]}</div>
+            <div class="score-running">${scores[5]}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
                 <div class="shot-gap"></div>
-                <div id = "split7" class="shot-box">${game.scoreBoard[12]}</div>
-                <div class="shot-box">${game.scoreBoard[13]}</div>
+                <div id = "split7" class="shot-box">${shotScores[12]}</div>
+                <div class="shot-box">${shotScores[13]}</div>
             </div>
-            <div class="score-running">${game.scoreBoardTot[6]}</div>
+            <div class="score-running">${scores[6]}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
                 <div class="shot-gap"></div>
-                <div id = "split8" class="shot-box">${game.scoreBoard[14]}</div>
-                <div class="shot-box">${game.scoreBoard[15]}</div>
+                <div id = "split8" class="shot-box">${shotScores[14]}</div>
+                <div class="shot-box">${shotScores[15]}</div>
             </div>
-            <div class="score-running">${game.scoreBoardTot[7]}</div>
+            <div class="score-running">${scores[7]}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
                 <div class="shot-gap"></div>
-                <div id = "split9" class="shot-box">${game.scoreBoard[16]}</div>
-                <div class="shot-box">${game.scoreBoard[17]}</div>
+                <div id = "split9" class="shot-box">${shotScores[16]}</div>
+                <div class="shot-box">${shotScores[17]}</div>
             </div>
-            <div class="score-running">${game.scoreBoardTot[8]}</div>
+            <div class="score-running">${scores[8]}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
-                <div id = "split10" class="shot-box">${game.scoreBoard[18]}</div>
-                <div id = "split11" class="shot-box">${game.scoreBoard[19]}</div>
-                <div class="shot-box">${game.scoreBoard[20]}</div>
+                <div id = "split10" class="shot-box">${shotScores[18]}</div>
+                <div id = "split11" class="shot-box">${shotScores[19]}</div>
+                <div class="shot-box">${shotScores[20]}</div>
             </div>
-            <div class="score-running">${game.scoreBoardTot[9]}</div>
+            <div class="score-running">${scores[9]}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
                 <div class="shot-box">${event_score}</div>
             </div>
-            <div class="score-running">${game.scoreBoardTot[10]}</div>
+            <div class="score-running">${scores[10]}</div>
         </div>
     </div>
 <form  action="${pageContext.servletContext.contextPath}/game" method="post">

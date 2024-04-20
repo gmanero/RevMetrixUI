@@ -1,5 +1,9 @@
 package revMetrix.controller;
 
+import java.util.ArrayList;
+
+import revMetrix.db.model.Frame;
+import revMetrix.db.model.Pair;
 import revMetrix.db.model.Shot;
 
 public class GameController {
@@ -15,10 +19,13 @@ public class GameController {
 	}
 	public static int frameScore(Shot first, Shot second){
 		System.out.println("starting frame Score");
+		if(second== null) {
+			return 10;
+		}
 		String one = first.getShotScore();
 		String two = second.getShotScore();
 		System.out.println(one+"    "+two);
-		if (one.equals("X") || two.equals("/")) {
+		if (two.equals("/")) {
 			System.out.println("10");
 			return 10;
 		}
@@ -35,9 +42,7 @@ public class GameController {
 		
 		return firstScore+secondScore;
 	}
-	public static int frameScore(Shot first){
-		return 10;
-	}
+	
 	public static boolean isStrike(Shot shot) {
 		return shot.getShotScore().equals("X");
 	}
@@ -77,7 +82,7 @@ public class GameController {
 			out = 10;
 		}
 		else if(secondShot.equals("-")||secondShot.equals("F")) {
-			out += 0;
+			out += 0; 
 		}
 		else {
 			out += Integer.parseInt(secondShot);
@@ -147,6 +152,72 @@ public class GameController {
 	public static boolean isWashout(String pins) {
 		//to do implement
 			return false;
+	}
+	
+	public static String[] parseShots(ArrayList<Shot> shots){
+		String [] output = new String[22];
+		int index = 0;
+		for (Shot shot:shots) {
+			output[index]=shot.getShotScore();
+			if(output[index].equals("X") && index<18) {
+				index++;
+			}
+			index++;
+		}
+		return output;
+ 	}
+	public static void updateframeScores(ArrayList<Frame> frames, ArrayList<Shot> shots) {
+		int index = shots.size()-1;
+		Integer last[]= new Integer[3];
+		int i = 0;
+		while(index>=0&&i<3) {
+			if(shots.get(index).getShotNumber()==2) {
+				last[i] = index -1;
+				index -=2;
+			}
+			else {
+				last[i] = index;
+				index --;
+			}
+			i++;
+		}
+		if(last[1]!=null) {
+			
+			if(last[1]+1<shots.size()&&isSpare(shots.get(last[1]+1))){
+				frames.get(frames.size()-2).setFrameScore(10+addScoreSpare(shots.get(last[0])));
+				
+			}
+		}
+	
+		if(last[2]!=null) {
+			if(isStrike(shots.get(last[2]))){
+				
+				frames.get(frames.size()-3).setFrameScore(10+addScoreStrike(shots.get(last[1]),shots.get(last[0])));
+			}
+		}
+		
+	}
+	public static int[] parseScores(ArrayList<Frame> frames, ArrayList<Shot> shots) {
+		int[] output = new int[11];
+		int i = 0;
+		int total = 0;
+		for(Frame frame:frames) {
+			if(i<10) {
+			total += frame.getFrameScore();
+			output[i] = total;
+			//System.out.println("Score: "+frame.getFrameScore());
+			i++;
+			}
+		}
+		output[10] = total;
+		return output;
+		
+	}
+	
+	public static Frame addFrame(Shot first, Shot second, String lanes) {
+		Frame output = new Frame();
+		output.setFrameScore(frameScore(first,second));
+		return output;
 	}
 	
 	
