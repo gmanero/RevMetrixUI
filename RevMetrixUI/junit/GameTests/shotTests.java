@@ -3,10 +3,13 @@ package GameTests;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import revMetrix.controller.GameController;
+import revMetrix.db.model.Frame;
 import revMetrix.db.model.Shot;
 
 
@@ -143,6 +146,97 @@ public class shotTests {
 		assertFalse(GameController.isSpare(f));
 		assertFalse(GameController.isSpare(g));
 		assertFalse(GameController.isSpare(h));
+		
+	}
+	@Test
+	public void testGetShotScore() {
+		assertTrue(GameController.getShotScore(2, "", "0","")== "/");								// /
+		assertTrue(GameController.getShotScore(1, "0,1,2,3,4,5,6,7,8,9", null, "F")== "F");			// F
+		assertTrue(GameController.getShotScore(1, "0,1,2,3,4,5,6,7,8,9",null, "") == "-"); 			// -
+		assertTrue(GameController.getShotScore(1, "", null, "")== "X");								// X
+		
+		
+		
+	}
+	@Test
+	public void testParseShots() {
+		 ArrayList<Shot> shots = new ArrayList<Shot>();
+		 shots.add(GameController.addShot(1, "0,1,2,3,4,5,6,7,8,9",null, "", 0)); 		// -
+		 shots.add(GameController.addShot(2, "0,1","0,1,2,3,4,5,6,7,8,9", "", 0));		// 8
+		 shots.add(GameController.addShot(1, "", null, "", 0));							// X
+		 shots.add(GameController.addShot(1, "0", null,"", 0));							// 9
+		 shots.add(GameController.addShot(2, "", "0","", 0));							// /
+		 shots.add(GameController.addShot(1, "0,1,2",null, "", 0)); 					// 7
+		 shots.add(GameController.addShot(2, "1,2","0,1,2", "", 0)); 					// 1
+		
+		
+	}
+	@Test
+	public void testUpdateFrameScores() {
+		 ArrayList<Shot> shots = new ArrayList<Shot>();
+		 ArrayList<Frame> frames = new ArrayList<Frame>();
+		 shots.add(GameController.addShot(1, "0,1,2,3,4,5,6,7,8,9",null, "", 0)); 		// -
+		 shots.add(GameController.addShot(2, "0,1","0,1,2,3,4,5,6,7,8,9", "", 0));		// 8
+		 shots.add(GameController.addShot(1, "", null, "", 0));							// X
+		 shots.add(GameController.addShot(1, "0", null,"", 0));							// 9
+		 shots.add(GameController.addShot(2, "", "0","", 0));							// /
+		 shots.add(GameController.addShot(1, "0,1,2",null, "", 0)); 					// 7
+		 shots.add(GameController.addShot(2, "1,2","0,1,2", "", 0)); 					// 1
+		
+		 frames.add(GameController.addFrame(shots.get(0), shots.get(1), "0"));			// 8
+		 frames.add(GameController.addFrame(shots.get(2), null, "0"));					// 10
+		 frames.add(GameController.addFrame(shots.get(3), shots.get(4), "0"));			// 10
+		 frames.add(GameController.addFrame(shots.get(5), shots.get(6), "0"));			// 8
+	}
+	@Test
+	public void testParseScores() {
+		 ArrayList<Shot> shots = new ArrayList<Shot>();
+		 ArrayList<Frame> frames = new ArrayList<Frame>();
+		 shots.add(GameController.addShot(1, "0,1,2,3,4,5,6,7,8,9",null, "", 0)); 		// -
+		 shots.add(GameController.addShot(2, "0,1","0,1,2,3,4,5,6,7,8,9", "", 0));		// 8
+		 shots.add(GameController.addShot(1, "", null, "", 0));							// X
+		 shots.add(GameController.addShot(1, "0", null,"", 0));							// 9
+		 shots.add(GameController.addShot(2, "", "0","", 0));							// /
+		 shots.add(GameController.addShot(1, "0,1,2",null, "", 0)); 					// 7
+		 shots.add(GameController.addShot(2, "1,2","0,1,2", "", 0)); 					// 1
+		
+		 frames.add(GameController.addFrame(shots.get(0), shots.get(1), "0"));			// 8
+		 frames.add(GameController.addFrame(shots.get(2), null, "0"));					// 10
+		 frames.add(GameController.addFrame(shots.get(3), shots.get(4), "0"));			// 10
+		 frames.add(GameController.addFrame(shots.get(5), shots.get(6), "0"));			// 8
+		 
+		 
+	}
+	@Test
+	public void testAddFrame() {
+		Shot a = GameController.addShot(1, "0,1,2,3,4,5,6,7,8,9",null, "", 0); 		// -
+		Shot b = GameController.addShot(2, "0,1","0,1,2,3,4,5,6,7,8,9", "", 0);		// 8
+		Shot c = GameController.addShot(1, "", null, "", 0);						// X
+		Shot d = GameController.addShot(1, "0", null,"", 0);						// 9
+		Shot e = GameController.addShot(2, "", "0","", 0);							// /
+		Shot f = GameController.addShot(1, "0,1,2",null, "", 0); 					// 7
+		Shot g = GameController.addShot(2, "1,2","0,1,2", "", 0); 					// 1
+		Shot h = GameController.addShot(1, "0,1,2,3,4,5,6,7,8,9", null, "F", 0);	// -
+		Frame one	 = GameController.addFrame(a, b, "1-2");
+		Frame two	 = GameController.addFrame(c, null, "1-2");
+		Frame three	 = GameController.addFrame(d, e, "1-2");
+		Frame four = GameController.addFrame(f, g, "1-2");
+		assertTrue(one.getFrameScore()==8);
+		assertTrue(two.getFrameScore()==10);
+		assertTrue(three.getFrameScore()==10);
+		assertTrue(four.getFrameScore()==8);
+			
+	}
+	@Test
+	public void testCheckError() {
+		assertTrue(GameController.checkError("1,,2,3", "1,2"));
+		assertTrue(GameController.checkError("1,2,3,4,5", ""));
+		assertTrue(GameController.checkError("1,2", "1,2"));
+		assertTrue(GameController.checkError("", ""));
+		assertFalse(GameController.checkError("", "1"));
+		assertFalse(GameController.checkError("1,2,3", "1,2,3,4"));
+		assertFalse(GameController.checkError("", "1"));
+		assertFalse(GameController.checkError("", "1,2"));
 		
 	}
 }

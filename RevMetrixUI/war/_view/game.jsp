@@ -121,8 +121,7 @@
 <div class="NewPinContainer">
   <div class="rowNew">
     <div class="gameFrameHeaderNew">
-      <label>Frame: </label>
-      <input type="text" id="frameNum" readonly="" size="2">
+      <label>${error}</label>
     </div>
   </div>
   <div class="rowNew">

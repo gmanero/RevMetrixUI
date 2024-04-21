@@ -220,6 +220,10 @@ public class GameController {
 		return output;
 	}
 	
+	public static boolean checkError(String first, String second) {
+		return first.length()>=second.length();
+	}
+	
 	
 	
 	

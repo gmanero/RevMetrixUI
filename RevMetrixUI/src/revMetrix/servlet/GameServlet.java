@@ -55,6 +55,7 @@ public class GameServlet extends HttpServlet {
 	    if(scores == null) {
 	    	scores = new int[12];
 	    }
+	    String error = null;
 	    // Retrieving parameter from request
 	    String first = req.getParameter("firstRemaining");
 	    System.out.println("Remaining Pins: " + first);
@@ -67,7 +68,10 @@ public class GameServlet extends HttpServlet {
 	    String secondFoul = req.getParameter("secondExtra");
 	    System.out.println("foul: " + secondFoul);
 	    //grab ball id when its possible
-	    
+	    if (!GameController.checkError(first, second)) {
+	    	error = "Error invalid shot, try again";
+	    }
+	    else {
 	    Shot firstShot = GameController.addShot(1, first, null, firstFoul, 0);
 	    shots.add(firstShot);
 	    Shot secondShot = null;
@@ -79,10 +83,11 @@ public class GameServlet extends HttpServlet {
 	    GameController.updateframeScores(frames, shots);
 	    shotScores = GameController.parseShots(shots);
 	    scores = GameController.parseScores(frames, shots);
-
+	    }
+	    req.setAttribute("error", error);
 	    req.setAttribute("shotScores", shotScores);
-	    req.setAttribute("scores", scores);
-
+	    req.setAttribute("scores", scores); 
+	    
 	    // Forwarding request and response to JSP page
 	    req.getRequestDispatcher("/_view/game.jsp").forward(req, resp);
 	}
