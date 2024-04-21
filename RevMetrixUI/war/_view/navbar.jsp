@@ -11,7 +11,7 @@
 <div class="navbar">
     <div class="logo">
         <form method="get">
-            <button type="submit" name="destination" value="revMetrix" class="nav-item"><img class="logo" src="images/RevMetrixUI_Logo.png"  alt="Logo"></button>
+            <button type="submit" name="destination" value="RevMetrix" class="nav-item"><img class="logo" src="images/RevMetrixUI_Logo.png"  alt="Logo"></button>
         </form>
     </div>
     <div class="links">
