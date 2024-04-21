@@ -510,7 +510,7 @@ public class DerbyDatabase implements IDatabase {
 	                
 	                // Step 5: Insert new event with establishment ID and type
 	                stmt4 = conn.prepareStatement(
-	                        "INSERT INTO events (type, establishmentId, name, description) " +
+	                        "INSERT INTO events (type, establishment_id, name, description) " +
 	                        "VALUES (?, ?, ?, ?)"
 	                );
 	                stmt4.setInt(1, type);
@@ -525,7 +525,7 @@ public class DerbyDatabase implements IDatabase {
 	                // Step 6: Retrieve event ID
 	                stmt5 = conn.prepareStatement(
 	                        "SELECT event_id FROM events " +
-	                        "WHERE establishmentId = ? AND name = ? AND description = ?"
+	                        "WHERE establishment_id = ? AND name = ? AND description = ?"
 	                );
 	                stmt5.setInt(1, establishmentId);
 	                stmt5.setString(2, eventName);
