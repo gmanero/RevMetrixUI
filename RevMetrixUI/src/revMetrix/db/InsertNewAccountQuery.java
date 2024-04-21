@@ -1,18 +1,18 @@
 package revMetrix.db;
 
-
 import java.util.Scanner;
 
 import revMetrix.db.persist.DatabaseProvider;
 import revMetrix.db.persist.IDatabase;
 
 public class InsertNewAccountQuery {
+
 	public static void main(String[] args) throws Exception {
 		Scanner keyboard = new Scanner(System.in);
 
 		// Create the default IDatabase instance
 		InitDatabase.init(keyboard);
-		
+
 		System.out.print("Enter First Name: ");
 		String firstName = keyboard.nextLine();
 		
