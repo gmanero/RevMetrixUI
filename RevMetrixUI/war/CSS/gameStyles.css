@@ -24,6 +24,7 @@ body {
 
         .button:hover {
             background-color: #4891ac;
+            cursor: pointer;
         }
         .button {
 			  background-color: #26acca; /* fallback color */
@@ -38,7 +39,7 @@ body {
 			  cursor: pointer;
 			  border-radius: 4px;
 			  flex: 1;
-			  width: 125px;
+			  /*width: 145px;*/
 		}
 		.buttons-container {
 			display: flex;
@@ -164,13 +165,193 @@ body {
     		margin-bottom: 150px;
 		}
 		/* Positioning for individual pins */
-		#pin1  { top: 200px; left: 110px; }
-		#pin2  { top: 140px; left: 80px; }
-		#pin3  { top: 140px; left: 140px; }
-		#pin4  { top: 80px; left: 50px; }
-		#pin5  { top: 80px; left: 110px; }
-		#pin6  { top: 80px; left: 170px; }
-		#pin7  { top: 20px; left: 15px; }
-		#pin8  { top: 20px; left: 75px; }
-		#pin9  { top: 20px; left: 135px; }
-		#pin10 { top: 20px; left: 195px; }
+		.NewPinContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .gameFrameHeaderNew {
+      margin-right: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .gameFrameHeaderNew label {
+      margin-right: 10px;
+      text-align: center;
+    }
+
+    .gameFrameHeaderNew input {
+      border: 2px solid black;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .rowNew {
+      display: flex;
+      justify-content: center;
+    }
+    
+
+    .pinNew {
+      width: 30px;
+      height: 30px;
+      border: 2px solid black;
+      border-radius: 50%;
+      margin: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .firstShot {
+      width: 30px;
+      height: 30px;
+      border: 2px solid black;
+      margin: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      font-size: 28px;
+      font-weight: bold;
+      backgroundColor: '#26acca';
+    }
+
+    .secondShot {
+      width: 30px;
+      height: 30px;
+      border: 2px solid black;
+      margin: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      font-size: 28px;
+      font-weight: bold;
+      backgroundColor: 'lightgrey';
+    }
+
+    .miss {
+      width: 30px;
+      height: 30px;
+      border: 2px solid black;
+      margin: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      font-size: 28px;
+      font-weight: bold;
+      
+    }
+
+    .foul {
+      width: 30px;
+      height: 30px;
+      border: 2px solid black;
+      margin: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      font-size: 28px;
+      font-weight: bold;
+     
+    }
+
+    .strike {
+      width: 30px;
+      height: 30px;
+      border: 2px solid black;
+      margin: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      font-size: 28px;
+      font-weight: bold;
+      
+    }
+
+    .spare {
+      width: 30px;
+      height: 30px;
+      border: 2px solid black;
+      margin: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    
+
+    .firstShot::before {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .secondShot::before {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .miss::before {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .foul::before {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .strike::before {
+      /*            content: 'X';   */
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .spare::before {
+      /*            content: '/';  */
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .pinNew.leave {
+      background-color: black;
+      color: white;
+    }
+
+    .pinNew.leave {
+      background-color: black;
+      color: white;
+    }
+
+    .pinNew.miss {
+      background-color: red;
+      color: black;
+    }

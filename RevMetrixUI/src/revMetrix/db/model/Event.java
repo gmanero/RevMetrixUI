@@ -2,10 +2,12 @@ package revMetrix.db.model;
 
 public class Event {
     private int eventId;
-    private int type; //1 = practice, 2= league, 3= tourney
+    private int type; 
     private int establishmentId;
     private String name;
     private String description;
+    
+  //1 = practice, 2= league, 3= tourney
     
     public Event() {
     	

@@ -21,12 +21,12 @@ public class AllAccountsController {
 
 	public ArrayList<Account> getAllAccounts() {
 		
-		// get the list of (Author, Book) pairs from DB
+		
 		List<Account> accountList = db.findAllAccounts();
 		ArrayList<Account> accounts = null;
 		
 		if (accountList.isEmpty()) {
-			System.out.println("No accounts found in library");
+			System.out.println("No accounts found");
 			return null;
 		}
 		else {
@@ -37,7 +37,6 @@ public class AllAccountsController {
 			}			
 		}
 		
-		// return authors for this title
 		return accounts;
 	}
 }
