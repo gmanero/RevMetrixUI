@@ -39,7 +39,7 @@ public class DerbyDatabase implements IDatabase {
 
 	private static final int MAX_ATTEMPTS = 10;
 	
-
+	//ACCOUNT QUERYS
 	public List<Account> findAllAccounts() {
 		return executeTransaction(new Transaction<List<Account>>() {
 			@Override
@@ -81,122 +81,6 @@ public class DerbyDatabase implements IDatabase {
 			}
 		});
 	}
-	
-	public List<Ball> findAllBalls() {
-	    return executeTransaction(new Transaction<List<Ball>>() {
-	        @Override
-	        public List<Ball> execute(Connection conn) throws SQLException {
-	            PreparedStatement stmt = null;
-	            ResultSet resultSet = null;
-	            
-	            try {
-	                stmt = conn.prepareStatement("SELECT * FROM balls");
-	                
-	                List<Ball> result = new ArrayList<Ball>();
-	                
-	                resultSet = stmt.executeQuery();
-	                
-	                Boolean found = false;
-	                
-	                while (resultSet.next()) {
-	                    found = true;
-	                    
-	                    Ball ball = new Ball();
-	                    loadBall(ball, resultSet, 1);
-	                    
-	                    result.add(ball);
-	                }
-	                
-	                if (!found) {
-	                    System.out.println("No balls were found in the database");
-	                }
-	                
-	                return result;
-	            } finally {
-	                DBUtil.closeQuietly(resultSet);
-	                DBUtil.closeQuietly(stmt);
-	            }
-	        }
-	    });
-	}
-	
-	public List<Establishment> findAllEstablishments() {
-	    return executeTransaction(new Transaction<List<Establishment>>() {
-	        @Override
-	        public List<Establishment> execute(Connection conn) throws SQLException {
-	            PreparedStatement stmt = null;
-	            ResultSet resultSet = null;
-	            
-	            try {
-	                stmt = conn.prepareStatement("SELECT * FROM establishments");
-	                
-	                List<Establishment> result = new ArrayList<Establishment>();
-	                
-	                resultSet = stmt.executeQuery();
-	                
-	                Boolean found = false;
-	                
-	                while (resultSet.next()) {
-	                    found = true;
-	                    
-	                    Establishment establishment = new Establishment();
-	                    loadEstablishment(establishment, resultSet, 1);
-	                    
-	                    result.add(establishment);
-	                }
-	                
-	                if (!found) {
-	                    System.out.println("No establishments were found in the database");
-	                }
-	                
-	                return result;
-	            } finally {
-	                DBUtil.closeQuietly(resultSet);
-	                DBUtil.closeQuietly(stmt);
-	            }
-	        }
-	    });
-	}
-	
-	public List<Event> findAllEvents() {
-	    return executeTransaction(new Transaction<List<Event>>() {
-	        @Override
-	        public List<Event> execute(Connection conn) throws SQLException {
-	            PreparedStatement stmt = null;
-	            ResultSet resultSet = null;
-	            
-	            try {
-	                stmt = conn.prepareStatement("SELECT * FROM events");
-	                
-	                List<Event> result = new ArrayList<Event>();
-	                
-	                resultSet = stmt.executeQuery();
-	                
-	                Boolean found = false;
-	                
-	                while (resultSet.next()) {
-	                    found = true;
-	                    
-	                    Event event = new Event();
-	                    loadEvent(event, resultSet, 1);
-	                    
-	                    result.add(event);
-	                }
-	                
-	                if (!found) {
-	                    System.out.println("No events were found in the database");
-	                }
-	                
-	                return result;
-	            } finally {
-	                DBUtil.closeQuietly(resultSet);
-	                DBUtil.closeQuietly(stmt);
-	            }
-	        }
-	    });
-	}
-
-
 	
 	public Integer insertAccountIntoAccountsTable(final String email, final String password, final String lastName, final String firstName) {
 		return executeTransaction(new Transaction<Integer>() {
@@ -288,36 +172,555 @@ public class DerbyDatabase implements IDatabase {
 			}
 		});
 	}
+	
+	//BALLS QUERYS
+	public List<Ball> findAllBalls() {
+	    return executeTransaction(new Transaction<List<Ball>>() {
+	        @Override
+	        public List<Ball> execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            try {
+	                stmt = conn.prepareStatement("SELECT * FROM balls");
+	                
+	                List<Ball> result = new ArrayList<Ball>();
+	                
+	                resultSet = stmt.executeQuery();
+	                
+	                Boolean found = false;
+	                
+	                while (resultSet.next()) {
+	                    found = true;
+	                    
+	                    Ball ball = new Ball();
+	                    loadBall(ball, resultSet, 1);
+	                    
+	                    result.add(ball);
+	                }
+	                
+	                if (!found) {
+	                    System.out.println("No balls were found in the database");
+	                }
+	                
+	                return result;
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
+	
+	public Integer insertBallIntoBallsTable(final int weight, final String color, final String name) {
+	    return executeTransaction(new Transaction<Integer>() {
+	        @Override
+	        public Integer execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt1 = null;
+	            PreparedStatement stmt2 = null;
+	            PreparedStatement stmt3 = null;            
+	            
+	            ResultSet resultSet1 = null;
+	            ResultSet resultSet3 = null;            
+	                       
+	            Integer ball_Id = -1;
+
+	            try {
+	                stmt1 = conn.prepareStatement(
+	                        "SELECT ball_id FROM balls " +
+	                        "WHERE weight = ? AND color = ? AND name = ?"
+	                );
+	                stmt1.setInt(1, weight);
+	                stmt1.setString(2, color);
+	                stmt1.setString(3, name);
+	                
+	                resultSet1 = stmt1.executeQuery();
+
+	                if (resultSet1.next()) {
+	                    ball_Id = resultSet1.getInt(1);
+	                    System.out.println("Ball with weight: " + weight + ", color: " + color + ", name: " + name + " already exists with ID: " + ball_Id);
+	                } else {
+	                    System.out.println("Ball with weight: " + weight + ", color: " + color + ", name: " + name + " not found");
+	                if(ball_Id <=0) {
+	                    stmt2 = conn.prepareStatement(
+	                            "INSERT INTO balls (weight, color, name) " +
+	                            "VALUES (?, ?, ?)"
+	                    );
+	                    stmt2.setInt(1, weight);
+	                    stmt2.setString(2, color);
+	                    stmt2.setString(3, name);
+	                    
+	                    stmt2.executeUpdate();
+	                    
+	                    System.out.println("New ball inserted into Balls table");
+	                
+	                    stmt3 = conn.prepareStatement(
+	                            "SELECT ball_id FROM balls " +
+	                            "WHERE weight = ? AND color = ? AND name = ?"
+	                    );
+	                    stmt3.setInt(1, weight);
+	                    stmt3.setString(2, color);
+	                    stmt3.setString(3, name);
+	                    
+	                    resultSet3 = stmt3.executeQuery();
+	                    
+	                    if (resultSet3.next()) {
+	                        ball_Id = resultSet3.getInt(1);
+	                        System.out.println("New ball ID: " + ball_Id);
+	                    } else {
+	                        System.out.println("New ball not found in Balls table");
+	                    }
+	                }
+	            } 
+	                return ball_Id;
+	            } finally {
+	                DBUtil.closeQuietly(resultSet1);
+	                DBUtil.closeQuietly(stmt1);
+	                DBUtil.closeQuietly(stmt2);                    
+	                DBUtil.closeQuietly(resultSet3);
+	                DBUtil.closeQuietly(stmt3);                    
+	            }
+	        }
+	    });
+	}
 
 	
+	//ESTABLISHMENTS QUERYS
+	public List<Establishment> findAllEstablishments() {
+	    return executeTransaction(new Transaction<List<Establishment>>() {
+	        @Override
+	        public List<Establishment> execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            try {
+	                stmt = conn.prepareStatement("SELECT * FROM establishments");
+	                
+	                List<Establishment> result = new ArrayList<Establishment>();
+	                
+	                resultSet = stmt.executeQuery();
+	                
+	                Boolean found = false;
+	                
+	                while (resultSet.next()) {
+	                    found = true;
+	                    
+	                    Establishment establishment = new Establishment();
+	                    loadEstablishment(establishment, resultSet, 1);
+	                    
+	                    result.add(establishment);
+	                }
+	                
+	                if (!found) {
+	                    System.out.println("No establishments were found in the database");
+	                }
+	                
+	                return result;
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
 	
+	public Integer insertEstablishmentIntoEstablishmentsTable(final String name, final String address, final String phoneNumber, final int lanes) {
+	    return executeTransaction(new Transaction<Integer>() {
+	        @Override
+	        public Integer execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt1 = null;
+	            PreparedStatement stmt2 = null;
+	            PreparedStatement stmt3 = null;            
+	            
+	            ResultSet resultSet1 = null;
+	            ResultSet resultSet3 = null;            
+	                       
+	            Integer establishmentId = -1;
+
+	            try {
+	                stmt1 = conn.prepareStatement(
+	                        "SELECT establishment_id FROM establishments " +
+	                        "WHERE name = ? AND address = ? AND phoneNumber = ?"
+	                );
+	                stmt1.setString(1, name);
+	                stmt1.setString(2, address);
+	                stmt1.setString(3, phoneNumber);
+	                
+	                resultSet1 = stmt1.executeQuery();
+
+	                if (resultSet1.next()) {
+	                    establishmentId = resultSet1.getInt(1);
+	                    System.out.println("Establishment with name: " + name + ", address: " + address + ", phoneNumber: " + phoneNumber + " already exists with ID: " + establishmentId);
+	                } else {
+	                    System.out.println("Establishment with name: " + name + ", address: " + address + ", phoneNumber: " + phoneNumber + " not found");
+	                
+	                    if (establishmentId <= 0) {
+	                        stmt2 = conn.prepareStatement(
+	                                "INSERT INTO establishments (name, address, phoneNumber, lanes) " +
+	                                "VALUES (?, ?, ?, ?)"
+	                        );
+	                        stmt2.setString(1, name);
+	                        stmt2.setString(2, address);
+	                        stmt2.setString(3, phoneNumber);
+	                        stmt2.setInt(4, lanes);
+	                        
+	                        stmt2.executeUpdate();
+	                        
+	                        System.out.println("New establishment inserted into Establishments table");
+	                    
+	                        stmt3 = conn.prepareStatement(
+	                                "SELECT establishment_id FROM establishments " +
+	                                "WHERE name = ? AND address = ? AND phoneNumber = ?"
+	                        );
+	                        stmt3.setString(1, name);
+	                        stmt3.setString(2, address);
+	                        stmt3.setString(3, phoneNumber);
+	                        
+	                        resultSet3 = stmt3.executeQuery();
+	                        
+	                        if (resultSet3.next()) {
+	                            establishmentId = resultSet3.getInt(1);
+	                            System.out.println("New establishment ID: " + establishmentId);
+	                        } else {
+	                            System.out.println("New establishment not found in Establishments table");
+	                        }
+	                    }
+	                }
+	                
+	                return establishmentId;
+	            } finally {
+	                DBUtil.closeQuietly(resultSet1);
+	                DBUtil.closeQuietly(stmt1);
+	                DBUtil.closeQuietly(stmt2);                    
+	                DBUtil.closeQuietly(resultSet3);
+	                DBUtil.closeQuietly(stmt3);                    
+	            }
+	        }
+	    });
+	}
+
+	//EVENTS QUERYS
+	public List<Event> findAllEvents() {
+	    return executeTransaction(new Transaction<List<Event>>() {
+	        @Override
+	        public List<Event> execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            try {
+	                stmt = conn.prepareStatement("SELECT * FROM events");
+	                
+	                List<Event> result = new ArrayList<Event>();
+	                
+	                resultSet = stmt.executeQuery();
+	                
+	                Boolean found = false;
+	                
+	                while (resultSet.next()) {
+	                    found = true;
+	                    
+	                    Event event = new Event();
+	                    loadEvent(event, resultSet, 1);
+	                    
+	                    result.add(event);
+	                }
+	                
+	                if (!found) {
+	                    System.out.println("No events were found in the database");
+	                }
+	                
+	                return result;
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
 	
+	public Integer insertEventWithEstablishmentNameAndType(final String establishmentName, final String eventName, final String description, final String eventType) {
+	    return executeTransaction(new Transaction<Integer>() {
+	        @Override
+	        public Integer execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt1 = null;
+	            PreparedStatement stmt2 = null;
+	            PreparedStatement stmt3 = null;            
+	            
+	            ResultSet resultSet1 = null;
+	            ResultSet resultSet3 = null;            
+	                       
+	            Integer eventId = -1;
+
+	            try {
+	                // Step 1: Retrieve establishment ID using establishment name
+	                stmt1 = conn.prepareStatement(
+	                        "SELECT establishment_id FROM establishments " +
+	                        "WHERE name = ?"
+	                );
+	                stmt1.setString(1, establishmentName);
+	                
+	                resultSet1 = stmt1.executeQuery();
+
+	                if (resultSet1.next()) {
+	                    int establishmentId = resultSet1.getInt(1);
+	                    System.out.println("Establishment with name: " + establishmentName + " found with ID: " + establishmentId);
+	                    
+	                    // Convert eventType to corresponding type integer value
+	                    int type = 0;
+	                    if (eventType.equalsIgnoreCase("practice")) {
+	                        type = 1;
+	                    } else if (eventType.equalsIgnoreCase("league")) {
+	                        type = 2;
+	                    } else if (eventType.equalsIgnoreCase("tournament")) {
+	                        type = 3;
+	                    } else {
+	                        System.out.println("Invalid event type");
+	                        return -1; // Return -1 if the event type is invalid
+	                    }
+	                    
+	                    // Step 2: Insert new event with establishment ID and type
+	                    stmt2 = conn.prepareStatement(
+	                            "INSERT INTO events (type, establishmentId, name, description) " +
+	                            "VALUES (?, ?, ?, ?)"
+	                    );
+	                    stmt2.setInt(1, type);
+	                    stmt2.setInt(2, establishmentId);
+	                    stmt2.setString(3, eventName);
+	                    stmt2.setString(4, description);
+	                    
+	                    stmt2.executeUpdate();
+	                    
+	                    System.out.println("New event inserted into Events table");
+	                
+	                    // Step 3: Retrieve event ID
+	                    stmt3 = conn.prepareStatement(
+	                            "SELECT event_id FROM events " +
+	                            "WHERE establishmentId = ? AND name = ? AND description = ?"
+	                    );
+	                    stmt3.setInt(1, establishmentId);
+	                    stmt3.setString(2, eventName);
+	                    stmt3.setString(3, description);
+	                    
+	                    resultSet3 = stmt3.executeQuery();
+	                    
+	                    if (resultSet3.next()) {
+	                        eventId = resultSet3.getInt(1);
+	                        System.out.println("New event ID: " + eventId);
+	                    } else {
+	                        System.out.println("New event not found in Events table");
+	                    }
+	                } else {
+	                    System.out.println("Establishment with name: " + establishmentName + " not found");
+	                }
+	                
+	                return eventId;
+	            } finally {
+	                DBUtil.closeQuietly(resultSet1);
+	                DBUtil.closeQuietly(stmt1);
+	                DBUtil.closeQuietly(stmt2);                    
+	                DBUtil.closeQuietly(resultSet3);
+	                DBUtil.closeQuietly(stmt3);                    
+	            }
+	        }
+	    });
+	}
+
 	
+	//FRAMES QUERYS
+	public List<Frame> findAllFrames() {
+	    return executeTransaction(new Transaction<List<Frame>>() {
+	        @Override
+	        public List<Frame> execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            try {
+	                stmt = conn.prepareStatement("SELECT * FROM frames");
+	                
+	                List<Frame> result = new ArrayList<Frame>();
+	                
+	                resultSet = stmt.executeQuery();
+	                
+	                Boolean found = false;
+	                
+	                while (resultSet.next()) {
+	                    found = true;
+	                    
+	                    Frame frame = new Frame();
+	                    loadFrame(frame, resultSet, 1);
+	                    
+	                    result.add(frame);
+	                }
+	                
+	                if (!found) {
+	                    System.out.println("No frames were found in the database");
+	                }
+	                
+	                return result;
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
 	
+	//GAMES QUERYS
+	public List<Game> findAllGames() {
+	    return executeTransaction(new Transaction<List<Game>>() {
+	        @Override
+	        public List<Game> execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            try {
+	                stmt = conn.prepareStatement("SELECT * FROM games");
+	                
+	                List<Game> result = new ArrayList<Game>();
+	                
+	                resultSet = stmt.executeQuery();
+	                
+	                Boolean found = false;
+	                
+	                while (resultSet.next()) {
+	                    found = true;
+	                    
+	                    Game game = new Game();
+	                    loadGame(game, resultSet, 1);
+	                    
+	                    result.add(game);
+	                }
+	                
+	                if (!found) {
+	                    System.out.println("No games were found in the database");
+	                }
+	                
+	                return result;
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
 	
+	//SESSIONS QUERYS
+	public List<Session> findAllSessions() {
+	    return executeTransaction(new Transaction<List<Session>>() {
+	        @Override
+	        public List<Session> execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            try {
+	                stmt = conn.prepareStatement("SELECT * FROM sessions");
+	                
+	                List<Session> result = new ArrayList<Session>();
+	                
+	                resultSet = stmt.executeQuery();
+	                
+	                Boolean found = false;
+	                
+	                while (resultSet.next()) {
+	                    found = true;
+	                    
+	                    Session session = new Session();
+	                    loadSession(session, resultSet, 1);
+	                    
+	                    result.add(session);
+	                }
+	                
+	                if (!found) {
+	                    System.out.println("No sessions were found in the database");
+	                }
+	                
+	                return result;
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
 	
+	//SHOTS QUERYS
+	public List<Shot> findAllShots() {
+	    return executeTransaction(new Transaction<List<Shot>>() {
+	        @Override
+	        public List<Shot> execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            try {
+	                stmt = conn.prepareStatement("SELECT * FROM shots");
+	                
+	                List<Shot> result = new ArrayList<Shot>();
+	                
+	                resultSet = stmt.executeQuery();
+	                
+	                Boolean found = false;
+	                
+	                while (resultSet.next()) {
+	                    found = true;
+	                    
+	                    Shot shot = new Shot();
+	                    loadShot(shot, resultSet, 1);
+	                    
+	                    result.add(shot);
+	                }
+	                
+	                if (!found) {
+	                    System.out.println("No shots were found in the database");
+	                }
+	                
+	                return result;
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	//JUNCTIONS QUERYS
+	public List<Junction> findAllJunctions() {
+	    return executeTransaction(new Transaction<List<Junction>>() {
+	        @Override
+	        public List<Junction> execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            try {
+	                stmt = conn.prepareStatement("SELECT * FROM junction");
+	                
+	                List<Junction> result = new ArrayList<Junction>();
+	                
+	                resultSet = stmt.executeQuery();
+	                
+	                Boolean found = false;
+	                
+	                while (resultSet.next()) {
+	                    found = true;
+	                    
+	                    Junction junction = new Junction();
+	                    loadJunction(junction, resultSet, 1);
+	                    
+	                    result.add(junction);
+	                }
+	                
+	                if (!found) {
+	                    System.out.println("No junctions were found in the database");
+	                }
+	                
+	                return result;
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
+
 	
 	// wrapper SQL transaction function that calls actual transaction function (which has retries)
 	public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {

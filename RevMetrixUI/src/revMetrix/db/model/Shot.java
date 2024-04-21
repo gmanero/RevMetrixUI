@@ -50,7 +50,7 @@ public class Shot {
     }
     
     public boolean getSplit() {
-        return split;
+        return split; 
     }
     
     public void setWashout(boolean washout) {
