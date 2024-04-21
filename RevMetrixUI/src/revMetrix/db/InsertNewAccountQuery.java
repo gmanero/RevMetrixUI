@@ -37,6 +37,7 @@ public class InsertNewAccountQuery {
 		else
 		{
 			System.out.println("Failed to insert new Account (ID: " + account_id + ") into Accounts table: <" + password + ">");			
+
 		}
 	}
 }
