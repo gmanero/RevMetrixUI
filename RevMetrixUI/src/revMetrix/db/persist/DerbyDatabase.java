@@ -173,7 +173,7 @@ public class DerbyDatabase implements IDatabase {
 		});
 	}
 	
-	//BALLS QUERYS
+	
 	public List<Ball> findAllBalls() {
 	    return executeTransaction(new Transaction<List<Ball>>() {
 	        @Override
@@ -324,7 +324,7 @@ public class DerbyDatabase implements IDatabase {
 	    });
 	}
 	
-	public Integer insertEstablishmentIntoEstablishmentsTable(final String name, final String address, final String phoneNumber, final int lanes) {
+	public Integer insertEstablishmentIntoEstablishmentsTable(final String name) {
 	    return executeTransaction(new Transaction<Integer>() {
 	        @Override
 	        public Integer execute(Connection conn) throws SQLException {
@@ -340,29 +340,26 @@ public class DerbyDatabase implements IDatabase {
 	            try {
 	                stmt1 = conn.prepareStatement(
 	                        "SELECT establishment_id FROM establishments " +
-	                        "WHERE name = ? AND address = ? AND phoneNumber = ?"
+	                        "WHERE name = ? "
 	                );
 	                stmt1.setString(1, name);
-	                stmt1.setString(2, address);
-	                stmt1.setString(3, phoneNumber);
+	             
 	                
 	                resultSet1 = stmt1.executeQuery();
 
 	                if (resultSet1.next()) {
 	                    establishmentId = resultSet1.getInt(1);
-	                    System.out.println("Establishment with name: " + name + ", address: " + address + ", phoneNumber: " + phoneNumber + " already exists with ID: " + establishmentId);
+	                    System.out.println("Establishment with name: " + name + ", address: " + " already exists with ID: " + establishmentId);
 	                } else {
-	                    System.out.println("Establishment with name: " + name + ", address: " + address + ", phoneNumber: " + phoneNumber + " not found");
+	                    System.out.println("Establishment with name: " + name + ", address: " +" not found");
 	                
 	                    if (establishmentId <= 0) {
 	                        stmt2 = conn.prepareStatement(
-	                                "INSERT INTO establishments (name, address, phoneNumber, lanes) " +
-	                                "VALUES (?, ?, ?, ?)"
+	                                "INSERT INTO establishments (name) " +
+	                                "VALUES (?)"
 	                        );
 	                        stmt2.setString(1, name);
-	                        stmt2.setString(2, address);
-	                        stmt2.setString(3, phoneNumber);
-	                        stmt2.setInt(4, lanes);
+	                        
 	                        
 	                        stmt2.executeUpdate();
 	                        
@@ -370,11 +367,9 @@ public class DerbyDatabase implements IDatabase {
 	                    
 	                        stmt3 = conn.prepareStatement(
 	                                "SELECT establishment_id FROM establishments " +
-	                                "WHERE name = ? AND address = ? AND phoneNumber = ?"
+	                                "WHERE name = ? "
 	                        );
 	                        stmt3.setString(1, name);
-	                        stmt3.setString(2, address);
-	                        stmt3.setString(3, phoneNumber);
 	                        
 	                        resultSet3 = stmt3.executeQuery();
 	                        
@@ -444,15 +439,18 @@ public class DerbyDatabase implements IDatabase {
 	        public Integer execute(Connection conn) throws SQLException {
 	            PreparedStatement stmt1 = null;
 	            PreparedStatement stmt2 = null;
-	            PreparedStatement stmt3 = null;            
+	            PreparedStatement stmt3 = null;
+	            PreparedStatement stmt4 = null;
+	            PreparedStatement stmt5 = null;
 	            
 	            ResultSet resultSet1 = null;
-	            ResultSet resultSet3 = null;            
+	            ResultSet resultSet3 = null;
+	            ResultSet resultSet5 = null;
 	                       
 	            Integer eventId = -1;
 
 	            try {
-	                // Step 1: Retrieve establishment ID using establishment name
+	                // Step 1: Check if establishment exists in the database
 	                stmt1 = conn.prepareStatement(
 	                        "SELECT establishment_id FROM establishments " +
 	                        "WHERE name = ?"
@@ -461,56 +459,85 @@ public class DerbyDatabase implements IDatabase {
 	                
 	                resultSet1 = stmt1.executeQuery();
 
+	                int establishmentId;
 	                if (resultSet1.next()) {
-	                    int establishmentId = resultSet1.getInt(1);
+	                    establishmentId = resultSet1.getInt(1);
 	                    System.out.println("Establishment with name: " + establishmentName + " found with ID: " + establishmentId);
+	                } else {
+	                    // Step 2: Insert new establishment
+	                    System.out.println("Establishment with name: " + establishmentName + " not found, adding new establishment...");
 	                    
-	                    // Convert eventType to corresponding type integer value
-	                    int type = 0;
-	                    if (eventType.equalsIgnoreCase("practice")) {
-	                        type = 1;
-	                    } else if (eventType.equalsIgnoreCase("league")) {
-	                        type = 2;
-	                    } else if (eventType.equalsIgnoreCase("tournament")) {
-	                        type = 3;
-	                    } else {
-	                        System.out.println("Invalid event type");
-	                        return -1; // Return -1 if the event type is invalid
-	                    }
-	                    
-	                    // Step 2: Insert new event with establishment ID and type
 	                    stmt2 = conn.prepareStatement(
-	                            "INSERT INTO events (type, establishmentId, name, description) " +
-	                            "VALUES (?, ?, ?, ?)"
+	                            "INSERT INTO establishments (name) " +
+	                            "VALUES (?)"
 	                    );
-	                    stmt2.setInt(1, type);
-	                    stmt2.setInt(2, establishmentId);
-	                    stmt2.setString(3, eventName);
-	                    stmt2.setString(4, description);
+	                    stmt2.setString(1, establishmentName);
 	                    
 	                    stmt2.executeUpdate();
 	                    
-	                    System.out.println("New event inserted into Events table");
+	                    System.out.println("New establishment inserted into Establishments table");
 	                
-	                    // Step 3: Retrieve event ID
+	                    // Step 3: Retrieve establishment ID
 	                    stmt3 = conn.prepareStatement(
-	                            "SELECT event_id FROM events " +
-	                            "WHERE establishmentId = ? AND name = ? AND description = ?"
+	                            "SELECT establishment_id FROM establishments " +
+	                            "WHERE name = ?"
 	                    );
-	                    stmt3.setInt(1, establishmentId);
-	                    stmt3.setString(2, eventName);
-	                    stmt3.setString(3, description);
+	                    stmt3.setString(1, establishmentName);
 	                    
 	                    resultSet3 = stmt3.executeQuery();
 	                    
 	                    if (resultSet3.next()) {
-	                        eventId = resultSet3.getInt(1);
-	                        System.out.println("New event ID: " + eventId);
+	                        establishmentId = resultSet3.getInt(1);
+	                        System.out.println("New establishment ID: " + establishmentId);
 	                    } else {
-	                        System.out.println("New event not found in Events table");
+	                        System.out.println("New establishment not found in Establishments table");
+	                        return -1; // Return -1 if establishment ID not found
 	                    }
+	                }
+	                
+	                // Step 4: Convert eventType to corresponding type integer value
+	                int type = 0;
+	                if (eventType.equalsIgnoreCase("practice")) {
+	                    type = 1;
+	                } else if (eventType.equalsIgnoreCase("league")) {
+	                    type = 2;
+	                } else if (eventType.equalsIgnoreCase("tournament")) {
+	                    type = 3;
 	                } else {
-	                    System.out.println("Establishment with name: " + establishmentName + " not found");
+	                    System.out.println("Invalid event type");
+	                    return -1; // Return -1 if the event type is invalid
+	                }
+	                
+	                // Step 5: Insert new event with establishment ID and type
+	                stmt4 = conn.prepareStatement(
+	                        "INSERT INTO events (type, establishment_id, name, description) " +
+	                        "VALUES (?, ?, ?, ?)"
+	                );
+	                stmt4.setInt(1, type);
+	                stmt4.setInt(2, establishmentId);
+	                stmt4.setString(3, eventName);
+	                stmt4.setString(4, description);
+	                
+	                stmt4.executeUpdate();
+	                
+	                System.out.println("New event inserted into Events table");
+	            
+	                // Step 6: Retrieve event ID
+	                stmt5 = conn.prepareStatement(
+	                        "SELECT event_id FROM events " +
+	                        "WHERE establishment_id = ? AND name = ? AND description = ?"
+	                );
+	                stmt5.setInt(1, establishmentId);
+	                stmt5.setString(2, eventName);
+	                stmt5.setString(3, description);
+	                
+	                resultSet5 = stmt5.executeQuery();
+	                
+	                if (resultSet5.next()) {
+	                    eventId = resultSet5.getInt(1);
+	                    System.out.println("New event ID: " + eventId);
+	                } else {
+	                    System.out.println("New event not found in Events table");
 	                }
 	                
 	                return eventId;
@@ -519,11 +546,15 @@ public class DerbyDatabase implements IDatabase {
 	                DBUtil.closeQuietly(stmt1);
 	                DBUtil.closeQuietly(stmt2);                    
 	                DBUtil.closeQuietly(resultSet3);
-	                DBUtil.closeQuietly(stmt3);                    
+	                DBUtil.closeQuietly(stmt3);
+	                DBUtil.closeQuietly(stmt4);
+	                DBUtil.closeQuietly(resultSet5);
+	                DBUtil.closeQuietly(stmt5);                    
 	            }
 	        }
 	    });
 	}
+
 
 	
 	//FRAMES QUERYS
@@ -800,9 +831,6 @@ public class DerbyDatabase implements IDatabase {
 	private void loadEstablishment(Establishment establishment, ResultSet resultSet, int index) throws SQLException {
 		establishment.setEstablishmentId(resultSet.getInt(index++));
 		establishment.setName(resultSet.getString(index++));
-		establishment.setAddress(resultSet.getString(index++));
-		establishment.setPhoneNumber(resultSet.getString(index++));
-		establishment.setLanes(resultSet.getInt(index++));
 	}
 	
 	private void loadEvent(Event event, ResultSet resultSet, int index) throws SQLException {
@@ -904,10 +932,7 @@ public class DerbyDatabase implements IDatabase {
 							"create table establishments (" +
 							"	establishment_id integer primary key " +
 							"		generated always as identity (start with 1, increment by 1), " +
-							"	name varchar(40)," +
-							"	address varchar(40)," +
-							"   phoneNumber varchar(15)," +
-							"   lanes integer" +
+							"	name varchar(40)"+
 							")"
 					);
 					stmt3.executeUpdate();
@@ -1079,12 +1104,9 @@ public class DerbyDatabase implements IDatabase {
 					
 					System.out.println("Balls table populated");	
 					
-					insertEstablishment = conn.prepareStatement("insert into establishments (name, address, phoneNumber, lanes) VALUES (?, ?, ?, ?)");
+					insertEstablishment = conn.prepareStatement("insert into establishments (name) VALUES (?)");
 					for (Establishment establishment : establishmentList) {
 					    insertEstablishment.setString(1, establishment.getName());
-					    insertEstablishment.setString(2, establishment.getAddress());
-					    insertEstablishment.setString(3, establishment.getPhoneNumber());
-					    insertEstablishment.setInt(4, establishment.getLanes());
 					    insertEstablishment.addBatch();
 					}
 					insertEstablishment.executeBatch();

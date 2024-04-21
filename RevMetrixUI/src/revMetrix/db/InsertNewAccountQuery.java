@@ -12,7 +12,7 @@ public class InsertNewAccountQuery {
 
 		// Create the default IDatabase instance
 		InitDatabase.init(keyboard);
-		
+
 		System.out.print("Enter First Name: ");
 		String firstName = keyboard.nextLine();
 		
