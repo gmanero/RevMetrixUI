@@ -1,45 +1,42 @@
-package edu.ycp.cs320.booksdb;
-
+package revMetrix.db;
 
 import java.util.Scanner;
 
-import edu.ycp.cs320.booksdb.persist.DatabaseProvider;
-import edu.ycp.cs320.booksdb.persist.IDatabase;
+import revMetrix.db.persist.DatabaseProvider;
+import revMetrix.db.persist.IDatabase;
 
-public class InsertNewBookWithAuthor {
+public class InsertNewAccountQuery {
+
 	public static void main(String[] args) throws Exception {
 		Scanner keyboard = new Scanner(System.in);
 
 		// Create the default IDatabase instance
 		InitDatabase.init(keyboard);
-		
-		System.out.print("Enter the author's last name: ");
-		String lastName = keyboard.nextLine();
-		
-		System.out.print("Enter the author's first name: ");
+
+		System.out.print("Enter First Name: ");
 		String firstName = keyboard.nextLine();
 		
-		System.out.print("Enter the book's title: ");
-		String title = keyboard.nextLine();
+		System.out.print("Enter Last Name: ");
+		String lastName = keyboard.nextLine();
 		
-		System.out.print("Enter the book's ISBN: ");
-		String isbn = keyboard.nextLine();
+		System.out.print("Enter Email: ");
+		String email = keyboard.nextLine();
 		
-		System.out.print("Enter the year the book was published: ");
-		int published = keyboard.nextInt();
+		System.out.print("Enter Password: ");
+		String password = keyboard.nextLine();
 		
 		// get the DB instance and execute the transaction
 		IDatabase db = DatabaseProvider.getInstance();
-		Integer book_id = db.insertBookIntoBooksTable(title, isbn, published, lastName, firstName);
+		Integer account_id = db.insertAccountIntoAccountsTable(email, password, lastName, firstName);
 
 		// check if the insertion succeeded
-		if (book_id > 0)
+		if (account_id > 0)
 		{
-			System.out.println("New book (ID: " + book_id + ") successfully added to Books table: <" + title + ">");
+			System.out.println("New Account (ID: " + account_id + ") successfully added to Accounts table: <" + password + ">");
 		}
 		else
 		{
-			System.out.println("Failed to insert new book (ID: " + book_id + ") into Books table: <" + title + ">");			
+			System.out.println("Failed to insert new Account (ID: " + account_id + ") into Accounts table: <" + password + ">");			
 		}
 	}
 }
