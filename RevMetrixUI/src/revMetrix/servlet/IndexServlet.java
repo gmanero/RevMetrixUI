@@ -27,7 +27,7 @@ public class IndexServlet extends HttpServlet {
 		
         
         // Forward based on the action parameter
-        if ("revMetrix".equals(destIn)) {
+        if ("RevMetrix".equals(destIn)) {
            destOut = "/_view/index.jsp";
         } 
         else if ("login".equals(destIn)) {
