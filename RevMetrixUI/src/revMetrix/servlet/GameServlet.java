@@ -2,6 +2,7 @@ package revMetrix.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import revMetrix.controller.GameController;
+import revMetrix.db.model.Ball;
 import revMetrix.db.model.Frame;
 import revMetrix.db.model.Shot;
 import revMetrix.model.RevMetrix;
@@ -39,13 +41,16 @@ public class GameServlet extends HttpServlet {
 	    if(frames == null) {
 	    	frames = new ArrayList<Frame>();
 	    }
-		
+	    GameController controller = new GameController();
+	   
+	    List<Ball> balls = controller.getAllBalls();
+	    req.setAttribute("balls", balls);
 		req.getRequestDispatcher("/_view/game.jsp").forward(req, resp);
 	}
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	    System.out.println("Game Servlet: doPost");
 	    // populate array from database
-	    
+	    GameController controller = new GameController();
 	    if(shots == null) {
 	    	shots = new ArrayList<Shot>();
 	    }
@@ -55,7 +60,21 @@ public class GameServlet extends HttpServlet {
 	    if(scores == null) {
 	    	scores = new int[12];
 	    }
+	    List<Ball> balls = controller.getAllBalls();
 	    String error = null;
+	    int ball1 = 0;
+	    int ball2 = 0;
+	    String lane = "";
+	    try {
+	    	ball1 = Integer.parseInt(req.getParameter("ball1"));
+	    	System.out.println(ball1);
+	    	ball2 = Integer.parseInt(req.getParameter("ball2"));
+	    	System.out.println(ball2);
+	    	lane = req.getParameter("lane");
+	    }
+	    finally{
+	    	
+	    }
 	    // Retrieving parameter from request
 	    String first = req.getParameter("firstRemaining");
 	    System.out.println("Remaining Pins: " + first);
@@ -72,18 +91,20 @@ public class GameServlet extends HttpServlet {
 	    	error = "Error invalid shot, try again";
 	    }
 	    else {
-	    Shot firstShot = GameController.addShot(1, first, null, firstFoul, 0);
+	    Shot firstShot = GameController.addShot(1, first, null, firstFoul, ball1);
 	    shots.add(firstShot);
 	    Shot secondShot = null;
 	    if (!GameController.isStrike(firstShot)) {
-	    	secondShot = GameController.addShot(2, second, first, secondFoul, 0);
+	    	secondShot = GameController.addShot(2, second, first, secondFoul, ball2);
 	    	shots.add(secondShot);
 	    }
-	    frames.add(GameController.addFrame(firstShot, secondShot, "placeholder"));
+	    frames.add(GameController.addFrame(firstShot, secondShot, lane));
 	    GameController.updateframeScores(frames, shots);
 	    shotScores = GameController.parseShots(shots);
 	    scores = GameController.parseScores(frames, shots);
 	    }
+	    req.setAttribute("lane", lane);
+	    req.setAttribute("balls", balls);
 	    req.setAttribute("error", error);
 	    req.setAttribute("shotScores", shotScores);
 	    req.setAttribute("scores", scores); 

@@ -17,6 +17,7 @@ public class AllAccountsQuery {
 		
 		// get the DB instance and execute transaction
 		IDatabase db = DatabaseProvider.getInstance();
+		
 		List<Account> accountList = db.findAllAccounts();
 		
 		// check if anything was returned and output the list

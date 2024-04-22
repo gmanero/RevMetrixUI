@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+//import edu.ycp.cs320.booksdb.model.Author;
+//import edu.ycp.cs320.booksdb.model.Book;
 import revMetrix.db.persist.DBUtil;
 import revMetrix.db.model.Account;
 import revMetrix.db.model.Ball;
@@ -510,7 +512,7 @@ public class DerbyDatabase implements IDatabase {
 	                
 	                // Step 5: Insert new event with establishment ID and type
 	                stmt4 = conn.prepareStatement(
-	                        "INSERT INTO events (type, establishmentId, name, description) " +
+	                        "INSERT INTO events (type, establishment_id, name, description) " +
 	                        "VALUES (?, ?, ?, ?)"
 	                );
 	                stmt4.setInt(1, type);
@@ -525,7 +527,7 @@ public class DerbyDatabase implements IDatabase {
 	                // Step 6: Retrieve event ID
 	                stmt5 = conn.prepareStatement(
 	                        "SELECT event_id FROM events " +
-	                        "WHERE establishmentId = ? AND name = ? AND description = ?"
+	                        "WHERE establishment_id = ? AND name = ? AND description = ?"
 	                );
 	                stmt5.setInt(1, establishmentId);
 	                stmt5.setString(2, eventName);
@@ -596,7 +598,120 @@ public class DerbyDatabase implements IDatabase {
 	    });
 	}
 	
+	public ArrayList<Frame> GetFrameByGame(int id){
+		return executeTransaction(new Transaction<ArrayList<Frame>>() {
+	        @Override
+	        public ArrayList<Frame> execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            
+	            try {
+	            	stmt = conn.prepareStatement("select frames.* from junction, frames where Junction.Game_Id = ? and Junction.frame_id=frames.frame_Id");
+	                stmt.setInt(1,id);
+	                ArrayList<Frame> results = new ArrayList<Frame>();
+	                
+	                resultSet = stmt.executeQuery();
+	                
+	                Boolean found = false;
+	                
+	                while (resultSet.next()) {
+	                    found = true;
+	                    
+	                    Frame frame = new Frame();
+	                   loadFrame(frame, resultSet, 1);
+	                    
+	                    results.add(frame);
+	                }
+	                
+	                if (!found) {
+	                    System.out.println("No junctions were found in the database");
+	                }
+	                return results;
+	            	
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
+	public Boolean updateFrameScore(int frameId, int newScore) {
+		return executeTransaction(new Transaction<Boolean>() {
+	        @Override
+	        public Boolean execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            try {
+	                stmt = conn.prepareStatement("UPDATE frames SET frameScore = ? WHERE frame_id = ?");
+	                
+	                Boolean result = true;
+	                stmt.setInt(1, newScore);
+	                stmt.setInt(2, frameId);
+	                int rowsUpdated =stmt.executeUpdate();
+	                System.out.println(rowsUpdated);
+	                return result;
+	               
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
 	//GAMES QUERYS
+	public ArrayList<Shot> GetShotsByGame(int id){
+		return executeTransaction(new Transaction<ArrayList<Shot>>() {
+	        @Override
+	        public ArrayList<Shot> execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            
+	            try {
+	            	stmt = conn.prepareStatement("select shots.* from junction, shots where Junction.Game_Id = ? and Junction.shot_id=Shots.shot_Id");
+	                stmt.setInt(1,id);
+	                ArrayList<Shot> results = new ArrayList<Shot>();
+	                
+	                resultSet = stmt.executeQuery();
+	                
+	                Boolean found = false;
+	                
+	                while (resultSet.next()) {
+	                    found = true;
+	                    
+	                   Shot shot = new Shot();
+	                   loadShot(shot, resultSet, 1);
+	                    
+	                    results.add(shot);
+	                }
+	                
+	                if (!found) {
+	                    System.out.println("No junctions were found in the database");
+	                }
+	                return results;
+	            	
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
+	
+	public Integer addGame(Game game) {
+		return executeTransaction(new Transaction<Integer>() {
+			public Integer execute(Connection conn) throws SQLException {
+				PreparedStatement insertGame = conn.prepareStatement("insert into games (gameScore, startingLane, opponent, handicap) VALUES (?, ?, ?, ?)");
+				insertGame.execute();
+				
+				return 7;
+			
+			}
+			
+		});
+	}
 	public List<Game> findAllGames() {
 	    return executeTransaction(new Transaction<List<Game>>() {
 	        @Override
