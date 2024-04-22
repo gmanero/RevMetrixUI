@@ -63,7 +63,7 @@ public class AccountCreationServlet extends HttpServlet {
 	        	System.out.println("PASS");
 
 	            // Call the insertAccount method
-	            controller.insertAccount(Email, Password, LastName, FirstName);
+	        	controller.insertAccount(Email, Password, LastName, FirstName);
 	            System.out.println("ADDED INTO DATABASE");
 
 	            // Set success message if needed
