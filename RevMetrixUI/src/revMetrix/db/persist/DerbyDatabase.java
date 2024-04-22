@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+//import edu.ycp.cs320.booksdb.model.Author;
+//import edu.ycp.cs320.booksdb.model.Book;
 import revMetrix.db.persist.DBUtil;
 import revMetrix.db.model.Account;
 import revMetrix.db.model.Ball;
@@ -393,6 +395,41 @@ public class DerbyDatabase implements IDatabase {
 	        }
 	    });
 	}
+	public Establishment findEstablishmentById(int establishmentId) {
+        return executeTransaction(new Transaction<Establishment>() {
+            @Override
+            public Establishment execute(Connection conn) throws SQLException {
+                PreparedStatement stmt = null;
+                ResultSet resultSet = null;
+                
+                Integer establishmentId = -1;
+
+                try {
+                    stmt = conn.prepareStatement(
+                    		"SELECT name FROM establishments"+
+                    		"WHERE establishment_Id = ?"
+                    				);
+                    stmt.setInt(1, establishmentId);
+
+                    resultSet = stmt.executeQuery();
+
+                    if (resultSet.next()) {
+                        Establishment establishment = new Establishment();
+                        establishment.setEstablishmentId(resultSet.getInt("establishment_Id"));
+                        establishment.setName(resultSet.getString("name"));
+                        return establishment;
+                    } else {
+                        System.out.println("Establishment with ID " + establishmentId + " not found.");
+                        return null;
+                    }
+                } finally {
+                    DBUtil.closeQuietly(resultSet);
+                    DBUtil.closeQuietly(stmt);
+                }
+            }
+        });
+    }
+
 
 	//EVENTS QUERYS
 	public List<Event> findAllEvents() {
@@ -596,7 +633,182 @@ public class DerbyDatabase implements IDatabase {
 	    });
 	}
 	
+	public ArrayList<Frame> GetFrameByGame(int id){
+		return executeTransaction(new Transaction<ArrayList<Frame>>() {
+	        @Override
+	        public ArrayList<Frame> execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            
+	            try {
+	            	stmt = conn.prepareStatement("select frames.* from junction, frames where Junction.Game_Id = ? and Junction.frame_id=frames.frame_Id");
+	                stmt.setInt(1,id);
+	                ArrayList<Frame> results = new ArrayList<Frame>();
+	                
+	                resultSet = stmt.executeQuery();
+	                
+	                Boolean found = false;
+	                
+	                while (resultSet.next()) {
+	                    found = true;
+	                    
+	                    Frame frame = new Frame();
+	                    loadFrame(frame, resultSet, 1);
+	                    boolean unique = true;
+	                    for(Frame current:results ) {
+	                    	if (current.getFrameId()==frame.getFrameId()) {
+	                    		unique = false;
+	                    	}
+	                    }
+	                    if(unique) {
+	                    	results.add(frame);
+	                    }
+	                    
+	                }
+	                
+	                if (!found) {
+	                    System.out.println("No junctions were found in the database");
+	                }
+	                return results;
+	            	
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
+	public Boolean updateFrameScore(int frameId, int newScore) {
+		return executeTransaction(new Transaction<Boolean>() {
+	        @Override
+	        public Boolean execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            try {
+	                stmt = conn.prepareStatement("UPDATE frames SET frameScore = ? WHERE frame_id = ?");
+	                
+	                Boolean result = true;
+	                stmt.setInt(1, newScore);
+	                stmt.setInt(2, frameId);
+	                int rowsUpdated =stmt.executeUpdate();
+	                System.out.println(rowsUpdated);
+	                return result;
+	               
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
 	//GAMES QUERYS
+	public ArrayList<Shot> GetShotsByGame(int id){
+		return executeTransaction(new Transaction<ArrayList<Shot>>() {
+	        @Override
+	        public ArrayList<Shot> execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            
+	            try {
+	            	stmt = conn.prepareStatement("select shots.* from junction, shots where Junction.Game_Id = ? and Junction.shot_id=Shots.shot_Id");
+	                stmt.setInt(1,id);
+	                ArrayList<Shot> results = new ArrayList<Shot>();
+	                
+	                resultSet = stmt.executeQuery();
+	                
+	                Boolean found = false;
+	                
+	                while (resultSet.next()) {
+	                    found = true;
+	                    
+	                   Shot shot = new Shot();
+	                   loadShot(shot, resultSet, 1);
+	                    
+	                    results.add(shot);
+	                }
+	                
+	                if (!found) {
+	                    System.out.println("No junctions were found in the database");
+	                }
+	                return results;
+	            	
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
+	
+	public Integer addGame(Game game) {
+		return executeTransaction(new Transaction<Integer>() {
+			public Integer execute(Connection conn) throws SQLException {
+				PreparedStatement insertGame = conn.prepareStatement("insert into games (gameScore, startingLane, opponent, handicap) VALUES (?, ?, ?, ?)",PreparedStatement.RETURN_GENERATED_KEYS);
+				insertGame.setInt(1, game.getGameScore());
+			   	insertGame.setInt(2, game.getStartingLane());
+			   	insertGame.setString(3, game.getOpponent());
+			   	insertGame.setInt(4, game.getHandicap());
+				insertGame.executeUpdate();
+				ResultSet rs = insertGame.getGeneratedKeys();
+				if(rs.next()) {
+					return rs.getInt(1);
+				}
+				return -1;
+			
+			}
+			
+		});
+	}
+	public Integer addFrame(Frame frame) {
+		return executeTransaction(new Transaction<Integer>() {
+			public Integer execute(Connection conn) throws SQLException {
+				PreparedStatement insertFrame = conn.prepareStatement("insert into frames (frameScore, lane) VALUES (?, ?)",PreparedStatement.RETURN_GENERATED_KEYS);
+				insertFrame.setInt(1, frame.getFrameScore());
+				insertFrame.setInt(2, frame.getLane());
+				int key = insertFrame.executeUpdate();
+				ResultSet rs = insertFrame.getGeneratedKeys();
+				if(rs.next()) {
+					return rs.getInt(1);
+				}
+				return -1;
+			}
+			
+		});
+	}
+	public Integer addShot(int gameId, int FrameId, Shot shot) {
+		return executeTransaction(new Transaction<Integer>() {
+			public Integer execute(Connection conn) throws SQLException {
+				PreparedStatement insertShot = conn.prepareStatement("insert into shots (shotNumber, pins, ball_id, split, washout, shotScore) VALUES (?, ?, ?, ?, ?, ?)",PreparedStatement.RETURN_GENERATED_KEYS);
+				insertShot.setInt(1, shot.getShotNumber());
+				 	insertShot.setString(2, shot.getPins());
+				 	insertShot.setInt(3, shot.getBallId());
+				 	insertShot.setBoolean(4, shot.getSplit());
+				 	insertShot.setBoolean(5, shot.getWashout());
+				 	insertShot.setString(6, shot.getShotScore());
+
+				insertShot.executeUpdate();
+				ResultSet rs = insertShot.getGeneratedKeys();
+				int key = 0;
+				if(rs.next()) {
+					key = rs.getInt(1);
+				}
+				
+				PreparedStatement insertJunction = conn.prepareStatement("insert into junction (session_id, game_id, frame_id, shot_id) values (?, ?, ?, ?)",PreparedStatement.RETURN_GENERATED_KEYS);
+				 insertJunction.setInt(1, 1);
+					 insertJunction.setInt(2, gameId);
+					 insertJunction.setInt(3, FrameId);
+					 insertJunction.setInt(4, key);
+				insertJunction.executeUpdate();
+
+				return key;
+			
+			}
+			
+		});
+	}
 	public List<Game> findAllGames() {
 	    return executeTransaction(new Transaction<List<Game>>() {
 	        @Override

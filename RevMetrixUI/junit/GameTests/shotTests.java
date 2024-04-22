@@ -239,4 +239,26 @@ public class shotTests {
 		assertFalse(GameController.checkError("", "1,2"));
 		
 	}
+	@Test
+	public void testGetShotsByGame() {
+		GameController controller = new GameController();
+		assertTrue(controller.GetShotsByGame(1)!=null);
+	}
+	@Test
+	public void testGetFramesByGame() {
+		GameController controller = new GameController();
+		assertTrue(controller.GetFramesByGame(2)!=null);
+	}
+	@Test
+	public void testGetFramesByGameDupeCheck() {
+		GameController controller = new GameController();
+		ArrayList<Frame> frames = controller.GetFramesByGame(1);
+		for (int i = 0; i<frames.size()-1;i++){
+			for(int j = i+1; j<frames.size()-1;j++){
+				assertFalse(frames.get(i)==frames.get(j));
+			}
+		}
+		
+	}
+	
 }

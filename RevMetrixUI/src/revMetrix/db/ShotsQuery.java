@@ -1,14 +1,16 @@
 package revMetrix.db;
 
+import java.util.ArrayList;
 import java.util.List;
-
 import java.util.Scanner;
 
 import revMetrix.db.model.Account;
+import revMetrix.db.model.Frame;
+import revMetrix.db.model.Shot;
 import revMetrix.db.persist.DatabaseProvider;
 import revMetrix.db.persist.IDatabase;
 
-public class AllAccountsQuery {
+public class ShotsQuery {
 	public static void main(String[] args) throws Exception {
 		Scanner keyboard = new Scanner(System.in);
 
@@ -17,17 +19,9 @@ public class AllAccountsQuery {
 		
 		// get the DB instance and execute transaction
 		IDatabase db = DatabaseProvider.getInstance();
-		
-		List<Account> accountList = db.findAllAccounts();
+		Boolean accountList = db.updateFrameScore(1,10);
 		
 		// check if anything was returned and output the list
-		if (accountList.isEmpty()) {
-			System.out.println("There are no accounts in the database");
-		}
-		else {
-			for (Account account : accountList) {
-				System.out.println(account.getEmail() + ", " + account.getPassword() + ", "+ account.getFirstname() + ", " + account.getLastname() + ", " + account.isLoggedIn());
-			}
-		}
+		
 	}
 }
