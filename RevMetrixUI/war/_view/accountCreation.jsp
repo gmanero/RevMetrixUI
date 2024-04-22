@@ -32,7 +32,7 @@
   <form class="loginForm" action="${pageContext.servletContext.contextPath}/accountCreation" method="post">
 
     <h1>Sign Up</h1>
-
+    <p>${errorMessage}</p>
         <p>Enter your Email Address</p>
     <input type="text" id="email" name="email" placeholder="Email">
 
