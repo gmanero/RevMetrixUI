@@ -1,3 +1,7 @@
+<%@ page import="java.util.List" %>
+<%@ page import="revMetrix.db.model.Establishment" %>
+<%@ page import="revMetrix.controller.EstablishmentController" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,15 +39,24 @@
             <div class="form-group select-style">
                 <label for="establishment">Establishment:</label>
                 <select id="establishment" name="establishment" onchange="checkAddNew(this)">
-                    <option value="Suburban Bowl">Suburban Bowl</option>
-                    <option value="York Bowling">York Bowling</option>
-                    <option value="Spring lanes">Spring lanes</option>
-                    <option value="Add New">Add New</option>
+                    <%
+                        EstablishmentController establishmentController = new EstablishmentController();
+                        List<Establishment> establishments = establishmentController.getAllEstablishments();
+                        if (establishments != null && !establishments.isEmpty()) {
+                            for (Establishment establishment : establishments) {
+                    %>
+                    <option value="<%= establishment.getName()%>"><%= establishment.getName() %></option>
+                    <%
+                            }
+                        }
+                    %>
+                    <option value="addNew">Add New</option>
                 </select>
             </div>
             
-            <div id="addNewEstablishment" class="form-group">
-                <input type="text" id="newEstablishment" name="newEstablishment" style="display: none;" class="input-text" placeholder="Establishment">
+            <div id="addNewEstablishment" class="form-group" style="display: none;">
+                <label for="newEstablishment">New Establishment Name:</label>
+                <input type="text" id="newEstablishment" name="newEstablishment" class="input-text" placeholder="New Establishment Name">
             </div>
             
             <div class="form-group select-style">
@@ -61,9 +74,10 @@
 
     <script>
         function checkAddNew(select) {
-            var addNewInput = document.getElementById("newEstablishment");
-            if (select.value == "Add New") {
-                addNewInput.style.display = "block";
+            var addNewInput = document.getElementById("addNewEstablishment");
+            if (select.value == "addNew") {
+                addNewInput.innerHTML = '<input type="text" id="newEstablishment" name="newEstablishment" class="input-text" placeholder="New Establishment Name">';
+                addNewInput.style.display = "text";
             } else {
                 addNewInput.style.display = "none";
             }
