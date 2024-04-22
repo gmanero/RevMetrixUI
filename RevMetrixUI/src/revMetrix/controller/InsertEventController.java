@@ -1,6 +1,7 @@
 package revMetrix.controller;
 
 import revMetrix.db.persist.DatabaseProvider;
+
 import revMetrix.db.persist.DerbyDatabase;
 import revMetrix.db.persist.IDatabase;
 
@@ -11,7 +12,7 @@ public class InsertEventController {
     public InsertEventController() {
         
         // creating DB instance here
-        DatabaseProvider.setInstance(new DerbyDatabase());
+    	DatabaseProvider.setInstance(new DerbyDatabase());
         db = DatabaseProvider.getInstance();       
     }
 

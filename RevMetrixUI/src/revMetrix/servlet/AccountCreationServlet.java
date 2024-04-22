@@ -1,6 +1,7 @@
 package revMetrix.servlet;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -60,7 +61,7 @@ public class AccountCreationServlet extends HttpServlet {
 	        	InsertAccountController controller = new InsertAccountController();
 
 	            // Call the insertAccount method
-	            controller.insertAccount(Email, Password, LastName, FirstName);
+	        	controller.insertAccount(Email, Password, LastName, FirstName);
 	            System.out.println("ADDED INTO DATABASE");
 
 	            // Set success message if needed
