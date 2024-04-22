@@ -42,6 +42,7 @@ public class AccountCreationServlet extends HttpServlet {
 		// holds the error message text, if there is any
 		String errorMessage = null;
 		String successMessage = null;
+		boolean added = false;
 		
 		// decode POSTed form parameters and dispatch to controller
 		try {
@@ -49,15 +50,16 @@ public class AccountCreationServlet extends HttpServlet {
 			String FirstName = req.getParameter("firstname");
 			String LastName = req.getParameter("lastname");
 			String Password = req.getParameter("password2");
+			System.out.println(Email + FirstName + LastName + Password);
 			
-			System.out.println("TEST: " + Email + FirstName + LastName + Password);
 			
 			// Check for null values
-	        if (Email == null || FirstName == null || LastName == null || Password == null) {
+	        if ((Email == null || Email == "")  || (FirstName == null || FirstName == "") || (LastName == null || LastName == "") || (Password == null || Password == "")) {
 	            System.out.println("Missing Required Data");
+	            //handle error message
 	        } else {
-	        	System.out.println("PASS");
 	        	InsertAccountController controller = new InsertAccountController();
+	        	System.out.println("PASS");
 
 	            // Call the insertAccount method
 	            controller.insertAccount(Email, Password, LastName, FirstName);
@@ -69,9 +71,12 @@ public class AccountCreationServlet extends HttpServlet {
 	        }
 			
 		} catch (Exception e) {
-			errorMessage = "Type Error - Needs fixing";
+			//type error if this shows
+			errorMessage = "Something Went Wrong";
 		}
 		req.setAttribute("errorMessage", errorMessage);
+		
+		
 		
 		req.getRequestDispatcher("/_view/account.jsp").forward(req, resp);
 	}
