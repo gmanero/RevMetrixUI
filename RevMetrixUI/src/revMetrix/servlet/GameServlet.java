@@ -19,38 +19,37 @@ import revMetrix.model.RevMetrix.Game;
 public class GameServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private ArrayList<Shot> shots;
+	//private ArrayList<Shot> shots;
 	private String[] shotScores;
 	private int[] scores;
-	private ArrayList<Frame> frames;
+	private int gameID;
+	private GameController controller;
+	//private ArrayList<Frame> frames;
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		
 		System.out.println("Game Servlet: doGet");
 		
-	    if(shots == null) {
-	    	shots = new ArrayList<Shot>();
-	    }
-	    if(shotScores == null) {
-	    	shotScores = new String[26];
-	    }
-	    if(scores == null) {
-	    	scores = new int[12];
-	    }
-	    if(frames == null) {
-	    	frames = new ArrayList<Frame>();
-	    }
-	    GameController controller = new GameController();
-	   
+	  
+	    
+	    shotScores = new String[26];
+	    scores = new int[12];
+	    
+	    
+	    controller = new GameController();
+	    gameID = controller.newGame();
 	    List<Ball> balls = controller.getAllBalls();
 	    req.setAttribute("balls", balls);
+	    //req.setAttribute("GameId", );
 		req.getRequestDispatcher("/_view/game.jsp").forward(req, resp);
 	}
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	    System.out.println("Game Servlet: doPost");
 	    // populate array from database
-	    GameController controller = new GameController();
+	    ArrayList<Shot> shots = controller.GetShotsByGame(gameID);
+	    ArrayList<Frame> frames = controller.GetFramesByGame(gameID);
+	    System.out.print("Size = "+frames.size());
 	    if(shots == null) {
 	    	shots = new ArrayList<Shot>();
 	    }
@@ -99,10 +98,16 @@ public class GameServlet extends HttpServlet {
 	    	shots.add(secondShot);
 	    }
 	    frames.add(GameController.addFrame(firstShot, secondShot, lane));
-	    GameController.updateframeScores(frames, shots);
+	    int frameID= controller.storeFrame(frames.get(frames.size()-1));
+	    controller.storeShot(gameID, frameID, firstShot);
+	    if(secondShot!=null) {
+	    	controller.storeShot(gameID, frameID, secondShot);
+	    }
+	    controller.updateframeScores(frames, shots);
 	    shotScores = GameController.parseShots(shots);
 	    scores = GameController.parseScores(frames, shots);
 	    }
+	    System.out.print("Size = "+frames.size());
 	    req.setAttribute("lane", lane);
 	    req.setAttribute("balls", balls);
 	    req.setAttribute("error", error);
