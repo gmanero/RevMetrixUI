@@ -41,12 +41,15 @@ public class GameServlet extends HttpServlet {
 	    gameID = controller.newGame();
 	    List<Ball> balls = controller.getAllBalls();
 	    req.setAttribute("balls", balls);
-	    //req.setAttribute("GameId", );
+	    System.out.println("Game all set");
 		req.getRequestDispatcher("/_view/game.jsp").forward(req, resp);
 	}
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	    System.out.println("Game Servlet: doPost");
 	    // populate array from database
+	    //if (gameID >=1) {
+	    	//gameID = Integer.parseInt(req.getParameter("GameID"));
+	    //}
 	    ArrayList<Shot> shots = controller.GetShotsByGame(gameID);
 	    ArrayList<Frame> frames = controller.GetFramesByGame(gameID);
 	    System.out.print("Size = "+frames.size());
