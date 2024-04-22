@@ -86,7 +86,7 @@ public class DerbyDatabase implements IDatabase {
 		return executeTransaction(new Transaction<Integer>() {
 			@Override
 			public Integer execute(Connection conn) throws SQLException {
-				Boolean isLoggedIn = false;
+				Boolean isLoggedIn = true;
 				PreparedStatement stmt1 = null;
 				PreparedStatement stmt2 = null;
 				PreparedStatement stmt3 = null;			

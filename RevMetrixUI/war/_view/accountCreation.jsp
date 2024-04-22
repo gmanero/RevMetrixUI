@@ -29,15 +29,17 @@
         <h1>RevMetrix - Create an Account</h1>
     </div>
     
-  <form class="loginForm" action="${pageContext.servletContext.contextPath}/login" method="post">
+  <form class="loginForm" action="${pageContext.servletContext.contextPath}/accountCreation" method="post">
 
     <h1>Sign Up</h1>
 
         <p>Enter your Email Address</p>
     <input type="text" id="email" name="email" placeholder="Email">
 
-    <p>Enter your Username</p>
-    <input type="text" id="username" name="username" placeholder="Username">
+    <p>Enter your First Name</p>
+    <input type="text" id="firstname" name="firstname" placeholder="First Name">
+    <p>Enter your Last Name</p>
+    <input type="text" id="lastname" name="lastname" placeholder="Last Name">
 
     <p>Enter your Password</p>
     <input type="password" id="password" name="password" placeholder="Password">
