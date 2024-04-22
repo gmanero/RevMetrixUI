@@ -14,19 +14,7 @@
         <h1>Current Game</h1>
     </div>
     
-    
-        
-    <div class="mainText">
-        <div class="gameInfo">
-            <h2>Welcome to the Bowling Game</h2>
-            <p>Game Number: 1</p>
-            <p>Lane Number: 1</p>
-            <p id="shotNumber">Shot Number: ${game.getShotNum()}</p>
-            <p id="pinsRemaining">Pins Remaining: ${game.pinsRemain}</p>
-            
-            
-        </div>
-
+<div class="center">
 	<div class = "interactions">
 	<div class="scoreboard">
         <div class="score-box">
@@ -161,29 +149,62 @@
     <input type = "hidden" name = "firstExtra" id = 'firstExtra' value = "">
     <input type = "hidden" name = "secondExtra" id = 'secondExtra' value = "">
   </div>
-
+  <br>
+  <div class="dropdown-select" >
+  <select name="ball1">
+  	<%@ page import="java.util.List" %>
+  	<%@ page import= "revMetrix.db.model.Ball" %>
+	<% 
+            // Retrieve the objectList attribute from the request
+            Object obj = request.getAttribute("balls");
+            
+            // Check if obj is an instance of ArrayList<Ball> before casting
+            if (obj instanceof List) {
+                List<Ball> ballList = (List<Ball>) obj;
+                
+                // Iterate over the ArrayList and generate options for the dropdown menu
+                for (Ball ball : ballList) {
+            %>
+            <option value="<%= ball.getBallId() %>"><%= ball.getName() %></option>
+            <% 
+                } 
+            } else {
+            %>
+            <option value="">No balls available</option>
+            <% } %>
    
-  
+  </select>
+  <select name="ball2">
+  	<%@ page import="java.util.List" %>
+  	<%@ page import= "revMetrix.db.model.Ball" %>
+	<% 
+            // Retrieve the objectList attribute from the request
+            if (obj instanceof List) {
+            	List<Ball> ballList = (List<Ball>) obj;
+                // Iterate over the ArrayList and generate options for the dropdown menu
+                for (Ball ball : ballList) {
+            %>
+            <option value="<%= ball.getBallId() %>"><%= ball.getName() %></option>
+            <% 
+                } 
+            } else {
+            %>
+            <option value="">No balls available</option>
+            <% } %>
+   
+  </select>
+  </div>
+  <br>
 </div>
+<div class= "center">
+<label> Lane: </label>
+<input name = "lane" value = ${lane }>
+</div>
+<br>
 </form>		      
-        
+        <br>
     </div>
-    
-    
-	</div>
-        <div class="stats">
-            <h2>Game Statistics</h2>
-            <p>Total Strikes: ${game.getTotStrike()}</p>
-            <p>Total Spares: ${game.getTotSpare()}</p>
-            <p>Total Gutters: ${game.getTotGutter()}</p>
-            <p>Total Fouls: ${game.getTotFoul()}</p>
-        </div>
-	
-        
-         
-   
-    </div>
-
+</div>
     <script>
   // constants for shot variable
   const FIRST_SHOT  = 1;
@@ -332,7 +353,7 @@
     if (shot == FIRST_SHOT) {
       // set up all pins
       setAllPinsStanding();
-
+      first_Remaining = [0,1,2,3,4,5,6,7,8,9];
       // clear secondShot whenever firstShot changes
       clearSecondShot();
 
@@ -345,6 +366,13 @@
       document.querySelector('.secondShot span').textContent = '-';
       second_Remaining = first_Remaining;
     }
+    first_Remaining.sort();
+    second_Remaining.sort();
+    var firstLoaction = document.getElementById('firstRemaining');
+    var SecondLocation = document.getElementById('secondRemaining');
+
+    firstLoaction.value = first_Remaining.join(",");
+    SecondLocation.value = second_Remaining.join(",");
 
   }
 

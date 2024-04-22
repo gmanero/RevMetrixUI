@@ -1,5 +1,6 @@
 package revMetrix.db.persist;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -12,4 +13,14 @@ public interface IDatabase {
 	public List<Event> findAllEvents();
 	public Establishment findEstablishmentById(int establishmentId);
 	public List<Establishment> findAllEstablishments();
+	public List<Ball> findAllBalls();
+	public ArrayList<Shot> GetShotsByGame(int id);
+	public ArrayList<Frame> GetFrameByGame(int id);
+	public Boolean updateFrameScore(int frameId, int newScore);
+	public Integer addGame(Game game);
+	public Integer addFrame(Frame frame);
+	public Integer addShot(int gameId, int FrameId, Shot shot);
+	public List<Game> findAllGames();
+	public List<Frame> findAllFrames();
+	public List<Shot> findAllShots();
 }
