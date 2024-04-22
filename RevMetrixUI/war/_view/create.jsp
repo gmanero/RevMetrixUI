@@ -33,8 +33,8 @@
             </div>
             
             <div class="form-group select-style">
-                <label for="establishment">Establishment:</label>
-                <select id="establishment" name="establishment" onchange="checkAddNew(this)">
+                <label for="establishmentName">Establishment:</label>
+                <select id="establishmentName" name="establishmentName" onchange="checkAddNew(this)">
                     <option value="Suburban Bowl">Suburban Bowl</option>
                     <option value="York Bowling">York Bowling</option>
                     <option value="Spring lanes">Spring lanes</option>
