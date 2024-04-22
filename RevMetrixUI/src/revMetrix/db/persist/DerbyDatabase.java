@@ -393,6 +393,41 @@ public class DerbyDatabase implements IDatabase {
 	        }
 	    });
 	}
+	public Establishment findEstablishmentById(int establishmentId) {
+        return executeTransaction(new Transaction<Establishment>() {
+            @Override
+            public Establishment execute(Connection conn) throws SQLException {
+                PreparedStatement stmt = null;
+                ResultSet resultSet = null;
+                
+                Integer establishmentId = -1;
+
+                try {
+                    stmt = conn.prepareStatement(
+                    		"SELECT name FROM establishments"+
+                    		"WHERE establishment_Id = ?"
+                    				);
+                    stmt.setInt(1, establishmentId);
+
+                    resultSet = stmt.executeQuery();
+
+                    if (resultSet.next()) {
+                        Establishment establishment = new Establishment();
+                        establishment.setEstablishmentId(resultSet.getInt("establishment_Id"));
+                        establishment.setName(resultSet.getString("name"));
+                        return establishment;
+                    } else {
+                        System.out.println("Establishment with ID " + establishmentId + " not found.");
+                        return null;
+                    }
+                } finally {
+                    DBUtil.closeQuietly(resultSet);
+                    DBUtil.closeQuietly(stmt);
+                }
+            }
+        });
+    }
+
 
 	//EVENTS QUERYS
 	public List<Event> findAllEvents() {
