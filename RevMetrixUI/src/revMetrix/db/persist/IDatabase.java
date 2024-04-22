@@ -14,5 +14,7 @@ public interface IDatabase {
 	public ArrayList<Shot> GetShotsByGame(int id);
 	public ArrayList<Frame> GetFrameByGame(int id);
 	public Boolean updateFrameScore(int frameId, int newScore);
-	public Integer addGame();
+	public List<Game> findAllGames();
+	public List<Frame> findAllFrames();
+	public List<Shot> findAllShots();
 }
