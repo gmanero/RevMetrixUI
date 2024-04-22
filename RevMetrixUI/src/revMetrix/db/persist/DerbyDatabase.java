@@ -619,9 +619,17 @@ public class DerbyDatabase implements IDatabase {
 	                    found = true;
 	                    
 	                    Frame frame = new Frame();
-	                   loadFrame(frame, resultSet, 1);
+	                    loadFrame(frame, resultSet, 1);
+	                    boolean unique = true;
+	                    for(Frame current:results ) {
+	                    	if (current.getFrameId()==frame.getFrameId()) {
+	                    		unique = false;
+	                    	}
+	                    }
+	                    if(unique) {
+	                    	results.add(frame);
+	                    }
 	                    
-	                    results.add(frame);
 	                }
 	                
 	                if (!found) {
@@ -703,10 +711,64 @@ public class DerbyDatabase implements IDatabase {
 	public Integer addGame(Game game) {
 		return executeTransaction(new Transaction<Integer>() {
 			public Integer execute(Connection conn) throws SQLException {
-				PreparedStatement insertGame = conn.prepareStatement("insert into games (gameScore, startingLane, opponent, handicap) VALUES (?, ?, ?, ?)");
-				insertGame.execute();
+				PreparedStatement insertGame = conn.prepareStatement("insert into games (gameScore, startingLane, opponent, handicap) VALUES (?, ?, ?, ?)",PreparedStatement.RETURN_GENERATED_KEYS);
+				insertGame.setInt(1, game.getGameScore());
+			   	insertGame.setInt(2, game.getStartingLane());
+			   	insertGame.setString(3, game.getOpponent());
+			   	insertGame.setInt(4, game.getHandicap());
+				insertGame.executeUpdate();
+				ResultSet rs = insertGame.getGeneratedKeys();
+				if(rs.next()) {
+					return rs.getInt(1);
+				}
+				return -1;
+			
+			}
+			
+		});
+	}
+	public Integer addFrame(Frame frame) {
+		return executeTransaction(new Transaction<Integer>() {
+			public Integer execute(Connection conn) throws SQLException {
+				PreparedStatement insertFrame = conn.prepareStatement("insert into frames (frameScore, lane) VALUES (?, ?)",PreparedStatement.RETURN_GENERATED_KEYS);
+				insertFrame.setInt(1, frame.getFrameScore());
+				insertFrame.setInt(2, frame.getLane());
+				int key = insertFrame.executeUpdate();
+				ResultSet rs = insertFrame.getGeneratedKeys();
+				if(rs.next()) {
+					return rs.getInt(1);
+				}
+				return -1;
+			}
+			
+		});
+	}
+	public Integer addShot(int gameId, int FrameId, Shot shot) {
+		return executeTransaction(new Transaction<Integer>() {
+			public Integer execute(Connection conn) throws SQLException {
+				PreparedStatement insertShot = conn.prepareStatement("insert into shots (shotNumber, pins, ball_id, split, washout, shotScore) VALUES (?, ?, ?, ?, ?, ?)",PreparedStatement.RETURN_GENERATED_KEYS);
+				insertShot.setInt(1, shot.getShotNumber());
+				 	insertShot.setString(2, shot.getPins());
+				 	insertShot.setInt(3, shot.getBallId());
+				 	insertShot.setBoolean(4, shot.getSplit());
+				 	insertShot.setBoolean(5, shot.getWashout());
+				 	insertShot.setString(6, shot.getShotScore());
+
+				insertShot.executeUpdate();
+				ResultSet rs = insertShot.getGeneratedKeys();
+				int key = 0;
+				if(rs.next()) {
+					key = rs.getInt(1);
+				}
 				
-				return 7;
+				PreparedStatement insertJunction = conn.prepareStatement("insert into junction (session_id, game_id, frame_id, shot_id) values (?, ?, ?, ?)",PreparedStatement.RETURN_GENERATED_KEYS);
+				 insertJunction.setInt(1, 1);
+					 insertJunction.setInt(2, gameId);
+					 insertJunction.setInt(3, FrameId);
+					 insertJunction.setInt(4, key);
+				insertJunction.executeUpdate();
+
+				return key;
 			
 			}
 			
