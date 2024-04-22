@@ -11,7 +11,6 @@ public class InsertAccountController {
 	public InsertAccountController() {
 		
 		// creating DB instance here
-		DatabaseProvider.setInstance(new DerbyDatabase());
 		db = DatabaseProvider.getInstance();		
 	}
 
