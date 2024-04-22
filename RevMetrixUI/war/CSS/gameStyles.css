@@ -225,6 +225,7 @@ body {
       font-size: 28px;
       font-weight: bold;
       backgroundColor: '#26acca';
+      cursor: pointer;
     }
 
     .secondShot {
@@ -239,6 +240,7 @@ body {
       font-size: 28px;
       font-weight: bold;
       backgroundColor: 'lightgrey';
+      cursor: pointer;
     }
 
     .miss {
@@ -252,6 +254,7 @@ body {
       position: relative;
       font-size: 28px;
       font-weight: bold;
+      cursor: pointer;
       
     }
 
@@ -266,6 +269,7 @@ body {
       position: relative;
       font-size: 28px;
       font-weight: bold;
+      cursor: pointer;
      
     }
 
@@ -280,6 +284,7 @@ body {
       position: relative;
       font-size: 28px;
       font-weight: bold;
+      cursor: pointer;
       
     }
 

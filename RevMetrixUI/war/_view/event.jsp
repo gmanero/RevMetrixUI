@@ -1,94 +1,43 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RevMetrix - Bowling Events</title>
-    <link rel = "stylesheet" type ="text/css" href="CSS/eventStyles.css">
+    <link rel="stylesheet" type="text/css" href="CSS/eventStyles.css">
 </head>
-
 <body>
 
- <jsp:include page="navbar.jsp" />
- 
-    <div class="topPage">
-        <h1>Bowling Events</h1>
+<jsp:include page="navbar.jsp" />
+
+<div class="topPage">
+    <h1>Bowling Events</h1>
+</div>
+
+<%@ page import="java.util.List" %>
+<%@ page import="revMetrix.db.model.Event" %>
+<%@ page import="revMetrix.controller.EventController" %>
+
+<%
+    EventController controller = new EventController();
+    List<Event> events = controller.getAllEvents();
+%>
+
+<% if (!events.isEmpty()) { %>
+    <div class="eventCards">
+        <% for (Event event : events) { %>
+            <div class="eventCard">
+                <h2><%= event.getName() %></h2>
+                <p><strong>Establishment:</strong> <%= event.getEstablishmentName() %></p>
+                <p><strong>Type:</strong> <%= event.getTypeString() %></p>
+                <p><strong>Description:</strong> <%= event.getDescription() %></p>
+            </div>
+        <% } %>
     </div>
-
-
-
-    <!-- Tournaments Section -->
-    <div class="section">
-        <div class="section-title">Featured Tournaments</div>
-        <div class="tournaments">
-            <div class="tournament" onclick="location.href='https://example.com/tournament1';">
-                <h2>Tournament 1</h2>
-                <p><strong>Date:</strong> January 15, 2025</p>
-                <p><strong>Location:</strong> Bowling Palace, 123 Main St, Cityville</p>
-                <p>A friendly tournament for amateur bowlers. Come and showcase your skills!</p>
-            </div>
-            <div class="tournament" onclick="location.href='https://example.com/tournament2';">
-                <h2>Tournament 2</h2>
-                <p><strong>Date:</strong> June 20, 2024</p>
-                <p><strong>Location:</strong> Thunder Lanes, 456 Oak Ave, Townsville</p>
-                <p>An exciting competition with cash prizes for winners. Register now!</p>
-            </div>
-            <div class="tournament" onclick="location.href='https://example.com/tournament3';">
-                <h2>Tournament 3</h2>
-                <p><strong>Date:</strong> March 30, 2024</p>
-                <p><strong>Location:</strong> Strike Zone, 789 Elm St, Villageton</p>
-                <p>A charity tournament to support local causes. Join us for a fun-filled day!</p>
-            </div>
-            <!-- Add more tournaments here -->
-        </div>
-    </div>
-
- <!-- Tournaments Section -->
-    <div class="section">
-        <div class="section-title">Featured Leagues</div>
-        <div class="tournaments">
-            <div class="tournament" onclick="location.href='https://example.com/tournament1';">
-                <h2>League 1 </h2>
-                
-                <p><strong>Location:</strong> Bowling Palace, 123 Main St, Cityville</p>
-                <p>A friendly tournament for amateur bowlers. Come and showcase your skills!</p>
-            </div>
-            <div class="tournament" onclick="location.href='https://example.com/tournament2';">
-                <h2>League 2</h2>
-                
-                <p><strong>Location:</strong> Thunder Lanes, 456 Oak Ave, Townsville</p>
-                <p>An exciting competition with cash prizes for winners. Register now!</p>
-            </div>
-            <div class="tournament" onclick="location.href='https://example.com/tournament3';">
-                <h2>League 3</h2>
-               
-                <p><strong>Location:</strong> Strike Zone, 789 Elm St, Villageton</p>
-                <p>A charity tournament to support local causes. Join us for a fun-filled day!</p>
-            </div>
-            <!-- Add more tournaments here -->
-        </div>
-    </div>
-
-    <!-- Practice Sessions Section -->
-    <div class="section">
-        <div class="section-title">Featured Practice Sessions</div>
-        <div class="section-content">
-            <p>Hone your skills with our featured practice sessions:</p>
-            <ul>
-                <li><strong>Session 1:</strong> Date: January 10, 2025 | Location: Lane Master, 789 Oak St, Bowlingtown</li>
-                <li><strong>Session 2:</strong> Date: February 5, 2025 | Location: Pin City, 456 Elm St, Alleyville</li>
-                <li><strong>Session 3:</strong> Date: March 20, 2025 | Location: Roll & Bowl, 123 Maple Ave, Bowlertown</li>
-            </ul>
-        </div>
-    </div>
-    
-     <div class="section-title">Upcoming Events</div>
-        <div class="section-content">
-            <p>This section displays upcoming events.</p>
-        </div>
-   
+<% } else { %>
+    <p>No events found.</p>
+<% } %>
 
 </body>
-
 </html>
