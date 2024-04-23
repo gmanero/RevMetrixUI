@@ -24,5 +24,6 @@ public interface IDatabase {
 	public List<Frame> findAllFrames();
 	public List<Shot> findAllShots();
 	public Integer insertEstablishmentIntoEstablishmentsTable(final String name);
+	
 }
 
