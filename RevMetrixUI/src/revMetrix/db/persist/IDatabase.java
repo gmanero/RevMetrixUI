@@ -26,5 +26,9 @@ public interface IDatabase {
 	public Integer insertEstablishmentIntoEstablishmentsTable(final String name);
 	public List<Junction> findAllJunctions();
 	public List<Session> findAllSessions();
+	public Integer insertBallIntoBallsTable(final int weight, final String color, final String name);
+	public List<Event> findAllTournaments();
+	public List<Event> findAllPracticeEvents();
+	public List<Event> findAllLeagueEvents();
 }
 

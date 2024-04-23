@@ -1,13 +1,18 @@
 package revMetrix.servlet;
 
+
 import java.io.IOException;
+
 import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import revMetrix.controller.AllAccountsController;
 import revMetrix.db.model.Account;
+import revMetrix.db.model.Ball;
 
 public class AccountServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -22,6 +27,12 @@ public class AccountServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+        // Get all balls
+        List<Ball> balls = controller.findAllBalls();
+
+        // Set balls as attribute in request
+        req.setAttribute("balls", balls);
+
         // Forward to JSP for rendering
         req.getRequestDispatcher("/account.jsp").forward(req, resp);
     }
@@ -29,14 +40,19 @@ public class AccountServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        // Get all accounts
-        List<Account> accounts = controller.getAllAccounts();
+    	 List<Account> accounts = controller.getAllAccounts();
 
-        // Set accounts as attribute in request
-        req.setAttribute("accounts", accounts);
+    	    // Set accounts as attribute in request
+    	req.setAttribute("accounts", accounts);
+        // Get form parameters for new ball
+        String name = req.getParameter("name");
+        int weight = Integer.parseInt(req.getParameter("weight"));
+        String color = req.getParameter("color");
 
-        // Forward to JSP for rendering
-        req.getRequestDispatcher("/account.jsp").forward(req, resp);
+        // Add new ball to database
+        controller.insertBallIntoBallsTable(weight, color, name);
+
+        // Redirect back to GET to display all balls
+        resp.sendRedirect(req.getContextPath() + "/account");
     }
-
 }

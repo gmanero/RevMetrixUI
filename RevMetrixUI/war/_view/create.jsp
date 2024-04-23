@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Event</title>
-    <link rel="stylesheet" type="text/css" href="CSS/createLeagueStyles.css">
+    <link rel="stylesheet" type="text/css" href="CSS/createStyles.css">
 </head>
 
 <body>
@@ -19,7 +19,7 @@
     </div>
     <div class="container">
         <h2>Create Event</h2>
-        <form action="${pageContext.servletContext.contextPath}/game" method="post">
+        <form action="${pageContext.servletContext.contextPath}/create" method="post">
             <div class="form-group">
                 <label for="eventName">Event Name:</label>
                 <input type="text" id="eventName" name="eventName" required>
