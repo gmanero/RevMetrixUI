@@ -351,9 +351,9 @@ public class DerbyDatabase implements IDatabase {
 
 	                if (resultSet1.next()) {
 	                    establishmentId = resultSet1.getInt(1);
-	                    System.out.println("Establishment with name: " + name + ", address: " + " already exists with ID: " + establishmentId);
+	                    System.out.println("Establishment with name: " + name + " already exists with ID: " + establishmentId);
 	                } else {
-	                    System.out.println("Establishment with name: " + name + ", address: " +" not found");
+	                    System.out.println("Establishment with name: " + name + " not found");
 	                
 	                    if (establishmentId <= 0) {
 	                        stmt2 = conn.prepareStatement(
