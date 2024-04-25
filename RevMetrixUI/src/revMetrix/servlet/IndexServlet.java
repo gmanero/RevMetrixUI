@@ -1,11 +1,15 @@
 package revMetrix.servlet;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import revMetrix.controller.GameController;
+import revMetrix.db.model.Ball;
 import revMetrix.model.RevMetrix;
 
 public class IndexServlet extends HttpServlet {
@@ -27,7 +31,7 @@ public class IndexServlet extends HttpServlet {
 		
         
         // Forward based on the action parameter
-        if ("revMetrix".equals(destIn)) {
+        if ("RevMetrix".equals(destIn)) {
            destOut = "/_view/index.jsp";
         } 
         else if ("login".equals(destIn)) {
@@ -43,7 +47,8 @@ public class IndexServlet extends HttpServlet {
         	destOut = "/_view/account.jsp";
         }  
         else if ("game".equals(destIn)) {
-        	destOut = "/_view/game.jsp";
+        	destOut = "/game";
+        	//req.getRequestDispatcher("/game").forward(req, resp);
         } 
         else if ("stats".equals(destIn)) {
         	destOut = "/_view/stats.jsp";	

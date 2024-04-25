@@ -11,7 +11,7 @@
 <div class="navbar">
     <div class="logo">
         <form method="get">
-            <button type="submit" name="destination" value="revMetrix" class="nav-item"><img class="logo" src="images/RevMetrixUI_Logo.png"  alt="Logo"></button>
+            <button type="submit" name="destination" value="RevMetrix" class="nav-item"><img class="logo" src="images/RevMetrixUI_Logo.png"  alt="Logo"></button>
         </form>
     </div>
     <div class="links">
@@ -25,15 +25,8 @@
                 </div>
             </div>
             
-            <div class="dropdown">
                 <button type="submit" class="nav-item dropbtn" name="destination" value="create">Create</button>
-                <div class="dropdown-content">
-                    <button type="submit" name="destination" value="createTournament" class="nav-dropdown">Create Tournament</button>
-                    <button type="submit" name="destination" value="createPractice" class="nav-dropdown">Create Practice</button>
-                    <button type="submit" name="destination" value="createLeague" class="nav-dropdown">Create League</button>
-                </div>
-            </div>
-            
+          
             <button type="submit" name="destination" value="stats" class="nav-item">Stats</button>
             <button type="submit" name="destination" value="yourGames" class="nav-item">Your Games</button>
             <button type="submit" name="destination" value="game" class="nav-item">Quick Bowl</button>

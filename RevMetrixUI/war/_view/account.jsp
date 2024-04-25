@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,6 +17,40 @@
 <div class="mainText">
     <p>Welcome to your account page! Here you can manage your profile, view your bowling balls collection, and more.</p>
 </div>
+
+<%@ page import="java.util.List" %>
+<%@ page import="revMetrix.db.model.Account" %>
+<%@ page import="revMetrix.controller.AllAccountsController" %>
+
+<%
+    // Create a new instance of AllAccountsController
+    AllAccountsController controller = new AllAccountsController();
+    
+    // Retrieve all accounts
+    List<Account> accounts = controller.getAllAccounts();
+%>
+
+<%-- Check if accounts list is not empty --%>
+<% if (accounts != null && !accounts.isEmpty()) { %>
+    <div class="accountCards">
+        <%-- Loop through each account and display its information as a card --%>
+        <% for (Account account : accounts) { %>
+            <div class="accountCard">
+            <br>  
+            
+            
+            <br/>
+                <h3>Email: <%= account.getEmail() %></h3>
+                <p>Password: <%= account.getPassword() %></p>
+                <p>First Name: <%= account.getFirstname() %></p>
+                <p>Last Name: <%= account.getLastname() %></p>
+                <p>Logged In: <%= account.isLoggedIn() %></p>
+            </div>
+        <% } %>
+    </div>
+<% } else { %>
+    <p>No accounts found.</p>
+<% } %>
 
 <div class="bowlingBalls" id="bowlingBalls">
     <!-- Hardcoded Bowling Balls -->
