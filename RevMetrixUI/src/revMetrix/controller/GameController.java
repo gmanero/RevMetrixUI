@@ -1,12 +1,24 @@
 package revMetrix.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import revMetrix.db.model.Ball;
 import revMetrix.db.model.Frame;
+import revMetrix.db.model.Game;
 import revMetrix.db.model.Pair;
 import revMetrix.db.model.Shot;
+import revMetrix.db.persist.DatabaseProvider;
+import revMetrix.db.persist.DerbyDatabase;
+import revMetrix.db.persist.IDatabase;
 
 public class GameController {
+	private IDatabase db = null;
+	
+	public GameController() {
+		DatabaseProvider.setInstance(new DerbyDatabase());
+		db = DatabaseProvider.getInstance();
+	}
 	public static Shot addShot(int num, String pins,String previous, String foul, int ballId) {
 		Shot output = new Shot();
 		output.setShotNumber(num);
@@ -154,8 +166,8 @@ public class GameController {
 			return false;
 	}
 	
-	public static String[] parseShots(ArrayList<Shot> shots){
-		String [] output = new String[22];
+	public static String[] parseShots(List<Shot> shots){
+		String [] output = new String[26];
 		int index = 0;
 		for (Shot shot:shots) {
 			output[index]=shot.getShotScore();
@@ -166,7 +178,7 @@ public class GameController {
 		}
 		return output;
  	}
-	public static void updateframeScores(ArrayList<Frame> frames, ArrayList<Shot> shots) {
+	public void updateframeScores(ArrayList<Frame> frames, ArrayList<Shot> shots) {
 		int index = shots.size()-1;
 		Integer last[]= new Integer[3];
 		int i = 0;
@@ -184,15 +196,18 @@ public class GameController {
 		if(last[1]!=null) {
 			
 			if(last[1]+1<shots.size()&&isSpare(shots.get(last[1]+1))){
-				frames.get(frames.size()-2).setFrameScore(10+addScoreSpare(shots.get(last[0])));
+				Frame updated =frames.get(frames.size()-2);
+				updated.setFrameScore(10+addScoreSpare(shots.get(last[0])));
+				updateFrameScore(updated.getFrameId(),10+addScoreSpare(shots.get(last[0])));
 				
 			}
 		}
 	
 		if(last[2]!=null) {
 			if(isStrike(shots.get(last[2]))){
-				
-				frames.get(frames.size()-3).setFrameScore(10+addScoreStrike(shots.get(last[1]),shots.get(last[0])));
+				Frame updated =frames.get(frames.size()-3);
+				updated.setFrameScore(10+addScoreStrike(shots.get(last[1]),shots.get(last[0])));
+				updateFrameScore(updated.getFrameId(),updated.getFrameScore());
 			}
 		}
 		
@@ -222,6 +237,35 @@ public class GameController {
 	
 	public static boolean checkError(String first, String second) {
 		return first.length()>=second.length();
+	}
+	public List<Ball> getAllBalls(){
+		
+		return db.findAllBalls();
+		
+	}
+	public ArrayList<Shot> GetShotsByGame(int id){
+		
+		return db.GetShotsByGame(id);
+	}
+	public ArrayList<Frame> GetFramesByGame(int id){
+		return db.GetFrameByGame(id);
+	}
+	public void updateFrameScore(int frameId, int newScore) {
+		db.updateFrameScore(frameId, newScore);
+	}
+	public int newGame() {
+		Game game = new Game();
+		game.setGameScore(0);
+		game.setHandicap(0);
+		game.setOpponent("");
+		game.setStartingLane(0);
+		return db.addGame(game);
+	}
+	public int storeFrame(Frame frame) {
+		return db.addFrame(frame);
+	}
+	public int storeShot(int gameId, int frameId, Shot shot) {
+		return db.addShot(gameId, frameId, shot);
 	}
 	
 	

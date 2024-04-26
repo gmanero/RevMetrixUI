@@ -2,92 +2,40 @@ package revMetrix.servlet;
 
 import java.io.IOException;
 
-
-import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-import revMetrix.controller.PracticeController;
-import revMetrix.model.RevMetrix;
-
+import revMetrix.controller.EventController;
+import revMetrix.db.model.Event;
 
 public class PracticesServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	private RevMetrix revMetrix;
-	ArrayList<RevMetrix.Practice> practices;
-	
-	@Override
+    private static final long serialVersionUID = 1L;
+    private EventController eventController;
+
+    @Override
     public void init() throws ServletException {
         super.init();
-        // Initialize RevMetrix instance
-        if(revMetrix==null) {
-			revMetrix = new RevMetrix();
-		}
+            eventController = new EventController();
     }
-	
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		
-		System.out.println("Practices Servlet: doGet");
-		
-		
-		practices = revMetrix.getPracticeList();
-		
-		req.setAttribute("practices", practices);
-		
-		req.getRequestDispatcher("/_view/practices.jsp").forward(req, resp);
-	}
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		if(revMetrix==null) {
-			revMetrix = new RevMetrix();
-		}
-		try {
-		String practiceName = req.getParameter("practiceName");
-        String practiceStartDate = req.getParameter("practiceStartDate");
-        String practiceLocation = req.getParameter("practiceLocation");
-        String practiceDescription = req.getParameter("practiceDescription");
-        int practiceCapacity = Integer.parseInt(req.getParameter("practiceCapacity"));
-		
-        //System.out.print("canary"+tournamentName+ tournamentStartDate+ tournamentLocation+ tournamentDescription+ tournamentCapacity);
-        boolean flag = true;
-        
-        for(RevMetrix.Practice check:revMetrix.getPracticeList()) {
-        	if(practiceName .equals( check.getPracticeName())) {
-        		flag = false;
-        	}
-        }
-        
-        if(flag) {
-        	int practiceId = PracticeController.generateNewId();
 
-    		RevMetrix.Practice newPractice = new RevMetrix.Practice(practiceId, practiceName, practiceStartDate, practiceLocation, practiceDescription, practiceCapacity);
-    		
-    		revMetrix.addPractice(newPractice);
-    		
-    		System.out.println("Practices Servlet: doPost");
-    		
-    		
-    		
-        }
-		}
-		finally{
-			
-		}
-        practices = revMetrix.getPracticeList();
-        
-		req.setAttribute("model", revMetrix);
-		req.setAttribute("practices", practices);
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		
-		req.getRequestDispatcher("/_view/practices.jsp").forward(req, resp);
-		
-		
-		
-		
-	}
+        System.out.println("Practices Servlet: doGet");
+
+        // Get all tournaments from the EventController
+        List<Event> practices = eventController.getAllPracticeEvents();
+
+        req.setAttribute("tournaments", practices);
+
+        req.getRequestDispatcher("/_view/practices.jsp").forward(req, resp);
+    }
+
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // Handling of POST requests can be added if needed
+        doGet(req, resp); // Just call doGet for both GET and POST for simplicity
+    }
 }

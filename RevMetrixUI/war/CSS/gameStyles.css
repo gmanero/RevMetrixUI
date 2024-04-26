@@ -77,6 +77,7 @@ body {
             border-radius: 10px;
             width: 600px;
 			height: 454.667px;
+			
    			
         }
 
@@ -224,6 +225,7 @@ body {
       font-size: 28px;
       font-weight: bold;
       backgroundColor: '#26acca';
+      cursor: pointer;
     }
 
     .secondShot {
@@ -238,6 +240,7 @@ body {
       font-size: 28px;
       font-weight: bold;
       backgroundColor: 'lightgrey';
+      cursor: pointer;
     }
 
     .miss {
@@ -251,6 +254,7 @@ body {
       position: relative;
       font-size: 28px;
       font-weight: bold;
+      cursor: pointer;
       
     }
 
@@ -265,6 +269,7 @@ body {
       position: relative;
       font-size: 28px;
       font-weight: bold;
+      cursor: pointer;
      
     }
 
@@ -279,6 +284,7 @@ body {
       position: relative;
       font-size: 28px;
       font-weight: bold;
+      cursor: pointer;
       
     }
 
@@ -355,3 +361,69 @@ body {
       background-color: red;
       color: black;
     }
+   /* Dropdown container */
+.dropdown-select {
+  position: relative;
+  display: inline-block;
+}
+
+/* Style the select element */
+.dropdown-select select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: #333; /* Dark background color */
+  color: #fff; /* Text color */
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Style the options */
+.dropdown-select select option {
+  background-color: #333; /* Dark background color */
+  color: #fff; /* Text color */
+}
+
+/* Show the dropdown arrow */
+.dropdown-select::after {
+  content: "\25BC"; /* Unicode for down arrow */
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  color: #fff; /* Arrow color */
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-select select:focus ~ .dropdown-content {
+  display: block;
+}
+
+/* Dropdown content */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #333; /* Dark background color */
+  min-width: 100%;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content option {
+  color: #fff;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of links on hover */
+.dropdown-content option:hover {
+  background-color: #555; /* Darker background color */
+}
+.center {
+  display: flex;
+  justify-content: center; /* Center the content horizontally */
+}
+
