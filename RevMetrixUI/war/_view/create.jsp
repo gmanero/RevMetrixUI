@@ -10,35 +10,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Event</title>
     <link rel="stylesheet" type="text/css" href="CSS/createStyles.css">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" type="text/css" href="styles.css"> <!-- Link to external CSS file -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
 <body>
-
-    <jsp:include page="navbar.jsp" />
-
-    <div class="topPage">
-        <h1>Create Event</h1>
+<jsp:include page="navbar.jsp" />
+	<div class="topPage">
+        <h1>RevMetrix - Create an Event</h1>
     </div>
-
-    <form action="${pageContext.servletContext.contextPath}/create" method="post">
-        <div class="container">
-            <h2>Event Details</h2>
+    <div class="container">
+        <h2>Create Event</h2>
+        <form action="${pageContext.servletContext.contextPath}/create" method="post">
             <div class="form-group">
                 <label for="eventName">Event Name:</label>
-                <input type="text" id="eventName" name="eventName">
+                <input type="text" id="eventName" name="eventName" required>
             </div>
             <div class="form-group">
                 <label for="description">Description:</label>
-                <textarea id="description" name="description"></textarea>
+                <textarea id="description" name="description" required></textarea>
             </div>
-            
-            <div class="form-group select-style">
+            <div class="form-group">
                 <label for="establishment">Establishment:</label>
-                <select id="establishment" name="establishment" onchange="checkAddNew(this)">
+                <select id="establishment" name="establishment" onchange="toggleAddNew()" required>
                     <%
                         EstablishmentController establishmentController = new EstablishmentController();
                         List<Establishment> establishments = establishmentController.getAllEstablishments();
@@ -53,33 +45,32 @@
                     <option value="addNew">Add New</option>
                 </select>
             </div>
-            
-            <div id="addNewEstablishment" class="form-group" style="display: none;">
+            <div id="newEstablishmentDiv" class="form-group" style="display: none;">
                 <label for="newEstablishment">New Establishment Name:</label>
-                <input type="text" id="newEstablishment" name="newEstablishment" class="input-text" placeholder="New Establishment Name">
+                <input type="text" id="newEstablishment" name="newEstablishment" placeholder="New Establishment Name">
             </div>
-            
-            <div class="form-group select-style">
+            <div class="form-group">
                 <label for="eventType">Event Type:</label>
-                <select id="eventType" name="eventType">
+                <select id="eventType" name="eventType" required>
                     <option value="practice">Practice</option>
                     <option value="league">League</option>
                     <option value="tournament">Tournament</option>
                 </select>
             </div>
-            
             <input type="submit" value="Create Event">
-        </div>
-    </form>
+        </form>
+    </div>
 
     <script>
-        function checkAddNew(select) {
-            var addNewInput = document.getElementById("addNewEstablishment");
-            if (select.value == "addNew") {
-                addNewInput.innerHTML = '<input type="text" id="newEstablishment" name="newEstablishment" class="input-text" placeholder="New Establishment Name">';
-                addNewInput.style.display = "text";
+        function toggleAddNew() {
+            var select = document.getElementById("establishment");
+            var newEstablishmentDiv = document.getElementById("newEstablishmentDiv");
+
+            if (select.value === "addNew") {
+                newEstablishmentDiv.style.display = "block";
+                document.getElementById("newEstablishment").focus();
             } else {
-                addNewInput.style.display = "none";
+                newEstablishmentDiv.style.display = "none";
             }
         }
     </script>

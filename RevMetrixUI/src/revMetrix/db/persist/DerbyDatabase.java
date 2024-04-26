@@ -351,9 +351,9 @@ public class DerbyDatabase implements IDatabase {
 
 	                if (resultSet1.next()) {
 	                    establishmentId = resultSet1.getInt(1);
-	                    System.out.println("Establishment with name: " + name + ", address: " + " already exists with ID: " + establishmentId);
+	                    System.out.println("Establishment with name: " + name + " already exists with ID: " + establishmentId);
 	                } else {
-	                    System.out.println("Establishment with name: " + name + ", address: " +" not found");
+	                    System.out.println("Establishment with name: " + name + " not found");
 	                
 	                    if (establishmentId <= 0) {
 	                        stmt2 = conn.prepareStatement(
@@ -469,6 +469,8 @@ public class DerbyDatabase implements IDatabase {
 	        }
 	    });
 	}
+	
+	
 	
 	public Integer insertEventWithEstablishmentNameAndType(final String establishmentName, final String eventName, final String description, final String eventType) {
 	    return executeTransaction(new Transaction<Integer>() {
@@ -591,6 +593,126 @@ public class DerbyDatabase implements IDatabase {
 	        }
 	    });
 	}
+	
+	public List<Event> findAllTournaments() {
+	    return executeTransaction(new Transaction<List<Event>>() {
+	        @Override
+	        public List<Event> execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+
+	            try {
+	                stmt = conn.prepareStatement("SELECT * FROM events WHERE type = ?");
+	                stmt.setInt(1, 3); // Filter for tournaments (type 3)
+
+	                List<Event> result = new ArrayList<>();
+
+	                resultSet = stmt.executeQuery();
+
+	                Boolean found = false;
+
+	                while (resultSet.next()) {
+	                    found = true;
+
+	                    Event event = new Event();
+	                    loadEvent(event, resultSet, 1);
+
+	                    result.add(event);
+	                }
+
+	                if (!found) {
+	                    System.out.println("No tournaments were found in the database");
+	                }
+
+	                return result;
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
+	
+	public List<Event> findAllPracticeEvents() {
+	    return executeTransaction(new Transaction<List<Event>>() {
+	        @Override
+	        public List<Event> execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+
+	            try {
+	                stmt = conn.prepareStatement("SELECT * FROM events WHERE type = ?");
+	                stmt.setInt(1, 1); // Filter for practice events (type 1)
+
+	                List<Event> result = new ArrayList<>();
+
+	                resultSet = stmt.executeQuery();
+
+	                Boolean found = false;
+
+	                while (resultSet.next()) {
+	                    found = true;
+
+	                    Event event = new Event();
+	                    loadEvent(event, resultSet, 1);
+
+	                    result.add(event);
+	                }
+
+	                if (!found) {
+	                    System.out.println("No practice events were found in the database");
+	                }
+
+	                return result;
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
+	
+	public List<Event> findAllLeagueEvents() {
+	    return executeTransaction(new Transaction<List<Event>>() {
+	        @Override
+	        public List<Event> execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+
+	            try {
+	                stmt = conn.prepareStatement("SELECT * FROM events WHERE type = ?");
+	                stmt.setInt(1, 2); // Filter for league events (type 2)
+
+	                List<Event> result = new ArrayList<>();
+
+	                resultSet = stmt.executeQuery();
+
+	                Boolean found = false;
+
+	                while (resultSet.next()) {
+	                    found = true;
+
+	                    Event event = new Event();
+	                    loadEvent(event, resultSet, 1);
+
+	                    result.add(event);
+	                }
+
+	                if (!found) {
+	                    System.out.println("No league events were found in the database");
+	                }
+
+	                return result;
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
+
+
+
 
 
 	
