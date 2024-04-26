@@ -1,3 +1,8 @@
+<%@ page import="java.util.List" %>
+<%@ page import="revMetrix.db.model.Account" %>
+<%@ page import="revMetrix.db.model.Ball" %>
+<%@ page import="revMetrix.controller.AllAccountsController" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,10 +23,6 @@
     <p>Welcome to your account page! Here you can manage your profile, view your bowling balls collection, and more.</p>
 </div>
 
-<%@ page import="java.util.List" %>
-<%@ page import="revMetrix.db.model.Account" %>
-<%@ page import="revMetrix.controller.AllAccountsController" %>
-
 <%
     // Create a new instance of AllAccountsController
     AllAccountsController controller = new AllAccountsController();
@@ -30,41 +31,45 @@
     List<Account> accounts = controller.getAllAccounts();
 %>
 
-<%-- Check if accounts list is not empty --%>
-<% if (accounts != null && !accounts.isEmpty()) { %>
-    <div class="accountCards">
-        <%-- Loop through each account and display its information as a card --%>
-        <% for (Account account : accounts) { %>
-            <div class="accountCard">
-            <br>  
-            
-            
-            <br/>
-                <h3>Email: <%= account.getEmail() %></h3>
-                <p>Password: <%= account.getPassword() %></p>
-                <p>First Name: <%= account.getFirstname() %></p>
-                <p>Last Name: <%= account.getLastname() %></p>
-                <p>Logged In: <%= account.isLoggedIn() %></p>
-            </div>
-        <% } %>
-    </div>
-<% } else { %>
-    <p>No accounts found.</p>
-<% } %>
-
-<div class="bowlingBalls" id="bowlingBalls">
-    <!-- Hardcoded Bowling Balls -->
-    <div class="bowlingBall" data-name="Ball 1" data-weight="12" data-color="red">Ball</div>
-
-    <!-- Add Ball Button -->
-    <div class="addBall">
-        <span class="plus">+</span>
-    </div>
+<div class="accountSection">
+    <h2>Your Accounts</h2>
+    <% if (accounts != null && !accounts.isEmpty()) { %>
+        <div class="accountCards">
+            <% for (Account account : accounts) { %>
+                <div class="accountCard">
+                    <h3>Email: <%= account.getEmail() %></h3>
+                    <p>Password: <%= account.getPassword() %></p>
+                    <p>First Name: <%= account.getFirstname() %></p>
+                    <p>Last Name: <%= account.getLastname() %></p>
+                    <p>Logged In: <%= account.isLoggedIn() %></p>
+                </div>
+            <% } %>
+        </div>
+    <% } else { %>
+        <p>No accounts found.</p>
+    <% } %>
 </div>
 
-<div class="addBallForm" id="addBallForm">
+<%
+    // Retrieve all bowling balls
+    List<Ball> balls = controller.findAllBalls();
+%>
+
+<div class="bowlingBalls" id="bowlingBalls">
+    <h2>Your Bowling Balls</h2>
+    <% if (balls != null && !balls.isEmpty()) { %>
+        <% for (Ball ball : balls) { %>
+            <div class="bowlingBall" style="background-color: <%= ball.getColor() %>;">
+                <p>Name: <%= ball.getName() %></p>
+                <p>Weight: <%= ball.getWeight() %> lbs</p>
+                <p>Color: <%= ball.getColor() %></p>
+            </div>
+        <% } %>
+    <% } else { %>
+        <p>No bowling balls found.</p>
+    <% } %>
     <h2>Add a New Bowling Ball</h2>
-    <form>
+    <form action="account" method="post">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required>
         <br>
@@ -80,7 +85,6 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const bowlingBalls = document.getElementById('bowlingBalls');
     const addBallButton = document.querySelector('.addBall');
     const addBallForm = document.getElementById('addBallForm');
 
@@ -110,14 +114,17 @@ document.addEventListener('DOMContentLoaded', function() {
     function addBowlingBall(name, weight, color) {
         const ball = document.createElement('div');
         ball.classList.add('bowlingBall');
-        ball.dataset.name = name;
-        ball.dataset.weight = weight;
-        ball.dataset.color = color;
-        ball.textContent = name;
         ball.style.backgroundColor = color;
-        bowlingBalls.insertBefore(ball, addBallButton);
+        ball.innerHTML = `
+            <p>Name: ${name}</p>
+            <p>Weight: ${weight} lbs</p>
+            <p>Color: ${color}</p>
+        `;
+        const bowlingBalls = document.getElementById('bowlingBalls');
+        bowlingBalls.appendChild(ball);
     }
 });
 </script>
+
 </body>
 </html>
