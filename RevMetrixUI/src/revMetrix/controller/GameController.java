@@ -1,6 +1,7 @@
 package revMetrix.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import revMetrix.db.model.Ball;
@@ -25,8 +26,8 @@ public class GameController {
 		output.setPins(pins);
 		output.setBallId(ballId);
 		output.setShotScore(getShotScore(num,pins, previous ,foul));
-		output.setSplit(isSplit(pins));
-		output.setWashout(isWashout(pins));
+		output.setSplit(isSplit(num,pins));
+		output.setWashout(isWashout(num,pins));
 		return output;
 	}
 	public static int frameScore(Shot first, Shot second){
@@ -157,13 +158,133 @@ public class GameController {
 		return 10 - standing.length  + "";
 	}
 	
-	public static boolean isSplit(String pins) {
-		//to do implement
-		return false;
-	}
-	public static boolean isWashout(String pins) {
-		//to do implement
+	public static boolean isSplit(int shotNum, String pins) {
+		if(shotNum ==2) {
 			return false;
+		}
+		if(pins.equals("")) {
+			return false;
+		}
+		if (pins.contains("1")){
+			return false;
+		}
+		if(pins.length()==1) {
+			return false;
+		}
+		//String str = "Geeks";
+		String[] strSplit = pins.split(","); 
+		  
+        // Now convert string into ArrayList 
+        ArrayList<String> pinList = new ArrayList<String>(Arrays.asList(strSplit)); 
+        PinsRemove(pinList.get(0),pinList);
+        System.out.println("Split:" + (pinList.size()!=0));
+		return pinList.size()!=0;
+	}
+	public static boolean isWashout(int shotNum, String pins) {
+		if(shotNum ==2) {
+			return false;
+		}
+		if(pins.equals("")) {
+			return false;
+		}
+		if(pins.length()==1) {
+			return false;
+		}
+		
+		String[] strSplit = pins.split(","); 
+		  
+        // Now convert string into ArrayList 
+        ArrayList<String> pinList = new ArrayList<String>(Arrays.asList(strSplit)); 
+        PinsRemove(pinList.get(0),pinList);
+       
+		return pinList.size()!=0;
+	}
+	public static void PinsRemove(String pin, ArrayList<String> List) {
+		int i = -1;
+		
+		switch(pin) {
+		case "1":
+			i = List.indexOf("1");
+			if(i!=-1) {
+				List.remove(i);
+				PinsRemove("2",List);
+				PinsRemove("3",List);
+				PinsRemove("5",List);
+			}
+			break;
+		case "2":
+			i = List.indexOf("2");
+			if(i!=-1) {
+				List.remove(i);
+				PinsRemove("3",List);
+				PinsRemove("4",List);
+				PinsRemove("5",List);
+				PinsRemove("8",List);
+			}
+			break;
+		case "3":
+			i = List.indexOf("3");
+			if(i!=-1) {
+				List.remove(i);
+				PinsRemove("5",List);
+				PinsRemove("6",List);
+				PinsRemove("9",List);
+			}
+			break;
+		case "4":
+			i = List.indexOf("4");
+			if(i!=-1) {
+				List.remove(i);
+				PinsRemove("5",List);
+				PinsRemove("7",List);
+				PinsRemove("8",List);
+			}
+			break;
+		case "5":
+			i = List.indexOf("5");
+			if(i!=-1) {
+				List.remove(i);
+				PinsRemove("6",List);
+				PinsRemove("8",List);
+				PinsRemove("9",List);
+			}
+			break;
+		case "6":
+			i = List.indexOf("6");
+			if(i!=-1) {
+				List.remove(i);
+				PinsRemove("9",List);
+				PinsRemove("0",List);
+			}
+			break;
+		case "7":
+			i = List.indexOf("7");
+			if(i!=-1) {
+				List.remove(i);
+				PinsRemove("8",List);
+			}
+			break;
+		case "8":
+			i = List.indexOf("8");
+			if(i!=-1) {
+				List.remove(i);
+				PinsRemove("9",List);
+				
+			}
+			break;
+		case "9":
+			i = List.indexOf("9");
+			if(i!=-1) {
+				List.remove(i);
+				PinsRemove("0",List);
+				
+			}
+			break;
+		default:
+	
+			break;
+	
+		}
 	}
 	
 	public static String[] parseShots(List<Shot> shots){
@@ -212,8 +333,8 @@ public class GameController {
 		}
 		
 	}
-	public static int[] parseScores(ArrayList<Frame> frames, ArrayList<Shot> shots) {
-		int[] output = new int[11];
+	public static Integer[] parseScores(ArrayList<Frame> frames, ArrayList<Shot> shots) {
+		Integer[] output = new Integer[11];
 		int i = 0;
 		int total = 0;
 		for(Frame frame:frames) {

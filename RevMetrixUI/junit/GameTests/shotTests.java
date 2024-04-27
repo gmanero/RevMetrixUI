@@ -260,5 +260,25 @@ public class shotTests {
 		}
 		
 	}
+	@Test
+	public void testSplit() {
+		assertFalse(GameController.isSplit(2, "1,2,3,4"));
+		assertFalse(GameController.isSplit(2, "8,9"));
+		assertFalse(GameController.isSplit(1, "0,1,2"));
+		assertFalse(GameController.isSplit(1, "0,1,3"));
+		assertFalse(GameController.isSplit(1, ""));
+		assertFalse(GameController.isSplit(1, "0"));
+		assertFalse(GameController.isSplit(1, "2,3,8"));
+		assertTrue(GameController.isSplit(1, "0,7"));
+		assertTrue(GameController.isSplit(1, "0,8"));
+		assertTrue(GameController.isSplit(1, "3,8"));
+		assertTrue(GameController.isSplit(1, "0,2,9"));
+		assertTrue(GameController.isSplit(1, "0,2,6"));
+		assertTrue(GameController.isSplit(1, "3,4,6"));
+		assertTrue(GameController.isSplit(1, "3,6,7"));
+		assertTrue(GameController.isSplit(1, "2,4,9"));
+		assertTrue(GameController.isSplit(1, "2,3,7"));
+		assertFalse(GameController.isSplit(1, "2,8,9"));
+	}
 	
 }

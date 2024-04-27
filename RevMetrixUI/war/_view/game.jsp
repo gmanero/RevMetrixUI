@@ -19,7 +19,7 @@
 	<div class="scoreboard">
         <div class="score-box">
             <div class="score-upper">
-                <div class="shot-gap">a</div>
+                <div class="shot-gap"></div>
                 <div id = "split1" class="shot-box">${shotScores[0]}</div>
                 <div class="shot-box">${shotScores[1]}</div>
             </div>
@@ -99,7 +99,7 @@
         </div>
         <div class="score-box">
             <div class="score-upper">
-                <div class="shot-box">${event_score}</div>
+                <div class="shot-box"></div>
             </div>
             <div class="score-running">${scores[10]}</div>
         </div>

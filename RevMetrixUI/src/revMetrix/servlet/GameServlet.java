@@ -21,7 +21,7 @@ public class GameServlet extends HttpServlet {
 	
 	//private ArrayList<Shot> shots;
 	private String[] shotScores;
-	private int[] scores;
+	private Integer[] scores;
 	private int gameID;
 	private GameController controller;
 	//private ArrayList<Frame> frames;
@@ -34,7 +34,7 @@ public class GameServlet extends HttpServlet {
 	  
 	    
 	    shotScores = new String[26];
-	    scores = new int[12];
+	    scores = new Integer[12];
 	    
 	    
 	    controller = new GameController();
@@ -60,7 +60,7 @@ public class GameServlet extends HttpServlet {
 	    	shotScores = new String[21];
 	    }
 	    if(scores == null) {
-	    	scores = new int[12];
+	    	scores = new Integer[12];
 	    }
 	    List<Ball> balls = controller.getAllBalls();
 	    String error = null;
