@@ -175,6 +175,53 @@ public class DerbyDatabase implements IDatabase {
 		});
 	}
 	
+	public Boolean logInAccount(String email, String password) throws SQLException {
+	    executeTransaction(new Transaction<Void>() {
+	        @Override
+	        public Void execute(Connection conn) throws SQLException {
+	            PreparedStatement stmtLogIn = null;
+	            
+	            try {
+	                stmtLogIn = conn.prepareStatement(
+	                    "UPDATE accounts SET isLoggedIn = true WHERE email = ? AND password = ?"
+	                );
+	                stmtLogIn.setString(1, email);
+	                stmtLogIn.setString(2, password);
+	                stmtLogIn.executeUpdate();
+	                
+	                System.out.println("Account <" + email + "> logged in");
+	            } finally {
+	                DBUtil.closeQuietly(stmtLogIn);
+	            }
+	            
+	            return true;
+	        }
+	    });
+	}
+
+	public void logOutAllAccounts() throws SQLException {
+	    executeTransaction(new Transaction<Void>() {
+	        @Override
+	        public Void execute(Connection conn) throws SQLException {
+	            PreparedStatement stmtLogOut = null;
+	            
+	            try {
+	                stmtLogOut = conn.prepareStatement(
+	                    "UPDATE accounts SET isLoggedIn = false"
+	                );
+	                stmtLogOut.executeUpdate();
+	                
+	                System.out.println("All accounts logged out");
+	            } finally {
+	                DBUtil.closeQuietly(stmtLogOut);
+	            }
+	            
+	            return null;
+	        }
+	    });
+	}
+
+	
 	
 	public List<Ball> findAllBalls() {
 	    return executeTransaction(new Transaction<List<Ball>>() {

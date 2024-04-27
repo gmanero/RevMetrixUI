@@ -30,5 +30,7 @@ public interface IDatabase {
 	public List<Event> findAllTournaments();
 	public List<Event> findAllPracticeEvents();
 	public List<Event> findAllLeagueEvents();
+	public Boolean logInAccount(String email, String password);
+	public Boolean logOutAllAccounts();
 }
 

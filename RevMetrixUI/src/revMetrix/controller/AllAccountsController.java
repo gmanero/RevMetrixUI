@@ -37,6 +37,18 @@ public class AllAccountsController {
 
         return accounts;
     }
+    
+    public void logInAccount(String email, String password) {
+        db.logInAccount(email, password);
+        System.out.println("Account logged in: " + email);
+    }
+
+    public void logOutAllAccounts() {
+        db.logOutAllAccounts();
+        System.out.println("All accounts logged out");
+    }
+    
+    
 
     public List<Ball> findAllBalls() {
     	List<Ball> ballList = db.findAllBalls();
@@ -65,6 +77,20 @@ public class AllAccountsController {
         }
 
         return ballId;
+    }
+    
+    public boolean authenticate(String email, String password) {
+        // Implement authentication logic using your existing methods
+        // For example:
+        List<Account> accounts = getAllAccounts();
+        for (Account account : accounts) {
+            if (account.getEmail().equals(email) && account.getPassword().equals(password)) {
+                // Update isLoggedIn to true
+                // This part is not implemented in the provided code. You need to add logic to update isLoggedIn in the database.
+                return true;
+            }
+        }
+        return false;
     }
 
     // Your other methods like executeTransaction can remain unchanged
