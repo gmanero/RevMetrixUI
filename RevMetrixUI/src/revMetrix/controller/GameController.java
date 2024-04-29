@@ -184,6 +184,9 @@ public class GameController {
 		if(shotNum ==2) {
 			return false;
 		}
+		if (!pins.contains("1")){
+			return false;
+		}
 		if(pins.equals("")) {
 			return false;
 		}
@@ -322,6 +325,7 @@ public class GameController {
 				updateFrameScore(updated.getFrameId(),10+addScoreSpare(shots.get(last[0])));
 				
 			}
+			
 		}
 	
 		if(last[2]!=null) {
@@ -388,7 +392,38 @@ public class GameController {
 	public int storeShot(int gameId, int frameId, Shot shot) {
 		return db.addShot(gameId, frameId, shot);
 	}
-	
+	public static String[] getWashouts(ArrayList<Shot> shots) {
+		ArrayList<Shot> firstShots = new ArrayList<Shot>();
+		for(Shot shot:shots) {
+			if(shot.getShotNumber()==1) {
+				firstShots.add(shot);
+			}
+		}
+		
+		String[] output = new String[9];
+		for(int i = 0; i<=9&&i<firstShots.size(); i++) {
+			if(firstShots.get(i).getWashout()) {
+				output[i]="w";
+			}
+		}
+		return output;
+	}
+	public static boolean[] getSplits(ArrayList<Shot> shots) {
+		ArrayList<Shot> firstShots = new ArrayList<Shot>();
+		for(Shot shot:shots) {
+			if(shot.getShotNumber()==1) {
+				firstShots.add(shot);
+			}
+		}
+		
+		boolean[] output = new boolean[11];
+		for(int i = 0; i<=11&&i<firstShots.size(); i++) {
+			if(firstShots.get(i).getSplit()) {
+				output[i]=true;
+			}
+		}
+		return output;
+	}
 	
 	
 	

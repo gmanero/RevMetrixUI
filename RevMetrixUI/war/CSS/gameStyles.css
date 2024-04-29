@@ -112,17 +112,24 @@ body {
 		    border: 1px solid white;
 		    width: 33%
 		}
-		.shot-box-split {
+		.split {
 		    flex: 1;
-		    border: 1px solid white;
-		    width: 33%;
-		    background-color:red;
-		    min-height: 20px;
+		    border: 3px solid red;
+		    aspect-ratio: 1 / 1;
+		    border-radius: 50%;
+    		background-color: #333;
+    		min-height: 18px;
+		    max-height: 18px;
+		    min-width:18px;
+		    max-width:18px;
+		    text-align: center;
+		    
 		}
 		.shot-gap{
 		    flex: 1;
 		    width: 34%;
-		    visibility: hidden;
+		    
+		    
 		}
 		
 		.score-running{
@@ -216,6 +223,8 @@ body {
       font-weight: bold;
       cursor: pointer;
       transition: background-color 0.3s;
+      background-color: white;
+      color:black;
     }
 
     .firstShot {
@@ -229,7 +238,7 @@ body {
       position: relative;
       font-size: 28px;
       font-weight: bold;
-      backgroundColor: '#26acca';
+      backgroundColor: '#553180';
     }
 
     .secondShot {

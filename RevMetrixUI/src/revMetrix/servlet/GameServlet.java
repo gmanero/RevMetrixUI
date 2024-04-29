@@ -30,7 +30,14 @@ public class GameServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		System.out.println("Game Servlet: doGet");
-		
+		String Id = req.getParameter("SesionID");
+		int session = 1;
+		try {
+			session = Integer.parseInt(Id);
+		}
+		finally{
+			
+		}
 	  
 	    
 	    shotScores = new String[26];
@@ -40,8 +47,10 @@ public class GameServlet extends HttpServlet {
 	    controller = new GameController();
 	    gameID = controller.newGame();
 	    List<Ball> balls = controller.getAllBalls();
+	    ArrayList<Shot> shots = controller.GetShotsByGame(gameID);
 	    req.setAttribute("balls", balls);
-	    System.out.println("Game all set");
+	    req.setAttribute("washout", GameController.getWashouts(shots));
+	    req.setAttribute("split", GameController.getSplits(shots));
 		req.getRequestDispatcher("/_view/game.jsp").forward(req, resp);
 	}
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -110,7 +119,12 @@ public class GameServlet extends HttpServlet {
 	    shotScores = GameController.parseShots(shots);
 	    scores = GameController.parseScores(frames, shots);
 	    }
-	    System.out.print("Size = "+frames.size());
+	    boolean[] split = GameController.getSplits(shots);
+	    for(boolean a:split) {
+	    	System.out.println(a);
+	    }
+	    req.setAttribute("washout", GameController.getWashouts(shots));
+	    req.setAttribute("split", split);
 	    req.setAttribute("lane", lane);
 	    req.setAttribute("balls", balls);
 	    req.setAttribute("error", error);
@@ -119,6 +133,9 @@ public class GameServlet extends HttpServlet {
 	    
 	    // Forwarding request and response to JSP page
 	    req.getRequestDispatcher("/_view/game.jsp").forward(req, resp);
+	}
+	protected void doUpdate(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 	}
 
 

@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RevMetrix - Current Game</title>
     <link rel = "stylesheet" type ="text/css" href="CSS/gameStyles.css">
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 </head>
 
-<body>
+<body onload="Splits()">
  <jsp:include page="navbar.jsp" />
     <div class="topPage">
         <h1>Current Game</h1>
@@ -19,80 +20,80 @@
 	<div class="scoreboard">
         <div class="score-box">
             <div class="score-upper">
-                <div class="shot-gap"></div>
-                <div id = "split1" class="shot-box">${shotScores[0]}</div>
+                <div class="shot-gap">${washout[0]}</div>
+                <div class="shot-box"><div id = split1 class=""> ${shotScores[0]}</div></div>
                 <div class="shot-box">${shotScores[1]}</div>
             </div>
             <div class="score-running">${scores[0]}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
-                <div class="shot-gap"></div>
-                <div id = "split2" class="shot-box">${shotScores[2]}</div>
+                <div class="shot-gap">${washout[1]}</div>
+                <div class="shot-box"><div id = "split2" class="">${shotScores[2]}</div></div>
                 <div class="shot-box">${shotScores[3]}</div>
             </div>
             <div class="score-running">${scores[1]}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
-                <div class="shot-gap"></div>
-                <div id = "split3" class="shot-box">${shotScores[4]}</div>
+                <div class="shot-gap">${washout[2]}</div>
+                <div class="shot-box"><div id = split3 class="">${shotScores[4]}</div></div>
                 <div class="shot-box">${shotScores[5]}</div>
             </div>
             <div class="score-running">${scores[2]}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
-                <div class="shot-gap"></div>
-                <div id = "split4" class="shot-box">${shotScores[6]}</div>
+                <div class="shot-gap">${washout[3]}</div>
+                <div class="shot-box"><div id = split4 class="">${shotScores[6]}</div></div>
                 <div class="shot-box">${shotScores[7]}</div>
             </div>
             <div class="score-running">${scores[3]}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
-                <div class="shot-gap"></div>
-                <div id = "split5" class="shot-box">${shotScores[8]}</div>
+                <div class="shot-gap">${washout[4]}</div>
+                <div class="shot-box"><div id = split5 class="">${shotScores[8]}</div></div>
                 <div class="shot-box">${shotScores[9]}</div>
             </div>
             <div class="score-running">${scores[4]}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
-                <div class="shot-gap"></div>
-                <div id = "split6" class="shot-box">${shotScores[10]}</div>
+                <div class="shot-gap">${washout[5]}</div>
+                <div class="shot-box"><div id = split6 class="">${shotScores[10]}</div></div>
                 <div class="shot-box">${shotScores[11]}</div>
             </div>
             <div class="score-running">${scores[5]}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
-                <div class="shot-gap"></div>
-                <div id = "split7" class="shot-box">${shotScores[12]}</div>
+                <div class="shot-gap">${washout[6]}</div>
+                <div class="shot-box"><div id = split7 class="">${shotScores[12]}</div></div>
                 <div class="shot-box">${shotScores[13]}</div>
             </div>
             <div class="score-running">${scores[6]}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
-                <div class="shot-gap"></div>
-                <div id = "split8" class="shot-box">${shotScores[14]}</div>
+                <div class="shot-gap">${washout[7]}</div>
+                <div class="shot-box"><div id = split8 class="">${shotScores[14]}</div></div>
                 <div class="shot-box">${shotScores[15]}</div>
             </div>
             <div class="score-running">${scores[7]}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
-                <div class="shot-gap"></div>
-                <div id = "split9" class="shot-box">${shotScores[16]}</div>
+                <div class="shot-gap">${washout[8]}</div>
+                <div class="shot-box"><div id = split9 class="">${shotScores[16]}</div></div>
                 <div class="shot-box">${shotScores[17]}</div>
             </div>
             <div class="score-running">${scores[8]}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
-                <div id = "split10" class="shot-box">${shotScores[18]}</div>
-                <div id = "split11" class="shot-box">${shotScores[19]}</div>
+                <div class="shot-box"><div id = split10 class="">${shotScores[18]}</div></div>
+                <div class="shot-box"><div id = split11 class="">${shotScores[19]}</div></div>
                 <div class="shot-box">${shotScores[20]}</div>
             </div>
             <div class="score-running">${scores[9]}</div>
@@ -248,7 +249,7 @@
   function togglePin(pin,num) {
     // toggle the class of the clicked pin
     pin.classList.toggle("leave");
-
+	
     // count the number of pins knocked down
     const pins = document.querySelectorAll('.pinNew:not(.leave)');
 
@@ -588,8 +589,19 @@
 
 
   }
-  function Split(i) {
-      document.getElementById("split"+i).className = "shot-box-split";
+  
+  function Splits() {
+	  var splitCount = [<c:forEach items="${split}" var="bool" varStatus="loop">
+      <c:if test="${loop.index > 0}">,</c:if>
+      ${bool}
+  </c:forEach>];
+      for(var i = 0; i<splitCount.length;i++){
+    	  if(splitCount[i]==true){
+    		  document.getElementById("split"+(i+1)).className = "split";
+    	  }
+    	  
+      }
+     
   }
 
 </script>
