@@ -33,7 +33,7 @@ public class GameServlet extends HttpServlet {
 		String Id = req.getParameter("SesionID");
 		int session = 1;
 		try {
-			session = Integer.parseInt(Id);
+			//session = Integer.parseInt(Id);
 		}
 		finally{
 			

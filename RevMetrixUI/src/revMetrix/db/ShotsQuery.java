@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import revMetrix.db.model.Account;
 import revMetrix.db.model.Frame;
+import revMetrix.db.model.Game;
 import revMetrix.db.model.Shot;
 import revMetrix.db.persist.DatabaseProvider;
 import revMetrix.db.persist.IDatabase;
@@ -19,9 +20,10 @@ public class ShotsQuery {
 		
 		// get the DB instance and execute transaction
 		IDatabase db = DatabaseProvider.getInstance();
-		Boolean accountList = db.updateFrameScore(1,10);
+		ArrayList<Game> games = db.GetGamesBySession(1);
 		
 		// check if anything was returned and output the list
+		System.out.print(games.size());
 		
 	}
 }

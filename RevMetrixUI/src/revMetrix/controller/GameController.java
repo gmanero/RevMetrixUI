@@ -378,6 +378,9 @@ public class GameController {
 	public void updateFrameScore(int frameId, int newScore) {
 		db.updateFrameScore(frameId, newScore);
 	}
+	public ArrayList<Game> GetGamesBySession(int id){
+		return db.GetGamesBySession(id);
+	}
 	public int newGame() {
 		Game game = new Game();
 		game.setGameScore(0);

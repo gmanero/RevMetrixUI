@@ -811,6 +811,51 @@ public class DerbyDatabase implements IDatabase {
 	        }
 	    });
 	}
+	public ArrayList<Game> GetGamesBySession(int id){
+		return executeTransaction(new Transaction<ArrayList<Game>>() {
+	        @Override
+	        public ArrayList<Game> execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            try {
+	            	stmt = conn.prepareStatement("select games.* from junction, games where Junction.Session_Id = ? and Junction.Game_id=Games.Game_Id");
+	                stmt.setInt(1,id);
+	                
+	                ArrayList<Game> result = new ArrayList<Game>();
+	                
+	                resultSet = stmt.executeQuery();
+	                
+	                Boolean found = false;
+	                
+	                while (resultSet.next()) {
+	                    found = true;
+	                    
+	                    Game game = new Game();
+	                    loadGame(game, resultSet, 1);
+	                    boolean duplicate = false;
+	                    for(Game games: result) {
+	                    	if(game.getGameId()==games.getGameId()) {
+	                    		duplicate = true;
+	                    	}
+	                    }
+	                    if(!duplicate) {
+	                    result.add(game);
+	                    }
+	                }
+	                
+	                if (!found) {
+	                    System.out.println("No games were found in the database");
+	                }
+	                
+	                return result;
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
 	
 	//SESSIONS QUERYS
 	public List<Session> findAllSessions() {
@@ -1392,4 +1437,7 @@ public class DerbyDatabase implements IDatabase {
 		
 		System.out.println("RevMetrix DB successfully initialized!");
 	}
+
+	
+	
 }
