@@ -1,4 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,18 +7,20 @@
     <link rel="stylesheet" type="text/css" href="CSS/statsStyles.css">
 </head>
 <body>
-    <jsp:include page="navbar.jsp" />
+    <%@ include file="navbar.jsp" %>
     <div class="topPage">
         <h1>Take a look at stats</h1>
     </div>
-    <div class="infoSection">
-        <h3>Game Stats:</h3>
-        <ul>
-            <li><span class="highlight">Average frame score:</span> ${averageGameScore}</li>
-            <li><span class="highlight">Strike percentage:</span> ${strikesPerGame}</li>
-            <li><span class="highlight">Spare percentage:</span> ${sparesPerGame}</li>
-            
-        </ul>
-    </div>
+
+    <form class="Stats" action="${pageContext.servletContext.contextPath}/stats" method="post">
+        <div class="infoSection">
+            <h3>Game Stats:</h3>
+            <ul>
+                <li><span class="highlight">Average game score:</span> <%= request.getAttribute("averageGameScore") %></li>
+                <li><span class="highlight">Total Strike:</span> <%= request.getAttribute("strikesPerGame") %></li>
+                <li><span class="highlight">Total Spare:</span> <%= request.getAttribute("sparesPerGame") %></li>
+            </ul>
+        </div>
+    </form>
 </body>
 </html>
