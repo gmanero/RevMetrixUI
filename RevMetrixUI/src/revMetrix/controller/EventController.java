@@ -133,4 +133,27 @@ public class EventController {
 
         return tournaments;
     }
-}
+
+	public ArrayList<Event> findEventByID(int eventId) {
+    List<Event> eventList = db.findEventById(eventId);
+    List<Establishment> establishmentList = db.findAllEstablishments(); // Fetch all establishments
+
+    ArrayList<Event> events = new ArrayList<>();
+
+    if (eventList.isEmpty()) {
+        System.out.println("No events found");
+        return events;
+    } else {
+        for (Event event : eventList) {
+            // Set establishment name for each event
+            event.setEstablishmentName(getEstablishmentName(event.getEstablishmentId(), establishmentList));
+            events.add(event);
+            System.out.println("Event Name: " + event.getName() + ", Establishment: " +
+                    event.getEstablishmentName() +
+                    ", Type: " + eventTypeToString(event.getType()) +
+                    ", Description: " + event.getDescription());
+        }
+    }
+
+    return events;
+}}

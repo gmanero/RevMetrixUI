@@ -710,8 +710,45 @@ public class DerbyDatabase implements IDatabase {
 	        }
 	    });
 	}
+	
+	public List<Event> findEventById(final int eventId) {
+	    return executeTransaction(new Transaction<List<Event>>() {
+	        @Override
+	        public List<Event> execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
 
+	            try {
+	                stmt = conn.prepareStatement("SELECT * FROM events WHERE event_id = ?");
+	                stmt.setInt(1, eventId);
 
+	                List<Event> result = new ArrayList<>();
+
+	                resultSet = stmt.executeQuery();
+
+	                Boolean found = false;
+
+	                while (resultSet.next()) {
+	                    found = true;
+
+	                    Event event = new Event();
+	                    loadEvent(event, resultSet, 1);
+
+	                    result.add(event);
+	                }
+
+	                if (!found) {
+	                    System.out.println("No events were found with this Id");
+	                }
+
+	                return result;
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
 
 
 

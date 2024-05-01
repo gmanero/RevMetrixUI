@@ -30,5 +30,6 @@ public interface IDatabase {
 	public List<Event> findAllTournaments();
 	public List<Event> findAllPracticeEvents();
 	public List<Event> findAllLeagueEvents();
+	public List<Event> findEventById(final int eventId);
 }
 
