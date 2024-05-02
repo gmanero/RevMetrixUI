@@ -20,10 +20,12 @@ public class ShotsQuery {
 		
 		// get the DB instance and execute transaction
 		IDatabase db = DatabaseProvider.getInstance();
-		ArrayList<Game> games = db.GetGamesBySession(1);
+		List<Frame> shots = db.findAllFrames();
+		db.removeFrame(shots.get(0).getFrameId());
+		List<Frame> shots2 = db.findAllFrames();
 		
 		// check if anything was returned and output the list
-		System.out.print(games.size());
+		System.out.print(shots.size()+" "+shots2.size());
 		
 	}
 }
