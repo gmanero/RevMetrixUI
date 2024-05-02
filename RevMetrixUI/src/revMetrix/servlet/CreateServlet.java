@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import revMetrix.controller.EstablishmentController;
 import revMetrix.controller.InsertEventController;
+import revMetrix.controller.EventController;
 import revMetrix.db.model.Establishment;
+import revMetrix.db.model.Event;
 
 public class CreateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -31,6 +33,7 @@ public class CreateServlet extends HttpServlet {
             String type = req.getParameter("eventType");
             String establishmentIdParam = req.getParameter("establishment");
             String newEstablishmentName = req.getParameter("newEstablishment");
+            int numberOfSessions = Integer.parseInt(req.getParameter("numberOfSessions"));
 
             if (eventName == null || description == null || type == null) {
                 errorMessage = "Missing Required Data";
@@ -40,11 +43,25 @@ public class CreateServlet extends HttpServlet {
                     establishmentController.insertEstablishmentIntoEstablishmentsTable(newEstablishmentName);
                     InsertEventController controller = new InsertEventController();
                     controller.insertEvent(newEstablishmentName, eventName, description, type);
+                    EventController eventcontroller = new EventController();
+                    int eventId = eventcontroller.findEventIdByInfo(eventName, description);
+                    System.out.println(numberOfSessions);
+                    for(int i =0; i < numberOfSessions;i++) {
+                    	System.out.println("For loop session");
+                    	controller.insertSession(0, eventId, "0", "0", 0);
+                    }
                     successMessage = "Event added successfully";
                 }
                 else {
                 	InsertEventController controller = new InsertEventController();
                     controller.insertEvent(establishmentIdParam, eventName, description, type);
+                    EventController eventcontroller = new EventController();
+                    int eventId = eventcontroller.findEventIdByInfo(eventName, description);
+                    System.out.println(numberOfSessions);
+                    for(int i= 0;  i< numberOfSessions;i++) {
+                    	System.out.println("For loop session");
+                    	controller.insertSession(0, eventId, "0", "0", 0);
+                    }
                     successMessage = "Event added successfully";
                 }
             }

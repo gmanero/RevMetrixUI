@@ -749,7 +749,38 @@ public class DerbyDatabase implements IDatabase {
 	        }
 	    });
 	}
+	
+	public int findEventIdByInfo(final String name, final String description) {
+        return executeTransaction(new Transaction<Integer>() {
+            @Override
+            public Integer execute(Connection conn) throws SQLException {
+                PreparedStatement stmt = null;
+                ResultSet resultSet = null;
 
+                try {
+                    stmt = conn.prepareStatement(
+                        "SELECT event_id FROM events WHERE name = ? AND description = ?"
+                    );
+                    stmt.setString(1, name);
+                    stmt.setString(2, description);
+ 
+
+                    resultSet = stmt.executeQuery();
+
+                    int eventId = -1; // Default value if event not found
+
+                    if (resultSet.next()) {
+                        eventId = resultSet.getInt("event_id");
+                    }
+
+                    return eventId;
+                } finally {
+                    DBUtil.closeQuietly(resultSet);
+                    DBUtil.closeQuietly(stmt);
+                }
+            }
+        });
+    }
 
 
 	
@@ -1044,6 +1075,56 @@ public class DerbyDatabase implements IDatabase {
 	        }
 	    });
 	}
+	
+	public Integer insertSessionIntoSessionsTable(final int sessionScore, final int eventId, final String lanes, final String date, final int userId) {
+	    return executeTransaction(new Transaction<Integer>() {
+	        @Override
+	        public Integer execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt1 = null;
+	            PreparedStatement stmt2 = null;
+	            ResultSet resultSet = null;
+	            Integer sessionId = -1;
+
+	            try {
+	            	if(sessionId<=0) {
+	            	 stmt1 = conn.prepareStatement(
+	                            "INSERT INTO sessions (sessionScore, event_id, lanes, date, userId) " +
+	                            "VALUES (?, ?, ?, ?, ?)"
+	                  );
+	            	 stmt1.setInt(1, sessionScore);
+	                    stmt1.setInt(2, eventId);
+	                    stmt1.setString(3, lanes);
+	                    stmt1.setString(4, date);
+	                    stmt1.setInt(5, userId);
+	                    
+	                    stmt1.executeUpdate();
+	                    
+	                    System.out.println("New session inserted into Sessions table");
+	                 stmt2 = conn.prepareStatement(
+	                		 "SELECT session_id FROM sessions " +
+	 	                            "WHERE event_id = ? "
+	                		 );
+	                 stmt2.setInt(1, eventId);
+	                 
+	                 resultSet = stmt2.executeQuery();
+	                 
+	                 if (resultSet.next()) {
+	                        sessionId = resultSet.getInt(1);
+	                        System.out.println("New Session ID: " + sessionId);
+	                 }
+	            	}
+	                return sessionId;
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt1);
+	                DBUtil.closeQuietly(stmt2);
+	            }
+	        }
+	    });
+	}
+	
+	
+
 	
 	//SHOTS QUERYS
 	public List<Shot> findAllShots() {
