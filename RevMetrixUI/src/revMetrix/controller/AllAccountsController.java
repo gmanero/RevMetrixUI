@@ -48,6 +48,10 @@ public class AllAccountsController {
         System.out.println("All accounts logged out");
     }
     
+    public boolean isLoggedInAccount() {
+    	System.out.println("Accounts logged in found");
+        return db.isLoggedInAccount();
+    }
     
 
     public List<Ball> findAllBalls() {
@@ -79,6 +83,10 @@ public class AllAccountsController {
         return ballId;
     }
     
+    public String findLoggedInUser() {
+        return db.findLoggedInUser();
+    }
+    
     public boolean authenticate(String email, String password) {
         // Implement authentication logic using your existing methods
         // For example:
@@ -92,6 +100,4 @@ public class AllAccountsController {
         }
         return false;
     }
-
-    // Your other methods like executeTransaction can remain unchanged
 }

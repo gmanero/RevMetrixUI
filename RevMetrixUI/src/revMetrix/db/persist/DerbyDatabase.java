@@ -175,7 +175,7 @@ public class DerbyDatabase implements IDatabase {
 		});
 	}
 	
-	public Boolean logInAccount(String email, String password) throws SQLException {
+	public Boolean logInAccount(String email, String password) {
 	    executeTransaction(new Transaction<Void>() {
 	        @Override
 	        public Void execute(Connection conn) throws SQLException {
@@ -187,19 +187,23 @@ public class DerbyDatabase implements IDatabase {
 	                );
 	                stmtLogIn.setString(1, email);
 	                stmtLogIn.setString(2, password);
-	                stmtLogIn.executeUpdate();
+	                int rowsAffected = stmtLogIn.executeUpdate();
 	                
-	                System.out.println("Account <" + email + "> logged in");
+	                if (rowsAffected > 0) {
+	                    System.out.println("Account <" + email + "> logged in");
+	                } else {
+	                    System.out.println("Login failed for account <" + email + ">");
+	                }
 	            } finally {
 	                DBUtil.closeQuietly(stmtLogIn);
 	            }
-	            
-	            return true;
+	            return null;
 	        }
 	    });
+	    return true;
 	}
 
-	public void logOutAllAccounts() throws SQLException {
+	public Boolean logOutAllAccounts() {
 	    executeTransaction(new Transaction<Void>() {
 	        @Override
 	        public Void execute(Connection conn) throws SQLException {
@@ -209,9 +213,9 @@ public class DerbyDatabase implements IDatabase {
 	                stmtLogOut = conn.prepareStatement(
 	                    "UPDATE accounts SET isLoggedIn = false"
 	                );
-	                stmtLogOut.executeUpdate();
+	                int rowsAffected = stmtLogOut.executeUpdate();
 	                
-	                System.out.println("All accounts logged out");
+	                System.out.println(rowsAffected + " accounts logged out");
 	            } finally {
 	                DBUtil.closeQuietly(stmtLogOut);
 	            }
@@ -219,8 +223,65 @@ public class DerbyDatabase implements IDatabase {
 	            return null;
 	        }
 	    });
+	    return true;
 	}
+	
+	public Boolean isLoggedInAccount() {
+	    return executeTransaction(new Transaction<Boolean>() {
+	        @Override
+	        public Boolean execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet rs = null;
+	            boolean isLoggedIn = false;
 
+	            try {
+	                stmt = conn.prepareStatement(
+	                        "SELECT COUNT(*) FROM accounts WHERE isLoggedIn = true"
+	                );
+	                rs = stmt.executeQuery();
+
+	                // Check if there's at least one account logged in
+	                if (rs.next()) {
+	                    int count = rs.getInt(1);
+	                    isLoggedIn = count > 0;
+	                }
+	            } finally {
+	                DBUtil.closeQuietly(rs);
+	                DBUtil.closeQuietly(stmt);
+	            }
+
+	            return isLoggedIn;
+	        }
+	    });
+	}
+	
+	public String findLoggedInUser() {
+	    return executeTransaction(new Transaction<String>() {
+	        @Override
+	        public String execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet rs = null;
+	            String loggedInFirstName = null;
+
+	            try {
+	                stmt = conn.prepareStatement(
+	                        "SELECT firstname FROM accounts WHERE isLoggedIn = true"
+	                );
+	                rs = stmt.executeQuery();
+
+	                // Check if there's at least one account logged in
+	                if (rs.next()) {
+	                    loggedInFirstName = rs.getString("firstname");
+	                }
+	            } finally {
+	                DBUtil.closeQuietly(rs);
+	                DBUtil.closeQuietly(stmt);
+	            }
+
+	            return loggedInFirstName;
+	        }
+	    });
+	}
 	
 	
 	public List<Ball> findAllBalls() {

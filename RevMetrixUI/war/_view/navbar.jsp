@@ -34,7 +34,13 @@
     </div>
     <div class="login">
         <form method="get">
-            <button type="submit" name="destination" value="login" class="login-btn">Login</button>
+            <% Boolean loggedIn = (Boolean) request.getAttribute("loggedIn"); %>
+            <% if (loggedIn != null && loggedIn) { %>
+                <span class="loggedInName"><p>${loggedInName}</p></span>
+                <button type="submit" name="destination" value="logout" class="login-btn">Logout</button>
+            <% } else { %>
+                <button type="submit" name="destination" value="login" class="login-btn">Login</button>
+            <% } %>
             <button type="submit" name="destination" value="account" class="account-btn">Account</button>
         </form>
     </div>

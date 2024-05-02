@@ -27,12 +27,13 @@ public class LoginServlet extends HttpServlet {
 	    // Check if the email and password are valid
 	    if (controller.authenticate(email, password)) {
 	        // If authentication succeeds, redirect to account.jsp
-	    	//controller.logInAccount(email, password);
+	    	controller.logInAccount(email, password);
 	    	System.out.println("LOGGED IN");
 	        response.sendRedirect("/revMetrix/index?destination=account");
 	    } else {
 	        // If authentication fails, redirect back to the login page with an error message
-	        response.sendRedirect("login.jsp?error=true");
+	    	System.out.println("INVALID LOGIN");
+	        response.sendRedirect("/revMetrix/index?destination=login");
 	    }
     }
 }
