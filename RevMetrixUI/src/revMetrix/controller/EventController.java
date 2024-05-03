@@ -18,7 +18,7 @@ public class EventController {
         DatabaseProvider.setInstance(new DerbyDatabase());
         db = DatabaseProvider.getInstance();
     }
-
+    
     public ArrayList<Event> getAllEvents() {
         List<Event> eventList = db.findAllEvents();
         List<Establishment> establishmentList = db.findAllEstablishments(); // Fetch all establishments
@@ -133,4 +133,35 @@ public class EventController {
 
         return tournaments;
     }
+
+	public ArrayList<Event> findEventByID(int eventId) {
+    List<Event> eventList = db.findEventById(eventId);
+    List<Establishment> establishmentList = db.findAllEstablishments(); // Fetch all establishments
+
+    ArrayList<Event> events = new ArrayList<>();
+
+    if (eventList.isEmpty()) {
+        System.out.println("No events found");
+        return events;
+    } else {
+        for (Event event : eventList) {
+            // Set establishment name for each event
+            event.setEstablishmentName(getEstablishmentName(event.getEstablishmentId(), establishmentList));
+            events.add(event);
+            System.out.println("Event Name: " + event.getName() + ", Establishment: " +
+                    event.getEstablishmentName() +
+                    ", Type: " + eventTypeToString(event.getType()) +
+                    ", Description: " + event.getDescription());
+        }
+    }
+
+    return events;
 }
+	
+	private int eventId = -1;
+	public int findEventIdByInfo(String name, String description) {
+		eventId = db.findEventIdByInfo(name, description);
+		return eventId;
+	}
+	
+	}

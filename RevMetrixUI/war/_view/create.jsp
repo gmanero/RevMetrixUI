@@ -57,6 +57,10 @@
                     <option value="tournament">Tournament</option>
                 </select>
             </div>
+            <div class="form-group">
+   			 <label for="numberOfSessions">Number of Sessions:</label>
+    		<input type="number" id="numberOfSessions" name="numberOfSessions" required>
+			</div>
             <input type="submit" value="Create Event">
         </form>
     </div>
