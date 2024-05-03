@@ -17,6 +17,7 @@ public interface IDatabase {
 	
 	public Boolean updateFrameScore(int frameId, int newScore);
 	public Boolean updateGameScore(int gameId, int newScore);
+	public Boolean updateSessionScore(int sessionId, int newScore);
 
 	public Integer addGame(Game game);
 	public Integer addFrame(Frame frame);

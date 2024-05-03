@@ -534,6 +534,14 @@ public class GameController {
 		
 		return output;
 	}
+	public void updateSessionScore(int id) {
+		ArrayList<Game> games = GetGamesBySession(id);
+		int total = 0;
+		for(Game game: games) {
+			total +=game.getGameScore();
+		}
+		db.updateSessionScore(id, total);
+	}
 	
 	
 	
