@@ -863,6 +863,32 @@ public class DerbyDatabase implements IDatabase {
 	    });
 	}
 	//GAMES QUERYS
+	
+	public Boolean updateGameScore(int gameId, int newScore) {
+		return executeTransaction(new Transaction<Boolean>() {
+	        @Override
+	        public Boolean execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            try {
+	                stmt = conn.prepareStatement("UPDATE games SET gameScore = ? WHERE game_id = ?");
+	                
+	                Boolean result = true;
+	                stmt.setInt(1, newScore);
+	                stmt.setInt(2, gameId);
+	                int rowsUpdated =stmt.executeUpdate();
+	                System.out.println(rowsUpdated);
+	                return result;
+	               
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
+	
 	public ArrayList<Shot> GetShotsByGame(int id){
 		return executeTransaction(new Transaction<ArrayList<Shot>>() {
 	        @Override
@@ -937,7 +963,7 @@ public class DerbyDatabase implements IDatabase {
 			
 		});
 	}
-	public Integer addShot(int gameId, int FrameId, Shot shot) {
+	public Integer addShot(int gameId, int FrameId, Shot shot, int sessionID) {
 		return executeTransaction(new Transaction<Integer>() {
 			public Integer execute(Connection conn) throws SQLException {
 				PreparedStatement insertShot = conn.prepareStatement("insert into shots (shotNumber, pins, ball_id, split, washout, shotScore) VALUES (?, ?, ?, ?, ?, ?)",PreparedStatement.RETURN_GENERATED_KEYS);
@@ -956,7 +982,7 @@ public class DerbyDatabase implements IDatabase {
 				}
 				
 				PreparedStatement insertJunction = conn.prepareStatement("insert into junction (session_id, game_id, frame_id, shot_id) values (?, ?, ?, ?)",PreparedStatement.RETURN_GENERATED_KEYS);
-				 insertJunction.setInt(1, 1);
+				 insertJunction.setInt(1, sessionID);
 					 insertJunction.setInt(2, gameId);
 					 insertJunction.setInt(3, FrameId);
 					 insertJunction.setInt(4, key);
@@ -966,6 +992,38 @@ public class DerbyDatabase implements IDatabase {
 			
 			}
 			
+		});
+	}
+	public Integer removeShot(int shotID) {
+		return executeTransaction(new Transaction<Integer>() {
+			public Integer execute(Connection conn) throws SQLException {
+				PreparedStatement remShot2 = conn.prepareStatement("DELETE FROM Junction WHERE Shot_id = ?");
+				remShot2.setInt(1, shotID);
+				remShot2.executeUpdate();
+				
+				PreparedStatement remShot = conn.prepareStatement("DELETE FROM shots WHERE Shot_id = ?");
+				remShot.setInt(1, shotID);
+				remShot.executeUpdate();
+				
+				
+				return -1;
+			}
+		});
+	}
+	public Integer removeFrame(int frameID) {
+		return executeTransaction(new Transaction<Integer>() {
+			public Integer execute(Connection conn) throws SQLException {
+				PreparedStatement remShot2 = conn.prepareStatement("DELETE FROM Junction WHERE Frame_id = ?");
+				remShot2.setInt(1, frameID);
+				remShot2.executeUpdate();
+				
+				PreparedStatement remShot = conn.prepareStatement("DELETE FROM frames WHERE Frame_id = ?");
+				remShot.setInt(1, frameID);
+				remShot.executeUpdate();
+				
+				
+				return -1;
+			}
 		});
 	}
 	public List<Game> findAllGames() {
@@ -1005,8 +1063,77 @@ public class DerbyDatabase implements IDatabase {
 	        }
 	    });
 	}
+	public ArrayList<Game> GetGamesBySession(int id){
+		return executeTransaction(new Transaction<ArrayList<Game>>() {
+	        @Override
+	        public ArrayList<Game> execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            try {
+	            	stmt = conn.prepareStatement("select games.* from junction, games where Junction.Session_Id = ? and Junction.Game_id=Games.Game_Id");
+	                stmt.setInt(1,id);
+	                
+	                ArrayList<Game> result = new ArrayList<Game>();
+	                
+	                resultSet = stmt.executeQuery();
+	                
+	                Boolean found = false;
+	                
+	                while (resultSet.next()) {
+	                    found = true;
+	                    
+	                    Game game = new Game();
+	                    loadGame(game, resultSet, 1);
+	                    boolean duplicate = false;
+	                    for(Game games: result) {
+	                    	if(game.getGameId()==games.getGameId()) {
+	                    		duplicate = true;
+	                    	}
+	                    }
+	                    if(!duplicate) {
+	                    result.add(game);
+	                    }
+	                }
+	                
+	                if (!found) {
+	                    System.out.println("No games were found in the database");
+	                }
+	                
+	                return result;
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
 	
 	//SESSIONS QUERYS
+	public Boolean updateSessionScore(int sessionId, int newScore) {
+		return executeTransaction(new Transaction<Boolean>() {
+	        @Override
+	        public Boolean execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            try {
+	                stmt = conn.prepareStatement("UPDATE sessions SET sessionScore = ? WHERE session_id = ?");
+	                
+	                Boolean result = true;
+	                stmt.setInt(1, newScore);
+	                stmt.setInt(2, sessionId);
+	                int rowsUpdated =stmt.executeUpdate();
+	                System.out.println(rowsUpdated);
+	                return result;
+	               
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
 	public List<Session> findAllSessions() {
 	    return executeTransaction(new Transaction<List<Session>>() {
 	        @Override
@@ -1586,4 +1713,7 @@ public class DerbyDatabase implements IDatabase {
 		
 		System.out.println("RevMetrix DB successfully initialized!");
 	}
+
+	
+	
 }
