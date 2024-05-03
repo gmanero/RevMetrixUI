@@ -38,18 +38,6 @@
  <servlet-name>CreateServlet</servlet-name>
         <servlet-class>revMetrix.servlet.CreateServlet</servlet-class>
     </servlet>
-     <servlet>
- <servlet-name>CreateLeagueServlet</servlet-name>
-        <servlet-class>revMetrix.servlet.CreateLeagueServlet</servlet-class>
-    </servlet>
-     <servlet>
- <servlet-name>CreatePracticeServlet</servlet-name>
-        <servlet-class>revMetrix.servlet.CreatePracticeServlet</servlet-class>
-    </servlet>
-     <servlet>
- <servlet-name>CreateTournamentServlet</servlet-name>
-        <servlet-class>revMetrix.servlet.CreateTournamentServlet</servlet-class>
-    </servlet>
     <servlet>
     <servlet-name>TournamentsServlet</servlet-name>
         <servlet-class>revMetrix.servlet.TournamentsServlet</servlet-class>
@@ -114,21 +102,6 @@
      <servlet-mapping>
         <servlet-name>CreateServlet</servlet-name>
         <url-pattern>/create</url-pattern>
-    </servlet-mapping>
-    
-     <servlet-mapping>
-        <servlet-name>CreateLeagueServlet</servlet-name>
-        <url-pattern>/createLeague</url-pattern>
-    </servlet-mapping>
-    
-     <servlet-mapping>
-        <servlet-name>CreatePracticeServlet</servlet-name>
-        <url-pattern>/createPractice</url-pattern>
-    </servlet-mapping>
-    
-     <servlet-mapping>
-        <servlet-name>CreateTournamentServlet</servlet-name>
-        <url-pattern>/createTournament</url-pattern>
     </servlet-mapping>
     
      <servlet-mapping>

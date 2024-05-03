@@ -12,6 +12,7 @@ body {
     color: #fff;
 }
 
+/* Header Styles */
 .topPage {
     text-align: center;
     background: linear-gradient(to bottom, #562d7f, #26acca);
@@ -25,44 +26,96 @@ body {
     color: #fff;
 }
 
+/* Form Styles */
 .container {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.box {
-    width: 300px;
+    width: 600px; /* Adjusted width for the wider form */
+    margin: 50px auto;
     padding: 20px;
-    background-color: #333;
+    border: 1px solid #333;
     border-radius: 10px;
-    margin-bottom: 20px;
+    background-color: #333;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.box h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.box p {
-    margin-bottom: 20px;
-}
-
-.button {
-    display: block;
+.container h2 {
     text-align: center;
-    background-color: #26acca;
-    border: none;
-    color: #fff;
-    padding: 10px 20px;
-    font-size: 18px;
-    text-decoration: none;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #fff; /* Adjusted label color */
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+textarea {
+    width: calc(100% - 10px);
+    padding: 10px;
+    border: 1px solid #ccc;
     border-radius: 5px;
+    font-size: 16px;
+    background-color: #444; /* Adjusted input background color */
+    color: #fff; /* Adjusted input text color */
+}
+
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #26acca;
+    color: #fff; /* Adjusted submit button color */
+    font-size: 16px;
     cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #316477;
+    color: #fff; /* Adjusted hover color */
+}
+
+textarea {
+    resize: vertical; /* Allowing vertical resize for textarea */
+}
+
+/* Additional Styles */
+.linkReg {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.linkReg a {
+    text-decoration: none;
+    color: #fff;
+    background-color: #af00ff;
+    padding: 10px 20px;
+    border-radius: 5px;
     transition: background-color 0.3s;
 }
 
-.button:hover {
-    background-color: #316477;
+.linkReg a:hover {
+    background-color: #8a00b3;
 }
+.signUp {
+        background-color: #26acca;
+        width: 150px;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        
+        }
+.signUp :hover {
+        background-color: #4891ac;
+        }

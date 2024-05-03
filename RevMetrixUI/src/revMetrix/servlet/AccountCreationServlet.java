@@ -1,12 +1,18 @@
 package revMetrix.servlet;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import revMetrix.db.persist.DatabaseProvider;
+import revMetrix.db.persist.DerbyDatabase;
+import revMetrix.db.persist.IDatabase;
+import revMetrix.controller.InsertAccountController;
 
 import revMetrix.model.RevMetrix;
 
@@ -15,6 +21,8 @@ import revMetrix.model.RevMetrix.Account;
 
 public class AccountCreationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private InsertAccountController controller =null;
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -34,55 +42,43 @@ public class AccountCreationServlet extends HttpServlet {
 		
 		// holds the error message text, if there is any
 		String errorMessage = null;
+		String successMessage = null;
+		boolean added = false;
 		
 		// decode POSTed form parameters and dispatch to controller
 		try {
-			RevMetrix revMetrix = new RevMetrix();
-			ArrayList<RevMetrix.Account> accounts = revMetrix.getAccountsList();
-			
-			RevMetrix.Account Account = new Account("djhake2@ycp.edu", "Don", "Hake", false);
-			accounts.add(Account);
-			
-			
 			String Email = req.getParameter("email");
-			String Username = req.getParameter("user");
-			String Password = req.getParameter("pass");
+			String FirstName = req.getParameter("firstname");
+			String LastName = req.getParameter("lastname");
+			String Password = req.getParameter("password2");
+			System.out.println(Email + FirstName + LastName + Password);
 			
 			
+			// Check for null values
+	        if ((Email == null || Email == "")  || (FirstName == null || FirstName == "") || (LastName == null || LastName == "") || (Password == null || Password == "")) {
+	            System.out.println("Missing Required Data");
+	            //handle error message
+	        } else {
+	        	InsertAccountController controller = new InsertAccountController();
+	        	System.out.println("PASS");
+
+	            // Call the insertAccount method
+	        	controller.insertAccount(Email, Password, LastName, FirstName);
+	            System.out.println("ADDED INTO DATABASE");
+
+	            // Set success message if needed
+	            successMessage = "Account added successfully";
+	            
+	        }
 			
-			// check for errors in the form data 
-			if (Email == null || Username == null || Password == null) {
-				errorMessage = "Missing Required Data";
-			}else {
-				
-				// PUT IN CONTROLLER
-				for(RevMetrix.Account account : accounts)
-				{
-					if (Email.equals(account.getEmail()))
-	    			{
-						errorMessage = "Email Already In Uses";
-						break;
-	    			}else{
-	    				if (Username.equals(account.getUsername()) )
-		   				{
-		   					errorMessage = "Username Already Taken";
-		   					break;
-		   				}else{
-		   					account = new Account(Email, Username, Password, false);
-		   					req.setAttribute("username", Username);
-		   	                req.setAttribute("password", Password);
-		    				resp.sendRedirect(req.getContextPath() + "/login.jsp");
-		    				return;
-		   				}
-	    			}
-				}
-				
-			}
 		} catch (Exception e) {
-			errorMessage = "Type Error - Needs fixing";
+			//type error if this shows
+			errorMessage = "Something Went Wrong";
 		}
 		req.setAttribute("errorMessage", errorMessage);
 		
-		req.getRequestDispatcher("/_view/login.jsp").forward(req, resp);
+		
+		
+		req.getRequestDispatcher("/_view/account.jsp").forward(req, resp);
 	}
 }
