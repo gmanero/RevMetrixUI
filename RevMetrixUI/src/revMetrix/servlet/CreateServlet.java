@@ -1,6 +1,7 @@
 package revMetrix.servlet;
 
 import java.io.IOException;
+
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -36,19 +37,16 @@ public class CreateServlet extends HttpServlet {
             } else {
                 if (establishmentIdParam.equals("addNew") && newEstablishmentName != null && !newEstablishmentName.isEmpty()) {
                     EstablishmentController establishmentController = new EstablishmentController();
-                    Integer newEstablishmentId = establishmentController.insertEstablishmentIntoEstablishmentsTable(newEstablishmentName);
-
-                    if (newEstablishmentId > 0) {
-                        establishmentIdParam = String.valueOf(newEstablishmentId);
-                        successMessage = "New Establishment Added: " + newEstablishmentName;
-                    } else {
-                        errorMessage = "Failed to Add New Establishment";
-                    }
+                    establishmentController.insertEstablishmentIntoEstablishmentsTable(newEstablishmentName);
+                    InsertEventController controller = new InsertEventController();
+                    controller.insertEvent(newEstablishmentName, eventName, description, type);
+                    successMessage = "Event added successfully";
                 }
-
-                InsertEventController controller = new InsertEventController();
-                controller.insertEvent(establishmentIdParam, eventName, description, type);
-                successMessage = "Event added successfully";
+                else {
+                	InsertEventController controller = new InsertEventController();
+                    controller.insertEvent(establishmentIdParam, eventName, description, type);
+                    successMessage = "Event added successfully";
+                }
             }
         } catch (Exception e) {
             errorMessage = "Error: " + e.getMessage();

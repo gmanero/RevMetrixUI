@@ -1,13 +1,13 @@
 package revMetrix.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import revMetrix.db.model.Event;
 import revMetrix.db.model.Establishment;
 import revMetrix.db.persist.DatabaseProvider;
 import revMetrix.db.persist.DerbyDatabase;
 import revMetrix.db.persist.IDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class EventController {
 
@@ -64,4 +64,96 @@ public class EventController {
                 return "Unknown Type";
         }
     }
-}
+
+    public ArrayList<Event> getAllPracticeEvents() {
+        List<Event> practiceEventList = db.findAllPracticeEvents();
+        List<Establishment> establishmentList = db.findAllEstablishments(); // Fetch all establishments
+
+        ArrayList<Event> practiceEvents = new ArrayList<>();
+
+        if (practiceEventList.isEmpty()) {
+            System.out.println("No practice events found");
+            return practiceEvents;
+        } else {
+            for (Event event : practiceEventList) {
+                // Set establishment name for each practice event
+                event.setEstablishmentName(getEstablishmentName(event.getEstablishmentId(), establishmentList));
+                practiceEvents.add(event);
+                System.out.println("Practice Event Name: " + event.getName() + ", Establishment: " +
+                        event.getEstablishmentName() +
+                        ", Description: " + event.getDescription());
+            }
+        }
+
+        return practiceEvents;
+    }
+
+    public ArrayList<Event> getAllLeagueEvents() {
+        List<Event> leagueEventList = db.findAllLeagueEvents();
+        List<Establishment> establishmentList = db.findAllEstablishments(); // Fetch all establishments
+
+        ArrayList<Event> leagueEvents = new ArrayList<>();
+
+        if (leagueEventList.isEmpty()) {
+            System.out.println("No league events found");
+            return leagueEvents;
+        } else {
+            for (Event event : leagueEventList) {
+                // Set establishment name for each league event
+                event.setEstablishmentName(getEstablishmentName(event.getEstablishmentId(), establishmentList));
+                leagueEvents.add(event);
+                System.out.println("League Event Name: " + event.getName() + ", Establishment: " +
+                        event.getEstablishmentName() +
+                        ", Description: " + event.getDescription());
+            }
+        }
+
+        return leagueEvents;
+    }
+
+    public ArrayList<Event> getAllTournaments() {
+        List<Event> tournamentList = db.findAllTournaments();
+        List<Establishment> establishmentList = db.findAllEstablishments(); // Fetch all establishments
+
+        ArrayList<Event> tournaments = new ArrayList<>();
+
+        if (tournamentList.isEmpty()) {
+            System.out.println("No tournaments found");
+            return tournaments;
+        } else {
+            for (Event event : tournamentList) {
+                // Set establishment name for each tournament
+                event.setEstablishmentName(getEstablishmentName(event.getEstablishmentId(), establishmentList));
+                tournaments.add(event);
+                System.out.println("Tournament Name: " + event.getName() + ", Establishment: " +
+                        event.getEstablishmentName() +
+                        ", Description: " + event.getDescription());
+            }
+        }
+
+        return tournaments;
+    }
+
+	public ArrayList<Event> findEventByID(int eventId) {
+    List<Event> eventList = db.findEventById(eventId);
+    List<Establishment> establishmentList = db.findAllEstablishments(); // Fetch all establishments
+
+    ArrayList<Event> events = new ArrayList<>();
+
+    if (eventList.isEmpty()) {
+        System.out.println("No events found");
+        return events;
+    } else {
+        for (Event event : eventList) {
+            // Set establishment name for each event
+            event.setEstablishmentName(getEstablishmentName(event.getEstablishmentId(), establishmentList));
+            events.add(event);
+            System.out.println("Event Name: " + event.getName() + ", Establishment: " +
+                    event.getEstablishmentName() +
+                    ", Type: " + eventTypeToString(event.getType()) +
+                    ", Description: " + event.getDescription());
+        }
+    }
+
+    return events;
+}}
