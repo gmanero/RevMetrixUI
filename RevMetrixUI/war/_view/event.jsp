@@ -25,16 +25,20 @@
 %>
 
 <% if (!events.isEmpty()) { %>
+<form method="get">
     <div class="eventCards">
         <% for (Event event : events) { %>
-            <div class="eventCard">
-                <h2><%= event.getName() %></h2>
-                <p><strong>Establishment:</strong> <%= event.getEstablishmentName() %></p>
-                <p><strong>Type:</strong> <%= event.getTypeString() %></p>
-                <p><strong>Description:</strong> <%= event.getDescription() %></p>
-            </div>
+            <a href="index?destination=eventDetails&id=<%= event.getEventId() %>">
+                <div class="eventCard">
+                    <h2><%= event.getName() %></h2>
+                    <p><strong>Establishment:</strong> <%= event.getEstablishmentName() %></p>
+                    <p><strong>Type:</strong> <%= event.getTypeString() %></p>
+                    <p><strong>Description:</strong> <%= event.getDescription() %></p>
+                </div>
+            </a>
         <% } %>
     </div>
+    </form>
 <% } else { %>
     <p>No events found.</p>
 <% } %>
