@@ -29,17 +29,19 @@ public class IndexServlet extends HttpServlet {
 
         AllAccountsController controller = new AllAccountsController();
         boolean loggedIn = controller.isLoggedInAccount();
-        
-        if (loggedIn) {
-        	loggedInName = "Hello, " + controller.findLoggedInUser();
-        	System.out.println("Logged in name: " + loggedInName);
-        }
 
         
         if (!loggedIn) {
-        	destOut = "/_view/login.jsp";
+        	if("accountCreation".equals(destIn)) {
+                destOut = "/_view/accountCreation.jsp";
+            }
+        	else {
+        		destOut = "/_view/login.jsp";
+        	}
         }
         else {
+        	loggedInName = "Hello, " + controller.findLoggedInUser();
+        	System.out.println("Logged in name: " + loggedInName);
         	// Forward based on the action parameter
             if ("RevMetrix".equals(destIn)) {
                destOut = "/_view/index.jsp";
@@ -91,9 +93,6 @@ public class IndexServlet extends HttpServlet {
             }
             else if ("yourGames".equals(destIn)) {
                 destOut = "/_view/yourGames.jsp";
-            }
-            else if ("accountCreation".equals(destIn)) {
-                destOut = "/_view/accountCreation.jsp";
             }
             else {
                destOut = "/_view/index.jsp";
