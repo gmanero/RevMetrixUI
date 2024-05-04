@@ -32,29 +32,17 @@
             <button type="submit" name="destination" value="game" class="nav-item">Quick Bowl</button>
         </form>
     </div>
-    <div class="accountLinks">
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-
-
     
-    <div class="account">
-        <form method="get">
-            <button type="submit" name="destination" value="account" class="account-btn">Account</button>
-        </form>
-    </div>
-
-    <div class="login">
+     <div class="login">
         <form method="get">
             <% Boolean loggedIn = (Boolean) request.getAttribute("loggedIn"); %>
             <% if (loggedIn != null && loggedIn) { %>
-                <span class="loggedInName"><p>${loggedInName}</p></span>
-                <button type="submit" name="destination" value="logout" class="login-btn">Logout</button>
+                <div class="left"><span class="loggedInName"><p>${loggedInName}</p></span></div>
+                <div class="center"><button type="submit" name="destination" value="logout" class="login-btn">Logout</button></div>
             <% } else { %>
-                <button type="submit" name="destination" value="login" class="login-btn">Login</button>
+                <div class="center"><button type="submit" name="destination" value="login" class="login-btn">Login</button></div>
             <% } %>
+            <div class="right"><button type="submit" name="destination" value="account" class="account-btn">Account</button></div>
         </form>
     </div>
 </div>

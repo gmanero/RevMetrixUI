@@ -6,100 +6,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RevMetrix - Current Game</title>
     <link rel = "stylesheet" type ="text/css" href="CSS/gameStyles.css">
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 </head>
 
-<body>
+<body onload="Startup()">
  <jsp:include page="navbar.jsp" />
     <div class="topPage">
         <h1>Current Game</h1>
+       
     </div>
     
-<div class="center">
+<div class="center2">
+	
 	<div class = "interactions">
 	<div class="scoreboard">
         <div class="score-box">
             <div class="score-upper">
-                <div class="shot-gap">a</div>
-                <div id = "split1" class="shot-box">${shotScores[0]}</div>
+                <div class="shot-gap">${washout[0]}</div>
+                <div class="shot-box"><div id = split1 class=""> ${shotScores[0]}</div></div>
                 <div class="shot-box">${shotScores[1]}</div>
             </div>
             <div class="score-running">${scores[0]}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
-                <div class="shot-gap"></div>
-                <div id = "split2" class="shot-box">${shotScores[2]}</div>
+                <div class="shot-gap">${washout[1]}</div>
+                <div class="shot-box"><div id = "split2" class="">${shotScores[2]}</div></div>
                 <div class="shot-box">${shotScores[3]}</div>
             </div>
             <div class="score-running">${scores[1]}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
-                <div class="shot-gap"></div>
-                <div id = "split3" class="shot-box">${shotScores[4]}</div>
+                <div class="shot-gap">${washout[2]}</div>
+                <div class="shot-box"><div id = split3 class="">${shotScores[4]}</div></div>
                 <div class="shot-box">${shotScores[5]}</div>
             </div>
             <div class="score-running">${scores[2]}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
-                <div class="shot-gap"></div>
-                <div id = "split4" class="shot-box">${shotScores[6]}</div>
+                <div class="shot-gap">${washout[3]}</div>
+                <div class="shot-box"><div id = split4 class="">${shotScores[6]}</div></div>
                 <div class="shot-box">${shotScores[7]}</div>
             </div>
             <div class="score-running">${scores[3]}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
-                <div class="shot-gap"></div>
-                <div id = "split5" class="shot-box">${shotScores[8]}</div>
+                <div class="shot-gap">${washout[4]}</div>
+                <div class="shot-box"><div id = split5 class="">${shotScores[8]}</div></div>
                 <div class="shot-box">${shotScores[9]}</div>
             </div>
             <div class="score-running">${scores[4]}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
-                <div class="shot-gap"></div>
-                <div id = "split6" class="shot-box">${shotScores[10]}</div>
+                <div class="shot-gap">${washout[5]}</div>
+                <div class="shot-box"><div id = split6 class="">${shotScores[10]}</div></div>
                 <div class="shot-box">${shotScores[11]}</div>
             </div>
             <div class="score-running">${scores[5]}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
-                <div class="shot-gap"></div>
-                <div id = "split7" class="shot-box">${shotScores[12]}</div>
+                <div class="shot-gap">${washout[6]}</div>
+                <div class="shot-box"><div id = split7 class="">${shotScores[12]}</div></div>
                 <div class="shot-box">${shotScores[13]}</div>
             </div>
             <div class="score-running">${scores[6]}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
-                <div class="shot-gap"></div>
-                <div id = "split8" class="shot-box">${shotScores[14]}</div>
+                <div class="shot-gap">${washout[7]}</div>
+                <div class="shot-box"><div id = split8 class="">${shotScores[14]}</div></div>
                 <div class="shot-box">${shotScores[15]}</div>
             </div>
             <div class="score-running">${scores[7]}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
-                <div class="shot-gap"></div>
-                <div id = "split9" class="shot-box">${shotScores[16]}</div>
+                <div class="shot-gap">${washout[8]}</div>
+                <div class="shot-box"><div id = split9 class="">${shotScores[16]}</div></div>
                 <div class="shot-box">${shotScores[17]}</div>
             </div>
             <div class="score-running">${scores[8]}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
-                <div id = "split10" class="shot-box">${shotScores[18]}</div>
-                <div id = "split11" class="shot-box">${shotScores[19]}</div>
+                <div class="shot-box"><div id = split10 class="">${shotScores[18]}</div></div>
+                <div class="shot-box"><div id = split11 class="">${shotScores[19]}</div></div>
                 <div class="shot-box">${shotScores[20]}</div>
             </div>
             <div class="score-running">${scores[9]}</div>
         </div>
         <div class="score-box">
             <div class="score-upper">
-                <div class="shot-box">${event_score}</div>
+                <div class="shot-box"></div>
             </div>
             <div class="score-running">${scores[10]}</div>
         </div>
@@ -113,41 +116,41 @@
     </div>
   </div>
   <div class="rowNew">
-    <div class="pinNew" onclick="togglePin(this,7)"><span>7</span></div>
-    <div class="pinNew" onclick="togglePin(this,8)"><span>8</span></div>
-    <div class="pinNew" onclick="togglePin(this,9)"><span>9</span></div>
-    <div class="pinNew" onclick="togglePin(this,0)"><span>10</span></div>
+    <div class="pinNew" id= "pin7" onclick="togglePin(this,7)"><span>7</span></div>
+    <div class="pinNew" id= "pin8" onclick="togglePin(this,8)"><span>8</span></div>
+    <div class="pinNew" id= "pin9" onclick="togglePin(this,9)"><span>9</span></div>
+    <div class="pinNew" id= "pin0" onclick="togglePin(this,0)"><span>10</span></div>
   </div>
   <div class="rowNew">
-    <div class="pinNew" onclick="togglePin(this,4)"><span>4</span></div>
-    <div class="pinNew" onclick="togglePin(this,5)"><span>5</span></div>
-    <div class="pinNew" onclick="togglePin(this,6)"><span>6</span></div>
+    <div class="pinNew" id= "pin4" onclick="togglePin(this,4)"><span>4</span></div>
+    <div class="pinNew" id= "pin5" onclick="togglePin(this,5)"><span>5</span></div>
+    <div class="pinNew" id= "pin6" onclick="togglePin(this,6)"><span>6</span></div>
   </div>
   <div class="rowNew">
-    <div class="pinNew" onclick="togglePin(this,2)"><span>2</span></div>
-    <div class="pinNew" onclick="togglePin(this,3)"><span>3</span></div>
+    <div class="pinNew" id= "pin2" onclick="togglePin(this,2)"><span>2</span></div>
+    <div class="pinNew" id= "pin3" onclick="togglePin(this,3)"><span>3</span></div>
   </div>
   <div class="rowNew">
-    <div class="pinNew" onclick="togglePin(this,1)"><span>1</span></div>
+    <div class="pinNew" id= "pin1" onclick="togglePin(this,1)"><span>1</span></div>
   </div>
   <div class="rowNew">
-    <div class="firstShot" onclick="setFirstShot()" style="background-color: #26acca;"><span> </span></div>
-    <div class="secondShot" onclick="setSecondShot()" style="background-color: lightgrey;"><span> </span></div>
+    <div class="firstShot" style="display: none;" onclick="setFirstShot()" style="background-color: #26acca;"><span> </span></div>
+    <div class="secondShot" style="display: none;" onclick="setSecondShot()" style="background-color: lightgrey;" ><span> </span></div>
   </div>
   <div class="rowNew">
     <div class="foul" onclick="setFoul()"><span>F</span></div>
     <div class="miss" onclick="setGutter()"><span>-</span></div>
     <div class="strike" onclick="setStrike()"><span>X</span></div>
-    <div class="spare" onclick="setSpare()"><span>/</span></div>
+    <div class="spare" style="display: none;" onclick="setSpare()"><span>/</span></div>
   </div>
   <div class="rowNew">
-    <input class="button" type="Submit" name="submit" value="< Previous" onclick="getPreviousFrame()">
-    <input class="button" type="Submit" name="submit" value="Next Frame >" onclick="getNextFrame()">
+    <input id = "next" class="button" type="Submit" name="submit" value="Next Shot >" onclick="getNextFrame()">
     
     <input type = "hidden" name = "firstRemaining" id = 'firstRemaining' value = "">
     <input type = "hidden" name = "secondRemaining" id = 'secondRemaining' value = "">
     <input type = "hidden" name = "firstExtra" id = 'firstExtra' value = "">
     <input type = "hidden" name = "secondExtra" id = 'secondExtra' value = "">
+      
   </div>
   <br>
   <div class="dropdown-select" >
@@ -174,7 +177,7 @@
             <% } %>
    
   </select>
-  <select name="ball2">
+  <select name="ball2" style="display: none;">
   	<%@ page import="java.util.List" %>
   	<%@ page import= "revMetrix.db.model.Ball" %>
 	<% 
@@ -196,13 +199,60 @@
   </div>
   <br>
 </div>
-<div class= "center">
+<div class= "center2">
 <label> Lane: </label>
 <input name = "lane" value = ${lane }>
 </div>
 <br>
+
 </form>		      
         <br>
+        <div class = "gameInfo">
+        <div class = "center2">
+        
+        <form action="${pageContext.servletContext.contextPath}/game" method="post">
+        <div class="dropdown-select">
+ 		<input class="button" type="Submit" name="submit" value="  Swap Game   ">
+		<select name="Game">
+		  	<%@ page import="java.util.ArrayList" %>
+		  	<%@ page import= "revMetrix.db.model.Game" %>
+			<% 
+		            // Retrieve the objectList attribute from the request
+		            Object games = request.getAttribute("games");
+		            
+		            // Check if obj is an instance of ArrayList<Ball> before casting
+		            if (games instanceof List) {
+		                ArrayList<Game> gameList = (ArrayList<Game>) games;
+		                int i = 0;
+		                // Iterate over the ArrayList and generate options for the dropdown menu
+		                for (Game game : gameList) { i++;
+		            %>
+		            <option value="<%= game.getGameId() %>">Game  <%= i+": "+game.getGameScore() %></option>
+		            <% 
+		                } 
+		            } else {
+		            %>
+		            <option value="">No Games available</option>
+		            <% } %>
+		   
+		  </select>
+		 
+		  </div>
+        
+        </form>
+        <form action="${pageContext.servletContext.contextPath}/game" method="post">
+        <input class="button" type="Submit" name="submit" value="    New Game    ">
+        <input type = "hidden" name = "firstRemaining"  value = "New">
+        </form>
+        </div>
+        <div class = "center2">
+        <form action="${pageContext.servletContext.contextPath}/game" method="post">
+        <input class="button" type="Submit" name="submit" style="background-color: red;" value="   			  Remove LastShot			   ">
+        <input type = "hidden" name = "firstRemaining"  value = "Rem">
+        </form>
+        </div>
+        
+        </div>
     </div>
 </div>
     <script>
@@ -248,7 +298,7 @@
   function togglePin(pin,num) {
     // toggle the class of the clicked pin
     pin.classList.toggle("leave");
-
+	
     // count the number of pins knocked down
     const pins = document.querySelectorAll('.pinNew:not(.leave)');
 
@@ -323,6 +373,7 @@
 
 
   }
+  
 
   function clearPins() {
     var pins = document.querySelectorAll('.pinNew');
@@ -492,7 +543,7 @@
     clearFirstShot();
 
     // set secondShot for a strike ('X')
-    document.querySelector('.secondShot span').textContent = 'X';
+    document.querySelector('.firstShot span').textContent = 'X';
 
     first_Remaining = [];
     second_Remaining = [];
@@ -588,9 +639,73 @@
 
 
   }
-  function Split(i) {
-      document.getElementById("split"+i).className = "shot-box-split";
+  
+  function Splits() {
+	  var splitCount = [<c:forEach items="${split}" var="bool" varStatus="loop">
+      <c:if test="${loop.index > 0}">,</c:if>
+      ${bool}
+  </c:forEach>];
+      for(var i = 0; i<splitCount.length;i++){
+    	  if(splitCount[i]==true){
+    		  document.getElementById("split"+(i+1)).className = "split";
+    	  }
+    	  
+      }
+     
   }
+  function LockOut() {
+	  var LockedPins = [<c:forEach items="${locked}" var="bool" varStatus="loop">
+      <c:if test="${loop.index > 0}">,</c:if>
+      ${bool}
+  </c:forEach>];
+	  var flag = false;
+	  var count = 0;
+	  for(var i = 0; i<LockedPins.length;i++){
+    	  if(LockedPins[i]==true){
+    		  document.getElementById("pin"+i).removeAttribute("onclick");
+    		  document.getElementById("pin"+i).className = "locked";
+    		  flag = true;
+    		  count++;
+    	  }
+    	  
+      }
+      if(flag){
+    	  for(var i = 0; i<LockedPins.length;i++){
+        	  if(LockedPins[i]==false){
+        		  togglePin(document.getElementById("pin"+i),i);
+        		  
+        	  }
+        	  
+          }
+      }
+      if(count == 10){
+    	  document.getElementById(next).disabled = true;
+    	  
+      }
+     
+  }
+  function secondFrame(){
+	 
+		 
+	  var secondFrame= [<c:forEach items="${secondFrame}" var="bool" varStatus="loop">
+      <c:if test="${loop.index > 0}">,</c:if>
+      ${bool}
+  </c:forEach>];
+	  
+    	  if(secondFrame[0]==true){
+    		  document.querySelector('.strike span').textContent = '/';
+    	  }
+    	  
+      
+	    
+	  
+  }
+  function Startup(){
+	  Splits();
+	  LockOut();
+	  secondFrame();
+  }
+  
 
 </script>
 </body>

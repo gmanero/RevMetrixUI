@@ -26,7 +26,7 @@ public class IndexServlet extends HttpServlet {
 
         AllAccountsController controller = new AllAccountsController();
         loggedIn = controller.isLoggedInAccount();
-        System.out.println("LOOK HERE " + loggedIn);
+        System.out.println("Look here + "+ loggedIn);
 
         if (loggedIn) {
             loggedInName = "Hello, " + controller.findLoggedInUser();
@@ -35,17 +35,23 @@ public class IndexServlet extends HttpServlet {
 
         // Handle logout action
         if (!loggedIn) {
-        	destOut = "/_view/login.jsp";
+            destOut = "/_view/login.jsp";
         } else {
             // Handle other actions
             if ("RevMetrix".equals(destIn)) {
                 destOut = "/_view/index.jsp";
-            } else if ("login".equals(destIn)) {
+            } 
+            else if ("eventDetails".equals(destIn)) {
+                // Forward to eventDetails.jsp with event ID parameter
+                req.setAttribute("eventId", req.getParameter("id"));
+                destOut = "/_view/eventDetails.jsp";
+            }
+            else if ("login".equals(destIn)) {
                 destOut = "/_view/login.jsp";
-            } else if ("logout".equals(destIn)) {
+            } else if("logout".equals(destIn)){
             	controller.logOutAllAccounts();
-            	loggedIn = false;
-                destOut = "/_view/login.jsp";
+            	loggedIn =false;
+            	destOut = "/_view/login.jsp";
             } else if ("event".equals(destIn)) {
                 destOut = "/_view/event.jsp";
             } else if ("register".equals(destIn)) {
