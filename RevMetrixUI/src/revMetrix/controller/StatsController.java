@@ -36,7 +36,7 @@ public class StatsController {
 		}
 	}
 	
-	public String getLastThreeGameScore()
+	public double getLastThreeGameScore()
 	{
 		List<Game> gameList = db.findAllGames();
 		
@@ -57,11 +57,12 @@ public class StatsController {
 			aveGameCount++;
 			averageGameScore += game.getGameScore();
 		}
+			//String roundedNumber = String.format("%.2f", averageGameScore / aveGameCount);
 			return averageGameScore = averageGameScore / aveGameCount;
 		}
 	}
 	
-	public String getTotalGameScore()
+	public double getTotalGameScore()
 	{
 		List<Game> gameList = db.findAllGames();
 		
@@ -78,8 +79,8 @@ public class StatsController {
 			aveGameCount++;
 			averageGameScore += game.getGameScore();
 		}
-			double roundedNumber = Double.parseDouble(String.format("%.2f", averageGameScore / aveGameCount));
-			return averageGameScore = ;
+			//String roundedNumber = String.format("%.2f", averageGameScore / aveGameCount);
+			return averageGameScore / aveGameCount;
 		}
 	}
 	
@@ -271,8 +272,8 @@ public class StatsController {
 		
 		
 		return 0;
-	}*/
-	/*public int getTotalStrikesForSetGames()
+	}
+	public int getTotalStrikesForSetGames()
 	{
 		List<Game> gameList = db.findAllGames();
 		List<Shot> shotList = db.findAllShots();

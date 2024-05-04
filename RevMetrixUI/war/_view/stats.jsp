@@ -21,8 +21,8 @@
     <%
     StatsController SC = new StatsController();
     List<Game> gamelist = SC.getAllGames();
-    String gameScore = SC.getTotalGameScore();
-    String gameScore123 = SC.getLastThreeGameScore();
+    double gameScore = SC.getTotalGameScore();
+    double gameScore123 = SC.getLastThreeGameScore();
     int tStr = SC.getTotalStrikes();
     int tSpa = SC.getTotalSpares();
     int strPer = SC.getStrikesPercentage();
@@ -72,7 +72,8 @@ const yArray = <%= Arrays.toString(graph) %>;
 const data = [{
   x: xArray,
   y: yArray,
-  mode:"lines"
+  mode:"lines",
+  
 }];
 
 // Define Layout
@@ -80,8 +81,13 @@ const layout = {
   xaxis: {range: [1, 5]},
   yaxis: {range: [0, 300]},  
   title: "Recent Game Scores (5)",
-  //plot_bgcolor: "#1f1f1f",  // Set background color to #1f1f1f
-  paper_bgcolor: "#1f1f1f"  // Set paper color to #1f1f1f (optional)
+  plot_bgcolor: "#1f1f1f",  
+  
+  paper_bgcolor: "#1f1f1f",
+  titlefont: {
+      color: 'white' 
+  },
+  
 };
 
 // Display using Plotly
