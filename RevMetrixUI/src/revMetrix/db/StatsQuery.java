@@ -16,8 +16,7 @@ import revMetrix.db.persist.IDatabase;
 
 import revMetrix.controller.StatsController;
 
-public class StatsQuery {
-	
+public class StatsQuery { 
 	public static double gamesTotal()
 	{
 		IDatabase db = DatabaseProvider.getInstance();
@@ -28,10 +27,14 @@ public class StatsQuery {
 			System.out.println("There are no games listed in the database");
 			return 0;
 		}else{
+			System.out.println(StatsController.getTotalGameScore(gameList));
 			return StatsController.getTotalGameScore(gameList);
+			
 		}
 	}
-	public static int strikeTotal()
+	
+
+public static int strikeTotal() 
 	{
 		IDatabase db = DatabaseProvider.getInstance();
 		List<Game> gameList = db.findAllGames();
@@ -42,9 +45,11 @@ public class StatsQuery {
 			System.out.println("There are no games listed in the database");
 			return 0;
 		}else{
+			
 			return StatsController.getTotalStrikes(shotList);
 		}
 	}
+	
 	public static int spareTotal()
 	{
 		IDatabase db = DatabaseProvider.getInstance();
@@ -55,6 +60,7 @@ public class StatsQuery {
 			System.out.println("There are no games listed in the database");
 			return 0;
 		}else{
+
 			return StatsController.getTotalSpares(shotList);
 		}
 	}
@@ -68,6 +74,7 @@ public class StatsQuery {
 		{
 			System.out.println("There are no games listed in the database");
 		}else{
+
 			System.out.println(StatsController.getTotalStrikesForSetGames(gameList, shotList, num));
 		}
 	}
@@ -81,6 +88,7 @@ public class StatsQuery {
 		{
 			System.out.println("There are no games listed in the database");
 		}else{
+
 			System.out.println(StatsController.getTotalSparesForSetGames(gameList, shotList, num));
 		}
 	}
@@ -90,6 +98,25 @@ public class StatsQuery {
 		String conversion = new java.text.DecimalFormat("0.00").format(convert);
 		
         return Double.parseDouble(conversion);
-    }
+	}
 }
-
+/*public static void main(String[] args) throws Exception {
+		Scanner keyboard = new Scanner(System.in);
+			
+		
+		InitDatabase.init(keyboard);
+			
+		IDatabase db = DatabaseProvider.getInstance();
+		List<Game> gameList = db.findAllGames();
+		
+		//StatsController sc = new StatsController();
+		
+		if (gameList.isEmpty())
+		{
+			System.out.println("There are no games listed in the database");
+			
+		}else{
+			System.out.println(StatsController.getTotalGameScore(gameList));
+		}
+	}*/
+ 
