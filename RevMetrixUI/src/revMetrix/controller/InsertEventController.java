@@ -35,4 +35,16 @@ public class InsertEventController {
             return false;
         }
     }
+    
+    public boolean insertSession(int sessionScore, int eventId, String lanes, String date, int userId) {
+    	Integer sessionId = db.insertSessionIntoSessionsTable(sessionScore, eventId, lanes, date, userId);
+    	if (sessionId > 0) {
+    		System.out.println("New Session (ID: " + sessionId + ") successfully added to Sessions table: " + eventId);
+    		return true;
+    	}
+    	else {
+    		System.out.println("Failed to insert new Session (ID: " + sessionId + ") into Sessions table: " + eventId);
+    		return false;
+    	}
+    }
 }

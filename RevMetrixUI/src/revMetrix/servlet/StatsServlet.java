@@ -1,6 +1,7 @@
 package revMetrix.servlet;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +11,6 @@ import revMetrix.db.persist.IDatabase;
 import revMetrix.model.RevMetrix;
 
 import revMetrix.controller.StatsController;
-import revMetrix.db.StatsQuery;
 
 public class StatsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;

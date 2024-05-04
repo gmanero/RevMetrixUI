@@ -23,7 +23,7 @@ public class InitialData {
 	// reads initial Author data from CSV file and returns a List of Authors
 	public static List<Account> getAccounts() throws IOException {
 		List<Account> accountList = new ArrayList<Account>();
-		ReadCSV readAccounts = new ReadCSV("accounts.csv");
+		ReadCSV readAccounts = new ReadCSV("account.csv");
 		try {
 			// auto-generated primary key for authors table
 			Integer accountId =1;
@@ -57,7 +57,7 @@ public class InitialData {
 	// reads initial Book data from CSV file and returns a List of Books
 	public static List<Ball> getBalls() throws IOException {
 		List<Ball> ballList = new ArrayList<Ball>();
-		ReadCSV readBalls = new ReadCSV("Balls.csv");
+		ReadCSV readBalls = new ReadCSV("ball.csv");
 		try {
 			// auto-generated primary key for table books
 			Integer ballId = 1;
@@ -90,7 +90,7 @@ public class InitialData {
 	// reads initial Book data from CSV file and returns a List of Books
 		public static List<Establishment> getEstablishments() throws IOException {
 			List<Establishment> establishmentList = new ArrayList<Establishment>();
-			ReadCSV readEstablishments = new ReadCSV("Establishments.csv");
+			ReadCSV readEstablishments = new ReadCSV("establishment.csv");
 			try {
 				// auto-generated primary key for table books
 				Integer establishmentId = 1;
@@ -121,7 +121,7 @@ public class InitialData {
 		// reads initial Event data from CSV file and returns a List of Events
 	    public static List<Event> getEvents() throws IOException {
 	        List<Event> eventList = new ArrayList<Event>();
-	        ReadCSV readEvents = new ReadCSV("Event.csv");
+	        ReadCSV readEvents = new ReadCSV("event.csv");
 	        try {
 	        	
 	            Integer eventId = 1; // auto-generated primary key for events table

@@ -53,3 +53,7 @@ body {
 .eventCard:hover {
     background-color: #555;
 }
+
+a:link { 
+  text-decoration: none; 
+} 

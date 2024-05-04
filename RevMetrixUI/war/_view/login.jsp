@@ -18,24 +18,19 @@
     
     
     <!-- Login Form -->
-   <div class="loginForm">
-    <form  onsubmit="return redirectIfCorrect()">
-        <!--<input type="text" id="username" name="username" placeholder="Username" value="<%=session.getAttribute("username")%>">  -->
-        <input type="text" id="username" name="username" placeholder="Username"">
-        <br>
-        <!--<input type="password" id="password" name="password" placeholder="Password" value="<%=session.getAttribute("password")%>">  -->
-        <input type="password" id="password" name="password" placeholder="Password">
-        <br>
-       <input type="submit" value="Sign In">
-       
-       </form>
-       
-       <br/>
-       
-       <form method="get">
-       <button type= "submit" name = "destination" value = "accountCreation" class="signUp">Sign Up</button>
-    </form>
+    <div class="loginForm">
+        <form action="login" method="post" class="loginForm">
+            <h1>Log In</h1>
+            <input type="text" id="username" name="username" placeholder="Username">
+            <br>
+            <input type="password" id="password" name="password" placeholder="Password">
+            <br>
+            <input type="submit" value="Log In">
+            <button type="button" onclick="window.location.href='accountCreation'" class="signUp">Sign Up</button>
+        </form>
     </div>
+    
+    
     
     
     
@@ -55,7 +50,7 @@
             var correctPass1 = "12345";
             
             if ((User === correctUser && Pass === correctPass) || (User === correctUser1 && Pass === correctPass1) ) {
-                window.location.href = "http://localhost:8081/revMetrix/index";
+                window.location.href = "http://localhost:8081/revMetrix/account";
                 return false; // Prevent form submission
             } else {
                 alert("Incorrect Username or Password");
