@@ -21,7 +21,6 @@ public class IndexServlet extends HttpServlet {
 
         String destIn = req.getParameter("destination");
         String destOut = null;
-
         String loggedInName = "";
         boolean loggedIn = false; // Initialize loggedIn to false
 
@@ -49,6 +48,10 @@ public class IndexServlet extends HttpServlet {
             }
             else if ("login".equals(destIn)) {
                 destOut = "/_view/login.jsp";
+            } else if("logout".equals(destIn)){
+            	controller.logOutAllAccounts();
+            	loggedIn =false;
+            	destOut = "/_view/login.jsp";
             } else if ("event".equals(destIn)) {
                 destOut = "/_view/event.jsp";
             } else if ("register".equals(destIn)) {

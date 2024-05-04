@@ -78,6 +78,7 @@ public class GameServlet extends HttpServlet {
 			    boolean[] secondFrame = new boolean[1];
 			 
 			 req.setAttribute("games", games);
+			 controller.updateframeScores(frames,shots);
 			 shotScores = GameController.parseShots(shots);
 			 scores = GameController.parseScores(frames, shots);
 			 
