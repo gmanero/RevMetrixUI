@@ -21,6 +21,7 @@ public class IndexServlet extends HttpServlet {
 
         String destIn = req.getParameter("destination");
         String destOut = null;
+
         String loggedInName = "";
         boolean loggedIn = false; // Initialize loggedIn to false
 
@@ -30,6 +31,47 @@ public class IndexServlet extends HttpServlet {
         if (loggedIn) {
             loggedInName = "Hello, " + controller.findLoggedInUser();
             System.out.println("Logged in name: " + loggedInName);
+
+        
+      
+        
+		
+		
+        
+        // Forward based on the action parameter
+        if ("RevMetrix".equals(destIn)) {
+           destOut = "/_view/index.jsp";
+        } 
+        else if ("eventDetails".equals(destIn)) {
+            // Forward to eventDetails.jsp with event ID parameter
+            req.setAttribute("eventId", req.getParameter("id"));
+            destOut = "/_view/eventDetails.jsp";
+        }
+        
+        else if ("login".equals(destIn)) {
+        	 destOut = "/_view/login.jsp";
+        } 
+        else if ("event".equals(destIn)) {
+        	 destOut = "/_view/event.jsp";
+        } 
+        else if ("register".equals(destIn)) {
+        	destOut = "/_view/registration.jsp";
+        } 
+        else if ("account".equals(destIn)) {
+        	destOut = "/_view/account.jsp";
+        }  
+        else if ("game".equals(destIn)) {
+        	destOut = "/game";
+        	//req.getRequestDispatcher("/game").forward(req, resp);
+        } 
+        else if ("stats".equals(destIn)) {
+        	destOut = "/_view/stats.jsp";	
+        } 
+        else if ("create".equals(destIn)) {
+        	destOut = "/_view/create.jsp";
+        } 
+        else if ("createLeague".equals(destIn)) {
+        	destOut = "/_view/createLeague.jsp";
         }
 
         // Handle logout action
@@ -80,4 +122,5 @@ public class IndexServlet extends HttpServlet {
         req.setAttribute("loggedIn", loggedIn);
         req.getRequestDispatcher(destOut).forward(req, resp);
     }
+}
 }

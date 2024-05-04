@@ -62,6 +62,10 @@
     <servlet-name>SessionsServlet</servlet-name>
         <servlet-class>revMetrix.servlet.SessionsServlet</servlet-class>
     </servlet>
+      <servlet>
+        <servlet-name>EventDetailsServlet</servlet-name>
+        <servlet-class>revMetrix.servlet.EventDetailsServlet</servlet-class>
+    </servlet>
     
     <!-- Servlet mappings -->
     <servlet-mapping>
@@ -132,6 +136,11 @@
      <servlet-mapping>
         <servlet-name>SessionsServlet</servlet-name>
         <url-pattern>/sessions</url-pattern>
+    </servlet-mapping>
+    
+     <servlet-mapping>
+        <servlet-name>EventDetailsServlet</servlet-name>
+        <url-pattern>/eventDetails</url-pattern>
     </servlet-mapping>
 
     <welcome-file-list>
