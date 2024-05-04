@@ -2,6 +2,7 @@ package revMetrix.controller;
 
 import revMetrix.db.model.Event;
 import revMetrix.db.model.Game;
+import revMetrix.db.model.Session;
 import revMetrix.db.model.Establishment;
 import revMetrix.db.persist.DatabaseProvider;
 import revMetrix.db.persist.DerbyDatabase;
@@ -173,5 +174,26 @@ public class EventController {
 		db.updateSessionScore(id, total);
 		
 	}
+	  public ArrayList<Session> getSessionsByEvent(int eventId) {
+	        List<Session> sessionList = db.getSessionByEvent(eventId);
+	        ArrayList<Session> sessions = new ArrayList<>();
+
+	        if (sessionList.isEmpty()) {
+	            System.out.println("No sessions found for this event");
+	            return sessions;
+	        } else {
+	            for (Session session : sessionList) {
+	                sessions.add(session);
+	                System.out.println("Session ID: " + session.getSessionId() + ", Event ID: " +
+	                        session.getEventId() +
+	                        ", Score: " + session.getSessionScore() +
+	                        ", Lanes: " + session.getLanes() +
+	                        ", Date: " + session.getDate() +
+	                        ", User ID: " + session.getUserId());
+	            }
+	        }
+
+	        return sessions;
+	    }
 	
 	}

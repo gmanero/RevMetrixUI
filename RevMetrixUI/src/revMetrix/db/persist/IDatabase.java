@@ -42,8 +42,6 @@ public interface IDatabase {
 	public List<Event> findEventById(final int eventId);
 	public Integer insertSessionIntoSessionsTable(final int sessionScore, final int eventId, final String lanes, final String date, final int userId);
 	public int findEventIdByInfo(final String name, final String description);
-	
 	public ArrayList<Session> getSessionByEvent(int id);
-		
 }
 
