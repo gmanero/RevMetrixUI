@@ -1,6 +1,7 @@
 package revMetrix.controller;
 
 import revMetrix.db.model.Event;
+import revMetrix.db.model.Game;
 import revMetrix.db.model.Establishment;
 import revMetrix.db.persist.DatabaseProvider;
 import revMetrix.db.persist.DerbyDatabase;
@@ -162,6 +163,15 @@ public class EventController {
 	public int findEventIdByInfo(String name, String description) {
 		eventId = db.findEventIdByInfo(name, description);
 		return eventId;
+	}
+	public void updateSessionScore(int id) {
+		ArrayList<Game> games = db.GetGamesBySession(id);
+		int total = 0;
+		for(Game game:games) {
+			total+= game.getGameScore();
+		}
+		db.updateSessionScore(id, total);
+		
 	}
 	
 	}

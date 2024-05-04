@@ -1310,7 +1310,44 @@ public class DerbyDatabase implements IDatabase {
 	        }
 	    });
 	}
-	
+	public ArrayList<Session> getSessionByEvent(int id){
+		return executeTransaction(new Transaction<ArrayList<Session>>() {
+	        @Override
+	        public ArrayList<Session> execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            try {
+	            	stmt = conn.prepareStatement("select sessions.* from sessions where event_Id = ?");
+	                stmt.setInt(1,id);
+	                
+	                ArrayList<Session> result = new ArrayList<Session>();
+	                
+	                resultSet = stmt.executeQuery();
+	                
+	                Boolean found = false;
+	                
+	                while (resultSet.next()) {
+	                    found = true;
+	                    
+	                    Session session = new Session();
+	                    loadSession(session, resultSet, 1);
+	                    result.add(session);
+	                    
+	                }
+	                
+	                if (!found) {
+	                    System.out.println("No Sessions were found in the database");
+	                }
+	                
+	                return result;
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
 	public Integer insertSessionIntoSessionsTable(final int sessionScore, final int eventId, final String lanes, final String date, final int userId) {
 	    return executeTransaction(new Transaction<Integer>() {
 	        @Override
