@@ -26,6 +26,7 @@ public class IndexServlet extends HttpServlet {
 
         AllAccountsController controller = new AllAccountsController();
         loggedIn = controller.isLoggedInAccount();
+        System.out.println("LOOK HERE " + loggedIn);
 
         if (loggedIn) {
             loggedInName = "Hello, " + controller.findLoggedInUser();
@@ -33,16 +34,17 @@ public class IndexServlet extends HttpServlet {
         }
 
         // Handle logout action
-        if ("logout".equals(destIn)) {
-            controller.logOutAllAccounts();
-            loggedInName = "";
-            loggedIn = false; // Update loggedIn to false after logout
-            destOut = "/_view/login.jsp"; // Redirect to login page after logout
+        if (!loggedIn) {
+        	destOut = "/_view/login.jsp";
         } else {
             // Handle other actions
             if ("RevMetrix".equals(destIn)) {
                 destOut = "/_view/index.jsp";
             } else if ("login".equals(destIn)) {
+                destOut = "/_view/login.jsp";
+            } else if ("logout".equals(destIn)) {
+            	controller.logOutAllAccounts();
+            	loggedIn = false;
                 destOut = "/_view/login.jsp";
             } else if ("event".equals(destIn)) {
                 destOut = "/_view/event.jsp";
