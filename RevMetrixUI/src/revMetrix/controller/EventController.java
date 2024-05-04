@@ -18,7 +18,7 @@ public class EventController {
         DatabaseProvider.setInstance(new DerbyDatabase());
         db = DatabaseProvider.getInstance();
     }
-
+    
     public ArrayList<Event> getAllEvents() {
         List<Event> eventList = db.findAllEvents();
         List<Establishment> establishmentList = db.findAllEstablishments(); // Fetch all establishments
@@ -156,4 +156,12 @@ public class EventController {
     }
 
     return events;
-}}
+}
+	
+	private int eventId = -1;
+	public int findEventIdByInfo(String name, String description) {
+		eventId = db.findEventIdByInfo(name, description);
+		return eventId;
+	}
+	
+	}

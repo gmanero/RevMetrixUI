@@ -16,7 +16,8 @@
        
     </div>
     
-<div class="center">
+<div class="center2">
+	
 	<div class = "interactions">
 	<div class="scoreboard">
         <div class="score-box">
@@ -198,7 +199,7 @@
   </div>
   <br>
 </div>
-<div class= "center">
+<div class= "center2">
 <label> Lane: </label>
 <input name = "lane" value = ${lane }>
 </div>
@@ -207,7 +208,7 @@
 </form>		      
         <br>
         <div class = "gameInfo">
-        <div class = "center">
+        <div class = "center2">
         
         <form action="${pageContext.servletContext.contextPath}/game" method="post">
         <div class="dropdown-select">
@@ -244,7 +245,7 @@
         <input type = "hidden" name = "firstRemaining"  value = "New">
         </form>
         </div>
-        <div class = "center">
+        <div class = "center2">
         <form action="${pageContext.servletContext.contextPath}/game" method="post">
         <input class="button" type="Submit" name="submit" style="background-color: red;" value="   			  Remove LastShot			   ">
         <input type = "hidden" name = "firstRemaining"  value = "Rem">

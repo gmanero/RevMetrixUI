@@ -427,6 +427,11 @@ public class GameController {
 				
 				
 			}
+			else if (shotIndex +1 <shots.size()) {
+				System.out.println("updating");
+				frames.get(FrameIndex).setFrameScore(frameScore(shots.get(shotIndex),shots.get(shotIndex+1)));
+			}
+			
 			FrameIndex++;
 			shotIndex+=2;
 		}
