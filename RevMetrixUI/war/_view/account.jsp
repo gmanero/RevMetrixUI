@@ -1,5 +1,4 @@
 <%@ page import="java.util.List" %>
-<%@ page import="revMetrix.db.model.Account" %>
 <%@ page import="revMetrix.db.model.Ball" %>
 <%@ page import="revMetrix.controller.AllAccountsController" %>
 
@@ -31,12 +30,8 @@
     List<Ball> balls = controller.findAllBalls();
 %>
 
-
-
-
 <div class="pageTitle"><h2>Bowling Ball's</h2></div>
          
-
 <div class="bowlingBalls" id="bowlingBalls">
     <% if (balls != null && !balls.isEmpty()) { %>
         <% for (Ball ball : balls) { %>
@@ -47,10 +42,10 @@
     <% } else { %>
         <p>No bowling balls found.</p>
     <% } %>
-    <button class="addBall">+</button>
+   <button class="addBall">+</button>
     <div class="addBallForm" id="addBallForm">
         <h3>Add Ball Form</h3>
-        <form action="addBall" method="post">
+        <form action="${pageContext.request.contextPath}/account" method="post">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
             <br>
@@ -74,39 +69,6 @@ document.addEventListener('DOMContentLoaded', function() {
     addBallButton.addEventListener('click', function() {
         addBallForm.classList.toggle('show');
     });
-
-    // Add ball form submission
-    addBallForm.querySelector('form').addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        const nameInput = addBallForm.querySelector('#name');
-        const weightInput = addBallForm.querySelector('#weight');
-        const colorInput = addBallForm.querySelector('#color');
-
-        const name = nameInput.value;
-        const weight = weightInput.value;
-        const color = colorInput.value;
-
-        if (name && weight && color) {
-            addBowlingBall(name, weight, color);
-            addBallForm.classList.remove('show');
-            addBallForm.reset();
-        } else {
-            alert('Please enter name, weight, and color.');
-        }
-    });
-
-    // Function to add a new bowling ball
-    function addBowlingBall(name, weight, color) {
-        const ball = document.createElement('div');
-        ball.classList.add('bowlingBall');
-        ball.style.backgroundColor = color;
-        ball.innerHTML = `
-            <p>${name}</p>
-        `;
-        const bowlingBalls = document.getElementById('bowlingBalls');
-        bowlingBalls.insertBefore(ball, addBallForm);
-    }
 });
 </script>
 

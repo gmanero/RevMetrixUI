@@ -153,6 +153,7 @@
       
   </div>
   <br>
+   <label> Bowling Ball: </label>
   <div class="dropdown-select" >
   <select name="ball1">
   	<%@ page import="java.util.List" %>
@@ -200,7 +201,7 @@
   <br>
 </div>
 <div class= "center2">
-<label> Lane: </label>
+<label> Lane:</label>
 <input name = "lane" value = ${lane }>
 </div>
 <br>

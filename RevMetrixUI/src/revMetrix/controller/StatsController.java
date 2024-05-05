@@ -36,52 +36,53 @@ public class StatsController {
 		}
 	}
 	
-	public double getLastThreeGameScore()
+	public double getLastThreeGameScore() 
 	{
-		List<Game> gameList = db.findAllGames();
-		
-		List<Game> gameList_ = gameList;
-		int aveGameCount = 0;
-		double averageGameScore = 0;
-		
-		if (gameList_.isEmpty())
-		{
-			System.out.print("game list is empty");
-			return 0;
-		}else {
-			for (Game game : gameList_) {
-				if(aveGameCount == 3)
-				{
-					break;
-				}
-			aveGameCount++;
-			averageGameScore += game.getGameScore();
-		}
-			//String roundedNumber = String.format("%.2f", averageGameScore / aveGameCount);
-			return averageGameScore = averageGameScore / aveGameCount;
-		}
+	    List<Game> gameList = db.findAllGames();
+	    double averageGameScore = 0;
+
+	    if (gameList.isEmpty()) 
+	    {
+	        System.out.print("Game list is empty");
+	        return 0;
+	    } else {
+	        for (Game game : gameList) 
+	        {
+	            if (game.getGameId() == gameList.size() || game.getGameId() == gameList.size() - 1 || game.getGameId() == gameList.size() - 2) 
+	            {
+	                averageGameScore += game.getGameScore();
+	            }
+	        }
+	        averageGameScore = averageGameScore / 3;
+
+	        String formattedScore = String.format("%.2f", averageGameScore);
+
+	        return Double.parseDouble(formattedScore);
+	    }
 	}
 	
-	public double getTotalGameScore()
+	public double getTotalGameScore() 
 	{
-		List<Game> gameList = db.findAllGames();
-		
-		List<Game> gameList_ = gameList;
-		int aveGameCount = 0;
-		double averageGameScore = 0;
-		
-		if (gameList_.isEmpty())
-		{
-			System.out.print("game list is empty");
-			return 0;
-		}else {
-			for (Game game : gameList_) {
-			aveGameCount++;
-			averageGameScore += game.getGameScore();
-		}
-			//String roundedNumber = String.format("%.2f", averageGameScore / aveGameCount);
-			return averageGameScore / aveGameCount;
-		}
+	    List<Game> gameList = db.findAllGames();
+	    int aveGameCount = gameList.size();
+	    double totalGameScore = 0;
+
+	    if (aveGameCount == 0) 
+	    {
+	        System.out.println("Game list is empty.");
+	        return 0;
+	    } else {
+	        for (Game game : gameList) 
+	        {
+	            totalGameScore += game.getGameScore();
+	        }
+	        double averageGameScore = totalGameScore / aveGameCount;
+
+	        DecimalFormat df = new DecimalFormat("#.##");
+	        String formattedResult = df.format(averageGameScore);
+
+	        return Double.parseDouble(formattedResult);
+	    }
 	}
 	
 	
@@ -199,55 +200,60 @@ public class StatsController {
 		}
 	}
 	
-	public int getStrikesPercentage()
-	{
-		List<Game> gameList = db.findAllGames();
-		List<Shot> shotList = db.findAllShots();
-		int StrikesInGame = 0;
-		int aveGameCount = 0;
-		
-		if (gameList.isEmpty() || shotList.isEmpty())
-		{
-			System.out.print("game list is empty");
-			return 0;
-		}else {
-			aveGameCount = gameList.size();
-				
-			for(Shot shot: shotList)
-			{
-				if(shot.getShotScore().equals("X"))
-				{
-					StrikesInGame++;
-				}
-			}
-		}
-		return StrikesInGame /= aveGameCount;
+	public double getStrikesPercentage() {
+	    List<Frame> frameList = db.findAllFrames();
+	    List<Shot> shotList = db.findAllShots();
+	    int strikesInGame = 0;
+	    int aveGameCount = 0;
+
+	    if (frameList.isEmpty() || shotList.isEmpty()) 
+	    {
+	        System.out.println("Game list or shot list is empty.");
+	        return 0;
+	    } else {
+	        aveGameCount = frameList.size();
+
+	        for (Shot shot : shotList) 
+	        {
+	            if (shot.getShotScore().equals("X")) 
+	            {
+	                strikesInGame++;
+	            }
+	        }
+	        double strikesPercentage = (double) strikesInGame / aveGameCount * 100;
+
+	        DecimalFormat df = new DecimalFormat("#.##");
+	        String formattedResult = df.format(strikesPercentage);
+
+	        return Double.parseDouble(formattedResult);
+	    }
 	}
 
-	public int getSparesPerGame()
-	{
-		List<Game> gameList = db.findAllGames();
-		List<Shot> shotList = db.findAllShots();
-		int SparesInGame = 0;
-		int aveGameCount = 0;
-		
-		if (gameList.isEmpty() || shotList.isEmpty())
-		{
-			System.out.print("game list is empty");
-			return 0;
-		}else {
-			aveGameCount = gameList.size();
-			
-			for(Shot shot: shotList)
-			{
-				if(shot.getShotScore().equals("/"))
-				{
-					SparesInGame++;
-				}
-			}
-			
-			return SparesInGame/aveGameCount;
-		}
+	public double getSparesPercentage() {
+	    List<Frame> frameList = db.findAllFrames();
+	    List<Shot> shotList = db.findAllShots();
+	    int sparesInGame = 0;
+	    int aveGameCount = 0;
+
+	    if (frameList.isEmpty() || shotList.isEmpty()) 
+	    {
+	        System.out.println("Game list or shot list is empty.");
+	        return 0;
+	    } else {
+	        aveGameCount = frameList.size();
+
+	        for (Shot shot : shotList) {
+	            if (shot.getShotScore().equals("/")) {
+	                sparesInGame++;
+	            }
+	        }
+	        double sparesPercentage = (double) sparesInGame / aveGameCount * 100;
+
+	        DecimalFormat df = new DecimalFormat("#.##");
+	        String formattedResult = df.format(sparesPercentage);
+
+	        return Double.parseDouble(formattedResult);
+	    }
 	}
 	
 	/*public int overPercentage()
@@ -349,12 +355,11 @@ public class StatsController {
 		}else {
 			for(Game game : gameList)
 			{
-				if(count == 5 || count == gameList.size())
-				{
-					break;
-				}
-				arr[count] = game.getGameScore();
-				count++;
+				if (game.getGameId() == gameList.size() || game.getGameId() == gameList.size() - 1 || game.getGameId() == gameList.size() - 2 || game.getGameId() == gameList.size() - 3 || game.getGameId() == gameList.size() - 4) 
+	            {
+	                arr[count] = game.getGameScore();
+	                count++;
+	            }
 			}
 			return arr;
 		}

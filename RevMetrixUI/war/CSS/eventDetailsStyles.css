@@ -51,6 +51,8 @@ h1 {
 .event-box h3 {
     margin-top: 0; /* Remove top margin for event titles */
     margin-bottom: 10px; /* Add bottom margin for event titles */
+    font-size: 30px;
+    
 }
 
 .event-box p {
