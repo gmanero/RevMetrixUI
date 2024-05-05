@@ -20,6 +20,19 @@ body {
     color: #fff;
 }
 
+.pageTitle {
+	max-width: fit-content;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+
+h2 {
+	margin-bottom: 30px;
+	font-size: 50px;
+	margin: 0px;
+}
+
 /* Main Text Styles */
 .mainText {
     text-align: center;
@@ -34,25 +47,31 @@ body {
 
 /* Bowling Balls Styles */
 .bowlingBalls {
+    text-align: center;
+    margin-top: 50px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: 50px;
 }
 
 .bowlingBall {
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
     background-color: #555;
     border-radius: 50%;
     margin: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 24px;
+    font-size: 16px;
     color: #fff;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    flex-shrink: 0;
+}
+
+.bowlingBall p {
+    margin-top: 5px;
 }
 
 .bowlingBall:hover {
@@ -60,56 +79,57 @@ body {
 }
 
 .addBall {
-    width: 120px;
-    height: 120px;
-    background-color: #555;
+    width: 150px;
+    height: 150px;
+    background-color: #26acca;
     border-radius: 50%;
     margin: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 48px;
+    font-size: 36px;
     color: #fff;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    flex-shrink: 0;
 }
 
 .addBall:hover {
-    background-color: #777;
+    background-color: #4891ac;
 }
-
 
 .addBallForm {
     display: none;
     text-align: center;
-    margin-top: 50px;
+    margin-top: 20px;
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
 }
 
 .addBallForm.show {
     display: block;
 }
 
-.addBallForm h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-.addBallForm form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.addBallForm h3 {
+    margin-top: 0;
 }
 
 .addBallForm label {
+    display: block;
     margin-bottom: 10px;
 }
 
 .addBallForm input {
+    width: 100%;
     margin-bottom: 20px;
-    padding: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #777;
 }
 
 .addBallForm button {
+    width: 100%;
     padding: 10px 20px;
     background-color: #26acca;
     color: #fff;

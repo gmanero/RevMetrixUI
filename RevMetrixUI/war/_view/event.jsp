@@ -42,9 +42,5 @@
 <% } else { %>
     <p>No events found.</p>
 <% } %>
-
-<li><span class="highlight">Total Strike:</span> <%= request.getAttribute("strikesPerGame") %></li>
-				<li><span class="highlight">Total Spare:</span> <%= request.getAttribute("sparesPerGame") %></li>
-
 </body>
 </html>
