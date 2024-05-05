@@ -29,13 +29,39 @@
             max-width: 800px;
         }
 
-        /* Additional Styles */
-        .infoSection {
-            background-color: #333;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
+	.infoSection {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    margin: 30px auto; /* Center the box horizontally */
+    max-width: 600px; /* Limit the width of the box */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    transition: box-shadow 0.3s ease; /* Add transition effect on hover */
+}
+
+.infoSection:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+}
+
+.infoSectionGraph {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    max-width: 800px;
+    margin: 0 auto; /* Center the box horizontally */
+    display: flex; /* Use flexbox for better alignment */
+    flex-direction: column; /* Arrange child elements vertically */
+    align-items: center; /* Center child elements horizontally */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    transition: box-shadow 0.3s ease; /* Add transition effect on hover */
+}
+
+.infoSectionGraph:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+}
 
         .infoSection h2 {
             margin-top: 0;

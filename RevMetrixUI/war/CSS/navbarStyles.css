@@ -42,10 +42,16 @@ body {
     color: #553180; /* Change color on hover */
 }
 
+.login,
+.account-btn {
+    display: flex;
+    align-items: center; /* Align items vertically */
+}
+
 .login-btn,
 .account-btn {
-	 background-color:  #553180; 
-	 border: none;
+    background-color: #553180;
+    border: none;
     color: #fff;
     padding: 8px 20px;
     font-size: 16px;
@@ -56,7 +62,7 @@ body {
 
 .login-btn:hover,
 .account-btn:hover {
-    background-color:  #412562; 
+    background-color: #412562;
     color: #fff; /* White text color */
 }
 
@@ -84,7 +90,7 @@ body {
     background-color: #222; /* Dark background */
     min-width: 160px;
     z-index: 1;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
 .dropdown-content button {
@@ -95,9 +101,25 @@ body {
 }
 
 .dropdown-content button:hover {
-    background-color: #553180; 
+    background-color: #553180;
 }
 
 .dropdown:hover .dropdown-content {
     display: block;
+}
+.loggedInName{
+    padding: 8px 20px;
+    font-size: 16px;
+    margin-right: 20px;
+}
+.left {
+    float: left;
+}
+
+.center {
+    float: left; 
+}
+
+.right {
+    float: right;
 }

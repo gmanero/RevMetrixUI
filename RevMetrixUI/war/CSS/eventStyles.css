@@ -9,7 +9,7 @@ body {
 /* Header Styles */
 .topPage {
     text-align: center;
-    background: linear-gradient(to bottom,  #562d7f, #26acca);
+    background: linear-gradient(to bottom, #562d7f, #26acca);
     padding: 20px;
     margin-bottom: 20px;
 }
@@ -24,13 +24,14 @@ body {
 .eventCards {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: flex-start; /* Adjusted to flex-start */
     padding: 20px;
     margin-bottom: 20px;
 }
 
 .eventCard {
     width: 300px;
+    height: 300px; /* Set height for consistent size */
     background-color: #333;
     border-radius: 10px;
     padding: 20px;
@@ -39,21 +40,19 @@ body {
     color: #fff;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    overflow: hidden; /* Hide overflowing content */
+    margin-right: 20px;
 }
 
-.eventCard h2 {
-    margin-top: 0;
-    color: #fff;
-}
-
-.eventCard p {
-    margin: 5px 0;
+p strong {
+	 color: #26acca; 
+	  font-weight: 500px;
 }
 
 .eventCard:hover {
     background-color: #555;
 }
 
-a:link { 
-  text-decoration: none; 
-} 
+a:link {
+    text-decoration: none;
+}

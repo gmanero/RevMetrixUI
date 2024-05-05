@@ -42,6 +42,5 @@
 <% } else { %>
     <p>No events found.</p>
 <% } %>
-
 </body>
 </html>

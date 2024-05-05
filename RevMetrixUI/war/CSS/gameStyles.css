@@ -4,7 +4,9 @@ body {
             font-family: Arial, sans-serif;
             background-color: #1f1f1f;
             color: #fff;
+            justify-content: center;
         }
+        
 
         /* Header Styles */
         .topPage {
@@ -69,6 +71,7 @@ body {
             padding: 20px;
             margin-bottom: 20px;
             border-radius: 10px;
+            margin-top: 20px;
         }
         .interactions {
             background-color: #3f3f3f;
@@ -77,6 +80,7 @@ body {
             border-radius: 10px;
             width: 600px;
 			height: 454.667px;
+			justify-content:center;
 			
    			
         }
@@ -447,7 +451,7 @@ body {
 .dropdown-content option:hover {
   background-color: #555; /* Darker background color */
 }
-.center {
+.center2 {
   display: flex;
   justify-content: center; /* Center the content horizontally */
 }

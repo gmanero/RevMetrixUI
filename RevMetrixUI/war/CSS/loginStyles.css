@@ -27,6 +27,11 @@
             max-width: 400px;
             border-radius: 10px;
         }
+
+        .loginForm h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
         
 
         .loginForm input[type="text"],
@@ -58,8 +63,9 @@
         }
         
         .signUp {
-        background-color: #26acca;
-        width: 150px;
+        	float: right;
+            background-color: #26acca;
+            width: 150px;
             border: none;
             color: white;
             padding: 10px 20px;

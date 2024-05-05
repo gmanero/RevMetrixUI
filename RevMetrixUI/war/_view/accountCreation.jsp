@@ -48,11 +48,11 @@
     <input type="password" id="password2" name="password2" placeholder="Password"><br><br>
 
     <button type="submit" class="signUpBtn" onclick="submitForm()">Sign Up</button>
-    
-    
+
     <div class="linkToAccount">
-    <button type="submit" class="linkToAccount" name="destination" value="login" >Already have a login?</button>
-</div>
+        <a href="${pageContext.servletContext.contextPath}/index?destination=login" class="linkToAccount">Already have a login?</a>
+    </div>
+    
 
 </form>
 

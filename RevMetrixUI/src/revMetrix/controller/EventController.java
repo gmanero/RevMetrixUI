@@ -1,6 +1,8 @@
 package revMetrix.controller;
 
 import revMetrix.db.model.Event;
+import revMetrix.db.model.Game;
+import revMetrix.db.model.Session;
 import revMetrix.db.model.Establishment;
 import revMetrix.db.persist.DatabaseProvider;
 import revMetrix.db.persist.DerbyDatabase;
@@ -18,7 +20,7 @@ public class EventController {
         DatabaseProvider.setInstance(new DerbyDatabase());
         db = DatabaseProvider.getInstance();
     }
-
+    
     public ArrayList<Event> getAllEvents() {
         List<Event> eventList = db.findAllEvents();
         List<Establishment> establishmentList = db.findAllEstablishments(); // Fetch all establishments
@@ -156,4 +158,42 @@ public class EventController {
     }
 
     return events;
-}}
+}
+	
+	private int eventId = -1;
+	public int findEventIdByInfo(String name, String description) {
+		eventId = db.findEventIdByInfo(name, description);
+		return eventId;
+	}
+	public void updateSessionScore(int id) {
+		ArrayList<Game> games = db.GetGamesBySession(id);
+		int total = 0;
+		for(Game game:games) {
+			total+= game.getGameScore();
+		}
+		db.updateSessionScore(id, total);
+		
+	}
+	  public ArrayList<Session> getSessionsByEvent(int eventId) {
+	        List<Session> sessionList = db.getSessionByEvent(eventId);
+	        ArrayList<Session> sessions = new ArrayList<>();
+
+	        if (sessionList.isEmpty()) {
+	            System.out.println("No sessions found for this event");
+	            return sessions;
+	        } else {
+	            for (Session session : sessionList) {
+	                sessions.add(session);
+	                System.out.println("Session ID: " + session.getSessionId() + ", Event ID: " +
+	                        session.getEventId() +
+	                        ", Score: " + session.getSessionScore() +
+	                        ", Lanes: " + session.getLanes() +
+	                        ", Date: " + session.getDate() +
+	                        ", User ID: " + session.getUserId());
+	            }
+	        }
+
+	        return sessions;
+	    }
+	
+	}
