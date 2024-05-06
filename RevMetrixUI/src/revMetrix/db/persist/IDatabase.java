@@ -53,6 +53,7 @@ public interface IDatabase {
 	public ArrayList<Session> getSessionByEvent(int id);
 	public Boolean updateSessionDate(int Id);
 	public Session getSession(int id);
+	public Boolean RemoveSession(int id);
 	//Junction
 	public List<Junction> findAllJunctions();
 	

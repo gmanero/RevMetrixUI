@@ -1375,6 +1375,32 @@ public class DerbyDatabase implements IDatabase {
 	        }
 	    });
 	}
+	public Boolean RemoveSession(int id) {
+		return executeTransaction(new Transaction<Boolean>() {
+	        @Override
+	        public Boolean execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            try {
+	            	PreparedStatement remShot2 = conn.prepareStatement("DELETE FROM Junction WHERE Session_id = ?");
+					remShot2.setInt(1, id);
+					remShot2.executeUpdate();
+					
+					PreparedStatement remShot = conn.prepareStatement("DELETE FROM Sessions WHERE Session_id = ?");
+					remShot.setInt(1, id);
+					remShot.executeUpdate();
+					
+					
+					return true;
+	               
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
 	public Boolean updateSessionDate(int Id) {
 		return executeTransaction(new Transaction<Boolean>() {
 	        @Override

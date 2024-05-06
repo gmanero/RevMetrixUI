@@ -41,6 +41,14 @@
                 <p><strong>Type:</strong> <%= e.getTypeString() %></p>
                 <p><strong>Description:</strong> <%= e.getDescription() %></p>
             </div>
+            <div class="event-box">
+            <form action="${pageContext.servletContext.contextPath}/eventDetails" method = "post">
+            <button class="play-button" style="background-color: red;">remove</button>
+    		<input  name = "add" value = "" >
+    		<input type = "hidden" name = "eventId" value = "<%= eventId %>">
+    		
+    		<form></form>
+            </div>
             <% 
                     }
                 } else {
@@ -73,6 +81,10 @@
     </div>
     <input type = "hidden" name = "SesionID" value = "<%= s.getSessionId() %>" >
     <button class="play-button">Play</button>
+    </form>
+    <form action="${pageContext.servletContext.contextPath}/eventDetails" method = "post">
+    <input type = "hidden" name = "remove" value = "<%= s.getSessionId() %>" >
+    <button class="play-button" style="background-color: red;">remove</button>
     </form>
 </div>
             <% 
