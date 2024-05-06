@@ -37,7 +37,7 @@
         <form method="get">
             <% Boolean loggedIn = (Boolean) request.getAttribute("loggedIn"); %>
             <% if (loggedIn != null && loggedIn) { %>
-                <div class="left"><span class="loggedInName"><p>${loggedInName}</p></span></div>
+                <div class="left"><span class="loggedInName"><p>Hello, ${loggedInName}</p></span></div>
                 <div class="center"><button type="submit" name="destination" value="logout" class="login-btn">Logout</button></div>
             <% } else { %>
                 <div class="center"><button type="submit" name="destination" value="login" class="login-btn">Login</button></div>

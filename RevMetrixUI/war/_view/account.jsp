@@ -30,7 +30,18 @@
     List<Ball> balls = controller.findAllBalls();
 %>
 
-<div class="pageTitle"><h2>Bowling Ball's</h2></div>
+
+
+ <form method="get">
+            <% Boolean loggedIn = (Boolean) request.getAttribute("loggedIn"); %>
+            <% if (loggedIn != null && loggedIn) { %>
+                <div class="pageTitle"><span class="loggedInName"><h2>${loggedInName}'s Balls</h2></span></div>
+            
+            <% } else { %>
+                <div class="center"><button type="submit" name="destination" value="login" class="login-btn">Login</button></div>
+            <% } %>
+
+
          
 <div class="bowlingBalls" id="bowlingBalls">
     <% if (balls != null && !balls.isEmpty()) { %>

@@ -29,7 +29,7 @@ public class IndexServlet extends HttpServlet {
         System.out.println("Look here + "+ loggedIn);
 
         if (loggedIn) {
-            loggedInName = "Hello, " + controller.findLoggedInUser();
+            loggedInName = controller.findLoggedInUser();
             System.out.println("Logged in name: " + loggedInName);
         }
 
