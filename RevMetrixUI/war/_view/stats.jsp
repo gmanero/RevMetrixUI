@@ -14,10 +14,19 @@
 	<%@ page import="revMetrix.controller.StatsController" %>
 	<%@ page import="revMetrix.db.model.Game" %>
 	
+   
+   
+   
     <div class="topPage">
-        <h1>Take a look at Statistics</h1>
-    </div>
-    
+         <form method="get">
+            <% Boolean LoggedIn = (Boolean) request.getAttribute("loggedIn"); %>
+            <% if (LoggedIn != null && LoggedIn) { %>
+               <h1>${loggedInName}'s Statistics</h1>
+            
+            <% } else { %>
+                
+            <% } %>
+   </div>
     <%
     StatsController SC = new StatsController();
     List<Game> gamelist = SC.getAllGames();
@@ -25,8 +34,8 @@
     double gameScore123 = SC.getLastThreeGameScore();
     int tStr = SC.getTotalStrikes();
     int tSpa = SC.getTotalSpares();
-    int strPer = SC.getStrikesPercentage();
-    int spaPer = SC.getSparesPerGame();
+    double strPer = SC.getStrikesPercentage();
+    double spaPer = SC.getSparesPercentage();
     int high = SC.highestGameScore();
     int low = SC.lowestGameScore();
     int[] graph = SC.getGraphData();
@@ -49,8 +58,8 @@
         <div class="infoSection">
         	<ul>
 	        	<h3>Shot Statistics:</h3>
-	            <li><span class="highlight">Strike: Percentage</span> <%= strPer %></li>
-	            <li><span class="highlight">Spares Percentage:</span> <%= spaPer %></li>
+	            <li><span class="highlight">Strike Percentage:</span> <%= strPer %>%</li>
+	            <li><span class="highlight">Spares Percentage:</span> <%= spaPer %>%</li>
 	            <li><span class="highlight">Open Percentage:</span> <%= spaPer %></li>
         	</ul>          
         </div>
@@ -87,7 +96,11 @@ const layout = {
   titlefont: {
       color: 'white' 
   },
-  
+  xaxis: {
+      tickfont: {
+          color: 'white'
+      }
+  }
 };
 
 // Display using Plotly

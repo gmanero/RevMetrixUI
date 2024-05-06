@@ -1,3 +1,4 @@
+/* General styles */
 body {
     margin: 0;
     padding: 0;
@@ -6,7 +7,7 @@ body {
     color: #fff;
 }
 
-/* Header Styles */
+/* Header styles */
 .topPage {
     text-align: center;
     background: linear-gradient(to bottom, #562d7f, #26acca);
@@ -20,97 +21,156 @@ body {
     color: #fff;
 }
 
-/* Main Text Styles */
+/* Page title styles */
+.pageTitle {
+    max-width: fit-content;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+h2 {
+    margin-bottom: 30px;
+    font-size: 36px;
+    margin: 0px;
+    color: #fff;
+}
+
+/* Main text styles */
 .mainText {
     text-align: center;
-    margin: 50px auto;
+    margin: 20px auto;
     max-width: 800px;
 }
 
-.mainText p {
-    font-size: 18px;
-    line-height: 1.5;
+.mainText {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #fff;
 }
 
-/* Bowling Balls Styles */
+/* Bowling balls container styles */
 .bowlingBalls {
+    text-align: center;
+    margin-top: 50px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: 50px;
 }
 
+/* Individual bowling ball styles */
 .bowlingBall {
-    width: 120px;
-    height: 120px;
-    background-color: #555;
+    width: 200px;
+    height: 200px;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 100%);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
     border-radius: 50%;
     margin: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 24px;
-    color: #fff;
+    font-size: 14px;
+    color: #333;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    flex-shrink: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.bowlingBall:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background-color: inherit;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    transition: opacity 0.3s ease;
+}
+
+.bowlingBall:hover:before {
+    opacity: .7;
+}
+
+.bowlingBall p {
+    margin-top: 5px;
 }
 
 .bowlingBall:hover {
-    background-color: #777;
+    background-color: #f2f2f2;
 }
 
+/* Add ball button styles */
 .addBall {
-    width: 120px;
-    height: 120px;
-    background-color: #555;
+    width: 200px;
+    height: 200px;
+    background-color: #26acca;
+     background-image: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 100%);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     border-radius: 50%;
     margin: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 48px;
-    color: #fff;
+    font-size: 36px;
+    color: #000;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    flex-shrink: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .addBall:hover {
-    background-color: #777;
+    background-color: #4891ac;
 }
 
-
+/* Add ball form styles */
 .addBallForm {
     display: none;
     text-align: center;
-    margin-top: 50px;
+    margin-top: 20px;
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .addBallForm.show {
     display: block;
 }
 
-.addBallForm h2 {
-    font-size: 24px;
+.addBallForm h3 {
+    margin-top: 0;
     margin-bottom: 20px;
-}
-
-.addBallForm form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    font-size: 24px;
+    color: #fff;
 }
 
 .addBallForm label {
+    display: block;
     margin-bottom: 10px;
+    color: #fff;
 }
 
 .addBallForm input {
-    margin-bottom: 20px;
-    padding: 5px;
+    width: calc(100% - 20px);
+    margin: 0 auto 20px auto;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
 }
 
 .addBallForm button {
-    padding: 10px 20px;
+    width: calc(100% - 20px);
+    padding: 10px;
     background-color: #26acca;
     color: #fff;
     border: none;
@@ -121,4 +181,8 @@ body {
 
 .addBallForm button:hover {
     background-color: #4891ac;
+}
+
+.bowlingBall:hover {
+    filter: brightness(99%);
 }

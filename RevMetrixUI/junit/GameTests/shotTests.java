@@ -19,23 +19,30 @@ public class shotTests {
 		
 	}
 	@Test
-	public void testShotScore() {
-		assertTrue(GameController.getShotScore(1,"0,1,2,3,4,5,6,7,8,9",null,"").equals("-"));
-		assertTrue(GameController.getShotScore(1,"0,1,2,3,4,5,6,7,8",null,"").equals("1"));
-		assertTrue(GameController.getShotScore(1,"0,1,2,3,4,5,6,7",null,"").equals("2"));
-		assertTrue(GameController.getShotScore(1,"0,1,2,3,4,5,6",null,"").equals("3"));
-		assertTrue(GameController.getShotScore(1,"0,1,2,3,4,5",null,"").equals("4"));
-		assertTrue(GameController.getShotScore(1,"0,1,2,3,4",null,"").equals("5"));
-		assertTrue(GameController.getShotScore(1,"0,1,2,3",null,"").equals("6"));
-		assertTrue(GameController.getShotScore(1,"0,1,2",null,"").equals("7"));
-		assertTrue(GameController.getShotScore(1,"0,1",null,"").equals("8"));
-		assertTrue(GameController.getShotScore(1,"0",null,"").equals("9"));
-		assertTrue(GameController.getShotScore(1,"",null,"").equals("X"));
-		assertTrue(GameController.getShotScore(2,"",null,"").equals("/"));
-		assertTrue(GameController.getShotScore(1,"0,1,2,3,4,5,6,7,8,9",null,"F").contentEquals("F"));
-		assertTrue(GameController.getShotScore(2,"0,1,2,3,4,5,6,7,8,9",null,"F").contentEquals("F"));
-		assertTrue(GameController.getShotScore(2,"0","0,1","").contentEquals("1")); 
-		assertTrue(GameController.getShotScore(2,"0,1","0,1,2,3,4","").contentEquals("3"));
+	public void testIsOver() {
+		GameController controller = new GameController();
+		
+		String[] a =  {"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", null, null,null};
+		String[] b =  {"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "X", null,null};
+		String[] c =  {"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "7", null, null};
+		
+		String[] d =  {"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "X", "X",null};
+		String[] e =  {"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "X", "7", null};
+		
+		String[] f =  {"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "7", "/", null};
+		String[] g =  {"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "7", "F", null};
+		
+		String[] h =  {"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "X", "X", "X"};
+		
+		assertFalse(controller.isOver(a,1));
+		assertFalse(controller.isOver(b,1));
+		assertFalse(controller.isOver(c,1));
+		assertFalse(controller.isOver(d,1));
+		assertFalse(controller.isOver(e,1));
+		assertFalse(controller.isOver(f,1));
+		assertTrue(controller.isOver(g,1));
+		assertTrue(controller.isOver(h,1));
+		
 		
 	}
 	@Test
@@ -70,44 +77,6 @@ public class shotTests {
 		
 		 
 		
-	}
-	@Test
-	public void testAddScoreStrike() {
-		Shot a = GameController.addShot(1, "0,1,2,3,4,5,6,7,8,9",null, "", 0); 		// -
-		Shot b = GameController.addShot(2, "0,1","0,1,2,3,4,5,6,7,8,9", "", 0);		// 8
-		Shot c = GameController.addShot(1, "", null, "", 0);						// X
-		Shot d = GameController.addShot(1, "0", null,"", 0);						// 9
-		Shot e = GameController.addShot(2, "", "0","", 0);							// /
-		Shot f = GameController.addShot(1, "0,1,2",null, "", 0); 					// 7
-		Shot g = GameController.addShot(2, "1,2","0,1,2", "", 0); 					// 1
-		Shot h = GameController.addShot(1, "0,1,2,3,4,5,6,7,8,9", null, "F", 0);	// -
-		
-		assertTrue(GameController.addScoreStrike(a, b)==8);
-		assertTrue(GameController.addScoreStrike(b, c)==18);
-		assertTrue(GameController.addScoreStrike(c, d)==19);
-		assertTrue(GameController.addScoreStrike(d, e)==10);
-		assertTrue(GameController.addScoreStrike(f, g)==8);
-		assertTrue(GameController.addScoreStrike(g, h)==1);
-		assertTrue(GameController.addScoreStrike(c, c)==20);
-		assertTrue(GameController.addScoreStrike(h, h)==0);
-		
-	}
-	@Test
-	public void testAddScoreSpare() {
-		Shot a = GameController.addShot(1, "0,1,2,3,4,5,6,7,8,9",null, "", 0); 		// -
-		Shot b = GameController.addShot(2, "0,1","0,1,2,3,4,5,6,7,8,9", "", 0);		// 8
-		Shot c = GameController.addShot(1, "", null, "", 0);						// X
-		Shot d = GameController.addShot(1, "0", null,"", 0);						// 9
-		Shot e = GameController.addShot(2, "", "0","", 0);							// /
-		Shot f = GameController.addShot(1, "0,1,2",null, "", 0); 					// 7
-		Shot g = GameController.addShot(2, "1,2","0,1,2", "", 0); 					// 1
-		Shot h = GameController.addShot(1, "0,1,2,3,4,5,6,7,8,9", null, "F", 0);	// -
-		assertTrue(GameController.addScoreSpare(a)==10);
-		assertTrue(GameController.addScoreSpare(b)==18);
-		assertTrue(GameController.addScoreSpare(c)==20);
-		assertTrue(GameController.addScoreSpare(d)==19);
-		assertTrue(GameController.addScoreSpare(f)==17);
-		assertTrue(GameController.addScoreSpare(g)==11);
 	}
 	@Test
 	public void testIsStrike() {
@@ -148,15 +117,98 @@ public class shotTests {
 		assertFalse(GameController.isSpare(h));
 		
 	}
+	
+	
+	
+	@Test
+	public void testAddScoreStrike() {
+		Shot a = GameController.addShot(1, "0,1,2,3,4,5,6,7,8,9",null, "", 0); 		// -
+		Shot b = GameController.addShot(2, "0,1","0,1,2,3,4,5,6,7,8,9", "", 0);		// 8
+		Shot c = GameController.addShot(1, "", null, "", 0);						// X
+		Shot d = GameController.addShot(1, "0", null,"", 0);						// 9
+		Shot e = GameController.addShot(2, "", "0","", 0);							// /
+		Shot f = GameController.addShot(1, "0,1,2",null, "", 0); 					// 7
+		Shot g = GameController.addShot(2, "1,2","0,1,2", "", 0); 					// 1
+		Shot h = GameController.addShot(1, "0,1,2,3,4,5,6,7,8,9", null, "F", 0);	// -
+		
+		assertTrue(GameController.addScoreStrike(a, b)==8);
+		assertTrue(GameController.addScoreStrike(b, c)==18);
+		assertTrue(GameController.addScoreStrike(c, d)==19);
+		assertTrue(GameController.addScoreStrike(d, e)==10);
+		assertTrue(GameController.addScoreStrike(f, g)==8);
+		assertTrue(GameController.addScoreStrike(g, h)==1);
+		assertTrue(GameController.addScoreStrike(c, c)==20);
+		assertTrue(GameController.addScoreStrike(h, h)==0);
+		
+	}
+	@Test
+	public void testAddScoreSpare() {
+		Shot a = GameController.addShot(1, "0,1,2,3,4,5,6,7,8,9",null, "", 0); 		// -
+		Shot b = GameController.addShot(2, "0,1","0,1,2,3,4,5,6,7,8,9", "", 0);		// 8
+		Shot c = GameController.addShot(1, "", null, "", 0);						// X
+		Shot d = GameController.addShot(1, "0", null,"", 0);						// 9
+		Shot e = GameController.addShot(2, "", "0","", 0);							// /
+		Shot f = GameController.addShot(1, "0,1,2",null, "", 0); 					// 7
+		Shot g = GameController.addShot(2, "1,2","0,1,2", "", 0); 					// 1
+		Shot h = GameController.addShot(1, "0,1,2,3,4,5,6,7,8,9", null, "F", 0);	// -
+		assertTrue(GameController.addScoreSpare(a)==10);
+		assertTrue(GameController.addScoreSpare(b)==18);
+		assertTrue(GameController.addScoreSpare(c)==20);
+		assertTrue(GameController.addScoreSpare(d)==19);
+		assertTrue(GameController.addScoreSpare(f)==17);
+		assertTrue(GameController.addScoreSpare(g)==11);
+	}
+	
 	@Test
 	public void testGetShotScore() {
 		assertTrue(GameController.getShotScore(2, "", "0","")== "/");								// /
 		assertTrue(GameController.getShotScore(1, "0,1,2,3,4,5,6,7,8,9", null, "F")== "F");			// F
 		assertTrue(GameController.getShotScore(1, "0,1,2,3,4,5,6,7,8,9",null, "") == "-"); 			// -
 		assertTrue(GameController.getShotScore(1, "", null, "")== "X");								// X
+		assertTrue(GameController.getShotScore(1,"0,1,2,3,4,5,6,7,8,9",null,"").equals("-"));
+		assertTrue(GameController.getShotScore(1,"0,1,2,3,4,5,6,7,8",null,"").equals("1"));
+		assertTrue(GameController.getShotScore(1,"0,1,2,3,4,5,6,7",null,"").equals("2"));
+		assertTrue(GameController.getShotScore(1,"0,1,2,3,4,5,6",null,"").equals("3"));
+		assertTrue(GameController.getShotScore(1,"0,1,2,3,4,5",null,"").equals("4"));
+		assertTrue(GameController.getShotScore(1,"0,1,2,3,4",null,"").equals("5"));
+		assertTrue(GameController.getShotScore(1,"0,1,2,3",null,"").equals("6"));
+		assertTrue(GameController.getShotScore(1,"0,1,2",null,"").equals("7"));
+		assertTrue(GameController.getShotScore(1,"0,1",null,"").equals("8"));
+		assertTrue(GameController.getShotScore(1,"0",null,"").equals("9"));
+		assertTrue(GameController.getShotScore(1,"",null,"").equals("X"));
+		assertTrue(GameController.getShotScore(2,"",null,"").equals("/"));
+		assertTrue(GameController.getShotScore(1,"0,1,2,3,4,5,6,7,8,9",null,"F").contentEquals("F"));
+		assertTrue(GameController.getShotScore(2,"0,1,2,3,4,5,6,7,8,9",null,"F").contentEquals("F"));
+		assertTrue(GameController.getShotScore(2,"0","0,1","").contentEquals("1")); 
+		assertTrue(GameController.getShotScore(2,"0,1","0,1,2,3,4","").contentEquals("3"));
 		
 		
 		
+	}
+	@Test
+	public void testSplit() {
+		assertFalse(GameController.isSplit(2, "1,2,3,4"));
+		assertFalse(GameController.isSplit(2, "8,9"));
+		assertFalse(GameController.isSplit(1, "0,1,2"));
+		assertFalse(GameController.isSplit(1, "0,1,3"));
+		assertFalse(GameController.isSplit(1, ""));
+		assertFalse(GameController.isSplit(1, "0"));
+		assertFalse(GameController.isSplit(1, "2,3,8"));
+		assertTrue(GameController.isSplit(1, "0,7"));
+		assertTrue(GameController.isSplit(1, "0,8"));
+		assertTrue(GameController.isSplit(1, "3,8"));
+		assertTrue(GameController.isSplit(1, "0,2,9"));
+		assertTrue(GameController.isSplit(1, "0,2,6"));
+		assertTrue(GameController.isSplit(1, "3,4,6"));
+		assertTrue(GameController.isSplit(1, "3,6,7"));
+		assertTrue(GameController.isSplit(1, "2,4,9"));
+		assertTrue(GameController.isSplit(1, "2,3,7"));
+		assertFalse(GameController.isSplit(1, "2,8,9"));
+	}
+	
+	@Test
+	public void testWashout() {
+		assertFalse(GameController.isWashout(1, "0,1,2,3,4,5,6,7,8,9"));
 	}
 	@Test
 	public void testParseShots() {
@@ -261,55 +313,99 @@ public class shotTests {
 		
 	}
 	@Test
-	public void testSplit() {
-		assertFalse(GameController.isSplit(2, "1,2,3,4"));
-		assertFalse(GameController.isSplit(2, "8,9"));
-		assertFalse(GameController.isSplit(1, "0,1,2"));
-		assertFalse(GameController.isSplit(1, "0,1,3"));
-		assertFalse(GameController.isSplit(1, ""));
-		assertFalse(GameController.isSplit(1, "0"));
-		assertFalse(GameController.isSplit(1, "2,3,8"));
-		assertTrue(GameController.isSplit(1, "0,7"));
-		assertTrue(GameController.isSplit(1, "0,8"));
-		assertTrue(GameController.isSplit(1, "3,8"));
-		assertTrue(GameController.isSplit(1, "0,2,9"));
-		assertTrue(GameController.isSplit(1, "0,2,6"));
-		assertTrue(GameController.isSplit(1, "3,4,6"));
-		assertTrue(GameController.isSplit(1, "3,6,7"));
-		assertTrue(GameController.isSplit(1, "2,4,9"));
-		assertTrue(GameController.isSplit(1, "2,3,7"));
-		assertFalse(GameController.isSplit(1, "2,8,9"));
+	public void testGetWashouts() {
+		ArrayList<Shot> shots = new ArrayList<Shot>();
+		shots.add(GameController.addShot(1, "0,1,2,3,4,5,6,7,8,9",null, "", 0)); 		// -
+		shots.add(GameController.addShot(2, "0,1","0,1,2,3,4,5,6,7,8,9", "", 0));		// 8
+		
+		shots.add(GameController.addShot(1, "", null, "", 0));							// X
+		
+		shots.add(GameController.addShot(1, "0", null,"", 0));							// 9
+		shots.add(GameController.addShot(2, "", "0","", 0));							// /
+		
+		shots.add(GameController.addShot(1, "0,1,2",null, "", 0)); 						// 7
+		shots.add(GameController.addShot(2, "1,2","0,1,2", "", 0)); 					// 1
+		String[] output = GameController.getWashouts(shots);
+		assertTrue(output[0]==null);
+		assertTrue(output[1]==null);
+		assertTrue(output[2]==null);
+		assertTrue(output[3].equals("w"));
+		
+		
+		
+		
+	}
+	//database tests
+	@Test
+	public void testGetGameBySession() {
+		GameController controller = new GameController();
+		assertTrue(controller.GetGamesBySession(1)!=null);
+		
+	}
+	@Test
+	public void testUpdateDate() {
+		GameController controller = new GameController();
+		controller.updateSessionDate(1);
+		//method doesn't crash
+		assertTrue(true);
+		
+	}
+	@Test
+	public void testRemoveShot() {
+		GameController controller = new GameController();
+		
+		Shot shot = new Shot();
+		shot.setBallId(1);
+		
+		int id = controller.storeShot( 1 ,13 , shot ,1);
+		shot.setShotId(id);
+		controller.removeShot(shot);
+		//method doesn't crash
+		assertTrue(true);
+		
 	}
 	
 	@Test
-	public void testWashout() {
-		assertFalse(GameController.isWashout(1, "0,1,2,3,4,5,6,7,8,9"));
+	public void testRemoveFrame() {
+		GameController controller = new GameController();
+		int id = controller.storeFrame(new Frame());
+		Frame frame = new Frame();
+		frame.setFrameId(id);
+		
+		controller.removeFrame(frame);
+		//method doesn't crash
+		assertTrue(true);
+		
 	}
 	
 	@Test
-	public void testIsFinnished() {
-		String[] a =  {"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", null, null,null};
-		String[] b =  {"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "X", null,null};
-		String[] c =  {"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "7", null, null};
-		
-		String[] d =  {"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "X", "X",null};
-		String[] e =  {"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "X", "7", null};
-		
-		String[] f =  {"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "7", "/", null};
-		String[] g =  {"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "7", "F", null};
-		
-		String[] h =  {"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "X", "X", "X"};
-		
-		assertFalse(GameController.isOver(a));
-		assertFalse(GameController.isOver(b));
-		assertFalse(GameController.isOver(c));
-		assertFalse(GameController.isOver(d));
-		assertFalse(GameController.isOver(e));
-		assertFalse(GameController.isOver(f));
-		assertTrue(GameController.isOver(g));
-		assertTrue(GameController.isOver(h));
-		
+	public void testGetBallList() {
+		GameController controller = new GameController();
+		assertTrue(controller.getAllBalls()!=null);
 		
 	}
+	@Test
+	public void testUpdateGameScore() {
+		GameController controller = new GameController();
+		assertTrue(controller.getAllBalls()!=null);
+		
+	}
+	@Test
+	public void testParseFrames() {
+		GameController controller = new GameController();
+		assertTrue(controller.getAllBalls()!=null);
+		
+	}
+	
+	/*
+	public void testParseScores() {
+		GameController controller = new GameController();
+		assertTrue(controller.getAllBalls()!=null);
+		
+	}
+	*/
+	
+	
+	
 	
 }

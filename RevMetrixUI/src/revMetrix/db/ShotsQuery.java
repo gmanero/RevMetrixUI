@@ -1,4 +1,8 @@
 package revMetrix.db;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +11,7 @@ import java.util.Scanner;
 import revMetrix.db.model.Account;
 import revMetrix.db.model.Frame;
 import revMetrix.db.model.Game;
+import revMetrix.db.model.Session;
 import revMetrix.db.model.Shot;
 import revMetrix.db.persist.DatabaseProvider;
 import revMetrix.db.persist.IDatabase;
@@ -20,12 +25,16 @@ public class ShotsQuery {
 		
 		// get the DB instance and execute transaction
 		IDatabase db = DatabaseProvider.getInstance();
-		List<Frame> shots = db.findAllFrames();
-		db.removeFrame(shots.get(0).getFrameId());
-		List<Frame> shots2 = db.findAllFrames();
+		Session session= db.getSession(12);
 		
 		// check if anything was returned and output the list
-		System.out.print(shots.size()+" "+shots2.size());
+		System.out.print(session.getDate());
+		
+		 LocalDate currentDate = LocalDate.now();
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+	        String formattedDate = currentDate.format(formatter);
+	        System.out.println(formattedDate);
+		
 		
 	}
 }

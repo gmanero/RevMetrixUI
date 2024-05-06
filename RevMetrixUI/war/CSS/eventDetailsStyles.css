@@ -1,6 +1,4 @@
-/* styles.css */
-
-/* CSS for Event Details Page */
+/* eventDetailsStyles.css */
 
 body {
     margin: 0;
@@ -39,14 +37,72 @@ h1 {
     padding: 40px; /* Increase padding for better spacing */
     border-radius: 10px; /* Increase border radius for smoother edges */
     margin-top: 40px;
+    display: grid; /* Use grid layout */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Automatic columns with minimum width of 200px */
+    gap: 20px; /* Add gap between grid items */
 }
 
-.event-details p {
-    margin: 20px 0; /* Increase margin for better spacing between paragraphs */
-    font-size: 22px; /* Increase font size for better readability */
+.event-box {
+    background-color: #444; /* Color for the event boxes */
+    padding: 20px; /* Padding for event boxes */
+    border-radius: 10px; /* Border radius for event boxes */
 }
 
-.event-details strong {
+.event-box h3 {
+    margin-top: 0; /* Remove top margin for event titles */
+    margin-bottom: 10px; /* Add bottom margin for event titles */
+    font-size: 30px;
+    
+}
+
+.event-box p {
+    margin: 0; /* Remove margin for event details */
+}
+
+.event-box strong {
     font-weight: bold;
     color: #26acca; /* Accentuate strong text with a contrasting color */
+}
+
+/* Session Box Styles */
+.session-box {
+    background-color: #444; /* Color for the session boxes */
+    padding: 15px; /* Padding for session boxes */
+    border-radius: 8px; /* Border radius for session boxes */
+    margin-bottom: 15px; /* Add bottom margin for session boxes */
+}
+
+.session-box h3 {
+    margin-top: 0; /* Remove top margin for session titles */
+    margin-bottom: 5px; /* Add bottom margin for session titles */
+}
+
+.session-box p {
+    margin: 0; /* Remove margin for session details */
+}
+
+.session-box strong {
+    font-weight: bold;
+    color: #26acca; /* Accentuate strong text with a contrasting color */
+}
+.play-button {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.play-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+.session-box {
+	display: inline-block; /* Display boxes inline */
+    justify-content: space-between; /* Align items with space between them */
+    align-items: center; /* Align items vertically */
+    width: 200px; /* Adjust the width as needed */
+    margin: 10 auto; /* Center the box horizontally */
+    padding: 30ppx;
 }

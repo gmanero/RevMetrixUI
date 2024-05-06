@@ -9,6 +9,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -1070,11 +1072,12 @@ public class DerbyDatabase implements IDatabase {
 	public Integer addGame(Game game) {
 		return executeTransaction(new Transaction<Integer>() {
 			public Integer execute(Connection conn) throws SQLException {
-				PreparedStatement insertGame = conn.prepareStatement("insert into games (gameScore, startingLane, opponent, handicap) VALUES (?, ?, ?, ?)",PreparedStatement.RETURN_GENERATED_KEYS);
+				PreparedStatement insertGame = conn.prepareStatement("insert into games (gameScore, startingLane, opponent, handicap, done) VALUES (?, ?, ?, ?, ?)",PreparedStatement.RETURN_GENERATED_KEYS);
 				insertGame.setInt(1, game.getGameScore());
 			   	insertGame.setInt(2, game.getStartingLane());
 			   	insertGame.setString(3, game.getOpponent());
 			   	insertGame.setInt(4, game.getHandicap());
+			   	insertGame.setBoolean(5, game.getdone());
 				insertGame.executeUpdate();
 				ResultSet rs = insertGame.getGeneratedKeys();
 				if(rs.next()) {
@@ -1247,6 +1250,30 @@ public class DerbyDatabase implements IDatabase {
 	        }
 	    });
 	}
+	public boolean updateGameDone(int gameId, boolean isdone){
+		return executeTransaction(new Transaction<Boolean>() {
+	        @Override
+	        public Boolean execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            try {
+	                stmt = conn.prepareStatement("UPDATE games SET done = ? WHERE game_id = ?");
+	                
+	                Boolean result = true;
+	                stmt.setBoolean(1, isdone);
+	                stmt.setInt(2, gameId);
+	                int rowsUpdated =stmt.executeUpdate();
+	                System.out.println(rowsUpdated);
+	                return result;
+	               
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
 	
 	//SESSIONS QUERYS
 	public Boolean updateSessionScore(int sessionId, int newScore) {
@@ -1310,7 +1337,109 @@ public class DerbyDatabase implements IDatabase {
 	        }
 	    });
 	}
-	
+	public ArrayList<Session> getSessionByEvent(int id){
+		return executeTransaction(new Transaction<ArrayList<Session>>() {
+	        @Override
+	        public ArrayList<Session> execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            try {
+	            	stmt = conn.prepareStatement("select sessions.* from sessions where event_Id = ?");
+	                stmt.setInt(1,id);
+	                
+	                ArrayList<Session> result = new ArrayList<Session>();
+	                
+	                resultSet = stmt.executeQuery();
+	                
+	                Boolean found = false;
+	                
+	                while (resultSet.next()) {
+	                    found = true;
+	                    
+	                    Session session = new Session();
+	                    loadSession(session, resultSet, 1);
+	                    result.add(session);
+	                    
+	                }
+	                
+	                if (!found) {
+	                    System.out.println("No Sessions were found in the database");
+	                }
+	                
+	                return result;
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
+	public Boolean updateSessionDate(int Id) {
+		return executeTransaction(new Transaction<Boolean>() {
+	        @Override
+	        public Boolean execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            try {
+	                stmt = conn.prepareStatement("UPDATE sessions SET date = ? WHERE session_id = ?");
+	                
+	                Boolean result = true;
+	                LocalDate currentDate = LocalDate.now();
+	    	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+	    	        String formattedDate = currentDate.format(formatter);
+	                stmt.setString(1, formattedDate);
+	                stmt.setInt(2, Id);
+	                int rowsUpdated =stmt.executeUpdate();
+	                System.out.println(rowsUpdated);
+	                return result;
+	               
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
+	public Session getSession(int id) {
+		return executeTransaction(new Transaction<Session>() {
+	        @Override
+	        public Session execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            try {
+	                stmt = conn.prepareStatement("SELECT * FROM sessions Where session_id = ?");
+	                stmt.setInt(1, id);
+	                
+	                Session result = new Session();
+	                
+	                resultSet = stmt.executeQuery();
+	                
+	                Boolean found = false;
+	                
+	                while (resultSet.next()) {
+	                    found = true;
+	                    
+	                    
+	                    loadSession(result, resultSet, 1);
+	                    
+	                   
+	                }
+	                
+	                if (!found) {
+	                    System.out.println("No sessions were found in the database");
+	                }
+	                
+	                return result;
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
 	public Integer insertSessionIntoSessionsTable(final int sessionScore, final int eventId, final String lanes, final String date, final int userId) {
 	    return executeTransaction(new Transaction<Integer>() {
 	        @Override
@@ -1540,6 +1669,7 @@ public class DerbyDatabase implements IDatabase {
 		game.setStartingLane(resultSet.getInt(index++));
 		game.setOpponent(resultSet.getString(index++));
 		game.setHandicap(resultSet.getInt(index++));
+		game.setdone(resultSet.getBoolean(index++));
 	}
 	
 	private void loadSession(Session session, ResultSet resultSet, int index) throws SQLException {
@@ -1659,7 +1789,8 @@ public class DerbyDatabase implements IDatabase {
 							"	gameScore integer," +
 							"	startingLane integer," +
 							"   opponent varchar(40)," +
-							"   handicap integer" +
+							"   handicap integer," +
+							"   done boolean" +
 							")"
 					);
 					stmt6.executeUpdate();
@@ -1822,12 +1953,13 @@ public class DerbyDatabase implements IDatabase {
 
 					System.out.println("Frames table populated");
 
-					insertGame = conn.prepareStatement("insert into games (gameScore, startingLane, opponent, handicap) VALUES (?, ?, ?, ?)");
+					insertGame = conn.prepareStatement("insert into games (gameScore, startingLane, opponent, handicap, done) VALUES (?, ?, ?, ?, ?)");
 					for (Game game : gameList) {
 					    insertGame.setInt(1, game.getGameScore());
 					    insertGame.setInt(2, game.getStartingLane());
 					    insertGame.setString(3, game.getOpponent());
 					    insertGame.setInt(4, game.getHandicap());
+					    insertGame.setBoolean(5, game.getdone());
 					    insertGame.addBatch();
 					}
 					insertGame.executeBatch();

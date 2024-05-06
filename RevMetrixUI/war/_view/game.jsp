@@ -144,7 +144,7 @@
     <div class="spare" style="display: none;" onclick="setSpare()"><span>/</span></div>
   </div>
   <div class="rowNew">
-    <input id = "next" class="button" type="Submit" name="submit" value="Next Shot >" onclick="getNextFrame()">
+    <input id = "nextShotButton" class="button" type="Submit" name="submit" value="Next Shot >" onclick="getNextFrame()">
     
     <input type = "hidden" name = "firstRemaining" id = 'firstRemaining' value = "">
     <input type = "hidden" name = "secondRemaining" id = 'secondRemaining' value = "">
@@ -153,6 +153,7 @@
       
   </div>
   <br>
+   <label> Bowling Ball: </label>
   <div class="dropdown-select" >
   <select name="ball1">
   	<%@ page import="java.util.List" %>
@@ -200,7 +201,7 @@
   <br>
 </div>
 <div class= "center2">
-<label> Lane: </label>
+<label> Lane:</label>
 <input name = "lane" value = ${lane }>
 </div>
 <br>
@@ -227,7 +228,7 @@
 		                // Iterate over the ArrayList and generate options for the dropdown menu
 		                for (Game game : gameList) { i++;
 		            %>
-		            <option value="<%= game.getGameId() %>">Game  <%= i+": "+game.getGameScore() %></option>
+		            <option value="<%= game.getGameId() %>">Game  <%= i+": "+game.getGameScore()+" "+game.getdoneBox() %></option>
 		            <% 
 		                } 
 		            } else {
@@ -247,7 +248,7 @@
         </div>
         <div class = "center2">
         <form action="${pageContext.servletContext.contextPath}/game" method="post">
-        <input class="button" type="Submit" name="submit" style="background-color: red;" value="   			  Remove LastShot			   ">
+        <input class="button" type="Submit" name="submit" style="background-color: red;" value="   			 Remove Last Shot		   ">
         <input type = "hidden" name = "firstRemaining"  value = "Rem">
         </form>
         </div>
@@ -678,8 +679,14 @@
         	  
           }
       }
+      
       if(count == 10){
-    	  document.getElementById(next).disabled = true;
+    	  const nextShotButton = document.getElementById('nextShotButton');
+    	  nextShotButton.disabled = true;
+    	  nextShotButton.style.backgroundColor = '#ccc'; // Change background color to gray
+    	  nextShotButton.style.color = '#666'; // Change text color to a darker shade of gray
+    	  nextShotButton.style.cursor = 'not-allowed'; // Change cursor style to indicate not allowed
+    	  
     	  
       }
      
