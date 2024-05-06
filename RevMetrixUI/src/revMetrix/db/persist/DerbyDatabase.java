@@ -9,6 +9,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -1338,6 +1340,71 @@ public class DerbyDatabase implements IDatabase {
 	                
 	                if (!found) {
 	                    System.out.println("No Sessions were found in the database");
+	                }
+	                
+	                return result;
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
+	public Boolean updateSessionDate(int Id) {
+		return executeTransaction(new Transaction<Boolean>() {
+	        @Override
+	        public Boolean execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            try {
+	                stmt = conn.prepareStatement("UPDATE sessions SET date = ? WHERE session_id = ?");
+	                
+	                Boolean result = true;
+	                LocalDate currentDate = LocalDate.now();
+	    	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+	    	        String formattedDate = currentDate.format(formatter);
+	                stmt.setString(1, formattedDate);
+	                stmt.setInt(2, Id);
+	                int rowsUpdated =stmt.executeUpdate();
+	                System.out.println(rowsUpdated);
+	                return result;
+	               
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
+	public Session getSession(int id) {
+		return executeTransaction(new Transaction<Session>() {
+	        @Override
+	        public Session execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            try {
+	                stmt = conn.prepareStatement("SELECT * FROM sessions Where session_id = ?");
+	                stmt.setInt(1, id);
+	                
+	                Session result = new Session();
+	                
+	                resultSet = stmt.executeQuery();
+	                
+	                Boolean found = false;
+	                
+	                while (resultSet.next()) {
+	                    found = true;
+	                    
+	                    
+	                    loadSession(result, resultSet, 1);
+	                    
+	                   
+	                }
+	                
+	                if (!found) {
+	                    System.out.println("No sessions were found in the database");
 	                }
 	                
 	                return result;
