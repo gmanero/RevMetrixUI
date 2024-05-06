@@ -48,15 +48,18 @@ public class GameServlet extends HttpServlet {
 	    
 	    
 	    controller = new GameController();
-	    gameID = controller.newGame();
+	    System.out.println(gameID);
+	    if(gameID==0) {
+	    	//gameID = controller.newGame();
+	    }
 	    List<Ball> balls = controller.getAllBalls();
-	    ArrayList<Shot> shots = controller.GetShotsByGame(gameID);
-	    ArrayList<Game> games = controller.GetGamesBySession(SessionID);
 	    
+	    ArrayList<Game> games = controller.GetGamesBySession(SessionID);
+	    boolean[] locker = {true,true,true,true,true,true,true,true,true,true};
+		req.setAttribute("locked", locker);
 	    req.setAttribute("games", games);
 	    req.setAttribute("balls", balls);
-	    req.setAttribute("washout", GameController.getWashouts(shots));
-	    req.setAttribute("split", GameController.getSplits(shots));
+	   
 		req.getRequestDispatcher("/_view/game.jsp").forward(req, resp);
 	}
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -105,6 +108,7 @@ public class GameServlet extends HttpServlet {
 			    List<Ball> balls = controller.getAllBalls();
 			    ArrayList<Shot> shots = controller.GetShotsByGame(gameID);
 			    ArrayList<Game> games = controller.GetGamesBySession(SessionID);
+			    games.add(new Game());
 			    
 			    req.setAttribute("games", games);
 			    req.setAttribute("balls", balls);
@@ -211,7 +215,8 @@ public class GameServlet extends HttpServlet {
 	    scores = GameController.parseScores(frames, shots);
 	    controller.updateGameScore(gameID ,scores[10]);
 	    ArrayList<Game> games = controller.GetGamesBySession(SessionID);
-		
+		controller.updateSessionDate(SessionID);
+		controller.updateSessionScore(SessionID);
 	    req.setAttribute("games", games);
 	    req.setAttribute("secondFrame", secondFrame);
 	    req.setAttribute("locked", lockout);
