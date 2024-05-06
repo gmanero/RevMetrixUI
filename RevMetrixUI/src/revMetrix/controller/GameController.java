@@ -8,6 +8,7 @@ import revMetrix.db.model.Ball;
 import revMetrix.db.model.Frame;
 import revMetrix.db.model.Game;
 import revMetrix.db.model.Pair;
+import revMetrix.db.model.Session;
 import revMetrix.db.model.Shot;
 import revMetrix.db.persist.DatabaseProvider;
 import revMetrix.db.persist.DerbyDatabase;
@@ -547,7 +548,12 @@ public class GameController {
 		}
 		db.updateSessionScore(id, total);
 	}
-	
+	public void updateSessionDate(int id) {
+		Session s = db.getSession(id);
+		if(s.getDate().equals("0")) {
+			db.updateSessionDate(id);
+		}
+	}
 	
 	
 	

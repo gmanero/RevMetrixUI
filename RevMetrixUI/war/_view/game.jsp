@@ -144,7 +144,7 @@
     <div class="spare" style="display: none;" onclick="setSpare()"><span>/</span></div>
   </div>
   <div class="rowNew">
-    <input id = "next" class="button" type="Submit" name="submit" value="Next Shot >" onclick="getNextFrame()">
+    <input id = "nextShotButton" class="button" type="Submit" name="submit" value="Next Shot >" onclick="getNextFrame()">
     
     <input type = "hidden" name = "firstRemaining" id = 'firstRemaining' value = "">
     <input type = "hidden" name = "secondRemaining" id = 'secondRemaining' value = "">
@@ -679,8 +679,14 @@
         	  
           }
       }
+      
       if(count == 10){
-    	  document.getElementById(next).disabled = true;
+    	  const nextShotButton = document.getElementById('nextShotButton');
+    	  nextShotButton.disabled = true;
+    	  nextShotButton.style.backgroundColor = '#ccc'; // Change background color to gray
+    	  nextShotButton.style.color = '#666'; // Change text color to a darker shade of gray
+    	  nextShotButton.style.cursor = 'not-allowed'; // Change cursor style to indicate not allowed
+    	  
     	  
       }
      
