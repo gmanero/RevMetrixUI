@@ -38,9 +38,9 @@
                 <div class="pageTitle"><span class="loggedInName"><h2>${loggedInName}'s Balls</h2></span></div>
             
             <% } else { %>
-                <div class="center"><button type="submit" name="destination" value="login" class="login-btn">Login</button></div>
+                
             <% } %>
-
+</form>
 
          
 <div class="bowlingBalls" id="bowlingBalls">
