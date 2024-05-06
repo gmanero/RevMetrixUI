@@ -54,24 +54,5 @@ public interface IDatabase {
 	public Session getSession(int id);
 	//Junction
 	public List<Junction> findAllJunctions();
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }
 

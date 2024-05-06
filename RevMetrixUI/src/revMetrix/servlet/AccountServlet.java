@@ -23,13 +23,27 @@ public class AccountServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+    	String loggedInName = "";
+        boolean loggedIn = false; // Initialize loggedIn to false
+
+        AllAccountsController controller = new AllAccountsController();
+        loggedIn = controller.isLoggedInAccount();
+        System.out.println("Look here + "+ loggedIn);
+
+        if (loggedIn) {
+            loggedInName = controller.findLoggedInUser();
+            System.out.println("Logged in name: " + loggedInName);
+        }
+        
+        
     	System.out.println("account Servlet: doGet");
         // Get all balls
         List<Ball> balls = controller.findAllBalls();
 
         // Set balls as attribute in request
         req.setAttribute("balls", balls);
-
+        req.setAttribute("loggedInName", loggedInName);
+        req.setAttribute("loggedIn", loggedIn);
         // Forward to JSP for rendering
         req.getRequestDispatcher("/account.jsp").forward(req, resp);
     }
@@ -37,6 +51,17 @@ public class AccountServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+    	String loggedInName = "";
+        boolean loggedIn = false; // Initialize loggedIn to false
+
+        AllAccountsController controller = new AllAccountsController();
+        loggedIn = controller.isLoggedInAccount();
+        System.out.println("Look here + "+ loggedIn);
+
+        if (loggedIn) {
+            loggedInName = controller.findLoggedInUser();
+            System.out.println("Logged in name: " + loggedInName);
+        }
     	System.out.println("account Servlet: doPost");
         // Get form parameters for new ball
         String name = req.getParameter("name");
@@ -45,7 +70,8 @@ public class AccountServlet extends HttpServlet {
 
         // Add new ball to database
         controller.insertBallIntoBallsTable(weight, color, name);
-
+        req.setAttribute("loggedInName", loggedInName);
+        req.setAttribute("loggedIn", loggedIn);
         // Redirect back to GET to display all balls
         req.getRequestDispatcher("/_view/account.jsp").forward(req, resp);
     }

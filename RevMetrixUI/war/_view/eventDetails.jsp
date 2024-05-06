@@ -3,6 +3,7 @@
 <%@ page import="revMetrix.db.model.Session" %>
 <%@ page import="revMetrix.controller.EventController" %>
 
+
 <!DOCTYPE html>
 <html lang="en">
 

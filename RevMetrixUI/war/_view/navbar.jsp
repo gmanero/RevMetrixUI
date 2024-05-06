@@ -34,7 +34,7 @@
     </div>
     
      <div class="login">
-        <form method="get">
+        <form action="${pageContext.servletContext.contextPath}/index" method="get">
             <% Boolean loggedIn = (Boolean) request.getAttribute("loggedIn"); %>
             <% if (loggedIn != null && loggedIn) { %>
                 <div class="left"><span class="loggedInName"><p>Hello, ${loggedInName}</p></span></div>
