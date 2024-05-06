@@ -1,4 +1,8 @@
 package revMetrix.db;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +28,13 @@ public class ShotsQuery {
 		ArrayList<Session> session= db.getSessionByEvent(1);
 		
 		// check if anything was returned and output the list
-		System.out.print(session.size());
+		
+		
+		 LocalDate currentDate = LocalDate.now();
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+	        String formattedDate = currentDate.format(formatter);
+	        System.out.println(formattedDate);
+		
 		
 	}
 }

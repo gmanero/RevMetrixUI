@@ -44,6 +44,7 @@ public interface IDatabase {
 	public int findEventIdByInfo(final String name, final String description);
 	
 	public ArrayList<Session> getSessionByEvent(int id);
+	public Boolean updateSessionDate(int Id);
 		
 }
 

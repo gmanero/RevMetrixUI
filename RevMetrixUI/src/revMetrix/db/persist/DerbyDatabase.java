@@ -9,6 +9,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -1341,6 +1343,33 @@ public class DerbyDatabase implements IDatabase {
 	                }
 	                
 	                return result;
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
+	public Boolean updateSessionDate(int Id) {
+		return executeTransaction(new Transaction<Boolean>() {
+	        @Override
+	        public Boolean execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            try {
+	                stmt = conn.prepareStatement("UPDATE sessions SET date = ? WHERE session_id = ?");
+	                
+	                Boolean result = true;
+	                LocalDate currentDate = LocalDate.now();
+	    	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+	    	        String formattedDate = currentDate.format(formatter);
+	                stmt.setString(1, formattedDate);
+	                stmt.setInt(2, Id);
+	                int rowsUpdated =stmt.executeUpdate();
+	                System.out.println(rowsUpdated);
+	                return result;
+	               
 	            } finally {
 	                DBUtil.closeQuietly(resultSet);
 	                DBUtil.closeQuietly(stmt);
