@@ -94,7 +94,7 @@ public class AccountCreationServlet extends HttpServlet {
 	            // Set success message if needed
 	            successMessage = "Account added successfully";
 	            resp.sendRedirect("/revMetrix/index?destination=account");
-	            
+
 	        }
 			
 		} catch (Exception e) {
