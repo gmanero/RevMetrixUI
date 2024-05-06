@@ -56,18 +56,19 @@
             <% 
                 // Retrieve sessions associated with the event ID
                 List<Session> sessions = eventController.getSessionsByEvent(eventId);
-
+				int i = 0;
                 // Check if sessions exist for the event
                 if (sessions != null && !sessions.isEmpty()) {
                     // Iterate over sessions and display details
                     for (Session s : sessions) {
+                    	i++;
             %>
             <div class="session-box">
             <form action="${pageContext.servletContext.contextPath}/game" method="get">
             
             
     <div class="session-details">
-        <h3>Session <%= s.getSessionId() %></h3>
+        <h3>Session <%= i %></h3>
         <p>Score: <%= s.getSessionScore() %></p>
     </div>
     <input type = "hidden" name = "SesionID" value = "<%= s.getSessionId() %>" >

@@ -1072,11 +1072,12 @@ public class DerbyDatabase implements IDatabase {
 	public Integer addGame(Game game) {
 		return executeTransaction(new Transaction<Integer>() {
 			public Integer execute(Connection conn) throws SQLException {
-				PreparedStatement insertGame = conn.prepareStatement("insert into games (gameScore, startingLane, opponent, handicap) VALUES (?, ?, ?, ?)",PreparedStatement.RETURN_GENERATED_KEYS);
+				PreparedStatement insertGame = conn.prepareStatement("insert into games (gameScore, startingLane, opponent, handicap, done) VALUES (?, ?, ?, ?, ?)",PreparedStatement.RETURN_GENERATED_KEYS);
 				insertGame.setInt(1, game.getGameScore());
 			   	insertGame.setInt(2, game.getStartingLane());
 			   	insertGame.setString(3, game.getOpponent());
 			   	insertGame.setInt(4, game.getHandicap());
+			   	insertGame.setBoolean(5, game.getdone());
 				insertGame.executeUpdate();
 				ResultSet rs = insertGame.getGeneratedKeys();
 				if(rs.next()) {
@@ -1242,6 +1243,30 @@ public class DerbyDatabase implements IDatabase {
 	                }
 	                
 	                return result;
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
+	public boolean updateGameDone(int gameId, boolean isdone){
+		return executeTransaction(new Transaction<Boolean>() {
+	        @Override
+	        public Boolean execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            try {
+	                stmt = conn.prepareStatement("UPDATE games SET done = ? WHERE game_id = ?");
+	                
+	                Boolean result = true;
+	                stmt.setBoolean(1, isdone);
+	                stmt.setInt(2, gameId);
+	                int rowsUpdated =stmt.executeUpdate();
+	                System.out.println(rowsUpdated);
+	                return result;
+	               
 	            } finally {
 	                DBUtil.closeQuietly(resultSet);
 	                DBUtil.closeQuietly(stmt);
@@ -1644,6 +1669,7 @@ public class DerbyDatabase implements IDatabase {
 		game.setStartingLane(resultSet.getInt(index++));
 		game.setOpponent(resultSet.getString(index++));
 		game.setHandicap(resultSet.getInt(index++));
+		game.setdone(resultSet.getBoolean(index++));
 	}
 	
 	private void loadSession(Session session, ResultSet resultSet, int index) throws SQLException {
@@ -1763,7 +1789,8 @@ public class DerbyDatabase implements IDatabase {
 							"	gameScore integer," +
 							"	startingLane integer," +
 							"   opponent varchar(40)," +
-							"   handicap integer" +
+							"   handicap integer," +
+							"   done boolean" +
 							")"
 					);
 					stmt6.executeUpdate();
@@ -1926,12 +1953,13 @@ public class DerbyDatabase implements IDatabase {
 
 					System.out.println("Frames table populated");
 
-					insertGame = conn.prepareStatement("insert into games (gameScore, startingLane, opponent, handicap) VALUES (?, ?, ?, ?)");
+					insertGame = conn.prepareStatement("insert into games (gameScore, startingLane, opponent, handicap, done) VALUES (?, ?, ?, ?, ?)");
 					for (Game game : gameList) {
 					    insertGame.setInt(1, game.getGameScore());
 					    insertGame.setInt(2, game.getStartingLane());
 					    insertGame.setString(3, game.getOpponent());
 					    insertGame.setInt(4, game.getHandicap());
+					    insertGame.setBoolean(5, game.getdone());
 					    insertGame.addBatch();
 					}
 					insertGame.executeBatch();

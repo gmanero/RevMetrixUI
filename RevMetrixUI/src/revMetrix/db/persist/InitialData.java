@@ -207,6 +207,7 @@ public class InitialData {
 	                game.setStartingLane(Integer.parseInt(i.next()));
 	                game.setOpponent(i.next());
 	                game.setHandicap(Integer.parseInt(i.next()));
+	                game.setdone(true);
 	                
 	                gameList.add(game);
 	            }

@@ -35,6 +35,7 @@ public interface IDatabase {
 	public Boolean updateGameScore(int gameId, int newScore);
 	public Integer addGame(Game game);
 	public List<Game> findAllGames();
+	public boolean updateGameDone(int gameId, boolean isdone);
 	//Frame
 	public ArrayList<Frame> GetFrameByGame(int id);
 	public Boolean updateFrameScore(int frameId, int newScore);

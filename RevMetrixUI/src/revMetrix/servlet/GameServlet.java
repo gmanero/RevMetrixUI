@@ -37,7 +37,7 @@ public class GameServlet extends HttpServlet {
 			SessionID = Integer.parseInt(Id);
 		}
 		else {
-			SessionID= 2;
+			SessionID= 12;
 		}
 		
 		
@@ -55,7 +55,12 @@ public class GameServlet extends HttpServlet {
 	    List<Ball> balls = controller.getAllBalls();
 	    
 	    ArrayList<Game> games = controller.GetGamesBySession(SessionID);
+	    for(Game g:games) {
+	    	System.out.println(g.getdone());
+	    }
 	    boolean[] locker = {true,true,true,true,true,true,true,true,true,true};
+	    controller.updateSessionDate(SessionID);
+	    //controller.getallsessions();
 		req.setAttribute("locked", locker);
 	    req.setAttribute("games", games);
 	    req.setAttribute("balls", balls);
@@ -230,15 +235,13 @@ public class GameServlet extends HttpServlet {
 	    req.setAttribute("scores", scores); 
 		}
 	    // Forwarding request and response to JSP page
-		if(shotScores != null && GameController.isOver(shotScores)) {
+		if(shotScores != null && controller.isOver(shotScores,gameID)) {
 			boolean[] locker = {true,true,true,true,true,true,true,true,true,true};
 			req.setAttribute("locked", locker);
 		}
 	    req.getRequestDispatcher("/_view/game.jsp").forward(req, resp);
 	}
-	protected void doUpdate(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-	}
+	
 
 
 }
