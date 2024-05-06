@@ -22,7 +22,7 @@ public class GameController {
 		DatabaseProvider.setInstance(new DerbyDatabase());
 		db = DatabaseProvider.getInstance();
 	}
-	public static boolean isOver(String[] shots) {
+	public boolean isOver(String[] shots, int gameID) {
 		if (shots == null) {
 			return false;
 		}
@@ -36,6 +36,7 @@ public class GameController {
 			System.out.println("Not 1");
 		}
 		if(!(shots[20]==null)) {
+			db.updateGameDone(gameID,true);
 			return true;
 		}
 		else {
@@ -48,6 +49,7 @@ public class GameController {
 			System.out.println("Not 3");
 		}
 		if(!shots[19].equals("X")&&!shots[19].equals("/")) {
+			db.updateGameDone(gameID,true);
 			return true;
 		}
 		else {
@@ -554,7 +556,15 @@ public class GameController {
 			db.updateSessionDate(id);
 		}
 	}
+	/*
+	public void getallsessions() {
+		List<Session> sessions = db.findAllSessions();
+		for(Session s: sessions) {
+			System.out.println(s.getDate());
+		}
+	}
 	
+	*/
 	
 	
 }
