@@ -228,7 +228,7 @@
 		                // Iterate over the ArrayList and generate options for the dropdown menu
 		                for (Game game : gameList) { i++;
 		            %>
-		            <option value="<%= game.getGameId() %>">Game  <%= i+": "+game.getGameScore() %></option>
+		            <option value="<%= game.getGameId() %>">Game  <%= i+": "+game.getGameScore()+" "+game.getdoneBox() %></option>
 		            <% 
 		                } 
 		            } else {
@@ -248,7 +248,7 @@
         </div>
         <div class = "center2">
         <form action="${pageContext.servletContext.contextPath}/game" method="post">
-        <input class="button" type="Submit" name="submit" style="background-color: red;" value="   			  Remove LastShot			   ">
+        <input class="button" type="Submit" name="submit" style="background-color: red;" value="   			 Remove Last Shot		   ">
         <input type = "hidden" name = "firstRemaining"  value = "Rem">
         </form>
         </div>

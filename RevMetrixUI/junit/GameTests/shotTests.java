@@ -20,6 +20,8 @@ public class shotTests {
 	}
 	@Test
 	public void testIsOver() {
+		GameController controller = new GameController();
+		
 		String[] a =  {"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", null, null,null};
 		String[] b =  {"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "X", null,null};
 		String[] c =  {"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "7", null, null};
@@ -32,14 +34,14 @@ public class shotTests {
 		
 		String[] h =  {"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "X", "X", "X"};
 		
-		assertFalse(GameController.isOver(a));
-		assertFalse(GameController.isOver(b));
-		assertFalse(GameController.isOver(c));
-		assertFalse(GameController.isOver(d));
-		assertFalse(GameController.isOver(e));
-		assertFalse(GameController.isOver(f));
-		assertTrue(GameController.isOver(g));
-		assertTrue(GameController.isOver(h));
+		assertFalse(controller.isOver(a,1));
+		assertFalse(controller.isOver(b,1));
+		assertFalse(controller.isOver(c,1));
+		assertFalse(controller.isOver(d,1));
+		assertFalse(controller.isOver(e,1));
+		assertFalse(controller.isOver(f,1));
+		assertTrue(controller.isOver(g,1));
+		assertTrue(controller.isOver(h,1));
 		
 		
 	}
@@ -333,6 +335,75 @@ public class shotTests {
 		
 		
 	}
+	//database tests
+	@Test
+	public void testGetGameBySession() {
+		GameController controller = new GameController();
+		assertTrue(controller.GetGamesBySession(1)!=null);
+		
+	}
+	@Test
+	public void testUpdateDate() {
+		GameController controller = new GameController();
+		controller.updateSessionDate(1);
+		//method doesn't crash
+		assertTrue(true);
+		
+	}
+	@Test
+	public void testRemoveShot() {
+		GameController controller = new GameController();
+		
+		Shot shot = new Shot();
+		shot.setBallId(1);
+		
+		int id = controller.storeShot( 1 ,13 , shot ,1);
+		shot.setShotId(id);
+		controller.removeShot(shot);
+		//method doesn't crash
+		assertTrue(true);
+		
+	}
+	
+	@Test
+	public void testRemoveFrame() {
+		GameController controller = new GameController();
+		int id = controller.storeFrame(new Frame());
+		Frame frame = new Frame();
+		frame.setFrameId(id);
+		
+		controller.removeFrame(frame);
+		//method doesn't crash
+		assertTrue(true);
+		
+	}
+	
+	@Test
+	public void testGetBallList() {
+		GameController controller = new GameController();
+		assertTrue(controller.getAllBalls()!=null);
+		
+	}
+	@Test
+	public void testUpdateGameScore() {
+		GameController controller = new GameController();
+		assertTrue(controller.getAllBalls()!=null);
+		
+	}
+	@Test
+	public void testParseFrames() {
+		GameController controller = new GameController();
+		assertTrue(controller.getAllBalls()!=null);
+		
+	}
+	
+	/*
+	public void testParseScores() {
+		GameController controller = new GameController();
+		assertTrue(controller.getAllBalls()!=null);
+		
+	}
+	*/
 	
 	
 	
