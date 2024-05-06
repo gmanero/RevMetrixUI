@@ -1,15 +1,11 @@
 package revMetrix.servlet;
 
-
 import java.io.IOException;
-
 import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import revMetrix.controller.AllAccountsController;
 import revMetrix.db.model.Account;
 import revMetrix.db.model.Ball;
@@ -27,6 +23,7 @@ public class AccountServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+    	System.out.println("account Servlet: doGet");
         // Get all balls
         List<Ball> balls = controller.findAllBalls();
 
@@ -40,10 +37,7 @@ public class AccountServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-    	 List<Account> accounts = controller.getAllAccounts();
-
-    	    // Set accounts as attribute in request
-    	req.setAttribute("accounts", accounts);
+    	System.out.println("account Servlet: doPost");
         // Get form parameters for new ball
         String name = req.getParameter("name");
         int weight = Integer.parseInt(req.getParameter("weight"));
@@ -53,6 +47,6 @@ public class AccountServlet extends HttpServlet {
         controller.insertBallIntoBallsTable(weight, color, name);
 
         // Redirect back to GET to display all balls
-        resp.sendRedirect(req.getContextPath() + "/account");
+        req.getRequestDispatcher("/_view/account.jsp").forward(req, resp);
     }
 }

@@ -25,8 +25,8 @@
     double gameScore123 = SC.getLastThreeGameScore();
     int tStr = SC.getTotalStrikes();
     int tSpa = SC.getTotalSpares();
-    int strPer = SC.getStrikesPercentage();
-    int spaPer = SC.getSparesPerGame();
+    double strPer = SC.getStrikesPercentage();
+    double spaPer = SC.getSparesPercentage();
     int high = SC.highestGameScore();
     int low = SC.lowestGameScore();
     int[] graph = SC.getGraphData();
@@ -49,8 +49,8 @@
         <div class="infoSection">
         	<ul>
 	        	<h3>Shot Statistics:</h3>
-	            <li><span class="highlight">Strike: Percentage</span> <%= strPer %></li>
-	            <li><span class="highlight">Spares Percentage:</span> <%= spaPer %></li>
+	            <li><span class="highlight">Strike Percentage:</span> <%= strPer %>%</li>
+	            <li><span class="highlight">Spares Percentage:</span> <%= spaPer %>%</li>
 	            <li><span class="highlight">Open Percentage:</span> <%= spaPer %></li>
         	</ul>          
         </div>
@@ -87,7 +87,11 @@ const layout = {
   titlefont: {
       color: 'white' 
   },
-  
+  xaxis: {
+      tickfont: {
+          color: 'white'
+      }
+  }
 };
 
 // Display using Plotly
