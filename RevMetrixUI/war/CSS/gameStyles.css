@@ -22,7 +22,71 @@ body {
             color: #fff;
         }
 
+
+.remove-shot {
+    background-color: #c30103;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    flex: 1;
+    position: relative;
+    top: 30px;
+    left: 5px;
+}
      
+.swapbtn {
+    background-color: #26acca;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    flex: 1;
+}
+
+.lane {
+	position: relative;
+	left: 5px;
+}
+
+.newGamebtn {
+    background-color: #26acca;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    flex: 1;
+    position: relative;
+    left: 5px;
+}
+
+/* Darken swapbtn, newGamebtn, and remove-shot on hover */
+.swapbtn:hover,
+.newGamebtn:hover{
+    background-color: #4891ac;
+}
+
+.remove-shot:hover {
+    background-color: #930001;
+}
 
         .button:hover {
             background-color: #4891ac;
@@ -69,17 +133,21 @@ body {
         .gameInfo, .stats {
          background-color: #3f3f3f;
             padding: 20px;
+            padding-bottom: 30px;
             margin-bottom: 20px;
             border-radius: 10px;
-            margin-top: 20px;
+            margin-top: 15px;
+            justify-content:center;
+            
         }
         .interactions {
             background-color: #3f3f3f;
             padding: 20px;
-            margin-bottom: 20px;
+            padding-bottom: 35px;
+            margin-bottom: 40px;
             border-radius: 10px;
             width: 600px;
-			height: 454.667px;
+			height: 470px;
 			justify-content:center;
 			
    			
@@ -261,7 +329,7 @@ body {
       cursor: pointer;
     }
 
-    .miss {
+    .missbtn {
       width: 30px;
       height: 30px;
       border: 2px solid black;
@@ -276,7 +344,7 @@ body {
       
     }
 
-    .foul {
+    .foulbtn {
       width: 30px;
       height: 30px;
       border: 2px solid black;
@@ -291,7 +359,7 @@ body {
      
     }
 
-    .strike {
+    .strikebtn {
       width: 30px;
       height: 30px;
       border: 2px solid black;
@@ -306,7 +374,7 @@ body {
       
     }
 
-    .spare {
+    .sparebtn {
       width: 30px;
       height: 30px;
       border: 2px solid black;
@@ -335,21 +403,21 @@ body {
       transform: translate(-50%, -50%);
     }
 
-    .miss::before {
+    .missbtn::before {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
     }
 
-    .foul::before {
+    .foulbtn::before {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
     }
 
-    .strike::before {
+    .strikebtn::before {
       /*            content: 'X';   */
       position: absolute; 
       top: 50%;
@@ -357,7 +425,7 @@ body {
       transform: translate(-50%, -50%);
     }
 
-    .spare::before {
+    .sparebtn::before {
       /*            content: '/';  */
       position: absolute;
       top: 50%;
@@ -391,6 +459,7 @@ body {
       color: black;
     }
    /* Dropdown container */
+/* Dropdown container */
 .dropdown-select {
   position: relative;
   display: inline-block;
@@ -403,7 +472,7 @@ body {
   -moz-appearance: none;
   background-color: #333; /* Dark background color */
   color: #fff; /* Text color */
-  padding: 10px 20px;
+  padding: 10px 40px 10px 20px; /* Increased padding on the right for the arrow */
   border: none;
   cursor: pointer;
 }
@@ -434,9 +503,11 @@ body {
   display: none;
   position: absolute;
   background-color: #333; /* Dark background color */
-  min-width: 100%;
+  min-width: calc(100% + 20px); /* Adjusted width to include arrow padding */
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
   z-index: 1;
+  top: 100%; /* Position dropdown below select */
+  left: -10px; /* Adjusted left position to align with select */
 }
 
 /* Links inside the dropdown */
@@ -454,5 +525,23 @@ body {
 .center2 {
   display: flex;
   justify-content: center; /* Center the content horizontally */
+}
+
+.game-dropdown {
+	
+	 padding: 10px 20px;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+    flex: 1;
+}
+
+.ball-dropdown {
+	margin-top: 5px;
+	 padding: 10px 20px;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+    flex: 1;
 }
 

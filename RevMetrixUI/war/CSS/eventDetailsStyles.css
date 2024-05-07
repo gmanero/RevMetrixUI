@@ -18,6 +18,12 @@ h1 {
     color: #fff; /* Change header text color to white */
 }
 
+h2 {
+	
+	margin-top:15px;
+	margin-bottom: 15px;
+}
+
 /* Header Styles */
 .topPage {
     text-align: center;
@@ -101,7 +107,7 @@ h1 {
 }
 
 .play-button:hover {
-    background-color: #45a049; /* Darker green on hover */
+    background-color: #2f6f34; /* Darker green on hover */
 }
 
 
@@ -110,9 +116,9 @@ h1 {
      text-align: center;
     position: relative;
     color: white;
-    padding: 10px 20px;
+    padding: 5px 10px;
     border: none;
-    border-radius: 5px;
+    border-radius: 3px;
     cursor: pointer;
     font-size: 16px;
 }
@@ -123,7 +129,11 @@ h1 {
 }
 
 .add-button:hover {
-    background-color: #45a049; /* Darker green on hover */
+    background-color: #337637; /* Darker green on hover */
+}
+
+.add {
+	  padding: 5px 10px;
 }
 .session-box {
 	display: inline-block; /* Display boxes inline */
@@ -132,14 +142,15 @@ h1 {
     width: 200px; /* Adjust the width as needed */
     margin: 10 auto; /* Center the box horizontally */
     padding: 30ppx;
+    margin-right: 15px;
 }
 
 .remove-button {
   float: right;
-  bottom: 98px;
+  bottom: 97px;
   left: 15px;
     position: relative;
-    background-color: red;
+    background-color: #c30103;
     color: white;
     border: none;
     padding: 9px 9px;
