@@ -34,6 +34,7 @@
                     <p><strong>Establishment:</strong> <%= event.getEstablishmentName() %></p>
                     <p><strong>Type:</strong> <%= event.getTypeString() %></p>
                     <p><strong>Description:</strong> <%= event.getDescription() %></p>
+                    <p><strong>Start Date:</strong> <%= event.getStartdate() %></p>
                 </div>
             </a>
         <% }} %>

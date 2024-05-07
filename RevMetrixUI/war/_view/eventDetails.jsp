@@ -45,6 +45,7 @@
                 <p><strong>Establishment:</strong> <%= e.getEstablishmentName() %></p>
                 <p><strong>Type:</strong> <%= e.getTypeString() %></p>
                 <p><strong>Description:</strong> <%= e.getDescription() %></p>
+                <p><strong>Start Date:</strong> <%= e.getStartdate() %><p>
             </div>
             <% if (!e.isDone()) { %>
             <div class="event-box">
