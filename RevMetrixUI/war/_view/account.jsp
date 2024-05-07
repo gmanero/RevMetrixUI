@@ -21,7 +21,7 @@
 <h1>Welcome, ${loggedInName}!</h1>
 
 <div class="mainText">
-    <p>Here you can manage your profile, view your bowling balls collection, and more.</p>
+    <p>Here you can manage your profile, view your bowling balls collection, establishments and more.</p>
 </div>
 
 <%
