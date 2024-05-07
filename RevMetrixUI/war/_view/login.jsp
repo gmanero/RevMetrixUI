@@ -21,9 +21,9 @@
     <div class="loginForm">
         <form action="login" method="post" class="loginForm">
             <h1>Log In</h1>
-            <input type="text" id="username" name="username" placeholder="Username">
+            <input type="email" id="email" name="email" placeholder="Email" required>
             <br>
-            <input type="password" id="password" name="password" placeholder="Password">
+            <input type="password" id="password" name="password" placeholder="Password" required>
             <br>
             <input type="submit" value="Log In">
             <button type="button" onclick="window.location.href='accountCreation'" class="signUp">Sign Up</button>
@@ -36,11 +36,11 @@
     
     <script>
 		function redirectIfCorrect() {
-            var User = document.getElementById('username').value;
+            var User = document.getElementById('email').value;
             var Pass = document.getElementById('password').value;
             
             if (User.trim() === '' || Pass.trim() === '') {
-                alert("Please fill in both username and password fields.");
+                alert("Please fill in both email and password fields.");
                 return false; // Prevent form submission
             }
             
@@ -53,7 +53,7 @@
                 window.location.href = "http://localhost:8081/revMetrix/account";
                 return false; // Prevent form submission
             } else {
-                alert("Incorrect Username or Password");
+                alert("Incorrect Email or Password");
                 return false; // Prevent form submission
             }
         }

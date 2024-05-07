@@ -18,7 +18,7 @@
     <%@ include file="navbar.jsp" %>
 
     <div class="topPage">
-        <h1>Event Details</h1>
+        <h1>Event Details:</h1>
     </div>
 
     <div class="container">
@@ -45,7 +45,7 @@
             <div class="event-box">
             <form action="${pageContext.servletContext.contextPath}/eventDetails" method = "post">
             <button class="add-button">Add Sessions</button>
-    		<input  name = "add" value = "" >
+    		<input class="add" type="number" name = "add" value = "" min="1"  max="15" >
     		<input type = "hidden" name = "eventId" value = "<%= eventId %>">
     		
     		</form>
@@ -96,6 +96,7 @@
                     }
                 %>
             </div>
+             </div>
 </body>
 
 </html>

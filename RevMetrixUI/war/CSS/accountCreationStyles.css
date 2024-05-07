@@ -49,6 +49,7 @@ body {
 }
 
 .loginForm input[type="text"],
+.loginForm input[type="email"],
 .loginForm input[type="password"] {
     width: calc(100% - 10px);
     padding: 10px;
