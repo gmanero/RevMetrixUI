@@ -27,7 +27,7 @@
 <% if (!events.isEmpty()) { %>
 <form method="get">
     <div class="eventCards">
-        <% for (Event event : events) { %>
+        <% for (Event event : events) { if(event.getEventId()!=6){%>
             <a href="index?destination=eventDetails&id=<%= event.getEventId() %>">
                 <div class="eventCard">
                     <h2><%= event.getName() %></h2>
@@ -36,7 +36,7 @@
                     <p><strong>Description:</strong> <%= event.getDescription() %></p>
                 </div>
             </a>
-        <% } %>
+        <% }} %>
     </div>
     </form>
 <% } else { %>

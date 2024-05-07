@@ -66,6 +66,10 @@
         <servlet-name>EventDetailsServlet</servlet-name>
         <servlet-class>revMetrix.servlet.EventDetailsServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LeagueSheetServlet</servlet-name>
+        <servlet-class>revMetrix.servlet.LeagueSheetServlet</servlet-class>
+    </servlet>
      <servlet>
         <servlet-name>BallDetailsServlet</servlet-name>
         <servlet-class>revMetrix.servlet.BallDetailsServlet</servlet-class>
@@ -146,6 +150,11 @@
         <url-pattern>/eventDetails</url-pattern>
     </servlet-mapping>
     
+     <servlet-mapping>
+        <servlet-name>LeagueSheetServlet</servlet-name>
+        <url-pattern>/leagueSheet</url-pattern>
+     </servlet-mapping>
+     
      <servlet-mapping>
         <servlet-name>BallDetailsServlet</servlet-name>
         <url-pattern>/ballDetails</url-pattern>

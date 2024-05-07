@@ -42,14 +42,14 @@ body {
     color: #553180; /* Change color on hover */
 }
 
-.login,
-.account-btn {
+.account,
+.login {
     display: flex;
     align-items: center; /* Align items vertically */
 }
 
-.login-btn,
-.account-btn {
+.account-btn,
+.login-btn {
     background-color: #553180;
     border: none;
     color: #fff;
@@ -61,8 +61,8 @@ body {
     transition: all 0.3s;
 }
 
-.login-btn:hover,
-.account-btn:hover {
+.account-btn:hover,
+.login-btn:hover {
     background-color: #412562;
     color: #fff; /* White text color */
 }
