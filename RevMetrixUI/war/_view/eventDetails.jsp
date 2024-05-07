@@ -1,7 +1,10 @@
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page import="revMetrix.db.model.Event" %>
 <%@ page import="revMetrix.db.model.Session" %>
+<%@ page import="revMetrix.db.model.Game" %>
 <%@ page import="revMetrix.controller.EventController" %>
+<%@ page import="revMetrix.controller.GameController" %>
 
 
 <!DOCTYPE html>
@@ -29,6 +32,7 @@
 
                 // Retrieve event details from the controller
                 EventController eventController = new EventController();
+                GameController gameController = new GameController();
                 List<Event> event = eventController.findEventByID(eventId);
 
                 // Check if event details exist
@@ -42,13 +46,21 @@
                 <p><strong>Type:</strong> <%= e.getTypeString() %></p>
                 <p><strong>Description:</strong> <%= e.getDescription() %></p>
             </div>
+            <% if (!e.isDone()) { %>
             <div class="event-box">
+            <form action="${pageContext.servletContext.contextPath}/eventDetails" method = "post">
+            <button class="Archive">Archive</button>
+    		<input type = "hidden" class="add" type="number" name = "add" value = "Archive" >
+    		<input type = "hidden" name = "eventId" value = "<%= eventId %>">
+    		
+    		</form>
             <form action="${pageContext.servletContext.contextPath}/eventDetails" method = "post">
             <button class="add-button">Add Sessions</button>
     		<input class="add" type="number" name = "add" value = "" min="1"  max="15" >
     		<input type = "hidden" name = "eventId" value = "<%= eventId %>">
     		
     		</form>
+    		<% } %>
             </div>
             <% 
                     }
@@ -77,6 +89,7 @@
                         <h3>Session <%= i %></h3>
                         <p class="score">Score: <%= s.getSessionScore() %></p>
                     </div>
+           <% if (!event.get(0).isDone()) { %>
                     <form action="${pageContext.servletContext.contextPath}/game" method="get">
                         <input type="hidden" name="SesionID" value="<%= s.getSessionId() %>">
                         <button class="play-button">Play</button>
@@ -86,6 +99,14 @@
                       <button class="remove-button">&times;</button>
 
                     </form>
+              <% } 
+              ArrayList<Game> games = gameController.GetGamesBySession(s.getSessionId());
+              int j = 0;
+              for (Game g: games){
+            	  j++;
+              %>
+              <p class="score">	Game<%=i %>:  <%= g.getGameScore() %></p>
+              <%} %>
                 </div>
                 <% 
                         }

@@ -15,7 +15,7 @@ public interface IDatabase {
 	public Boolean isLoggedInAccount();
 	public String findLoggedInUser();
 	//Event
-	public Integer insertEventWithEstablishmentNameAndType(final String establishmentName, final String eventName, final String description, final String eventType);
+	public Integer insertEventWithEstablishmentNameAndType(final String establishmentName, final String eventName, final String description, final String eventType, final String date);
 	public List<Event> findAllEvents();
 	public List<Event> findAllDoneEvents();
 	public List<Event> findAllOngoingEvents();

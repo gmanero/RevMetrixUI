@@ -16,10 +16,10 @@ public class InsertEventController {
         db = DatabaseProvider.getInstance();       
     }
 
-    public boolean insertEvent(String establishmentName, String eventName, String description, String eventType) {
+    public boolean insertEvent(String establishmentName, String eventName, String description, String eventType, String date) {
         
         // insert new event with establishment name and type into DB
-        Integer eventId = db.insertEventWithEstablishmentNameAndType(establishmentName, eventName, description, eventType);
+        Integer eventId = db.insertEventWithEstablishmentNameAndType(establishmentName, eventName, description, eventType, date);
 
         // check if the insertion succeeded
         if (eventId > 0)

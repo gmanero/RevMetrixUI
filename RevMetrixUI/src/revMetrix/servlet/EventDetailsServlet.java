@@ -40,15 +40,22 @@ public class EventDetailsServlet extends HttpServlet {
     String add = req.getParameter("add");
     String eventId = req.getParameter("eventId");
     System.out.println(remove);
+    
     if(remove !=null) {
     	eventController.removeSession(Integer.parseInt(remove));
     }
     else if(add!= null) {
-    	try {
-            eventController.addSessions(Integer.parseInt(eventId), Integer.parseInt(add));
-        } catch (NumberFormatException e) {
-            System.out.println("The string cannot be converted into an integer.");
-        }
+    	if(add.equals("Archive")) {
+    		eventController.finnishEvent(Integer.parseInt(eventId));
+    	}
+    	else {
+    		try {
+                eventController.addSessions(Integer.parseInt(eventId), Integer.parseInt(add));
+            } catch (NumberFormatException e) {
+                System.out.println("The string cannot be converted into an integer.");
+            }
+    	}
+    	
     	
     }
     req.setAttribute("id", eventId);

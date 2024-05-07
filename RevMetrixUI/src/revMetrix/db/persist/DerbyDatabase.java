@@ -696,11 +696,32 @@ public class DerbyDatabase implements IDatabase {
 	    });
 	}
 	public Boolean updateEventDone(int id) {
-		return true;
+		return executeTransaction(new Transaction<Boolean>() {
+	        @Override
+	        public Boolean execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            try {
+	                stmt = conn.prepareStatement("UPDATE events SET done = true WHERE event_id = ?");
+	                
+	                Boolean result = true;
+	                stmt.setInt(1, id);
+	                ;
+	                int rowsUpdated =stmt.executeUpdate();
+	                System.out.println(rowsUpdated);
+	                return result;
+	               
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
 	}
 
 	
-	public Integer insertEventWithEstablishmentNameAndType(final String establishmentName, final String eventName, final String description, final String eventType) {
+	public Integer insertEventWithEstablishmentNameAndType(final String establishmentName, final String eventName, final String description, final String eventType, final String date) {
 	    return executeTransaction(new Transaction<Integer>() {
 	        @Override
 	        public Integer execute(Connection conn) throws SQLException {
@@ -777,14 +798,14 @@ public class DerbyDatabase implements IDatabase {
 	                
 	                // Step 5: Insert new event with establishment ID and type
 	                stmt4 = conn.prepareStatement(
-	                        "INSERT INTO events (type, establishment_id, name, description) " +
-	                        "VALUES (?, ?, ?, ?)"
+	                        "INSERT INTO events (type, establishment_id, name, description, done, date) " +
+	                        "VALUES (?, ?, ?, ?, false, ? )"
 	                );
 	                stmt4.setInt(1, type);
 	                stmt4.setInt(2, establishmentId);
 	                stmt4.setString(3, eventName);
 	                stmt4.setString(4, description);
-	                
+	                stmt4.setString(5, date);
 	                stmt4.executeUpdate();
 	                
 	                System.out.println("New event inserted into Events table");
