@@ -28,12 +28,17 @@ body {
     margin-left: auto;
 }
 
+h1 {
+	text-align: center;
+}
+
 h2 {
     margin-bottom: 30px;
     font-size: 36px;
     margin: 0px;
     color: #fff;
 }
+
 
 /* Main text styles */
 .mainText {
@@ -185,4 +190,8 @@ h2 {
 
 .bowlingBall:hover {
     filter: brightness(99%);
+}
+
+a:link {
+    text-decoration: none;
 }

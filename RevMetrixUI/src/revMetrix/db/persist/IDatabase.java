@@ -29,6 +29,7 @@ public interface IDatabase {
 	//Balls
 	public List<Ball> findAllBalls();
 	public Integer insertBallIntoBallsTable(final int weight, final String color, final String name);
+	public List<Ball> findBallById(final int ballId);
 	//Game
 	public ArrayList<Shot> GetShotsByGame(int id);
 	public ArrayList<Game> GetGamesBySession(int id);
