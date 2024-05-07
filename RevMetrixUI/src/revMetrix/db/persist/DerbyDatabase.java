@@ -285,6 +285,46 @@ public class DerbyDatabase implements IDatabase {
 	    });
 	}
 	
+	@Override
+	public List<Ball> findBallById(final int ballId) {
+	    return executeTransaction(new Transaction<List<Ball>>() {
+	        @Override
+	        public List<Ball> execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+
+	            try {
+	                stmt = conn.prepareStatement("SELECT * FROM balls WHERE ball_id = ?");
+	                stmt.setInt(1, ballId);
+
+	                List<Ball> result = new ArrayList<>();
+
+	                resultSet = stmt.executeQuery();
+
+	                boolean found = false;
+
+	                while (resultSet.next()) {
+	                    found = true;
+
+	                    Ball ball = new Ball();
+	                    loadBall(ball, resultSet, 1);
+
+	                    result.add(ball);
+	                }
+
+	                if (!found) {
+	                    System.out.println("No balls were found with this ID");
+	                }
+
+	                return result;
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
+
 	
 	public List<Ball> findAllBalls() {
 	    return executeTransaction(new Transaction<List<Ball>>() {
@@ -1212,6 +1252,7 @@ public class DerbyDatabase implements IDatabase {
 	            PreparedStatement stmt = null;
 	            ResultSet resultSet = null;
 	            
+	            System.out.print(id);
 	            try {
 	            	stmt = conn.prepareStatement("select games.* from junction, games where Junction.Session_Id = ? and Junction.Game_id=Games.Game_Id");
 	                stmt.setInt(1,id);

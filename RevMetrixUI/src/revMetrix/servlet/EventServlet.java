@@ -31,7 +31,7 @@ public class EventServlet extends HttpServlet {
         req.setAttribute("events", events);
 
         // Forward to JSP for rendering
-        req.getRequestDispatcher("/event.jsp").forward(req, resp);
+        req.getRequestDispatcher("/_view/event.jsp").forward(req, resp);
     }
 
     @Override

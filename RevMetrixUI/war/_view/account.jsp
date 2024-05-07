@@ -18,8 +18,10 @@
     <h1>Account</h1>
 </div>
 
+<h1>Welcome, ${loggedInName}!</h1>
+
 <div class="mainText">
-    <p>Welcome to your account page! Here you can manage your profile, view your bowling balls collection, and more.</p>
+    <p>Here you can manage your profile, view your bowling balls collection, establishments and more.</p>
 </div>
 
 <%
@@ -30,19 +32,28 @@
     List<Ball> balls = controller.findAllBalls();
 %>
 
-<div class="pageTitle"><h2>Bowling Ball's</h2></div>
-         
+<form method="get">
+    <% Boolean loggedIn = (Boolean) request.getAttribute("loggedIn"); %>
+    <% if (loggedIn != null && loggedIn) { %>
+        <div class="pageTitle"><span class="loggedInName"><h2>${loggedInName}'s Balls</h2></span></div>
+    <% } else { %>
+            
+    <% } %>
+</form>
+
 <div class="bowlingBalls" id="bowlingBalls">
     <% if (balls != null && !balls.isEmpty()) { %>
         <% for (Ball ball : balls) { %>
-            <div class="bowlingBall" style="background-color: <%= ball.getColor() %>;">
-                <p><%= ball.getName() %></p>
-            </div>
+          <a href="index?destination=ballDetails&id=<%= ball.getBallId() %>">
+                <div class="bowlingBall" style="background-color: <%= ball.getColor() %>;">
+                    <p><%= ball.getName() %></p>
+                </div>
+            </a>
         <% } %>
     <% } else { %>
         <p>No bowling balls found.</p>
     <% } %>
-   <button class="addBall">+</button>
+    <button class="addBall">+</button>
     <div class="addBallForm" id="addBallForm">
         <h3>Add Ball Form</h3>
         <form action="${pageContext.request.contextPath}/account" method="post">

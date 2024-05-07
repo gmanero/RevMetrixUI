@@ -14,10 +14,19 @@
 	<%@ page import="revMetrix.controller.StatsController" %>
 	<%@ page import="revMetrix.db.model.Game" %>
 	
+   
+   
+   
     <div class="topPage">
-        <h1>Take a look at Statistics</h1>
-    </div>
-    
+         <form method="get">
+            <% Boolean LoggedIn = (Boolean) request.getAttribute("loggedIn"); %>
+            <% if (LoggedIn != null && LoggedIn) { %>
+               <h1>${loggedInName}'s Statistics</h1>
+            
+            <% } else { %>
+                
+            <% } %>
+   </div>
     <%
     StatsController SC = new StatsController();
     List<Game> gamelist = SC.getAllGames();

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import revMetrix.db.persist.DatabaseProvider;
 import revMetrix.db.persist.DerbyDatabase;
 import revMetrix.db.persist.IDatabase;
+import revMetrix.controller.AllAccountsController;
 import revMetrix.controller.InsertAccountController;
 
 import revMetrix.model.RevMetrix;
@@ -27,9 +28,23 @@ public class AccountCreationServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		 String loggedInName = "";
+	        boolean loggedIn = false; // Initialize loggedIn to false
+
+	        AllAccountsController controller = new AllAccountsController();
+	        loggedIn = controller.isLoggedInAccount();
+	        System.out.println("Look here + "+ loggedIn);
+
+	        if (loggedIn) {
+	            loggedInName = controller.findLoggedInUser();
+	            System.out.println("Logged in name: " + loggedInName);
+	        }
+	        
+		
 		
 		System.out.println("Event Servlet: doGet");
-		
+		req.setAttribute("loggedInName", loggedInName);
+        req.setAttribute("loggedIn", loggedIn);
 		req.getRequestDispatcher("/_view/accountCreation.jsp").forward(req, resp);
 		
 	}
@@ -37,7 +52,17 @@ public class AccountCreationServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		
+		String loggedInName = "";
+        boolean loggedIn = false; // Initialize loggedIn to false
+
+        AllAccountsController Mcontroller = new AllAccountsController();
+        loggedIn = Mcontroller.isLoggedInAccount();
+        System.out.println("Look here + "+ loggedIn);
+
+        if (loggedIn) {
+            loggedInName = Mcontroller.findLoggedInUser();
+            System.out.println("Logged in name: " + loggedInName);
+        }
 		System.out.println("AccountCreation Servlet: doPost");
 		
 		// holds the error message text, if there is any
@@ -69,7 +94,7 @@ public class AccountCreationServlet extends HttpServlet {
 	            // Set success message if needed
 	            successMessage = "Account added successfully";
 	            resp.sendRedirect("/revMetrix/index?destination=account");
-	            
+
 	        }
 			
 		} catch (Exception e) {
@@ -77,7 +102,8 @@ public class AccountCreationServlet extends HttpServlet {
 			errorMessage = "Something Went Wrong";
 		}
 		req.setAttribute("errorMessage", errorMessage);
-		
+		req.setAttribute("loggedInName", loggedInName);
+        req.setAttribute("loggedIn", loggedIn);
 		
 		
 		req.getRequestDispatcher("/_view/account.jsp").forward(req, resp);
