@@ -6,9 +6,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import revMetrix.db.persist.DatabaseProvider;
-import revMetrix.db.persist.IDatabase;
-import revMetrix.model.RevMetrix;
 
 import revMetrix.controller.StatsController;
 
@@ -29,22 +26,15 @@ public class StatsServlet extends HttpServlet {
     	throws ServletException, IOException {
     	
         System.out.println("Stats Servlet: doPost");
-
-
+        
         StatsController SC = new StatsController();
-        
-        Double averageGameScore = SC.getTotalGameScore();
-        //int strikesPerGame = StatsQuery.strikeTotal();
-        //int sparesPerGame = StatsQuery.spareTotal();
-        
-        req.setAttribute("averageGameScore", averageGameScore);
-        //req.setAttribute("strikesPerGame", strikesPerGame);
-        //req.setAttribute("sparesPerGame", sparesPerGame);
-        
-        
 
-        // Set attributes in the request
+        int num = Integer.parseInt(req.getParameter("num"));
         
+        int[] graphData = SC.getGraphData();
+
+        // Set the graph data as an attribute in the request
+        req.setAttribute("graphData", graphData);
 
         // Forward the request to the JSP
         req.getRequestDispatcher("/_view/stats.jsp").forward(req, resp);

@@ -27,8 +27,11 @@
     int tSpa = SC.getTotalSpares();
     double strPer = SC.getStrikesPercentage();
     double spaPer = SC.getSparesPercentage();
+    double openPer = SC.getOpenPercentage();
     int high = SC.highestGameScore();
     int low = SC.lowestGameScore();
+    int tTur = SC.getTurkeys();
+    int cSpl = SC.splitsConversion();
     int[] graph = SC.getGraphData();
 	%>
 
@@ -42,6 +45,7 @@
                 <li><span class="highlight">Lowest Game Score:</span> <%= low %></li>
                 <li><span class="highlight">Total Strike:</span> <%= tStr %></li>
                 <li><span class="highlight">Total Spares:</span> <%= tSpa %></li>
+                <li><span class="highlight">Total Turkeys:</span> <%= tTur %></li>
             </ul>
         </div>
         
@@ -51,12 +55,26 @@
 	        	<h3>Shot Statistics:</h3>
 	            <li><span class="highlight">Strike Percentage:</span> <%= strPer %>%</li>
 	            <li><span class="highlight">Spares Percentage:</span> <%= spaPer %>%</li>
-	            <li><span class="highlight">Open Percentage:</span> <%= spaPer %></li>
+	            <li><span class="highlight">Open Percentage:</span> <%= openPer %>%</li>
+	            <li><span class="highlight">Converted Splits:</span> <%= cSpl %></li>
         	</ul>          
         </div>
         
         
     </form>
+    
+    <div class="infoSection">
+	    <div class="dropdown">
+		    <button class="dropbtn">Select # of Games</button>
+			    <div class="dropdown-content">
+			        <a href="#" data-value="5">past 5</a>
+		        	<a href="#" data-value="50">past 50</a>
+		        	<a href="#" data-value="100">past 100</a>
+			    </div>
+    </div>
+    
+    
+</div>
 
 <div class="infoSectionGraph">
 
@@ -65,6 +83,9 @@
 
 
 <script>
+
+
+	
 const xArray = [1,2,3,4,5];
 const yArray = <%= Arrays.toString(graph) %>;
 
@@ -97,6 +118,9 @@ const layout = {
 // Display using Plotly
 Plotly.newPlot("myPlot", data, layout);
 </script>
+
+
+	<input type="text" id="SetGame" name="SetGame" placeholder="Enter Set # Game: EX: 43">
 		
 
 
