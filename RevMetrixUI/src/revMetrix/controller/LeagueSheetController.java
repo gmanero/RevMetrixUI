@@ -41,18 +41,17 @@ public class LeagueSheetController {
             int totSecShot = 0;
 
             for (Session session : sessionList) { //iterate through each session
-                if (session.getEventId()!=6) {
+               
                     List<Game> gameList = db.GetGamesBySession(sessionNum);
+                    LeagueSheet leagueSheet = new LeagueSheet("","0|0","",0,0,0,0,0,0,"","",0,"","",0);
 
                     if (!gameList.isEmpty()) {
-                        LeagueSheet leagueSheet = new LeagueSheet("","","",0,0,0,0,0,0,"","",0,"","",0);
                         List<Event> eventList = db.findAllEvents();
 
                         leagueSheet.setDate(session.getDate());    //DATE
                         //============================================
-                        int eventTempCount = 1;
                         for (Event event : eventList) {
-                            if (event.getEventId() == eventTempCount) {
+                            if (event.getEventId() == session.getEventId()) {
                                 leagueSheet.setLge(generateAbbreviation(event.getName())); //LGE
                                 break;
                             }
@@ -61,19 +60,82 @@ public class LeagueSheetController {
                         leagueSheet.setLanes(session.getLanes()); //LANES
                         //===============================================
                         int game1Score = 0;
-                        Game game1 = gameList.get(0);
-                        game1Score = game1.getGameScore();
-                        leagueSheet.setGame1(game1Score); //GAME 1
+                        
+                        int tempStrikeTot = 0;
+                        int tempFrameTot = 0;
+                        int tempSpareTot = 0;
+                        int tempSecShotTot = 0;
+                        
+                        if (gameList.size() > 0) {
+                        	Game game1 = gameList.get(0);
+                            game1Score = game1.getGameScore();
+                            leagueSheet.setGame1(game1Score); //GAME 1
+                            
+                            List<Shot> shot1List = db.GetShotsByGame(game1.getGameId());
+                            for (Shot shot : shot1List) {
+                                if (shot.getShotScore().equals("X")) { //for strike
+                                    tempStrikeTot++;
+                                }
+                                if (shot.getShotScore().equals("/")) { //for spare
+                                    tempSpareTot++;
+                                }
+                                if (shot.getShotNumber()==1 && shot.getWashout()==false && shot.getSplit()==false && !shot.getShotScore().equals("X")) {
+                                    tempSecShotTot++;
+                                }
+                                tempFrameTot++;
+                            }
+                        }
+                        else {
+                        	leagueSheet.setGame1(0);
+                        }
                         //========================================
                         int game2Score = 0;
-                        Game game2 = gameList.get(1);
-                        game2Score = game2.getGameScore();
-                        leagueSheet.setGame2(game2Score); //GAME 2
+                        if (gameList.size() > 1) {
+                        	Game game2 = gameList.get(1);
+                            game2Score = game2.getGameScore();
+                            leagueSheet.setGame2(game2Score); //GAME 2
+                            
+                            List<Shot> shot2List = db.GetShotsByGame(game2.getGameId());
+                            for (Shot shot : shot2List) {
+                                if (shot.getShotScore().equals("X")) { //for strike
+                                    tempStrikeTot++;
+                                }
+                                if (shot.getShotScore().equals("/")) { //for spare
+                                    tempSpareTot++;
+                                }
+                                if (shot.getShotNumber()==1 && shot.getWashout()==false && shot.getSplit()==false && !shot.getShotScore().equals("X")) {
+                                    tempSecShotTot++;
+                                }
+                                tempFrameTot++;
+                            }
+                        }
+                        else {
+                        	leagueSheet.setGame2(0);
+                        }
                         //========================================
                         int game3Score = 0;
-                        Game game3 = gameList.get(2);
-                        game3Score = game3.getGameScore();
-                        leagueSheet.setGame3(game3Score); //GAME 3
+                        if (gameList.size() > 2) {
+                        	Game game3 = gameList.get(2);
+                            game3Score = game3.getGameScore();
+                            leagueSheet.setGame3(game3Score); //GAME 3
+                            
+                            List<Shot> shot3List = db.GetShotsByGame(game3.getGameId());
+                            for (Shot shot : shot3List) {
+                                if (shot.getShotScore().equals("X")) { //for strike
+                                    tempStrikeTot++;
+                                }
+                                if (shot.getShotScore().equals("/")) { //for spare
+                                    tempSpareTot++;
+                                }
+                                if (shot.getShotNumber()==1 && shot.getWashout()==false && shot.getSplit()==false && !shot.getShotScore().equals("X")) {
+                                    tempSecShotTot++;
+                                }
+                                tempFrameTot++;
+                            }
+                        }
+                        else {
+                        	leagueSheet.setGame3(0);
+                        }
                         //========================================
                         leagueSheet.setSeries(game1Score+game2Score+game3Score); //SERIES
                         //===============================================================
@@ -82,49 +144,6 @@ public class LeagueSheetController {
                         //==========================================
                         leagueSheet.setAverage((game1Score+game2Score+game3Score)/3); //AVERAGE
                         //=====================================================================
-                        int tempStrikeTot = 0;
-                        int tempFrameTot = 0;
-                        int tempSpareTot = 0;
-                        int tempSecShotTot = 0;
-                        List<Shot> shot1List = db.GetShotsByGame(game1.getGameId());
-                        for (Shot shot : shot1List) {
-                            if (shot.getShotScore().equals("X")) { //for strike
-                                tempStrikeTot++;
-                            }
-                            if (shot.getShotScore().equals("/")) { //for spare
-                                tempSpareTot++;
-                            }
-                            if (shot.getShotNumber()==1 && shot.getWashout()==false && shot.getSplit()==false && !shot.getShotScore().equals("X")) {
-                                tempSecShotTot++;
-                            }
-                            tempFrameTot++;
-                        }
-                        List<Shot> shot2List = db.GetShotsByGame(game2.getGameId());
-                        for (Shot shot : shot2List) {
-                            if (shot.getShotScore().equals("X")) { //for strike
-                                tempStrikeTot++;
-                            }
-                            if (shot.getShotScore().equals("/")) { //for spare
-                                tempSpareTot++;
-                            }
-                            if (shot.getShotNumber()==1 && shot.getWashout()==false && shot.getSplit()==false && !shot.getShotScore().equals("X")) {
-                                tempSecShotTot++;
-                            }
-                            tempFrameTot++;
-                        }
-                        List<Shot> shot3List = db.GetShotsByGame(game3.getGameId());
-                        for (Shot shot : shot3List) {
-                            if (shot.getShotScore().equals("X")) { //for strike
-                                tempStrikeTot++;
-                            }
-                            if (shot.getShotScore().equals("/")) { //for spare
-                                tempSpareTot++;
-                            }
-                            if (shot.getShotNumber()==1 && shot.getWashout()==false && shot.getSplit()==false && !shot.getShotScore().equals("X")) {
-                                tempSecShotTot++;
-                            }
-                            tempFrameTot++;
-                        }
                         leagueSheet.setStrikes(String.valueOf(tempStrikeTot)+"-"+String.valueOf(tempFrameTot)); //STRIKES
                         totStrike += tempStrikeTot;
                         totFrame += tempFrameTot;
@@ -148,7 +167,7 @@ public class LeagueSheetController {
                     }
 
                     sessionNum++;
-                }
+                
             }
         }
         return leagueSheetFinal;
