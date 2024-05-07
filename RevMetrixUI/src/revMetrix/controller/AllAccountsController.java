@@ -2,6 +2,7 @@ package revMetrix.controller;
 
 import revMetrix.db.model.Account;
 import revMetrix.db.model.Ball;
+import revMetrix.db.model.Event;
 import revMetrix.db.persist.DatabaseProvider;
 import revMetrix.db.persist.DerbyDatabase;
 import revMetrix.db.persist.IDatabase;
@@ -53,7 +54,28 @@ public class AllAccountsController {
         return db.isLoggedInAccount();
     }
     
+   
 
+    
+    public ArrayList<Ball>  findBallById(int ballId) {
+        List<Ball> ballList = db.findBallById(ballId);
+
+        ArrayList<Ball> balls = new ArrayList<>();
+
+        if (ballList.isEmpty()) {
+            System.out.println("No events found");
+            return balls;
+        } else {
+            for (Ball ball : ballList) {
+                // Set establishment name for each event
+              
+                balls.add(ball);
+            }
+        }
+
+        return balls;
+    }
+    
     public List<Ball> findAllBalls() {
     	List<Ball> ballList = db.findAllBalls();
     	ArrayList<Ball> balls = null;
