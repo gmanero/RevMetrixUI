@@ -32,6 +32,8 @@
     int low = SC.lowestGameScore();
     int tTur = SC.getTurkeys();
     int cSpl = SC.splitsConversion();
+    int nSpl = SC.numSplit();
+    int nWas = SC.numWashout();
     int[] graph = SC.getGraphData();
 	%>
 
@@ -53,10 +55,12 @@
         <div class="infoSection">
         	<ul>
 	        	<h3>Shot Statistics:</h3>
-	            <li><span class="highlight">Strike Percentage:</span> <%= strPer %>%</li>
+	            <li><span class="highlight">Strikes Percentage:</span> <%= strPer %>%</li>
 	            <li><span class="highlight">Spares Percentage:</span> <%= spaPer %>%</li>
 	            <li><span class="highlight">Open Percentage:</span> <%= openPer %>%</li>
+	            <li><span class="highlight">Splits:</span> <%= nSpl %></li>
 	            <li><span class="highlight">Converted Splits:</span> <%= cSpl %></li>
+	            <li><span class="highlight">WashOuts:</span> <%= nWas %></li>
         	</ul>          
         </div>
         

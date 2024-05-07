@@ -296,28 +296,54 @@ public class StatsController {
 		return turkeyCount;
 	}
 	
-	public int splitsConversion()
+	public int splitsConversion() {
+	    List<Shot> shotList = db.findAllShots();
+	    int convertSplits = 0;
+	    boolean splitOccurred = false;
+
+	    for (Shot shot : shotList) {
+	        // Check if a split occurred in the shot
+	        if (shot.getSplit() && shot.getShotNumber() == 1) {
+	            splitOccurred = true;
+	        }
+	        
+	        // Check if the shot after a split is a spare
+	        if (splitOccurred && shot.getShotNumber() == 2 && shot.getShotScore().equals("/")) {
+	            convertSplits++;
+	            splitOccurred = false; // Reset split flag after counting
+	        }
+	    }
+	    return convertSplits;
+	}
+	
+	public int numSplit()
 	{
 		List<Shot> shotList = db.findAllShots();
-		int convertSplits = 0;
-		int shotNum = 0;
-		
-		for (Shot shot : shotList)
-		{
-			if (shot.getSplit() == true && shot.getShotNumber() == 1)
-			{
-				shotNum++;
-			}
-			if (shot.getShotScore() == "/" && shotNum == 1)
-			{
-					convertSplits++;
-			}
-			if (shotNum == 1 && shot.getShotNumber() == 2)
-			{
-				shotNum--;
-			}
-		}
-		return convertSplits;
+	    int splits = 0;
+	    
+	    for (Shot shot : shotList)
+	    {
+	    	if (shot.getSplit() == true)
+	    	{
+	    		splits++;
+	    	}
+	    }
+	    return splits;
+	}
+	
+	public int numWashout()
+	{
+		List<Shot> shotList = db.findAllShots();
+	    int wash = 0;
+	    
+	    for (Shot shot : shotList)
+	    {
+	    	if (shot.getWashout() == true)
+	    	{
+	    		wash++;
+	    	}
+	    }
+	    return wash;
 	}
 	/*public int getTotalStrikesForSetGames()
 	{
