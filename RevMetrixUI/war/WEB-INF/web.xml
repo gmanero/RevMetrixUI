@@ -151,13 +151,13 @@
     </servlet-mapping>
     
      <servlet-mapping>
-<<<<<<< HEAD
         <servlet-name>LeagueSheetServlet</servlet-name>
         <url-pattern>/leagueSheet</url-pattern>
-=======
+     </servlet-mapping>
+     
+     <servlet-mapping>
         <servlet-name>BallDetailsServlet</servlet-name>
         <url-pattern>/ballDetails</url-pattern>
->>>>>>> refs/remotes/origin/Gabe
     </servlet-mapping>
 
     <welcome-file-list>
