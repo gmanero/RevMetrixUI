@@ -620,7 +620,85 @@ public class DerbyDatabase implements IDatabase {
 	    });
 	}
 	
+	public List<Event> findAllDoneEvents() {
+	    return executeTransaction(new Transaction<List<Event>>() {
+	        @Override
+	        public List<Event> execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            try {
+	                stmt = conn.prepareStatement("SELECT * FROM events where done = true");
+	                
+	                List<Event> result = new ArrayList<Event>();
+	                
+	                resultSet = stmt.executeQuery();
+	                
+	                Boolean found = false;
+	                
+	                while (resultSet.next()) {
+	                    found = true;
+	                    
+	                    Event event = new Event();
+	                    loadEvent(event, resultSet, 1);
+	                    
+	                    result.add(event);
+	                }
+	                
+	                if (!found) {
+	                    System.out.println("No events were found in the database");
+	                }
+	                
+	                return result;
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
 	
+	public List<Event> findAllOngoingEvents() {
+	    return executeTransaction(new Transaction<List<Event>>() {
+	        @Override
+	        public List<Event> execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            try {
+	                stmt = conn.prepareStatement("SELECT * FROM events where done = false");
+	                
+	                List<Event> result = new ArrayList<Event>();
+	                
+	                resultSet = stmt.executeQuery();
+	                
+	                Boolean found = false;
+	                
+	                while (resultSet.next()) {
+	                    found = true;
+	                    
+	                    Event event = new Event();
+	                    loadEvent(event, resultSet, 1);
+	                    
+	                    result.add(event);
+	                }
+	                
+	                if (!found) {
+	                    System.out.println("No events were found in the database");
+	                }
+	                
+	                return result;
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
+	public Boolean updateEventDone(int id) {
+		return true;
+	}
+
 	
 	public Integer insertEventWithEstablishmentNameAndType(final String establishmentName, final String eventName, final String description, final String eventType) {
 	    return executeTransaction(new Transaction<Integer>() {
@@ -1722,6 +1800,8 @@ public class DerbyDatabase implements IDatabase {
 		event.setEstablishmentId(resultSet.getInt(index++));
 		event.setName(resultSet.getString(index++));
 		event.setDescription(resultSet.getString(index++));
+		event.setDone(resultSet.getBoolean(index++));
+		event.setStartdate(resultSet.getString(index++));
 	}
 	
 	private void loadFrame(Frame frame, ResultSet resultSet, int index) throws SQLException {
@@ -1830,7 +1910,9 @@ public class DerbyDatabase implements IDatabase {
 							"	type integer," +
 							"	establishment_id integer constraint establishment_id references establishments," +
 							"   name varchar(40)," +
-							"   description varchar(300)" +
+							"   description varchar(300)," +
+							"   done Boolean," +
+							"   date varchar(40)" +
 							")"
 					);
 					stmt4.executeUpdate();
@@ -1998,12 +2080,14 @@ public class DerbyDatabase implements IDatabase {
 
 					System.out.println("Establishments table populated");
 					
-					insertEvent = conn.prepareStatement("insert into events (type, establishment_id, name, description) VALUES (?, ?, ?, ?)");
+					insertEvent = conn.prepareStatement("insert into events (type, establishment_id, name, description, done, date) VALUES (?, ?, ?, ?, ?, ?)");
 					for (Event event : eventList) {
 					    insertEvent.setInt(1, event.getType());
 					    insertEvent.setInt(2, event.getEstablishmentId());
 					    insertEvent.setString(3, event.getName());
 					    insertEvent.setString(4, event.getDescription());
+					    insertEvent.setBoolean(5, event.isDone());
+					    insertEvent.setString(6, event.getStartdate());
 					    insertEvent.addBatch();
 					}
 					insertEvent.executeBatch();
