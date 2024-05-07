@@ -1212,6 +1212,7 @@ public class DerbyDatabase implements IDatabase {
 	            PreparedStatement stmt = null;
 	            ResultSet resultSet = null;
 	            
+	            System.out.print(id);
 	            try {
 	            	stmt = conn.prepareStatement("select games.* from junction, games where Junction.Session_Id = ? and Junction.Game_id=Games.Game_Id");
 	                stmt.setInt(1,id);
