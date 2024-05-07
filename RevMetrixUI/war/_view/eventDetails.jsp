@@ -89,7 +89,16 @@
                         <h3>Session <%= i %></h3>
                         <p class="score">Score: <%= s.getSessionScore() %></p>
                     </div>
-           <% if (!event.get(0).isDone()) { %>
+           <br>
+              <% 
+              ArrayList<Game> games = gameController.GetGamesBySession(s.getSessionId());
+              int j = 0;
+              for (Game g: games){
+            	  j++;
+              %>
+              <p class="score">	Game<%=i %>:  <%= g.getGameScore() %></p>
+              <%} %>
+              <% if (!event.get(0).isDone()) { %>
                     <form action="${pageContext.servletContext.contextPath}/game" method="get">
                         <input type="hidden" name="SesionID" value="<%= s.getSessionId() %>">
                         <button class="play-button">Play</button>
@@ -99,14 +108,7 @@
                       <button class="remove-button">&times;</button>
 
                     </form>
-              <% } 
-              ArrayList<Game> games = gameController.GetGamesBySession(s.getSessionId());
-              int j = 0;
-              for (Game g: games){
-            	  j++;
-              %>
-              <p class="score">	Game<%=i %>:  <%= g.getGameScore() %></p>
-              <%} %>
+                    <%} %>
                 </div>
                 <% 
                         }
