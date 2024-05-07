@@ -30,6 +30,16 @@ public interface IDatabase {
 	public List<Ball> findAllBalls();
 	public Integer insertBallIntoBallsTable(final int weight, final String color, final String name);
 	public List<Ball> findBallById(final int ballId);
+	 // Method to get the total shots for a ball
+    public List<Shot> getTotalShotsForBall(int ballId);
+    // Method to get the total spares for a ball
+    public List<Shot> getTotalSparesForBall(int ballId);
+    // Method to get the total strikes for a ball
+    public List<Shot> getTotalStrikesForBall(int ballId);
+    // Method to get the total strikes for a ball
+    public List<Shot> getTotalFoulsForBall(int ballId);
+    // Method to get the total strikes for a ball
+    public List<Shot> getTotalMissesForBall(int ballId);
 	//Game
 	public ArrayList<Shot> GetShotsByGame(int id);
 	public ArrayList<Game> GetGamesBySession(int id);

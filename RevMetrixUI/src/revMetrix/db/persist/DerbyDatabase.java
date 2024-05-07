@@ -285,6 +285,9 @@ public class DerbyDatabase implements IDatabase {
 	    });
 	}
 	
+	//BALL QUERY 
+	
+	
 	@Override
 	public List<Ball> findBallById(final int ballId) {
 	    return executeTransaction(new Transaction<List<Ball>>() {
@@ -362,7 +365,163 @@ public class DerbyDatabase implements IDatabase {
 	            }
 	        }
 	    });
-	}
+	} 
+	
+	// Method to get the total shots for a ball
+    public List<Shot> getTotalShotsForBall(int ballId) {
+        return executeTransaction(new Transaction<List<Shot>>() {
+            @Override
+            public List<Shot> execute(Connection conn) throws SQLException {
+                PreparedStatement stmt = null;
+                ResultSet resultSet = null;
+
+                try {
+                    stmt = conn.prepareStatement("SELECT * FROM shots WHERE ball_id = ?");
+                    stmt.setInt(1, ballId);
+
+                    List<Shot> shots = new ArrayList<>();
+
+                    resultSet = stmt.executeQuery();
+
+                    while (resultSet.next()) {
+                        Shot shot = new Shot();
+                        loadShot(shot, resultSet, 1);
+                        shots.add(shot);
+                    }
+
+                    return shots;
+                } finally {
+                    DBUtil.closeQuietly(resultSet);
+                    DBUtil.closeQuietly(stmt);
+                }
+            }
+        });
+    }
+
+    // Method to get the total strikes for a ball
+    public List<Shot> getTotalStrikesForBall(int ballId) {
+        return executeTransaction(new Transaction<List<Shot>>() {
+            @Override
+            public List<Shot> execute(Connection conn) throws SQLException {
+                PreparedStatement stmt = null;
+                ResultSet resultSet = null;
+
+                try {
+                    stmt = conn.prepareStatement("SELECT * FROM shots WHERE ball_id = ? AND shotScore = 'X'");
+                    stmt.setInt(1, ballId);
+
+                    List<Shot> strikes = new ArrayList<>();
+
+                    resultSet = stmt.executeQuery();
+
+                    while (resultSet.next()) {
+                        Shot strike = new Shot();
+                        loadShot(strike, resultSet, 1);
+                        strikes.add(strike);
+                    }
+
+                    return strikes;
+                } finally {
+                    DBUtil.closeQuietly(resultSet);
+                    DBUtil.closeQuietly(stmt);
+                }
+            }
+        });
+    }
+
+    // Method to get the total spares for a ball
+    public List<Shot> getTotalSparesForBall(int ballId) {
+        return executeTransaction(new Transaction<List<Shot>>() {
+            @Override
+            public List<Shot> execute(Connection conn) throws SQLException {
+                PreparedStatement stmt = null;
+                ResultSet resultSet = null;
+
+                try {
+                    stmt = conn.prepareStatement("SELECT * FROM shots WHERE ball_id = ? AND shotScore = '/'");
+                    stmt.setInt(1, ballId);
+
+                    List<Shot> spares = new ArrayList<>();
+
+                    resultSet = stmt.executeQuery();
+
+                    while (resultSet.next()) {
+                        Shot spare = new Shot();
+                        loadShot(spare, resultSet, 1);
+                        spares.add(spare);
+                    }
+
+                    return spares;
+                } finally {
+                    DBUtil.closeQuietly(resultSet);
+                    DBUtil.closeQuietly(stmt);
+                }
+            }
+        });
+    }
+
+    // Method to get the total spares for a ball
+    public List<Shot> getTotalFoulsForBall(int ballId) {
+        return executeTransaction(new Transaction<List<Shot>>() {
+            @Override
+            public List<Shot> execute(Connection conn) throws SQLException {
+                PreparedStatement stmt = null;
+                ResultSet resultSet = null;
+
+                try {
+                    stmt = conn.prepareStatement("SELECT * FROM shots WHERE ball_id = ? AND shotScore = 'F'");
+                    stmt.setInt(1, ballId);
+
+                    List<Shot> fouls = new ArrayList<>();
+
+                    resultSet = stmt.executeQuery();
+
+                    while (resultSet.next()) {
+                        Shot foul = new Shot();
+                        loadShot(foul, resultSet, 1);
+                        fouls.add(foul);
+                    }
+
+                    return fouls;
+                } finally {
+                    DBUtil.closeQuietly(resultSet);
+                    DBUtil.closeQuietly(stmt);
+                }
+            }
+        });
+    }
+    
+    // Method to get the total spares for a ball
+    public List<Shot> getTotalMissesForBall(int ballId) {
+        return executeTransaction(new Transaction<List<Shot>>() {
+            @Override
+            public List<Shot> execute(Connection conn) throws SQLException {
+                PreparedStatement stmt = null;
+                ResultSet resultSet = null;
+
+                try {
+                    stmt = conn.prepareStatement("SELECT * FROM shots WHERE ball_id = ? AND shotScore = '-'");
+                    stmt.setInt(1, ballId);
+
+                    List<Shot> misses = new ArrayList<>();
+
+                    resultSet = stmt.executeQuery();
+
+                    while (resultSet.next()) {
+                        Shot miss = new Shot();
+                        loadShot(miss, resultSet, 1);
+                        misses.add(miss);
+                    }
+
+                    return misses;
+                } finally {
+                    DBUtil.closeQuietly(resultSet);
+                    DBUtil.closeQuietly(stmt);
+                }
+            }
+        });
+    }
+
 	
 	public Integer insertBallIntoBallsTable(final int weight, final String color, final String name) {
 	    return executeTransaction(new Transaction<Integer>() {
