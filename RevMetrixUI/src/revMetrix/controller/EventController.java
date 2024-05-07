@@ -195,5 +195,13 @@ public class EventController {
 
 	        return sessions;
 	    }
+	  public void removeSession(int id) {
+		  db.RemoveSession(id);
+	  }
+	  public void addSessions(int eventId, int num) {
+		  for (int i = 0; i<num;i++) {
+			  db.insertSessionIntoSessionsTable(0, eventId, "", "0", 0);
+		  }
+	  }
 	
 	}

@@ -25,15 +25,12 @@ public class ShotsQuery {
 		
 		// get the DB instance and execute transaction
 		IDatabase db = DatabaseProvider.getInstance();
-		Session session= db.getSession(12);
+		db.RemoveSession(13);
 		
 		// check if anything was returned and output the list
-		System.out.print(session.getDate());
 		
-		 LocalDate currentDate = LocalDate.now();
-	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-	        String formattedDate = currentDate.format(formatter);
-	        System.out.println(formattedDate);
+		
+		 
 		
 		
 	}

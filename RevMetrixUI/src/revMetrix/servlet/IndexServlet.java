@@ -46,6 +46,12 @@ public class IndexServlet extends HttpServlet {
                 req.setAttribute("eventId", req.getParameter("id"));
                 destOut = "/_view/eventDetails.jsp";
             }
+            
+            else if ("ballDetails".equals(destIn)) {
+                // Forward to eventDetails.jsp with event ID parameter
+                req.setAttribute("ballId", req.getParameter("id"));
+                destOut = "/_view/ballDetails.jsp";
+            }
             else if ("login".equals(destIn)) {
                 destOut = "/_view/login.jsp";
             } else if("logout".equals(destIn)){
