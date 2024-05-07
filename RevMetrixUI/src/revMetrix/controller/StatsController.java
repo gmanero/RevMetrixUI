@@ -135,7 +135,7 @@ public class StatsController {
 			if(lowScore == - 1)
 			{
 				lowScore = game.getGameScore();
-			}else if(lowScore > game.getGameScore())
+			}else if(lowScore > game.getGameScore() && game.getGameScore() != 0 )
 			{
 				lowScore = game.getGameScore();
 			}
@@ -244,6 +244,7 @@ public class StatsController {
 
 	        for (Shot shot : shotList) {
 	            if (shot.getShotScore().equals("/")) {
+	            	
 	                sparesInGame++;
 	            }
 	        }
@@ -256,30 +257,69 @@ public class StatsController {
 	    }
 	}
 	
-	/*public int overPercentage()
+	public double getOpenPercentage() {
+	    List<Shot> shotList = db.findAllShots();
+	    List<Frame> frameList = db.findAllFrames();
+
+	    int frameCount = frameList.size();
+	    int allPinsCount = 0;
+
+	    if (shotList.isEmpty() || frameList.isEmpty()) {
+	        System.out.print("game list is empty");
+	        return 0.00;
+	    } else {
+	        frameCount = frameCount - frameCount % 10;
+
+	        for (Shot shot : shotList) {
+	            if (shot.getShotScore().equals("X") || shot.getShotScore().equals("/")) {
+	                allPinsCount++;
+	            }
+	        }
+
+	        double percentage = (((double) frameCount - allPinsCount) / frameCount) * 100;
+	        return Math.round(percentage * 100.0) / 100.0; 
+	    }
+	}
+	
+	public int getTurkeys()
 	{
-		List<Game> gameList = db.findAllGames();
-		List<Shot> shotList = db.findAllShots();
 		List<Frame> frameList = db.findAllFrames();
+		int turkeyCount = 0;
 		
-		if (gameList.isEmpty() || shotList.isEmpty() || frameList.isEmpty())
+		for (Frame frame : frameList)
 		{
-			System.out.print("game list is empty");
-			return 0;
-		}else {
-			for (Frame frame : frameList)
+			 if (frame.getFrameScore() == 30)
+			 {
+				 turkeyCount++;
+			 }
+		}
+		return turkeyCount;
+	}
+	
+	public int splitsConversion()
+	{
+		List<Shot> shotList = db.findAllShots();
+		int convertSplits = 0;
+		int shotNum = 0;
+		
+		for (Shot shot : shotList)
+		{
+			if (shot.getSplit() == true && shot.getShotNumber() == 1)
 			{
-				if(frame.getFrameId() == 0 && frame.getFrameScore() == "X")
-				{
-					
-				}
+				shotNum++;
+			}
+			if (shot.getShotScore() == "/" && shotNum == 1)
+			{
+					convertSplits++;
+			}
+			if (shotNum == 1 && shot.getShotNumber() == 2)
+			{
+				shotNum--;
 			}
 		}
-		
-		
-		return 0;
+		return convertSplits;
 	}
-	public int getTotalStrikesForSetGames()
+	/*public int getTotalStrikesForSetGames()
 	{
 		List<Game> gameList = db.findAllGames();
 		List<Shot> shotList = db.findAllShots();
@@ -343,29 +383,6 @@ public class StatsController {
 		}
 	}*/
 	
-	/*
-	public int[] getGraphData()
-	{
-		List<Game> gameList = db.findAllGames();
-		int count = 0;
-		int[] arr = new int[5];
-		
-		if(gameList.isEmpty())
-		{
-			return null;
-		}else {
-			for(Game game : gameList)
-			{
-				if (game.getGameId() == gameList.size() || game.getGameId() == gameList.size() - 1 || game.getGameId() == gameList.size() - 2 || game.getGameId() == gameList.size() - 3 || game.getGameId() == gameList.size() - 4) 
-	            {
-	                arr[count] = game.getGameScore();
-	                count++;
-	            }
-			}
-			return arr;
-		}
-	}*/
-	
 	public int[] getGraphData(int numGames) {
         List<Game> gameList = db.findAllGames();
         int[] graphData = new int[numGames];
@@ -390,6 +407,7 @@ public class StatsController {
 		total = gameList.size();
 		return total;
 	}
+
 	
 	public double twoDec(Double convert) 
 	{

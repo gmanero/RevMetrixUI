@@ -20,48 +20,46 @@
             font-size: 36px;
         }
 
-      
-
-        /* Main Content Styles */
+        
         .mainText {
             text-align: center;
             margin: 20px auto;
             max-width: 800px;
         }
 
-	.infoSection {
-    background-color: #333;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    text-align: center;
-    margin: 30px auto; /* Center the box horizontally */
-    max-width: 600px; /* Limit the width of the box */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-    transition: box-shadow 0.3s ease; /* Add transition effect on hover */
-}
-
-.infoSection:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
-}
-
-.infoSectionGraph {
-    background-color: #333;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    max-width: 800px;
-    margin: 0 auto; /* Center the box horizontally */
-    display: flex; /* Use flexbox for better alignment */
-    flex-direction: column; /* Arrange child elements vertically */
-    align-items: center; /* Center child elements horizontally */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-    transition: box-shadow 0.3s ease; /* Add transition effect on hover */
-}
-
-.infoSectionGraph:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
-}
+		.infoSection {
+	    background-color: #333;
+	    padding: 20px;
+	    border-radius: 10px;
+	    margin-bottom: 20px;
+	    text-align: center;
+	    margin: 30px auto; 
+	    max-width: 600px; 
+	    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	    transition: box-shadow 0.3s ease; 
+		}
+		
+		.infoSection:hover {
+		    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+		}
+		
+		.infoSectionGraph {
+		    background-color: #333;
+		    padding: 20px;
+		    border-radius: 10px;
+		    margin-bottom: 20px;
+		    max-width: 800px;
+		    margin: 0 auto; 
+		    display: flex; 
+		    flex-direction: column; 
+		    align-items: center; 
+		    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+		    transition: box-shadow 0.3s ease;
+		}
+		
+		.infoSectionGraph:hover {
+		    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+		}
 
         .infoSection h2 {
             margin-top: 0;
@@ -89,3 +87,56 @@
             color: #fffff;
             font-weight: bold;
         }
+        
+        .dropbtn {
+    background-color: #3498db;
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #2980b9;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+    background-color: #2980b9;
+}

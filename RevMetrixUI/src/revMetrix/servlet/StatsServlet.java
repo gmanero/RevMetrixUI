@@ -25,8 +25,8 @@ public class StatsServlet extends HttpServlet {
         throws ServletException, IOException {
         
         System.out.println("Stats Servlet: doPost");
-
         StatsController SC = new StatsController();
+        
         int totGames = SC.getTotalLifeTimeGames();
         System.out.print(totGames);
 
@@ -38,6 +38,8 @@ public class StatsServlet extends HttpServlet {
         
         System.out.print(numGames);
         int[] graphData = SC.getGraphData(numGames); // Pass selected value
+
+        // Set the graph data as an attribute in the request
         req.setAttribute("graphData", graphData);
 
         // Forward the request to the JSP
