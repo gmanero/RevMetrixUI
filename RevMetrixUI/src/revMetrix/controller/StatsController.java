@@ -343,6 +343,7 @@ public class StatsController {
 		}
 	}*/
 	
+	/*
 	public int[] getGraphData()
 	{
 		List<Game> gameList = db.findAllGames();
@@ -363,6 +364,31 @@ public class StatsController {
 			}
 			return arr;
 		}
+	}*/
+	
+	public int[] getGraphData(int numGames) {
+        List<Game> gameList = db.findAllGames();
+        int[] graphData = new int[numGames];
+        int count = 0;
+        int graphCount = 0;
+        int gameSearch = gameList.size()-numGames;
+
+        for (Game game : gameList) {
+        	if (count == gameSearch) {
+        		graphData[graphCount++] = game.getGameScore();
+        		gameSearch++;
+        	}
+            count++;
+        }
+
+        return graphData;
+    }
+	
+	public int getTotalLifeTimeGames() {
+		int total = 0;
+		List<Game> gameList = db.findAllGames();
+		total = gameList.size();
+		return total;
 	}
 	
 	public double twoDec(Double convert) 
