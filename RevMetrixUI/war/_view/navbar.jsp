@@ -28,7 +28,7 @@
                 <button type="submit" class="nav-item dropbtn" name="destination" value="create">Create</button>
           
             <button type="submit" name="destination" value="stats" class="nav-item">Stats</button>
-            <button type="submit" name="destination" value="yourGames" class="nav-item">Your Games</button>
+            <button type="submit" name="destination" value="Archive" class="nav-item">Event Archive</button>
             <button type="submit" name="destination" value="game" class="nav-item">Quick Bowl</button>
         </form>
     </div>

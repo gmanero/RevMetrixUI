@@ -15,13 +15,16 @@ public interface IDatabase {
 	public Boolean isLoggedInAccount();
 	public String findLoggedInUser();
 	//Event
-	public Integer insertEventWithEstablishmentNameAndType(final String establishmentName, final String eventName, final String description, final String eventType);
+	public Integer insertEventWithEstablishmentNameAndType(final String establishmentName, final String eventName, final String description, final String eventType, final String date);
 	public List<Event> findAllEvents();
+	public List<Event> findAllDoneEvents();
+	public List<Event> findAllOngoingEvents();
 	public List<Event> findAllTournaments();
 	public List<Event> findAllPracticeEvents();
 	public List<Event> findAllLeagueEvents();
 	public List<Event> findEventById(final int eventId);
 	public int findEventIdByInfo(final String name, final String description);
+	public Boolean updateEventDone(int id);
 	//Establishments
 	public Establishment findEstablishmentById(int establishmentId);
 	public List<Establishment> findAllEstablishments();

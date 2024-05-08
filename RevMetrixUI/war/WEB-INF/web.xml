@@ -27,8 +27,8 @@
         <servlet-class>revMetrix.servlet.StatsServlet</servlet-class>
     </servlet>
      <servlet>
- <servlet-name>YourGamesServlet</servlet-name>
-        <servlet-class>revMetrix.servlet.YourGamesServlet</servlet-class>
+ <servlet-name>ArchiveServlet</servlet-name>
+        <servlet-class>revMetrix.servlet.ArchiveServlet</servlet-class>
     </servlet>
     <servlet>
  <servlet-name>AccountServlet</servlet-name>
@@ -101,8 +101,8 @@
     </servlet-mapping>
     
      <servlet-mapping>
-        <servlet-name>YourGamesServlet</servlet-name>
-        <url-pattern>/YourGames</url-pattern>
+        <servlet-name>ArchiveServlet</servlet-name>
+        <url-pattern>/Archive</url-pattern>
     </servlet-mapping>
     
      <servlet-mapping>

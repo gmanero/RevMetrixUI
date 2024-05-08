@@ -12,7 +12,7 @@
 <jsp:include page="navbar.jsp" />
 
 <div class="topPage">
-    <h1>Bowling Events</h1>
+    <h1>Archived Events</h1>
 </div>
 
 <%@ page import="java.util.List" %>
@@ -21,7 +21,7 @@
 
 <%
     EventController controller = new EventController();
-    List<Event> events = controller.getAllOngoingEvents();
+    List<Event> events = controller.getAllDoneEvents();
 %>
 
 <% if (!events.isEmpty()) { %>

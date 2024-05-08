@@ -143,6 +143,8 @@ public class InitialData {
 	                event.setEstablishmentId(Integer.parseInt(i.next()));
 	                event.setName(i.next());
 	                event.setDescription(i.next());
+	                event.setDone(Boolean.parseBoolean(i.next()));
+	                event.setStartdate(i.next());
 	                
 	                eventList.add(event);
 	            }
