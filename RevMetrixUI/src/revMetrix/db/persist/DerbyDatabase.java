@@ -815,9 +815,6 @@ public class DerbyDatabase implements IDatabase {
 	}
 	
 
-	
-
-
 
 	//EVENTS QUERYS
 	public List<Event> findAllEvents() {
