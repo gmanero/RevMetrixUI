@@ -66,6 +66,72 @@ public class EventController {
          }
          return events;
     }
+    public ArrayList<Event> getAllOngoingPracticeEvents(){
+   	 List<Event> eventList = db.findAllOngoingPracticeEvents();
+        List<Establishment> establishmentList = db.findAllEstablishments(); // Fetch all establishments
+
+        ArrayList<Event> events = new ArrayList<>();
+
+        if (eventList.isEmpty()) {
+            System.out.println("No events found");
+            return events;
+        } else {
+            for (Event event : eventList) {
+                // Set establishment name for each event
+                event.setEstablishmentName(getEstablishmentName(event.getEstablishmentId(), establishmentList));
+                events.add(event);
+                System.out.println("Event Name: " + event.getName() + ", Establishment: " +
+                        event.getEstablishmentName() +
+                        ", Type: " + eventTypeToString(event.getType()) +
+                        ", Description: " + event.getDescription());
+            }
+        }
+        return events;
+   }
+    public ArrayList<Event> getAllOngoingTournamentEvents(){
+      	 List<Event> eventList = db.findAllOngoingTournamentEvents();
+           List<Establishment> establishmentList = db.findAllEstablishments(); // Fetch all establishments
+
+           ArrayList<Event> events = new ArrayList<>();
+
+           if (eventList.isEmpty()) {
+               System.out.println("No events found");
+               return events;
+           } else {
+               for (Event event : eventList) {
+                   // Set establishment name for each event
+                   event.setEstablishmentName(getEstablishmentName(event.getEstablishmentId(), establishmentList));
+                   events.add(event);
+                   System.out.println("Event Name: " + event.getName() + ", Establishment: " +
+                           event.getEstablishmentName() +
+                           ", Type: " + eventTypeToString(event.getType()) +
+                           ", Description: " + event.getDescription());
+               }
+           }
+           return events;
+      }
+    public ArrayList<Event> getAllOngoingLeagueEvents(){
+     	 List<Event> eventList = db.findAllOngoingLeagueEvents();
+          List<Establishment> establishmentList = db.findAllEstablishments(); // Fetch all establishments
+
+          ArrayList<Event> events = new ArrayList<>();
+
+          if (eventList.isEmpty()) {
+              System.out.println("No events found");
+              return events;
+          } else {
+              for (Event event : eventList) {
+                  // Set establishment name for each event
+                  event.setEstablishmentName(getEstablishmentName(event.getEstablishmentId(), establishmentList));
+                  events.add(event);
+                  System.out.println("Event Name: " + event.getName() + ", Establishment: " +
+                          event.getEstablishmentName() +
+                          ", Type: " + eventTypeToString(event.getType()) +
+                          ", Description: " + event.getDescription());
+              }
+          }
+          return events;
+     }
     public ArrayList<Event> getAllDoneEvents(){
    	 	List<Event> eventList = db.findAllDoneEvents();
         List<Establishment> establishmentList = db.findAllEstablishments(); // Fetch all establishments
