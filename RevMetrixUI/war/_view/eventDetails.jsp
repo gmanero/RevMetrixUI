@@ -97,7 +97,7 @@
               for (Game g: games){
             	  j++;
               %>
-              <p class="score">	Game<%=j %>:  <%= g.getGameScore() %></p>
+              <p class="score">	Game <%=j %>:  <%= g.getGameScore() %></p>
               <%} %>
               <% if (!event.get(0).isDone()) { %>
                     <form action="${pageContext.servletContext.contextPath}/game" method="get">
