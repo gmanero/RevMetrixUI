@@ -45,6 +45,7 @@
 	%>
 
     <form class="Stats" action="${pageContext.servletContext.contextPath}/stats" method="post">
+    <div class="Card">
         <div class="infoSection">
             <h3>Game Statistics:</h3>
             <ul>
@@ -67,7 +68,7 @@
             </ul>    
         </div>
 
-        <div class="graphSection">
+        <div class="infoGraphSection">
             <h3>Display Options:</h3>
             <label for="numGames">Number of Games:</label>
             <select name="numGames" id="numGames">
@@ -83,10 +84,11 @@
             <br>   
             <div id="myPlot" style="width:100%;max-width:700px"></div>    
         </div>
+       </div> 
     </form>
     
     
-</div>
+
 
 
     <!-- JavaScript code to generate the graph -->
@@ -126,6 +128,6 @@
         // Display using Plotly
         Plotly.newPlot("myPlot", data, layout);
     </script>
-</script>
+
 </body>
 </html>

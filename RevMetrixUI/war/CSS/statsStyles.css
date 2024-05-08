@@ -16,6 +16,7 @@ body {
 
 .infoSection {
     background-color: #333;
+    background: linear-gradient(to bottom, #26acca, #562d7f);
     padding: 20px;
     border-radius: 10px;
     margin-bottom: 20px;
@@ -23,31 +24,6 @@ body {
     width: calc(50% - 20px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;
-}
-
-.graphSection {
-    background-color: #333;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    float: left;
-    width: calc(50% - 20px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease;
-    text-align: center; /* Center the text */
-}
-
-.infoSectionGraph {
-    background-color: #333;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    float: right;
-    width: calc(50% - 20px);
-    margin-top: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease;
-    text-align: center; /* Center the text */
 }
 
 .infoSection:hover {
@@ -76,6 +52,34 @@ body {
     margin-bottom: 5px;
 }
 
-.infoSectionGraph:hover {
+.Card {
+    width: 1500px;
+    height: 900px;
+    background-color: #333;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 0 auto; /* Center horizontally */
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+.infoGraphSection {
+    background-color: #333;
+    background: linear-gradient(to bottom, #26acca, #562d7f);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    float: right;
+    width: calc(50% - 20px);
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.infoGraphSection:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
