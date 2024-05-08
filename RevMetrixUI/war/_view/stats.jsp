@@ -105,6 +105,9 @@
             x: xArray,
             y: yArray,
             mode: "lines",
+            line: {
+            	color: '#26acca'
+            }
         }];
 
         // Define Layout
