@@ -21,7 +21,7 @@
     <div class="loginForm">
         <form action="login" method="post" class="loginForm">
             <h1>Log In</h1>
-            <input type="email" id="email" name="email" placeholder="Email" required>
+            <input type="email" id="username" name="username" placeholder="Email" required>
             <br>
             <input type="password" id="password" name="password" placeholder="Password" required>
             <br>
