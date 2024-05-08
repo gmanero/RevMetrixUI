@@ -18,26 +18,24 @@ public class LeagueSheetServlet extends HttpServlet {
 	
 	@Override
 	 protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String loggedInName = "";
+        boolean loggedIn = false; // Initialize loggedIn to false
+
+        AllAccountsController Mcontroller = new AllAccountsController();
+        loggedIn = Mcontroller.isLoggedInAccount();
+        System.out.println("Look here + "+ loggedIn);
+
+        if (loggedIn) {
+            loggedInName = Mcontroller.findLoggedInUser();
+            System.out.println("Logged in name: " + loggedInName);
+        }
 			System.out.println("League Sheet Servlet:  doGet");
 			LeagueSheetController controller = new LeagueSheetController();
 			ArrayList<LeagueSheet> leagueSheet = controller.getLeagueSheet();
-			
-			String loggedInName = "";
-	        boolean loggedIn = false; // Initialize loggedIn to false
-
-	        AllAccountsController accountController = new AllAccountsController();
-	        loggedIn = accountController.isLoggedInAccount();
-	        System.out.println("Look here + "+ loggedIn);
-
-	        if (loggedIn) {
-	            loggedInName = accountController.findLoggedInUser();
-	            System.out.println("Logged in name: " + loggedInName);
-	        }
 	        
 	        req.setAttribute("loggedInName", loggedInName);
 	        req.setAttribute("loggedIn", loggedIn);
-			
-			req.setAttribute("leagueSheet", leagueSheet);
+		      req.setAttribute("leagueSheet", leagueSheet);
 	        req.getRequestDispatcher("/_view/leagueSheet.jsp").forward(req, resp);
 	    }
 	@Override

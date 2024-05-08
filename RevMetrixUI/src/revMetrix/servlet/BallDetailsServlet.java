@@ -24,6 +24,17 @@ public class BallDetailsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	String loggedInName = "";
+        boolean loggedIn = false; // Initialize loggedIn to false
+
+        AllAccountsController controller = new AllAccountsController();
+        loggedIn = controller.isLoggedInAccount();
+        System.out.println("Look here + "+ loggedIn);
+
+        if (loggedIn) {
+            loggedInName = controller.findLoggedInUser();
+            System.out.println("Logged in name: " + loggedInName);
+        }
     	 int ballId = Integer.parseInt(request.getParameter("id"));
         
         // Check if ballIdParam is not null or empty
@@ -33,7 +44,8 @@ public class BallDetailsServlet extends HttpServlet {
                 
                 // Set ball attribute to be used in JSP
                 request.setAttribute("ball", ball);
-                
+                request.setAttribute("loggedInName", loggedInName);
+                request.setAttribute("loggedIn", loggedIn);
 
                 
                 // Forward to JSP for rendering

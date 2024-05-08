@@ -25,7 +25,11 @@ public interface IDatabase {
 	//Establishments
 	public Establishment findEstablishmentById(int establishmentId);
 	public List<Establishment> findAllEstablishments();
-	public Integer insertEstablishmentIntoEstablishmentsTable(final String name);
+	public Integer insertEstablishmentIntoEstablishmentsTable(final String name, final String address, final String phoneNumber, final int lanes);
+	public void updateEstablishmentName(final int establishmentId, final String newName);
+	public void updateEstablishmentAddress(final int establishmentId, final String newAddress);
+	public void updateEstablishmentPhoneNumber(final int establishmentId, final String newPhoneNumber);
+	public void updateEstablishmentLanes(final int establishmentId, final int newLanes);
 	//Balls
 	public List<Ball> findAllBalls();
 	public Integer insertBallIntoBallsTable(final int weight, final String color, final String name);
