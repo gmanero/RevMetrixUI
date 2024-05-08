@@ -108,7 +108,9 @@ public class InitialData {
 					// auto-generate book ID, instead
 					establishment.setEstablishmentId(establishmentId++);				
 					establishment.setName(i.next());
-					
+					establishment.setAddress(i.next());
+					establishment.setPhoneNumber(i.next());
+					establishment.setLanes(Integer.parseInt(i.next()));
 					establishmentList.add(establishment);
 				}
 				System.out.println("establishmentList loaded from CSV file");			

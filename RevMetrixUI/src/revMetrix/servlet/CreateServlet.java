@@ -73,7 +73,7 @@ public class CreateServlet extends HttpServlet {
             } else {
                 if (establishmentIdParam.equals("addNew") && newEstablishmentName != null && !newEstablishmentName.isEmpty()) {
                     EstablishmentController establishmentController = new EstablishmentController();
-                    establishmentController.insertEstablishmentIntoEstablishmentsTable(newEstablishmentName);
+                    establishmentController.insertEstablishmentIntoEstablishmentsTable(newEstablishmentName, " ", " ", 0);
                     InsertEventController Econtroller = new InsertEventController();
                     Econtroller.insertEvent(newEstablishmentName, eventName, description, type);
                     EventController eventcontroller = new EventController();
