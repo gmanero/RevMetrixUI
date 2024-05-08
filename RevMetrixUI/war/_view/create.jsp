@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Event</title>
+    <title>RevMetrix - Create Event</title>
     <link rel="stylesheet" type="text/css" href="CSS/createStyles.css">
     <script>
         
@@ -69,16 +69,16 @@
                     <option value="addNew">Add New</option>
                 </select>
             </div>
-            <input type="date" id="date" name = "date">
             
-
-<!-- Button to trigger displaying the selected date -->
-			
-			
             <div id="newEstablishmentDiv" class="form-group" style="display: none;">
                 <label for="newEstablishment">New Establishment Name:</label>
                 <input type="text" id="newEstablishment" name="newEstablishment" placeholder="New Establishment Name">
             </div>
+            <div class = "form-group">
+            <label for = "date">Date</label>
+            <input type="date" id="date" name = "date">
+            </div>
+            
             <div class="form-group">
                 <label for="eventType">Event Type:</label>
                 <select id="eventType" name="eventType" required>
