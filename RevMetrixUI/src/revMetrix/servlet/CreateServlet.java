@@ -22,7 +22,7 @@ public class CreateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         
-        
+       
         String loggedInName = "";
         boolean loggedIn = false; // Initialize loggedIn to false
 
@@ -66,6 +66,8 @@ public class CreateServlet extends HttpServlet {
             String type = req.getParameter("eventType");
             String establishmentIdParam = req.getParameter("establishment");
             String newEstablishmentName = req.getParameter("newEstablishment");
+            String date= req.getParameter("date");
+            System.out.println(date);
             int numberOfSessions = Integer.parseInt(req.getParameter("numberOfSessions"));
 
             if (eventName == null || description == null || type == null) {
@@ -75,7 +77,7 @@ public class CreateServlet extends HttpServlet {
                     EstablishmentController establishmentController = new EstablishmentController();
                     establishmentController.insertEstablishmentIntoEstablishmentsTable(newEstablishmentName, " ", " ", 0);
                     InsertEventController Econtroller = new InsertEventController();
-                    Econtroller.insertEvent(newEstablishmentName, eventName, description, type);
+                    Econtroller.insertEvent(newEstablishmentName, eventName, description, type,date);
                     EventController eventcontroller = new EventController();
                     int eventId = eventcontroller.findEventIdByInfo(eventName, description);
                     System.out.println(numberOfSessions);
@@ -87,7 +89,7 @@ public class CreateServlet extends HttpServlet {
                 }
                 else {
                 	InsertEventController Econtroller = new InsertEventController();
-                    Econtroller.insertEvent(establishmentIdParam, eventName, description, type);
+                    Econtroller.insertEvent(establishmentIdParam, eventName, description, type, date);
                     EventController eventcontroller = new EventController();
                     int eventId = eventcontroller.findEventIdByInfo(eventName, description);
                     System.out.println(numberOfSessions);

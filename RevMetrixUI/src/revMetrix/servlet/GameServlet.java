@@ -209,7 +209,8 @@ public class GameServlet extends HttpServlet {
 	    
 	    ArrayList<Shot> shots = controller.GetShotsByGame(gameID);
 	    ArrayList<Frame> frames = controller.GetFramesByGame(gameID);
-	    System.out.print("Size = "+frames.size());
+	    //System.out.print("Size = "+frames.size());
+	    boolean sameFrame = false;
 	    if(shots == null) {
 	    	shots = new ArrayList<Shot>();
 	    }
@@ -247,6 +248,7 @@ public class GameServlet extends HttpServlet {
 	    		lockout = GameController.getLockout(first);
 	    		secondFrame[0]=true;
 	    	}
+	    	sameFrame=true;
 	    }
 	    else {
 	    	frames.get(frames.size()-1).setFrameScore(GameController.frameScore(shots.get(shots.size()-2), shots.get(shots.size()-1)));
@@ -261,6 +263,27 @@ public class GameServlet extends HttpServlet {
 	    ArrayList<Game> games = controller.GetGamesBySession(SessionID);
 		controller.updateSessionDate(SessionID);
 		controller.updateSessionScore(SessionID);
+		if(lane !=null && !sameFrame) {
+			Integer laneNum=-1;
+			try {
+				laneNum = Integer.parseInt(lane);
+				if(laneNum%2==1) {
+					laneNum++;
+				}else {
+					laneNum--;
+				}
+				lane = laneNum.toString();
+			}catch(NumberFormatException e){
+				
+			}
+			
+			finally{
+				
+			}
+			
+			
+		}
+		
 	    req.setAttribute("games", games);
 	    req.setAttribute("secondFrame", secondFrame);
 	    req.setAttribute("locked", lockout);
@@ -282,6 +305,8 @@ public class GameServlet extends HttpServlet {
 			boolean[] locker = {true,true,true,true,true,true,true,true,true,true};
 			req.setAttribute("locked", locker);
 		}
+		
+		
 		req.setAttribute("loggedInName", loggedInName);
         req.setAttribute("loggedIn", loggedIn);
 	    req.getRequestDispatcher("/_view/game.jsp").forward(req, resp);

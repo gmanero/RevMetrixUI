@@ -41,7 +41,7 @@ public class LeagueSheetController {
             int totSecShot = 0;
 
             for (Session session : sessionList) { //iterate through each session
-               
+               if(session.getEventId()!=6) {
                     List<Game> gameList = db.GetGamesBySession(sessionNum);
                     LeagueSheet leagueSheet = new LeagueSheet("","0|0","",0,0,0,0,0,0,"","",0,"","",0);
 
@@ -168,7 +168,7 @@ public class LeagueSheetController {
 
                     sessionNum++;
                 
-            }
+            }}
         }
         return leagueSheetFinal;
     }
