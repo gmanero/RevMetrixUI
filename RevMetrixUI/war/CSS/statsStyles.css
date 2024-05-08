@@ -1,48 +1,40 @@
-		body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: #1f1f1f;
-            color: #fff;
-        }
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #1f1f1f;
+    color: #fff;
+}
 
-        /* Header Styles */
-        .topPage {
-             background: linear-gradient(to bottom,  #562d7f, #26acca);
-            color: #fff;
-            text-align: center;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
+.topPage {
+    background: linear-gradient(to bottom, #562d7f, #26acca);
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 20px;
+}
 
-        .topPage h1 {
-            margin: 0;
-            font-size: 36px;
-        }
-
-      
-
-        /* Main Content Styles */
-        .mainText {
-            text-align: center;
-            margin: 20px auto;
-            max-width: 800px;
-        }
-
-	.infoSection {
+.infoSection {
     background-color: #333;
     padding: 20px;
     border-radius: 10px;
     margin-bottom: 20px;
-    text-align: center;
-    margin: 30px auto; /* Center the box horizontally */
-    max-width: 600px; /* Limit the width of the box */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-    transition: box-shadow 0.3s ease; /* Add transition effect on hover */
+    float: left;
+    width: calc(50% - 20px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
 }
 
-.infoSection:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+.graphSection {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    float: left;
+    width: calc(50% - 20px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    text-align: center; /* Center the text */
 }
 
 .infoSectionGraph {
@@ -50,42 +42,40 @@
     padding: 20px;
     border-radius: 10px;
     margin-bottom: 20px;
-    max-width: 800px;
-    margin: 0 auto; /* Center the box horizontally */
-    display: flex; /* Use flexbox for better alignment */
-    flex-direction: column; /* Arrange child elements vertically */
-    align-items: center; /* Center child elements horizontally */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-    transition: box-shadow 0.3s ease; /* Add transition effect on hover */
+    float: right;
+    width: calc(50% - 20px);
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    text-align: center; /* Center the text */
+}
+
+.infoSection:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.infoSection h3 {
+    margin-top: 0;
+    font-size: 24px;
+}
+
+.infoSection p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+    color: #fff;
+}
+
+.infoSection ul {
+    list-style: none;
+    padding-left: 20px;
+    margin: 0;
+}
+
+.infoSection li {
+    margin-bottom: 5px;
 }
 
 .infoSectionGraph:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
-
-        .infoSection h2 {
-            margin-top: 0;
-            font-size: 24px;
-        }
-
-        .infoSection p {
-            font-size: 16px;
-            line-height: 1.6;
-            margin: 0;
-            color: #fff;
-        }
-
-        .infoSection ul {
-            list-style: none;
-            padding-left: 20px;
-            margin: 0;
-        }
-
-        .infoSection li {
-            margin-bottom: 5px;
-        }
-
-        .highlight {
-            color: #fffff;
-            font-weight: bold;
-        }
