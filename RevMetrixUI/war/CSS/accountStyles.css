@@ -30,6 +30,7 @@ body {
 
 h1 {
     text-align: center;
+    font-size: 60px;
 }
 
 h2 {
@@ -51,7 +52,7 @@ h2 {
 }
 
 .mainText {
-    font-size: 16px;
+    font-size: 20px;
     line-height: 1.6;
     color: #fff;
 }
@@ -63,14 +64,15 @@ h2 {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin-bottom: 50px;
 }
 
 /* Individual bowling ball styles */
 .bowlingBall {
     width: 200px;
     height: 200px;
-    background-color: #333; /* Solid color */
-    background-image: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 100%);
+    background-color: #555; /* Adjusted color for a lighter shade */
+      background-image: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 100%); /* Lighter gradient */
     position: relative;
     overflow: hidden;
     border-radius: 50%;
@@ -81,13 +83,65 @@ h2 {
     font-size: 14px;
     color: #fff;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Added box-shadow transition */
     flex-shrink: 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transform-style: preserve-3d;
     perspective: 1000px;
-    animation: spin 8s infinite linear; /* Always spinning */
+    animation: spin 8s infinite linear; /* Keep spinning */
 }
+/* Darken the ball on hover */
+.bowlingBall:hover {
+    background-color: #d7d7d7; /* Slightly darker color on hover */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+/* Pseudo-element for darkening effect */
+.bowlingBall::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjusted opacity for darkening effect */
+    transition: opacity 0.3s ease; /* Transition for opacity change */
+    pointer-events: none; /* Ensure the pseudo-element doesn't interfere with hover events */
+    border-radius: 50%; /* Ensure the darkening effect covers the entire ball */
+    opacity: 0; /* Initially invisible */
+}
+
+/* Darken the ball on hover */
+.bowlingBall:hover::before {
+    opacity: 2; /* Make the darkening effect visible on hover */
+}
+
+.addBall {
+    /* Adjusted background color and gradient */
+    background-color: #26acca; /* Light blue color */
+    border-radius: 50%;
+    border: none;
+    color: #fff;
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 36px;
+    cursor: pointer;
+    position: relative; /* Added position relative for pseudo-element */
+    overflow: hidden; /* Hide overflowing pseudo-element */
+    transition: background-color 0.3s ease;
+    
+    
+}
+
+/* Darken the ball on hover */
+.addBall:hover{
+      background-color: #3d7b93; /* Darker blue on hover */
+}
+
 
 /* Define the spinning animation */
 @keyframes spin {
@@ -99,99 +153,16 @@ h2 {
     }
 }
 
-
-/* Add shine effect */
-.bowlingBall:before,
-.bowlingBall:after {
-    content: '';
-    position: absolute;
-    width: 100px; /* Adjust the width of the shine */
-    height: 100px; /* Adjust the height of the shine */
-    background: rgba(255, 255, 255, 0.3); /* Adjust the color and opacity of the shine */
-    border-radius: 50%;
-    transition: opacity 0.3s ease; /* Add transition for smooth opacity change */
-}
-
-.bowlingBall:before {
-    top: 20%;
-    left: 20%;
-    transform: translate(-50%, -50%);
-}
-
-.bowlingBall:after {
-    top: 50%;
-    right: 20%;
-    transform: translate(50%, -50%);
-}
-
-/* Adjust the opacity of the shine on hover */
-.bowlingBall:hover:before,
-.bowlingBall:hover:after {
-    opacity: 0.1; /* Adjust the opacity on hover */
-}
-
-.bowlingBall:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255,255,255,0.2);
-    border-radius: 50%;
-    transform: translateZ(-10px);
-}
-
-.bowlingBall:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.6);
-    border-radius: 50%;
-    transform: translateZ(10px);
-}
-
-.bowlingBall p {
-    margin-top: 5px;
-}
-
-/* Add ball button styles */
-.addBall {
-    width: 200px;
-    height: 200px;
-    background-color: #26acca;
-    background-image: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 100%);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    border-radius: 50%;
-    margin: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 36px;
-    color: #000;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    flex-shrink: 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.addBall:hover {
-    background-color: #4891ac;
-}
-
-/* Add ball form styles */
 .addBallForm {
+    /* Adjusted styles for the Add Ball form */
     display: none;
     text-align: center;
-    margin-top: 20px;
+    margin: 50px auto; /* Center horizontally and add space around the form */
+    width: 60%; /* Set a wider width for the form */
+    max-width: 600px; /* Limit the maximum width for larger screens */
     background-color: #333;
-    padding: 20px;
-    border-radius: 10px;
+    padding: 30px; /* Increased padding for better spacing */
+    border-radius: 10px; /* Set border-radius to 10px */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -208,21 +179,21 @@ h2 {
 
 .addBallForm label {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 15px; /* Increased margin for better spacing */
     color: #fff;
 }
 
 .addBallForm input {
-    width: calc(100% - 20px);
-    margin: 0 auto 20px auto;
-    padding: 10px;
+    width: 100%; /* Set input width to 100% for better responsiveness */
+    padding: 12px; /* Increased padding for better appearance */
+    margin-bottom: 20px; /* Increased margin for better spacing */
     border-radius: 5px;
     border: 1px solid #ccc;
 }
 
 .addBallForm button {
-    width: calc(100% - 20px);
-    padding: 10px;
+    width: calc(100% - 300px); /* Set button width to 100% for better responsiveness */
+    padding: 12px; /* Increased padding for better appearance */
     background-color: #26acca;
     color: #fff;
     border: none;
@@ -232,7 +203,7 @@ h2 {
 }
 
 .addBallForm button:hover {
-    background-color: #4891ac;
+    background-color: #3d7b93; /* Darker blue on hover */
 }
 
 a:link {
@@ -240,7 +211,7 @@ a:link {
 }
 table {
     width: 90%;
-    margin: 20px auto;
+    margin: 40px auto;
     border-collapse: collapse;
     border: 2px solid #ddd;
     background-color: #333;
@@ -262,30 +233,28 @@ table {
   tr:hover {
     background-color: #797979;
   }
-  .addEstablishment {
-    /* Keep the same styles as the Add Ball button */
-    width: 200px;
-    height: 200px;
+.addEstablishment {
+    /* Adjusted styles for the Add Establishment button */
+    width: 250px;
+    height: 55px;
     background-color: #26acca;
-    background-image: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 100%);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    border-radius: 50%;
-    margin: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 36px;
-    color: #000;
+    border-radius: 13px;
+    border: none;
+    margin: 10px auto; /* Set margin to auto to center horizontally */
+    margin-bottom: 80px;
+    display: flex; /* Use flexbox for alignment */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    font-size: 18px; /* Reduced font size for a professional look */
+    font-family: Arial, sans-serif; /* Use a professional font */
+    color: #fff;
     cursor: pointer;
     transition: background-color 0.3s ease;
     flex-shrink: 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .addEstablishment:hover {
-    background-color: #4891ac;
+    background-color: #3d7b93; /* Darker blue on hover */
 }
 
 /* Add Establishment form styles */
@@ -293,7 +262,9 @@ table {
     /* Adjust the background color and border-radius */
     display: none;
     text-align: center;
-    margin-top: 20px;
+    margin: 50px;
+    margin-left: 550px;
+    margin-right: 550px;
     background-color: #333;
     padding: 20px;
     border-radius: 10px; /* Set border-radius to 10px */
@@ -326,7 +297,7 @@ table {
 }
 
 .addEstablishmentForm button {
-    width: calc(100% - 20px);
+    width: calc(100% - 300px);
     padding: 10px;
     background-color: #26acca;
     color: #fff;
@@ -334,9 +305,10 @@ table {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-size: 15px;
 }
 
 .addEstablishmentForm button:hover {
-    background-color: #4891ac;
+    background-color: #3d7b93;
 }
  
