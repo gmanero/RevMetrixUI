@@ -30,8 +30,8 @@ body {
 }
 
 .eventCard {
-    width: 300px;
-    height: 300px; /* Set height for consistent size */
+    width: 315px;
+    height: 315px; /* Set height for consistent size */
     background-color: #333;
     border-radius: 10px;
     padding: 20px;
@@ -42,6 +42,16 @@ body {
     transition: background-color 0.3s ease;
     overflow: hidden; /* Hide overflowing content */
     margin-right: 20px;
+}
+
+.eventCard p {
+	margin-bottom: 15px;
+	 font-size: 16px;
+}
+
+.eventCard h2 {
+	margin-bottom: 20px;
+	 font-size: 23px;
 }
 
 p strong {

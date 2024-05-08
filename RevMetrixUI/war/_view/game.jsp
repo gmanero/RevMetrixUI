@@ -140,7 +140,7 @@
   <div class="rowNew">
     <div class="foulbtn" onclick="setFoul()" style="background-color: lightgrey;"><span>F</span></div>
     <div class="missbtn" onclick="setGutter()" style="background-color: lightgrey;"><span>-</span></div>
-    <div class="strikebtn" onclick="setStrike()" style="background-color: lightgrey;"><span>X</span></div>
+    <div class="strikebtn" id = 'strike' onclick="setStrike()" style="background-color: lightgrey;"><span>X</span></div>
     <div class="sparebtn" style="display: none;" onclick="setSpare()" style="background-color: lightgrey;"><span>/</span></div>
   </div>
   <div class="rowNew">
@@ -302,7 +302,7 @@
 	
     // count the number of pins knocked down
     const pins = document.querySelectorAll('.pinNew:not(.leave)');
-
+    document.getElementById('firstExtra').value= '';
     // update pinCount with the # of pins knocked down
     pinCount = pins.length;
 
@@ -433,6 +433,7 @@
 
     firstLoaction.value = first_Remaining.join(",");
     SecondLocation.value = second_Remaining.join(",");
+    document.getElementById('firstExtra').value= '';
 
   }
 
@@ -575,6 +576,8 @@
 
     firstLoaction.value= first_Remaining.join(",");
     SecondLocation.value=second_Remaining.join(",");
+    
+    document.getElementById('firstExtra').value= '';
   }
 
   function getPreviousShot() {
@@ -719,7 +722,7 @@
   </c:forEach>];
 	  
     	  if(secondFrame[0]==true){
-    		  document.querySelector('.strike span').textContent = '/';
+    		  document.getElementById('strike').textContent = '/';
     	  }
     	  
       

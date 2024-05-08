@@ -28,8 +28,7 @@ public class LeagueSheetServlet extends HttpServlet {
         if (loggedIn) {
             loggedInName = Mcontroller.findLoggedInUser();
             System.out.println("Logged in name: " + loggedInName);
-        }
-			System.out.println("League Sheet Servlet:  doGet");
+            System.out.println("League Sheet Servlet:  doGet");
 			LeagueSheetController controller = new LeagueSheetController();
 			ArrayList<LeagueSheet> leagueSheet = controller.getLeagueSheet();
 	        
@@ -37,6 +36,11 @@ public class LeagueSheetServlet extends HttpServlet {
 	        req.setAttribute("loggedIn", loggedIn);
 		      req.setAttribute("leagueSheet", leagueSheet);
 	        req.getRequestDispatcher("/_view/leagueSheet.jsp").forward(req, resp);
+        }
+        else {
+        	req.getRequestDispatcher("/_view/login.jsp").forward(req, resp);
+        }
+			
 	    }
 	@Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

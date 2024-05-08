@@ -285,6 +285,9 @@ public class DerbyDatabase implements IDatabase {
 	    });
 	}
 	
+	//BALL QUERY 
+	
+	
 	@Override
 	public List<Ball> findBallById(final int ballId) {
 	    return executeTransaction(new Transaction<List<Ball>>() {
@@ -362,7 +365,163 @@ public class DerbyDatabase implements IDatabase {
 	            }
 	        }
 	    });
-	}
+	} 
+	
+	// Method to get the total shots for a ball
+    public List<Shot> getTotalShotsForBall(int ballId) {
+        return executeTransaction(new Transaction<List<Shot>>() {
+            @Override
+            public List<Shot> execute(Connection conn) throws SQLException {
+                PreparedStatement stmt = null;
+                ResultSet resultSet = null;
+
+                try {
+                    stmt = conn.prepareStatement("SELECT * FROM shots WHERE ball_id = ?");
+                    stmt.setInt(1, ballId);
+
+                    List<Shot> shots = new ArrayList<>();
+
+                    resultSet = stmt.executeQuery();
+
+                    while (resultSet.next()) {
+                        Shot shot = new Shot();
+                        loadShot(shot, resultSet, 1);
+                        shots.add(shot);
+                    }
+
+                    return shots;
+                } finally {
+                    DBUtil.closeQuietly(resultSet);
+                    DBUtil.closeQuietly(stmt);
+                }
+            }
+        });
+    }
+
+    // Method to get the total strikes for a ball
+    public List<Shot> getTotalStrikesForBall(int ballId) {
+        return executeTransaction(new Transaction<List<Shot>>() {
+            @Override
+            public List<Shot> execute(Connection conn) throws SQLException {
+                PreparedStatement stmt = null;
+                ResultSet resultSet = null;
+
+                try {
+                    stmt = conn.prepareStatement("SELECT * FROM shots WHERE ball_id = ? AND shotScore = 'X'");
+                    stmt.setInt(1, ballId);
+
+                    List<Shot> strikes = new ArrayList<>();
+
+                    resultSet = stmt.executeQuery();
+
+                    while (resultSet.next()) {
+                        Shot strike = new Shot();
+                        loadShot(strike, resultSet, 1);
+                        strikes.add(strike);
+                    }
+
+                    return strikes;
+                } finally {
+                    DBUtil.closeQuietly(resultSet);
+                    DBUtil.closeQuietly(stmt);
+                }
+            }
+        });
+    }
+
+    // Method to get the total spares for a ball
+    public List<Shot> getTotalSparesForBall(int ballId) {
+        return executeTransaction(new Transaction<List<Shot>>() {
+            @Override
+            public List<Shot> execute(Connection conn) throws SQLException {
+                PreparedStatement stmt = null;
+                ResultSet resultSet = null;
+
+                try {
+                    stmt = conn.prepareStatement("SELECT * FROM shots WHERE ball_id = ? AND shotScore = '/'");
+                    stmt.setInt(1, ballId);
+
+                    List<Shot> spares = new ArrayList<>();
+
+                    resultSet = stmt.executeQuery();
+
+                    while (resultSet.next()) {
+                        Shot spare = new Shot();
+                        loadShot(spare, resultSet, 1);
+                        spares.add(spare);
+                    }
+
+                    return spares;
+                } finally {
+                    DBUtil.closeQuietly(resultSet);
+                    DBUtil.closeQuietly(stmt);
+                }
+            }
+        });
+    }
+
+    // Method to get the total spares for a ball
+    public List<Shot> getTotalFoulsForBall(int ballId) {
+        return executeTransaction(new Transaction<List<Shot>>() {
+            @Override
+            public List<Shot> execute(Connection conn) throws SQLException {
+                PreparedStatement stmt = null;
+                ResultSet resultSet = null;
+
+                try {
+                    stmt = conn.prepareStatement("SELECT * FROM shots WHERE ball_id = ? AND shotScore = 'F'");
+                    stmt.setInt(1, ballId);
+
+                    List<Shot> fouls = new ArrayList<>();
+
+                    resultSet = stmt.executeQuery();
+
+                    while (resultSet.next()) {
+                        Shot foul = new Shot();
+                        loadShot(foul, resultSet, 1);
+                        fouls.add(foul);
+                    }
+
+                    return fouls;
+                } finally {
+                    DBUtil.closeQuietly(resultSet);
+                    DBUtil.closeQuietly(stmt);
+                }
+            }
+        });
+    }
+    
+    // Method to get the total spares for a ball
+    public List<Shot> getTotalMissesForBall(int ballId) {
+        return executeTransaction(new Transaction<List<Shot>>() {
+            @Override
+            public List<Shot> execute(Connection conn) throws SQLException {
+                PreparedStatement stmt = null;
+                ResultSet resultSet = null;
+
+                try {
+                    stmt = conn.prepareStatement("SELECT * FROM shots WHERE ball_id = ? AND shotScore = '-'");
+                    stmt.setInt(1, ballId);
+
+                    List<Shot> misses = new ArrayList<>();
+
+                    resultSet = stmt.executeQuery();
+
+                    while (resultSet.next()) {
+                        Shot miss = new Shot();
+                        loadShot(miss, resultSet, 1);
+                        misses.add(miss);
+                    }
+
+                    return misses;
+                } finally {
+                    DBUtil.closeQuietly(resultSet);
+                    DBUtil.closeQuietly(stmt);
+                }
+            }
+        });
+    }
+
 	
 	public Integer insertBallIntoBallsTable(final int weight, final String color, final String name) {
 	    return executeTransaction(new Transaction<Integer>() {
@@ -656,9 +815,6 @@ public class DerbyDatabase implements IDatabase {
 	}
 	
 
-	
-
-
 
 	//EVENTS QUERYS
 	public List<Event> findAllEvents() {
@@ -699,9 +855,108 @@ public class DerbyDatabase implements IDatabase {
 	    });
 	}
 	
+	public List<Event> findAllDoneEvents() {
+	    return executeTransaction(new Transaction<List<Event>>() {
+	        @Override
+	        public List<Event> execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            try {
+	                stmt = conn.prepareStatement("SELECT * FROM events where done = true");
+	                
+	                List<Event> result = new ArrayList<Event>();
+	                
+	                resultSet = stmt.executeQuery();
+	                
+	                Boolean found = false;
+	                
+	                while (resultSet.next()) {
+	                    found = true;
+	                    
+	                    Event event = new Event();
+	                    loadEvent(event, resultSet, 1);
+	                    
+	                    result.add(event);
+	                }
+	                
+	                if (!found) {
+	                    System.out.println("No events were found in the database");
+	                }
+	                
+	                return result;
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
 	
+	public List<Event> findAllOngoingEvents() {
+	    return executeTransaction(new Transaction<List<Event>>() {
+	        @Override
+	        public List<Event> execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            try {
+	                stmt = conn.prepareStatement("SELECT * FROM events where done = false");
+	                
+	                List<Event> result = new ArrayList<Event>();
+	                
+	                resultSet = stmt.executeQuery();
+	                
+	                Boolean found = false;
+	                
+	                while (resultSet.next()) {
+	                    found = true;
+	                    
+	                    Event event = new Event();
+	                    loadEvent(event, resultSet, 1);
+	                    
+	                    result.add(event);
+	                }
+	                
+	                if (!found) {
+	                    System.out.println("No events were found in the database");
+	                }
+	                
+	                return result;
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
+	public Boolean updateEventDone(int id) {
+		return executeTransaction(new Transaction<Boolean>() {
+	        @Override
+	        public Boolean execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            try {
+	                stmt = conn.prepareStatement("UPDATE events SET done = true WHERE event_id = ?");
+	                
+	                Boolean result = true;
+	                stmt.setInt(1, id);
+	                ;
+	                int rowsUpdated =stmt.executeUpdate();
+	                System.out.println(rowsUpdated);
+	                return result;
+	               
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
+
 	
-	public Integer insertEventWithEstablishmentNameAndType(final String establishmentName, final String eventName, final String description, final String eventType) {
+	public Integer insertEventWithEstablishmentNameAndType(final String establishmentName, final String eventName, final String description, final String eventType, final String date) {
 	    return executeTransaction(new Transaction<Integer>() {
 	        @Override
 	        public Integer execute(Connection conn) throws SQLException {
@@ -778,14 +1033,14 @@ public class DerbyDatabase implements IDatabase {
 	                
 	                // Step 5: Insert new event with establishment ID and type
 	                stmt4 = conn.prepareStatement(
-	                        "INSERT INTO events (type, establishment_id, name, description) " +
-	                        "VALUES (?, ?, ?, ?)"
+	                        "INSERT INTO events (type, establishment_id, name, description, done, date) " +
+	                        "VALUES (?, ?, ?, ?, false, ? )"
 	                );
 	                stmt4.setInt(1, type);
 	                stmt4.setInt(2, establishmentId);
 	                stmt4.setString(3, eventName);
 	                stmt4.setString(4, description);
-	                
+	                stmt4.setString(5, date);
 	                stmt4.executeUpdate();
 	                
 	                System.out.println("New event inserted into Events table");
@@ -1804,6 +2059,8 @@ public class DerbyDatabase implements IDatabase {
 		event.setEstablishmentId(resultSet.getInt(index++));
 		event.setName(resultSet.getString(index++));
 		event.setDescription(resultSet.getString(index++));
+		event.setDone(resultSet.getBoolean(index++));
+		event.setStartdate(resultSet.getString(index++));
 	}
 	
 	private void loadFrame(Frame frame, ResultSet resultSet, int index) throws SQLException {
@@ -1915,7 +2172,9 @@ public class DerbyDatabase implements IDatabase {
 							"	type integer," +
 							"	establishment_id integer constraint establishment_id references establishments," +
 							"   name varchar(40)," +
-							"   description varchar(300)" +
+							"   description varchar(300)," +
+							"   done Boolean," +
+							"   date varchar(40)" +
 							")"
 					);
 					stmt4.executeUpdate();
@@ -2086,12 +2345,14 @@ public class DerbyDatabase implements IDatabase {
 
 					System.out.println("Establishments table populated");
 					
-					insertEvent = conn.prepareStatement("insert into events (type, establishment_id, name, description) VALUES (?, ?, ?, ?)");
+					insertEvent = conn.prepareStatement("insert into events (type, establishment_id, name, description, done, date) VALUES (?, ?, ?, ?, ?, ?)");
 					for (Event event : eventList) {
 					    insertEvent.setInt(1, event.getType());
 					    insertEvent.setInt(2, event.getEstablishmentId());
 					    insertEvent.setString(3, event.getName());
 					    insertEvent.setString(4, event.getDescription());
+					    insertEvent.setBoolean(5, event.isDone());
+					    insertEvent.setString(6, event.getStartdate());
 					    insertEvent.addBatch();
 					}
 					insertEvent.executeBatch();

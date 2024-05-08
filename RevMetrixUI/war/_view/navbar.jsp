@@ -26,14 +26,15 @@
             </div>
             
             <button type="submit" class="nav-item dropbtn" name="destination" value="create">Create</button>
-          
+
             <div class="dropdown">
                 <button type="submit" class="nav-item dropbtn" name="destination" value="stats">Stats</button>
                 <div class="dropdown-content">
                     <button type="button" class="nav-dropdown" onclick="window.location.href='leagueSheet'">League Sheet</button>
                 </div>
             </div>
-            <button type="submit" name="destination" value="yourGames" class="nav-item">Your Games</button>
+            
+            <button type="submit" name="destination" value="Archive" class="nav-item">Event Archive</button>
             <button type="submit" name="destination" value="game" class="nav-item">Quick Bowl</button>
         </form>
     </div>
