@@ -42,15 +42,15 @@
             %>
             <div class="event-box">
                 <h3><%= e.getName() %></h3>
-                <p><strong>Establishment:</strong> <%= e.getEstablishmentName() %></p>
-                <p><strong>Type:</strong> <%= e.getTypeString() %></p>
-                <p><strong>Description:</strong> <%= e.getDescription() %></p>
-                <p><strong>Start Date:</strong> <%= e.getStartdate() %><p>
+                <p class="info-event"><strong>Establishment:</strong> <%= e.getEstablishmentName() %></p>
+                <p class="info-event"><strong>Type:</strong> <%= e.getTypeString() %></p>
+                <p class="info-event"><strong>Description:</strong> <%= e.getDescription() %></p>
+                <p class="info-event"><strong>Start Date:</strong> <%= e.getStartdate() %><p>
             </div>
             <% if (!e.isDone()) { %>
             <div class="event-box">
             <form action="${pageContext.servletContext.contextPath}/eventDetails" method = "post">
-            <button class="Archive">Archive</button>
+            <button class="archive-button">Archive</button>
     		<input type = "hidden" class="add" type="number" name = "add" value = "Archive" >
     		<input type = "hidden" name = "eventId" value = "<%= eventId %>">
     		
