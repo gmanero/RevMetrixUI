@@ -1,4 +1,8 @@
 package revMetrix.db;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,10 +25,13 @@ public class ShotsQuery {
 		
 		// get the DB instance and execute transaction
 		IDatabase db = DatabaseProvider.getInstance();
-		ArrayList<Session> session= db.getSessionByEvent(1);
+		db.RemoveSession(13);
 		
 		// check if anything was returned and output the list
-		System.out.print(session.size());
+		
+		
+		 
+		
 		
 	}
 }

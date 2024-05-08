@@ -8,6 +8,7 @@ import revMetrix.db.model.Ball;
 import revMetrix.db.model.Frame;
 import revMetrix.db.model.Game;
 import revMetrix.db.model.Pair;
+import revMetrix.db.model.Session;
 import revMetrix.db.model.Shot;
 import revMetrix.db.persist.DatabaseProvider;
 import revMetrix.db.persist.DerbyDatabase;
@@ -21,7 +22,7 @@ public class GameController {
 		DatabaseProvider.setInstance(new DerbyDatabase());
 		db = DatabaseProvider.getInstance();
 	}
-	public static boolean isOver(String[] shots) {
+	public boolean isOver(String[] shots, int gameID) {
 		if (shots == null) {
 			return false;
 		}
@@ -35,6 +36,7 @@ public class GameController {
 			System.out.println("Not 1");
 		}
 		if(!(shots[20]==null)) {
+			db.updateGameDone(gameID,true);
 			return true;
 		}
 		else {
@@ -47,6 +49,7 @@ public class GameController {
 			System.out.println("Not 3");
 		}
 		if(!shots[19].equals("X")&&!shots[19].equals("/")) {
+			db.updateGameDone(gameID,true);
 			return true;
 		}
 		else {
@@ -547,8 +550,21 @@ public class GameController {
 		}
 		db.updateSessionScore(id, total);
 	}
+	public void updateSessionDate(int id) {
+		Session s = db.getSession(id);
+		if(s.getDate().equals("0")) {
+			db.updateSessionDate(id);
+		}
+	}
+	/*
+	public void getallsessions() {
+		List<Session> sessions = db.findAllSessions();
+		for(Session s: sessions) {
+			System.out.println(s.getDate());
+		}
+	}
 	
-	
+	*/
 	
 	
 }

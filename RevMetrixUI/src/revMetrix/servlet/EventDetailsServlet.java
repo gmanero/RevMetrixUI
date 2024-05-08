@@ -34,4 +34,31 @@ public class EventDetailsServlet extends HttpServlet {
         // Forward to JSP for rendering
         request.getRequestDispatcher("/eventDetails.jsp").forward(request, response);
     }
+    
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    String remove = req.getParameter("remove");
+    String add = req.getParameter("add");
+    String eventId = req.getParameter("eventId");
+    System.out.println(remove);
+    
+    if(remove !=null) {
+    	eventController.removeSession(Integer.parseInt(remove));
+    }
+    else if(add!= null) {
+    	if(add.equals("Archive")) {
+    		eventController.finnishEvent(Integer.parseInt(eventId));
+    	}
+    	else {
+    		try {
+                eventController.addSessions(Integer.parseInt(eventId), Integer.parseInt(add));
+            } catch (NumberFormatException e) {
+                System.out.println("The string cannot be converted into an integer.");
+            }
+    	}
+    	
+    	
+    }
+    req.setAttribute("id", eventId);
+    req.getRequestDispatcher("/_view/event.jsp").forward(req, resp);
+    }
 }

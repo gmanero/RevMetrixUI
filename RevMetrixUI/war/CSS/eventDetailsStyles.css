@@ -18,6 +18,12 @@ h1 {
     color: #fff; /* Change header text color to white */
 }
 
+h2 {
+	
+	margin-top:15px;
+	margin-bottom: 15px;
+}
+
 /* Header Styles */
 .topPage {
     text-align: center;
@@ -40,6 +46,7 @@ h1 {
     display: grid; /* Use grid layout */
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Automatic columns with minimum width of 200px */
     gap: 20px; /* Add gap between grid items */
+    
 }
 
 .event-box {
@@ -57,6 +64,7 @@ h1 {
 
 .event-box p {
     margin: 0; /* Remove margin for event details */
+    
 }
 
 .event-box strong {
@@ -64,18 +72,10 @@ h1 {
     color: #26acca; /* Accentuate strong text with a contrasting color */
 }
 
-/* Session Box Styles */
-.session-box {
-    background-color: #444; /* Color for the session boxes */
-    padding: 15px; /* Padding for session boxes */
-    border-radius: 8px; /* Border radius for session boxes */
-    margin-bottom: 15px; /* Add bottom margin for session boxes */
-}
+/* Session Box Styles *
 
 .session-box h3 {
     margin-top: 0; /* Remove top margin for session titles */
-    margin-bottom: 5px; /* Add bottom margin for session titles */
-}
 
 .session-box p {
     margin: 0; /* Remove margin for session details */
@@ -87,22 +87,82 @@ h1 {
 }
 .play-button {
     background-color: #4CAF50; /* Green */
+    display: flex;
+ 	justify-content: center;
+ 	top: 40px;
+  	margin: 0 auto;
+    position: relative;
     color: white;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+    
 }
 
 .play-button:hover {
-    background-color: #45a049; /* Darker green on hover */
+    background-color: #2f6f34; /* Darker green on hover */
+}
+
+
+.add-button {
+    background-color: #4CAF50; /* Green */
+     text-align: center;
+    position: relative;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.score {
+	text-align: center;
+	font-size: 15px;
+}
+
+.add-button:hover {
+    background-color: #337637; /* Darker green on hover */
+}
+
+.add {
+	  padding: 5px 10px;
 }
 .session-box {
-	display: inline-block; /* Display boxes inline */
-    justify-content: space-between; /* Align items with space between them */
+    display: inline-block; /* Display boxes inline */
+    justify-content: top; /* Align items with space between them */
     align-items: center; /* Align items vertically */
-    width: 200px; /* Adjust the width as needed */
-    margin: 10 auto; /* Center the box horizontally */
-    padding: 30ppx;
+    width: 220px; /* Adjust the width to make the boxes bigger */
+    margin: 10px 30px 10px 0; /* Adjust margin for spacing */
+    padding: 20px; /* Adjust padding for content inside the box */
+    background-color: #444; /* Color for the session boxes */
+    border-radius: 8px; /* Border radius for session boxes */
+    margin-bottom: 15px; /* Add bottom margin for session boxes */
+    box-sizing: border-box;
+}
+
+
+
+
+.remove-button {
+  float: right;
+  bottom: 97px;
+  left: 15px;
+    position: relative;
+    background-color: #c30103;
+    color: white;
+    border: none;
+    padding: 9px 9px;
+    cursor: pointer;
+   	 border-radius: 5px; /* Make the button round */
+    cursor: pointer;
+    font-size: 16px; /* Adjust font size */
+    line-height: 1; /* Center the icon vertically */
+    font-size: 12px;
+}
+
+.remove-button:hover {
+    background-color: #c0392b; /* Darker red on hover */
 }

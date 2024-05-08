@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import revMetrix.model.RevMetrix;
 
 
-public class YourGamesServlet extends HttpServlet {
+public class ArchiveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	RevMetrix revMetrix;
 	@Override
@@ -19,7 +19,7 @@ public class YourGamesServlet extends HttpServlet {
 		
 		System.out.println("Your Games Servlet: doGet");
 		
-		req.getRequestDispatcher("/_view/yourGames.jsp").forward(req, resp);
+		req.getRequestDispatcher("/_view/archive.jsp").forward(req, resp);
 	}
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -27,7 +27,7 @@ public class YourGamesServlet extends HttpServlet {
 		System.out.println("Your Games Servlet: doPost");
 		
 		
-		req.getRequestDispatcher("/_view/yourGames.jsp").forward(req, resp);
+		req.getRequestDispatcher("/_view/archive.jsp").forward(req, resp);
 		
 		
 		

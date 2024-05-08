@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import revMetrix.controller.AllAccountsController;
 import revMetrix.controller.GameController;
 import revMetrix.db.model.Ball;
 import revMetrix.db.model.Frame;
@@ -30,6 +31,22 @@ public class GameServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		String loggedInName = "";
+        boolean loggedIn = false; // Initialize loggedIn to false
+
+        AllAccountsController Mcontroller = new AllAccountsController();
+        loggedIn = Mcontroller.isLoggedInAccount();
+        System.out.println("Look here + "+ loggedIn);
+
+        if (loggedIn) {
+            loggedInName = Mcontroller.findLoggedInUser();
+            System.out.println("Logged in name: " + loggedInName);
+        }
+		
+		
+		
+		
+		
 		
 		System.out.println("Game Servlet: doGet");
 		String Id = req.getParameter("SesionID");
@@ -37,7 +54,7 @@ public class GameServlet extends HttpServlet {
 			SessionID = Integer.parseInt(Id);
 		}
 		else {
-			SessionID= 2;
+			SessionID= 12;
 		}
 		
 		
@@ -48,18 +65,42 @@ public class GameServlet extends HttpServlet {
 	    
 	    
 	    controller = new GameController();
-	    gameID = controller.newGame();
+	    System.out.println(gameID);
+	    if(gameID==0) {
+	    	//gameID = controller.newGame();
+	    }
 	    List<Ball> balls = controller.getAllBalls();
-	    ArrayList<Shot> shots = controller.GetShotsByGame(gameID);
-	    ArrayList<Game> games = controller.GetGamesBySession(SessionID);
 	    
+	    ArrayList<Game> games = controller.GetGamesBySession(SessionID);
+	    for(Game g:games) {
+	    	System.out.println(g.getdone());
+	    }
+	    boolean[] locker = {true,true,true,true,true,true,true,true,true,true};
+	    controller.updateSessionDate(SessionID);
+	    //controller.getallsessions();
+		req.setAttribute("locked", locker);
 	    req.setAttribute("games", games);
 	    req.setAttribute("balls", balls);
-	    req.setAttribute("washout", GameController.getWashouts(shots));
-	    req.setAttribute("split", GameController.getSplits(shots));
+	    req.setAttribute("loggedInName", loggedInName);
+        req.setAttribute("loggedIn", loggedIn);
 		req.getRequestDispatcher("/_view/game.jsp").forward(req, resp);
 	}
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String loggedInName = "";
+        boolean loggedIn = false; // Initialize loggedIn to false
+
+        AllAccountsController Mcontroller = new AllAccountsController();
+        loggedIn = Mcontroller.isLoggedInAccount();
+        System.out.println("Look here + "+ loggedIn);
+
+        if (loggedIn) {
+            loggedInName = Mcontroller.findLoggedInUser();
+            System.out.println("Logged in name: " + loggedInName);
+        }
+		
+		
+		
+		
 	    String first = req.getParameter("firstRemaining");
 	    System.out.println("Remaining Pins: " + first);
 	    String firstFoul = req.getParameter("firstExtra");
@@ -93,6 +134,8 @@ public class GameServlet extends HttpServlet {
 			 req.setAttribute("error", error);
 			 req.setAttribute("shotScores", shotScores);
 			 req.setAttribute("scores", scores); 
+			 req.setAttribute("loggedInName", loggedInName);
+		        req.setAttribute("loggedIn", loggedIn);
 			
 		}
 		else if(first.equals("New")) {
@@ -105,11 +148,14 @@ public class GameServlet extends HttpServlet {
 			    List<Ball> balls = controller.getAllBalls();
 			    ArrayList<Shot> shots = controller.GetShotsByGame(gameID);
 			    ArrayList<Game> games = controller.GetGamesBySession(SessionID);
+			    games.add(new Game());
 			    
 			    req.setAttribute("games", games);
 			    req.setAttribute("balls", balls);
 			    req.setAttribute("washout", GameController.getWashouts(shots));
 			    req.setAttribute("split", GameController.getSplits(shots));
+			    req.setAttribute("loggedInName", loggedInName);
+		        req.setAttribute("loggedIn", loggedIn);
 				req.getRequestDispatcher("/_view/game.jsp").forward(req, resp);
 		}
 		else if(first.equals("Rem")) {
@@ -151,6 +197,8 @@ public class GameServlet extends HttpServlet {
 			 req.setAttribute("error", error);
 			 req.setAttribute("shotScores", shotScores);
 			 req.setAttribute("scores", scores); 
+			 req.setAttribute("loggedInName", loggedInName);
+		        req.setAttribute("loggedIn", loggedIn);
 		}
 		else {
 		System.out.println("Game Servlet: doPost");
@@ -161,7 +209,8 @@ public class GameServlet extends HttpServlet {
 	    
 	    ArrayList<Shot> shots = controller.GetShotsByGame(gameID);
 	    ArrayList<Frame> frames = controller.GetFramesByGame(gameID);
-	    System.out.print("Size = "+frames.size());
+	    //System.out.print("Size = "+frames.size());
+	    boolean sameFrame = false;
 	    if(shots == null) {
 	    	shots = new ArrayList<Shot>();
 	    }
@@ -199,6 +248,7 @@ public class GameServlet extends HttpServlet {
 	    		lockout = GameController.getLockout(first);
 	    		secondFrame[0]=true;
 	    	}
+	    	sameFrame=true;
 	    }
 	    else {
 	    	frames.get(frames.size()-1).setFrameScore(GameController.frameScore(shots.get(shots.size()-2), shots.get(shots.size()-1)));
@@ -211,6 +261,28 @@ public class GameServlet extends HttpServlet {
 	    scores = GameController.parseScores(frames, shots);
 	    controller.updateGameScore(gameID ,scores[10]);
 	    ArrayList<Game> games = controller.GetGamesBySession(SessionID);
+		controller.updateSessionDate(SessionID);
+		controller.updateSessionScore(SessionID);
+		if(lane !=null && !sameFrame) {
+			Integer laneNum=-1;
+			try {
+				laneNum = Integer.parseInt(lane);
+				if(laneNum%2==1) {
+					laneNum++;
+				}else {
+					laneNum--;
+				}
+				lane = laneNum.toString();
+			}catch(NumberFormatException e){
+				
+			}
+			
+			finally{
+				
+			}
+			
+			
+		}
 		
 	    req.setAttribute("games", games);
 	    req.setAttribute("secondFrame", secondFrame);
@@ -223,17 +295,23 @@ public class GameServlet extends HttpServlet {
 	    req.setAttribute("error", error);
 	    req.setAttribute("shotScores", shotScores);
 	    req.setAttribute("scores", scores); 
+	    req.setAttribute("loggedInName", loggedInName);
+        req.setAttribute("loggedIn", loggedIn);
 		}
+		
+		
 	    // Forwarding request and response to JSP page
-		if(shotScores != null && GameController.isOver(shotScores)) {
+		if(shotScores != null && controller.isOver(shotScores,gameID)) {
 			boolean[] locker = {true,true,true,true,true,true,true,true,true,true};
 			req.setAttribute("locked", locker);
 		}
+		
+		
+		req.setAttribute("loggedInName", loggedInName);
+        req.setAttribute("loggedIn", loggedIn);
 	    req.getRequestDispatcher("/_view/game.jsp").forward(req, resp);
 	}
-	protected void doUpdate(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-	}
+	
 
 
 }

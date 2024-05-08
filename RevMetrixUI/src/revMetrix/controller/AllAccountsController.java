@@ -2,6 +2,8 @@ package revMetrix.controller;
 
 import revMetrix.db.model.Account;
 import revMetrix.db.model.Ball;
+import revMetrix.db.model.Event;
+import revMetrix.db.model.Shot;
 import revMetrix.db.persist.DatabaseProvider;
 import revMetrix.db.persist.DerbyDatabase;
 import revMetrix.db.persist.IDatabase;
@@ -53,7 +55,28 @@ public class AllAccountsController {
         return db.isLoggedInAccount();
     }
     
+   
 
+    
+    public ArrayList<Ball>  findBallById(int ballId) {
+        List<Ball> ballList = db.findBallById(ballId);
+
+        ArrayList<Ball> balls = new ArrayList<>();
+
+        if (ballList.isEmpty()) {
+            System.out.println("No events found");
+            return balls;
+        } else {
+            for (Ball ball : ballList) {
+                // Set establishment name for each event
+              
+                balls.add(ball);
+            }
+        }
+
+        return balls;
+    }
+    
     public List<Ball> findAllBalls() {
     	List<Ball> ballList = db.findAllBalls();
     	ArrayList<Ball> balls = null;
@@ -70,6 +93,70 @@ public class AllAccountsController {
     	}
         return balls;
     }
+    public Integer getTotalShotsForBall(int ballId) {
+        List<Shot> shots = db.getTotalShotsForBall(ballId);
+        int totalShots = shots.size();
+
+        System.out.println("Total shots for ball with ID " + ballId + ": " + totalShots);
+        return totalShots;
+    }
+
+    public Integer getTotalStrikesForBall(int ballId) {
+        List<Shot> shots = db.getTotalStrikesForBall(ballId);
+        int totalStrikes = 0;
+
+        for (Shot shot : shots) {
+            if (shot.getShotScore().equals("X")) {
+                totalStrikes++;
+            }
+        }
+
+        System.out.println("Total strikes for ball with ID " + ballId + ": " + totalStrikes);
+        return totalStrikes;
+    }
+
+    public Integer getTotalSparesForBall(int ballId) {
+        List<Shot> shots = db.getTotalSparesForBall(ballId);
+        int totalSpares = 0;
+
+        for (Shot shot : shots) {
+            if (shot.getShotScore().equals("/")) {
+                totalSpares++;
+            }
+        }
+
+        System.out.println("Total spares for ball with ID " + ballId + ": " + totalSpares);
+        return totalSpares;
+    }
+    
+    public Integer getTotalFoulsForBall(int ballId) {
+        List<Shot> shots = db.getTotalFoulsForBall(ballId);
+        int totalFouls = 0;
+
+        for (Shot shot : shots) {
+            if (shot.getShotScore().equals("F")) {
+                totalFouls++;
+            }
+        }
+
+        System.out.println("Total spares for ball with ID " + ballId + ": " + totalFouls);
+        return totalFouls;
+    }
+    
+    public Integer getTotalMissesForBall(int ballId) {
+        List<Shot> shots = db.getTotalMissesForBall(ballId);
+        int totalMisses = 0;
+
+        for (Shot shot : shots) {
+            if (shot.getShotScore().equals("-")) {
+                totalMisses++;
+            }
+        }
+
+        System.out.println("Total spares for ball with ID " + ballId + ": " + totalMisses);
+        return totalMisses;
+    }
+
 
     public Integer insertBallIntoBallsTable(int weight, String color, String name) {
         Integer ballId = db.insertBallIntoBallsTable(weight, color, name);

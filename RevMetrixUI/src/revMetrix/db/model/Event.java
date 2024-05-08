@@ -7,6 +7,8 @@ public class Event {
     private String name;
     private String description;
     private String establishmentName;
+    private boolean done;
+    private String Startdate;
 
     // Constructor
     public Event() {
@@ -73,4 +75,20 @@ public class Event {
                 return "Unknown";
         }
     }
+
+	public boolean isDone() {
+		return done;
+	}
+
+	public void setDone(boolean done) {
+		this.done = done;
+	}
+
+	public String getStartdate() {
+		return Startdate;
+	}
+
+	public void setStartdate(String startdate) {
+		Startdate = startdate;
+	}
 }

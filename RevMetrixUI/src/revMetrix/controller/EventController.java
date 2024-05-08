@@ -44,6 +44,53 @@ public class EventController {
 
         return events;
     }
+    public ArrayList<Event> getAllOngoingEvents(){
+    	 List<Event> eventList = db.findAllOngoingEvents();
+         List<Establishment> establishmentList = db.findAllEstablishments(); // Fetch all establishments
+
+         ArrayList<Event> events = new ArrayList<>();
+
+         if (eventList.isEmpty()) {
+             System.out.println("No events found");
+             return events;
+         } else {
+             for (Event event : eventList) {
+                 // Set establishment name for each event
+                 event.setEstablishmentName(getEstablishmentName(event.getEstablishmentId(), establishmentList));
+                 events.add(event);
+                 System.out.println("Event Name: " + event.getName() + ", Establishment: " +
+                         event.getEstablishmentName() +
+                         ", Type: " + eventTypeToString(event.getType()) +
+                         ", Description: " + event.getDescription());
+             }
+         }
+         return events;
+    }
+    public ArrayList<Event> getAllDoneEvents(){
+   	 	List<Event> eventList = db.findAllDoneEvents();
+        List<Establishment> establishmentList = db.findAllEstablishments(); // Fetch all establishments
+
+        ArrayList<Event> events = new ArrayList<>();
+
+        if (eventList.isEmpty()) {
+            System.out.println("No events found");
+            return events;
+        } else {
+            for (Event event : eventList) {
+                // Set establishment name for each event
+                event.setEstablishmentName(getEstablishmentName(event.getEstablishmentId(), establishmentList));
+                events.add(event);
+                System.out.println("Event Name: " + event.getName() + ", Establishment: " +
+                        event.getEstablishmentName() +
+                        ", Type: " + eventTypeToString(event.getType()) +
+                        ", Description: " + event.getDescription());
+            }
+        }
+        return events;
+   }
+    public void finnishEvent(int id) {
+    	db.updateEventDone(id);
+    }
 
     private String getEstablishmentName(int establishmentId, List<Establishment> establishments) {
         for (Establishment establishment : establishments) {
@@ -195,5 +242,13 @@ public class EventController {
 
 	        return sessions;
 	    }
+	  public void removeSession(int id) {
+		  db.RemoveSession(id);
+	  }
+	  public void addSessions(int eventId, int num) {
+		  for (int i = 0; i<num;i++) {
+			  db.insertSessionIntoSessionsTable(0, eventId, "", "0", 0);
+		  }
+	  }
 	
 	}

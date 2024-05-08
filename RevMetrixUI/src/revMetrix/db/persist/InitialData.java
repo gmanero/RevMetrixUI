@@ -143,6 +143,8 @@ public class InitialData {
 	                event.setEstablishmentId(Integer.parseInt(i.next()));
 	                event.setName(i.next());
 	                event.setDescription(i.next());
+	                event.setDone(Boolean.parseBoolean(i.next()));
+	                event.setStartdate(i.next());
 	                
 	                eventList.add(event);
 	            }
@@ -207,6 +209,7 @@ public class InitialData {
 	                game.setStartingLane(Integer.parseInt(i.next()));
 	                game.setOpponent(i.next());
 	                game.setHandicap(Integer.parseInt(i.next()));
+	                game.setdone(true);
 	                
 	                gameList.add(game);
 	            }

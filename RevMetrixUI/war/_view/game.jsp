@@ -138,13 +138,13 @@
     <div class="secondShot" style="display: none;" onclick="setSecondShot()" style="background-color: lightgrey;" ><span> </span></div>
   </div>
   <div class="rowNew">
-    <div class="foul" onclick="setFoul()"><span>F</span></div>
-    <div class="miss" onclick="setGutter()"><span>-</span></div>
-    <div class="strike" onclick="setStrike()"><span>X</span></div>
-    <div class="spare" style="display: none;" onclick="setSpare()"><span>/</span></div>
+    <div class="foulbtn" onclick="setFoul()" style="background-color: lightgrey;"><span>F</span></div>
+    <div class="missbtn" onclick="setGutter()" style="background-color: lightgrey;"><span>-</span></div>
+    <div class="strikebtn" id = 'strike' onclick="setStrike()" style="background-color: lightgrey;"><span>X</span></div>
+    <div class="sparebtn" style="display: none;" onclick="setSpare()" style="background-color: lightgrey;"><span>/</span></div>
   </div>
   <div class="rowNew">
-    <input id = "next" class="button" type="Submit" name="submit" value="Next Shot >" onclick="getNextFrame()">
+    <input id = "nextShotButton" class="button" type="Submit" name="submit" value="Next Shot >" onclick="getNextFrame()">
     
     <input type = "hidden" name = "firstRemaining" id = 'firstRemaining' value = "">
     <input type = "hidden" name = "secondRemaining" id = 'secondRemaining' value = "">
@@ -155,7 +155,7 @@
   <br>
    <label> Bowling Ball: </label>
   <div class="dropdown-select" >
-  <select name="ball1">
+  <select class="ball-dropdown" name="ball1">
   	<%@ page import="java.util.List" %>
   	<%@ page import= "revMetrix.db.model.Ball" %>
 	<% 
@@ -202,7 +202,7 @@
 </div>
 <div class= "center2">
 <label> Lane:</label>
-<input name = "lane" value = ${lane }>
+<input class="lane" type="number" name = "lane" value = ${lane }>
 </div>
 <br>
 
@@ -213,8 +213,8 @@
         
         <form action="${pageContext.servletContext.contextPath}/game" method="post">
         <div class="dropdown-select">
- 		<input class="button" type="Submit" name="submit" value="  Swap Game   ">
-		<select name="Game">
+ 		<input class="swapbtn" type="Submit" name="submit" value="Swap Game">
+		<select class="game-dropdown"name="Game">
 		  	<%@ page import="java.util.ArrayList" %>
 		  	<%@ page import= "revMetrix.db.model.Game" %>
 			<% 
@@ -228,7 +228,7 @@
 		                // Iterate over the ArrayList and generate options for the dropdown menu
 		                for (Game game : gameList) { i++;
 		            %>
-		            <option value="<%= game.getGameId() %>">Game  <%= i+": "+game.getGameScore() %></option>
+		            <option value="<%= game.getGameId() %>">Game <%= i+": "+game.getGameScore()+" "+game.getdoneBox() %></option>
 		            <% 
 		                } 
 		            } else {
@@ -242,13 +242,13 @@
         
         </form>
         <form action="${pageContext.servletContext.contextPath}/game" method="post">
-        <input class="button" type="Submit" name="submit" value="    New Game    ">
+        <input class="newGamebtn" type="Submit" name="submit" value="New Game">
         <input type = "hidden" name = "firstRemaining"  value = "New">
         </form>
         </div>
         <div class = "center2">
         <form action="${pageContext.servletContext.contextPath}/game" method="post">
-        <input class="button" type="Submit" name="submit" style="background-color: red;" value="   			  Remove LastShot			   ">
+        <input class="remove-shot" type="Submit" name="submit" value="Remove Last Shot">
         <input type = "hidden" name = "firstRemaining"  value = "Rem">
         </form>
         </div>
@@ -302,7 +302,7 @@
 	
     // count the number of pins knocked down
     const pins = document.querySelectorAll('.pinNew:not(.leave)');
-
+    document.getElementById('firstExtra').value= '';
     // update pinCount with the # of pins knocked down
     pinCount = pins.length;
 
@@ -398,9 +398,16 @@
     // clear secondShot whenever firstShot changes
     clearSecondShot();
   }
-
+  
+  
+  
   // set gutter for current shot
   function setGutter() {
+	  document.querySelector('.missbtn').style.backgroundColor = '#26acca';
+	  document.querySelector('.foulbtn').style.backgroundColor = 'lightgrey';
+	  document.querySelector('.strikebtn').style.backgroundColor = 'lightgrey';
+	  document.querySelector('.sparebtn').style.backgroundColor = 'lightgrey';
+
     // gutter on first shot?
     if (shot == FIRST_SHOT) {
       // set up all pins
@@ -416,6 +423,7 @@
     else {
       // display '-', rather than '0' in second shot
       document.querySelector('.secondShot span').textContent = '-';
+     
       second_Remaining = first_Remaining;
     }
     first_Remaining.sort();
@@ -425,16 +433,20 @@
 
     firstLoaction.value = first_Remaining.join(",");
     SecondLocation.value = second_Remaining.join(",");
+    document.getElementById('firstExtra').value= '';
 
   }
 
   // set foul for current shot
   function setFoul() {
+	  document.querySelector('.foulbtn').style.backgroundColor = '#26acca';
+	  document.querySelector('.missbtn').style.backgroundColor = 'lightgrey';
+	  document.querySelector('.strikebtn').style.backgroundColor = 'lightgrey';
+	  document.querySelector('.sparebtn').style.backgroundColor = 'lightgrey';
     // foul on first shot?
     if (shot == FIRST_SHOT) {
       // set up all pins
       setAllPinsStanding();
-
       // clear secondShot whenever firstShot changes
       clearSecondShot();
       first_Remaining = [1,2,3,4,5,6,7,8,9,0];
@@ -504,6 +516,10 @@
   }
 
   function setSpare() {
+	  document.querySelector('.sparebtn').style.backgroundColor = '#26acca';
+	  document.querySelector('.foulbtn').style.backgroundColor = 'lightgrey';
+	  document.querySelector('.strikebtn').style.backgroundColor = 'lightgrey';
+	  document.querySelector('.missbtn').style.backgroundColor = 'lightgrey';
     // clear all pins
     clearPins();
 
@@ -531,6 +547,10 @@
   }
 
   function setStrike() {
+	  document.querySelector('.strikebtn').style.backgroundColor = '#26acca';
+	  document.querySelector('.foulbtn').style.backgroundColor = 'lightgrey';
+	  document.querySelector('.missbtn').style.backgroundColor = 'lightgrey';
+	  document.querySelector('.sparebtn').style.backgroundColor = 'lightgrey';
     // clear all pins, and firstShot, then put 'X' in secondShot
     clearPins();
 
@@ -556,6 +576,8 @@
 
     firstLoaction.value= first_Remaining.join(",");
     SecondLocation.value=second_Remaining.join(",");
+    
+    document.getElementById('firstExtra').value= '';
   }
 
   function getPreviousShot() {
@@ -679,8 +701,14 @@
         	  
           }
       }
+      
       if(count == 10){
-    	  document.getElementById(next).disabled = true;
+    	  const nextShotButton = document.getElementById('nextShotButton');
+    	  nextShotButton.disabled = true;
+    	  nextShotButton.style.backgroundColor = '#ccc'; // Change background color to gray
+    	  nextShotButton.style.color = '#666'; // Change text color to a darker shade of gray
+    	  nextShotButton.style.cursor = 'not-allowed'; // Change cursor style to indicate not allowed
+    	  
     	  
       }
      
@@ -694,7 +722,7 @@
   </c:forEach>];
 	  
     	  if(secondFrame[0]==true){
-    		  document.querySelector('.strike span').textContent = '/';
+    		  document.getElementById('strike').textContent = '/';
     	  }
     	  
       

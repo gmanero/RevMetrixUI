@@ -27,7 +27,7 @@ public class InsertNewEventQuery {
 
         // get the DB instance and execute the transaction
         IDatabase db = DatabaseProvider.getInstance();
-        Integer eventId = db.insertEventWithEstablishmentNameAndType(establishmentName, eventName, description, eventType);
+        Integer eventId = db.insertEventWithEstablishmentNameAndType(establishmentName, eventName, description, eventType,"");
 
         // check if the insertion succeeded
         if (eventId > 0) {

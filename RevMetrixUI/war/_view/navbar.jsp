@@ -28,16 +28,16 @@
                 <button type="submit" class="nav-item dropbtn" name="destination" value="create">Create</button>
           
             <button type="submit" name="destination" value="stats" class="nav-item">Stats</button>
-            <button type="submit" name="destination" value="yourGames" class="nav-item">Your Games</button>
+            <button type="submit" name="destination" value="Archive" class="nav-item">Event Archive</button>
             <button type="submit" name="destination" value="game" class="nav-item">Quick Bowl</button>
         </form>
     </div>
     
      <div class="login">
-        <form method="get">
+        <form action="${pageContext.servletContext.contextPath}/index" method="get">
             <% Boolean loggedIn = (Boolean) request.getAttribute("loggedIn"); %>
             <% if (loggedIn != null && loggedIn) { %>
-                <div class="left"><span class="loggedInName"><p>${loggedInName}</p></span></div>
+                <div class="left"><span class="loggedInName"><p>Hello, ${loggedInName}</p></span></div>
                 <div class="center"><button type="submit" name="destination" value="logout" class="login-btn">Logout</button></div>
             <% } else { %>
                 <div class="center"><button type="submit" name="destination" value="login" class="login-btn">Login</button></div>
