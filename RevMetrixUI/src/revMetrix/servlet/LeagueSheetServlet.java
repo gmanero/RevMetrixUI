@@ -32,10 +32,10 @@ public class LeagueSheetServlet extends HttpServlet {
 			System.out.println("League Sheet Servlet:  doGet");
 			LeagueSheetController controller = new LeagueSheetController();
 			ArrayList<LeagueSheet> leagueSheet = controller.getLeagueSheet();
-			
-			req.setAttribute("loggedInName", loggedInName);
+	        
+	        req.setAttribute("loggedInName", loggedInName);
 	        req.setAttribute("loggedIn", loggedIn);
-			req.setAttribute("leagueSheet", leagueSheet);
+		      req.setAttribute("leagueSheet", leagueSheet);
 	        req.getRequestDispatcher("/_view/leagueSheet.jsp").forward(req, resp);
 	    }
 	@Override
