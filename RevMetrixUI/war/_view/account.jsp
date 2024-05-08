@@ -40,6 +40,7 @@
     <span class="loggedInName"><h2>Your Establishments</h2></span>
     </div>
     <div>
+    <hr>
     <table border="1">
         <tr>
             <th>Name</th>
@@ -82,16 +83,16 @@
                         <input type="hidden" name="action" value="updateEstablishment">
                         <input type="hidden" name="establishmentId" value="<%= establishment.getEstablishmentId() %>">
                         <input type="hidden" name="fieldName" value="lanes">
-                        <input type="text" name="newValue" value="<%= establishment.getLanes() %>" onchange="this.form.submit()">
+                        <input type="number" name="newValue" value="<%= establishment.getLanes() %>" onchange="this.form.submit()">
                     </form>
                 </td>
             </tr>
         <% } %>
     </table>
 </div>
-<button class="addEstablishment">+</button>
+<button class="addEstablishment">Add Establishment</button>
     <div class="addEstablishmentForm" id="addEstablishmentForm">
-        <h3>Add Establishment Form</h3>
+        <h3>New Establishment</h3>
     <form action="${pageContext.request.contextPath}/account" method="post">
         <input type="hidden" name="action" value="addEstablishment">
         <label for="establishmentName">Name:</label>
@@ -106,7 +107,7 @@
         <label for="lanes">Lanes:</label>
         <input type="number" id="lanes" name="lanes" min="1" required>
         <br>
-        <button type="submit">Add Establishment</button>
+        <button type="submit">Submit</button>
     </form>
 </div>
 
@@ -114,7 +115,8 @@
 <form method="get">
     <% Boolean loggedIn = (Boolean) request.getAttribute("loggedIn"); %>
     <% if (loggedIn != null && loggedIn) { %>
-        <div class="pageTitle"><span class="loggedInName"><h2>Your Balls</h2></span></div>
+        <div class="pageTitle"><span class="loggedInName"><h2>Your Bowling Arsenal</h2></span></div>
+        <hr>
     <% } else { %>
             
     <% } %>
@@ -135,7 +137,7 @@
     <% } %>
     <button class="addBall">+</button>
     <div class="addBallForm" id="addBallForm">
-        <h3>Add Ball Form</h3>
+        <h3>Add Ball</h3>
         <form action="${pageContext.request.contextPath}/account" method="post">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
@@ -146,7 +148,7 @@
             <label for="color">Color:</label>
             <input type="text" id="color" name="color" required>
             <br>
-            <button type="submit">Add Ball</button>
+            <button type="submit">Submit</button>
         </form>
     </div>
 </div>
