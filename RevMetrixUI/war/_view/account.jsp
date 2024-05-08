@@ -125,8 +125,9 @@
         <% for (Ball ball : balls) { %>
           <a href="index?destination=ballDetails&id=<%= ball.getBallId() %>">
                 <div class="bowlingBall" style="background-color: <%= ball.getColor() %>;">
-                    <p><%= ball.getName() %></p>
+                   
                 </div>
+                 <p class="ball-name"><%= ball.getName() %></p>
             </a>
         <% } %>
     <% } else { %>

@@ -46,6 +46,7 @@ h2 {
     display: grid; /* Use grid layout */
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Automatic columns with minimum width of 200px */
     gap: 20px; /* Add gap between grid items */
+    
 }
 
 .event-box {
@@ -63,6 +64,7 @@ h2 {
 
 .event-box p {
     margin: 0; /* Remove margin for event details */
+    
 }
 
 .event-box strong {
@@ -96,6 +98,7 @@ h2 {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+    
 }
 
 .play-button:hover {
@@ -129,7 +132,7 @@ h2 {
 }
 .session-box {
     display: inline-block; /* Display boxes inline */
-    justify-content: space-between; /* Align items with space between them */
+    justify-content: top; /* Align items with space between them */
     align-items: center; /* Align items vertically */
     width: 220px; /* Adjust the width to make the boxes bigger */
     margin: 10px 30px 10px 0; /* Adjust margin for spacing */
@@ -137,6 +140,7 @@ h2 {
     background-color: #444; /* Color for the session boxes */
     border-radius: 8px; /* Border radius for session boxes */
     margin-bottom: 15px; /* Add bottom margin for session boxes */
+    box-sizing: border-box;
 }
 
 
