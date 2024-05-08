@@ -27,7 +27,7 @@ public class PracticesServlet extends HttpServlet {
         System.out.println("Practices Servlet: doGet");
 
         // Get all tournaments from the EventController
-        List<Event> practices = eventController.getAllPracticeEvents();
+        List<Event> practices = eventController.getAllOngoingPracticeEvents();
 
         req.setAttribute("tournaments", practices);
 
