@@ -1,24 +1,19 @@
-/* eventDetailsStyles.css */
-
+/* Global styles */
 body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
     background-color: #1f1f1f;
-    color: #fff; /* Change text color to white for better contrast */
+    color: #fff;
 }
 
 .container {
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+    position: relative;
 }
 
-h1 {
-    color: #fff; /* Change header text color to white */
-}
-
-/* Header Styles */
 .topPage {
     text-align: center;
     background: linear-gradient(to bottom,  #562d7f, #26acca);
@@ -28,129 +23,76 @@ h1 {
 
 .topPage h1 {
     margin: 0;
-    font-size: 36px;
+    font-size: 48px;
     color: #fff;
 }
 
-.event-details {
-    background-color: #333; /* Darken background color for contrast */
-    padding: 40px; /* Increase padding for better spacing */
-    border-radius: 10px; /* Increase border radius for smoother edges */
-    margin-top: 40px;
-    display: grid; /* Use grid layout */
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Automatic columns with minimum width of 200px */
-    gap: 20px; /* Add gap between grid items */
-}
-
-.event-box {
-    background-color: #444; /* Color for the event boxes */
-    padding: 20px; /* Padding for event boxes */
-    border-radius: 10px; /* Border radius for event boxes */
-}
-
-.event-box h3 {
-    margin-top: 0; /* Remove top margin for event titles */
-    margin-bottom: 10px; /* Add bottom margin for event titles */
-    font-size: 30px;
-    
-}
-
-.event-box p {
-    margin: 0; /* Remove margin for event details */
-}
-
-.event-box strong {
-    font-weight: bold;
-    color: #26acca; /* Accentuate strong text with a contrasting color */
-}
-
-/* Session Box Styles */
-.session-box {
-    background-color: #444; /* Color for the session boxes */
-    padding: 15px; /* Padding for session boxes */
-    border-radius: 8px; /* Border radius for session boxes */
-    margin-bottom: 15px; /* Add bottom margin for session boxes */
-}
-
-.session-box h3 {
-    margin-top: 0; /* Remove top margin for session titles */
-    margin-bottom: 5px; /* Add bottom margin for session titles */
-}
-
-.session-box p {
-    margin: 0; /* Remove margin for session details */
-}
-
-.session-box strong {
-    font-weight: bold;
-    color: #26acca; /* Accentuate strong text with a contrasting color */
-}
-.play-button {
-    background-color: #4CAF50; /* Green */
-    display: flex;
- 	justify-content: center;
- 	top: 40px;
-  	margin: 0 auto;
+/* Ball details and animation */
+.ball-info {
     position: relative;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
+    margin-bottom: 20px;
+    margin-top: 170px;
 }
 
-.play-button:hover {
-    background-color: #45a049; /* Darker green on hover */
-}
-
-
-.add-button {
-    background-color: #4CAF50; /* Green */
-     text-align: center;
+.ball-container {
+    width: 100%;
     position: relative;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
 }
 
-.score {
-	text-align: center;
-	font-size: 15px;
+.ball {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    position: absolute;
+    top: -10.7px;
+    left: calc(50% - 100px);
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.5);
+    animation: moveBall 5s infinite;
+  
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 100%);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
-.add-button:hover {
-    background-color: #45a049; /* Darker green on hover */
-}
-.session-box {
-	display: inline-block; /* Display boxes inline */
-    justify-content: space-between; /* Align items with space between them */
-    align-items: center; /* Align items vertically */
-    width: 200px; /* Adjust the width as needed */
-    margin: 10 auto; /* Center the box horizontally */
-    padding: 30ppx;
+.ball-color {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    position: absolute;
+    top: -100px;
+    left: calc(50% - 100px);
 }
 
-.remove-button {
-  float: right;
-  bottom: 98px;
-  left: 15px;
-    position: relative;
-    background-color: red;
-    color: white;
-    border: none;
-    padding: 9px 9px;
-    cursor: pointer;
-   	 border-radius: 5px; /* Make the button round */
-    cursor: pointer;
-    font-size: 16px; /* Adjust font size */
-    line-height: 1; /* Center the icon vertically */
-    font-size: 12px;
+@keyframes moveBall {
+    0% {
+        transform: translateX(-50%);
+    }
+    50% {
+        transform: translateX(50%);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
 }
 
-.remove-button:hover {
-    background-color: #c0392b; /* Darker red on hover */
+.stats-table {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px 20px;
+    text-align: left;
+    border-bottom: 1px solid #555;
+}
+
+th {
+    background-color: #555;
+    color: #26acca;
 }

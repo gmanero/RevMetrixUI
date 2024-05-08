@@ -28,11 +28,25 @@ public interface IDatabase {
 	//Establishments
 	public Establishment findEstablishmentById(int establishmentId);
 	public List<Establishment> findAllEstablishments();
-	public Integer insertEstablishmentIntoEstablishmentsTable(final String name);
+	public Integer insertEstablishmentIntoEstablishmentsTable(final String name, final String address, final String phoneNumber, final int lanes);
+	public void updateEstablishmentName(final int establishmentId, final String newName);
+	public void updateEstablishmentAddress(final int establishmentId, final String newAddress);
+	public void updateEstablishmentPhoneNumber(final int establishmentId, final String newPhoneNumber);
+	public void updateEstablishmentLanes(final int establishmentId, final int newLanes);
 	//Balls
 	public List<Ball> findAllBalls();
 	public Integer insertBallIntoBallsTable(final int weight, final String color, final String name);
 	public List<Ball> findBallById(final int ballId);
+	 // Method to get the total shots for a ball
+    public List<Shot> getTotalShotsForBall(int ballId);
+    // Method to get the total spares for a ball
+    public List<Shot> getTotalSparesForBall(int ballId);
+    // Method to get the total strikes for a ball
+    public List<Shot> getTotalStrikesForBall(int ballId);
+    // Method to get the total strikes for a ball
+    public List<Shot> getTotalFoulsForBall(int ballId);
+    // Method to get the total strikes for a ball
+    public List<Shot> getTotalMissesForBall(int ballId);
 	//Game
 	public ArrayList<Shot> GetShotsByGame(int id);
 	public ArrayList<Game> GetGamesBySession(int id);

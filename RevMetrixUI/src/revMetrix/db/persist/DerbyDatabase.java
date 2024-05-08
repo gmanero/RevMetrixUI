@@ -285,6 +285,9 @@ public class DerbyDatabase implements IDatabase {
 	    });
 	}
 	
+	//BALL QUERY 
+	
+	
 	@Override
 	public List<Ball> findBallById(final int ballId) {
 	    return executeTransaction(new Transaction<List<Ball>>() {
@@ -362,7 +365,163 @@ public class DerbyDatabase implements IDatabase {
 	            }
 	        }
 	    });
-	}
+	} 
+	
+	// Method to get the total shots for a ball
+    public List<Shot> getTotalShotsForBall(int ballId) {
+        return executeTransaction(new Transaction<List<Shot>>() {
+            @Override
+            public List<Shot> execute(Connection conn) throws SQLException {
+                PreparedStatement stmt = null;
+                ResultSet resultSet = null;
+
+                try {
+                    stmt = conn.prepareStatement("SELECT * FROM shots WHERE ball_id = ?");
+                    stmt.setInt(1, ballId);
+
+                    List<Shot> shots = new ArrayList<>();
+
+                    resultSet = stmt.executeQuery();
+
+                    while (resultSet.next()) {
+                        Shot shot = new Shot();
+                        loadShot(shot, resultSet, 1);
+                        shots.add(shot);
+                    }
+
+                    return shots;
+                } finally {
+                    DBUtil.closeQuietly(resultSet);
+                    DBUtil.closeQuietly(stmt);
+                }
+            }
+        });
+    }
+
+    // Method to get the total strikes for a ball
+    public List<Shot> getTotalStrikesForBall(int ballId) {
+        return executeTransaction(new Transaction<List<Shot>>() {
+            @Override
+            public List<Shot> execute(Connection conn) throws SQLException {
+                PreparedStatement stmt = null;
+                ResultSet resultSet = null;
+
+                try {
+                    stmt = conn.prepareStatement("SELECT * FROM shots WHERE ball_id = ? AND shotScore = 'X'");
+                    stmt.setInt(1, ballId);
+
+                    List<Shot> strikes = new ArrayList<>();
+
+                    resultSet = stmt.executeQuery();
+
+                    while (resultSet.next()) {
+                        Shot strike = new Shot();
+                        loadShot(strike, resultSet, 1);
+                        strikes.add(strike);
+                    }
+
+                    return strikes;
+                } finally {
+                    DBUtil.closeQuietly(resultSet);
+                    DBUtil.closeQuietly(stmt);
+                }
+            }
+        });
+    }
+
+    // Method to get the total spares for a ball
+    public List<Shot> getTotalSparesForBall(int ballId) {
+        return executeTransaction(new Transaction<List<Shot>>() {
+            @Override
+            public List<Shot> execute(Connection conn) throws SQLException {
+                PreparedStatement stmt = null;
+                ResultSet resultSet = null;
+
+                try {
+                    stmt = conn.prepareStatement("SELECT * FROM shots WHERE ball_id = ? AND shotScore = '/'");
+                    stmt.setInt(1, ballId);
+
+                    List<Shot> spares = new ArrayList<>();
+
+                    resultSet = stmt.executeQuery();
+
+                    while (resultSet.next()) {
+                        Shot spare = new Shot();
+                        loadShot(spare, resultSet, 1);
+                        spares.add(spare);
+                    }
+
+                    return spares;
+                } finally {
+                    DBUtil.closeQuietly(resultSet);
+                    DBUtil.closeQuietly(stmt);
+                }
+            }
+        });
+    }
+
+    // Method to get the total spares for a ball
+    public List<Shot> getTotalFoulsForBall(int ballId) {
+        return executeTransaction(new Transaction<List<Shot>>() {
+            @Override
+            public List<Shot> execute(Connection conn) throws SQLException {
+                PreparedStatement stmt = null;
+                ResultSet resultSet = null;
+
+                try {
+                    stmt = conn.prepareStatement("SELECT * FROM shots WHERE ball_id = ? AND shotScore = 'F'");
+                    stmt.setInt(1, ballId);
+
+                    List<Shot> fouls = new ArrayList<>();
+
+                    resultSet = stmt.executeQuery();
+
+                    while (resultSet.next()) {
+                        Shot foul = new Shot();
+                        loadShot(foul, resultSet, 1);
+                        fouls.add(foul);
+                    }
+
+                    return fouls;
+                } finally {
+                    DBUtil.closeQuietly(resultSet);
+                    DBUtil.closeQuietly(stmt);
+                }
+            }
+        });
+    }
+    
+    // Method to get the total spares for a ball
+    public List<Shot> getTotalMissesForBall(int ballId) {
+        return executeTransaction(new Transaction<List<Shot>>() {
+            @Override
+            public List<Shot> execute(Connection conn) throws SQLException {
+                PreparedStatement stmt = null;
+                ResultSet resultSet = null;
+
+                try {
+                    stmt = conn.prepareStatement("SELECT * FROM shots WHERE ball_id = ? AND shotScore = '-'");
+                    stmt.setInt(1, ballId);
+
+                    List<Shot> misses = new ArrayList<>();
+
+                    resultSet = stmt.executeQuery();
+
+                    while (resultSet.next()) {
+                        Shot miss = new Shot();
+                        loadShot(miss, resultSet, 1);
+                        misses.add(miss);
+                    }
+
+                    return misses;
+                } finally {
+                    DBUtil.closeQuietly(resultSet);
+                    DBUtil.closeQuietly(stmt);
+                }
+            }
+        });
+    }
+
 	
 	public Integer insertBallIntoBallsTable(final int weight, final String color, final String name) {
 	    return executeTransaction(new Transaction<Integer>() {
@@ -476,7 +635,7 @@ public class DerbyDatabase implements IDatabase {
 	    });
 	}
 	
-	public Integer insertEstablishmentIntoEstablishmentsTable(final String name) {
+	public Integer insertEstablishmentIntoEstablishmentsTable(final String name, final String address, final String phoneNumber, final int lanes) {
 	    return executeTransaction(new Transaction<Integer>() {
 	        @Override
 	        public Integer execute(Connection conn) throws SQLException {
@@ -486,13 +645,13 @@ public class DerbyDatabase implements IDatabase {
 	            
 	            ResultSet resultSet1 = null;
 	            ResultSet resultSet3 = null;            
-	                       
+	            
 	            Integer establishmentId = -1;
 
 	            try {
 	                stmt1 = conn.prepareStatement(
 	                        "SELECT establishment_id FROM establishments " +
-	                        "WHERE name = ? "
+	                        "WHERE name = ?"
 	                );
 	                stmt1.setString(1, name);
 	             
@@ -507,10 +666,13 @@ public class DerbyDatabase implements IDatabase {
 	                
 	                    if (establishmentId <= 0) {
 	                        stmt2 = conn.prepareStatement(
-	                                "INSERT INTO establishments (name) " +
-	                                "VALUES (?)"
+	                                "INSERT INTO establishments (name, address, phoneNumber, lanes) " +
+	                                "VALUES (?, ?, ?, ?)"
 	                        );
 	                        stmt2.setString(1, name);
+	                        stmt2.setString(2, address);
+	                        stmt2.setString(3, phoneNumber);
+	                        stmt2.setInt(4, lanes);
 	                        
 	                        
 	                        stmt2.executeUpdate();
@@ -519,7 +681,7 @@ public class DerbyDatabase implements IDatabase {
 	                    
 	                        stmt3 = conn.prepareStatement(
 	                                "SELECT establishment_id FROM establishments " +
-	                                "WHERE name = ? "
+	                                "WHERE name = ?"
 	                        );
 	                        stmt3.setString(1, name);
 	                        
@@ -545,6 +707,7 @@ public class DerbyDatabase implements IDatabase {
 	        }
 	    });
 	}
+
 	public Establishment findEstablishmentById(int establishmentId) {
         return executeTransaction(new Transaction<Establishment>() {
             @Override
@@ -579,6 +742,78 @@ public class DerbyDatabase implements IDatabase {
             }
         });
     }
+	public void updateEstablishmentName(final int establishmentId, final String newName) {
+	    executeTransaction(new Transaction<Void>() {
+	        @Override
+	        public Void execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            try {
+	                stmt = conn.prepareStatement("UPDATE establishments SET name = ? WHERE establishment_id = ?");
+	                stmt.setString(1, newName);
+	                stmt.setInt(2, establishmentId);
+	                stmt.executeUpdate();
+	            } finally {
+	                DBUtil.closeQuietly(stmt);
+	            }
+	            return null;
+	        }
+	    });
+	}
+
+	public void updateEstablishmentAddress(final int establishmentId, final String newAddress) {
+	    executeTransaction(new Transaction<Void>() {
+	        @Override
+	        public Void execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            try {
+	                stmt = conn.prepareStatement("UPDATE establishments SET address = ? WHERE establishment_id = ?");
+	                stmt.setString(1, newAddress);
+	                stmt.setInt(2, establishmentId);
+	                stmt.executeUpdate();
+	            } finally {
+	                DBUtil.closeQuietly(stmt);
+	            }
+	            return null;
+	        }
+	    });
+	}
+
+	public void updateEstablishmentPhoneNumber(final int establishmentId, final String newPhoneNumber) {
+	    executeTransaction(new Transaction<Void>() {
+	        @Override
+	        public Void execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            try {
+	                stmt = conn.prepareStatement("UPDATE establishments SET phoneNumber = ? WHERE establishment_id = ?");
+	                stmt.setString(1, newPhoneNumber);
+	                stmt.setInt(2, establishmentId);
+	                stmt.executeUpdate();
+	            } finally {
+	                DBUtil.closeQuietly(stmt);
+	            }
+	            return null;
+	        }
+	    });
+	}
+
+	public void updateEstablishmentLanes(final int establishmentId, final int newLanes) {
+	    executeTransaction(new Transaction<Void>() {
+	        @Override
+	        public Void execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            try {
+	                stmt = conn.prepareStatement("UPDATE establishments SET lanes = ? WHERE establishment_id = ?");
+	                stmt.setInt(1, newLanes);
+	                stmt.setInt(2, establishmentId);
+	                stmt.executeUpdate();
+	            } finally {
+	                DBUtil.closeQuietly(stmt);
+	            }
+	            return null;
+	        }
+	    });
+	}
+	
 
 
 	//EVENTS QUERYS
@@ -1813,6 +2048,9 @@ public class DerbyDatabase implements IDatabase {
 	private void loadEstablishment(Establishment establishment, ResultSet resultSet, int index) throws SQLException {
 		establishment.setEstablishmentId(resultSet.getInt(index++));
 		establishment.setName(resultSet.getString(index++));
+		establishment.setAddress(resultSet.getString(index++));
+		establishment.setPhoneNumber(resultSet.getString(index++));
+		establishment.setLanes(resultSet.getInt(index++));
 	}
 	
 	private void loadEvent(Event event, ResultSet resultSet, int index) throws SQLException {
@@ -1917,7 +2155,10 @@ public class DerbyDatabase implements IDatabase {
 							"create table establishments (" +
 							"	establishment_id integer primary key " +
 							"		generated always as identity (start with 1, increment by 1), " +
-							"	name varchar(40)"+
+							"	name varchar(40),"+
+							"   address varchar(100),"+
+							"   phoneNumber varchar(40),"+
+							"   lanes integer"+
 							")"
 					);
 					stmt3.executeUpdate();
@@ -2092,9 +2333,12 @@ public class DerbyDatabase implements IDatabase {
 					
 					System.out.println("Balls table populated");	
 					
-					insertEstablishment = conn.prepareStatement("insert into establishments (name) VALUES (?)");
+					insertEstablishment = conn.prepareStatement("insert into establishments (name, address, phoneNumber, lanes) VALUES (?,?,?,?)");
 					for (Establishment establishment : establishmentList) {
 					    insertEstablishment.setString(1, establishment.getName());
+					    insertEstablishment.setString(2, establishment.getAddress());
+					    insertEstablishment.setString(3, establishment.getPhoneNumber());
+					    insertEstablishment.setInt(4, establishment.getLanes());
 					    insertEstablishment.addBatch();
 					}
 					insertEstablishment.executeBatch();
