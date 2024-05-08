@@ -27,7 +27,6 @@
     <%
     StatsController SC = new StatsController();
     List<Game> gamelist = SC.getAllGames();
-    int totalGames = SC.getTotalLifeTimeGames();
     double gameScore = SC.getTotalGameScore();
     double gameScore123 = SC.getLastThreeGameScore();
     int tStr = SC.getTotalStrikes();
@@ -39,7 +38,10 @@
     int low = SC.lowestGameScore();
     int tTur = SC.getTurkeys();
     int cSpl = SC.splitsConversion();
-    int[] graph = SC.getGraphData();
+    int nSpl = SC.numSplit();
+    int nWas = SC.numWashout();
+    int totalGames = SC.getTotalLifeTimeGames();
+    int[] graph = (int[]) request.getAttribute("graphData");
 	%>
 
     <form class="Stats" action="${pageContext.servletContext.contextPath}/stats" method="post">
@@ -54,9 +56,18 @@
                 <li><span class="highlight">Total Spares:</span> <%= tSpa %></li>
                 <li><span class="highlight">Total Turkeys:</span> <%= tTur %></li>
             </ul>
+            <h3>Shot Statistics:</h3>
+            <ul>
+                <li><span class="highlight">Strikes Percentage:</span> <%= strPer %>%</li>
+                <li><span class="highlight">Spares Percentage:</span> <%= spaPer %>%</li>
+                <li><span class="highlight">Open Percentage:</span> <%= openPer %>%</li>
+                <li><span class="highlight">Converted Splits:</span> <%= cSpl %></li>
+                <li><span class="highlight">Splits:</span> <%= nSpl %></li>
+                <li><span class="highlight">WashOuts:</span> <%= nWas %></li>
+            </ul>    
         </div>
 
-        <div class="infoSection">
+        <div class="graphSection">
             <h3>Display Options:</h3>
             <label for="numGames">Number of Games:</label>
             <select name="numGames" id="numGames">
@@ -67,35 +78,16 @@
                 <option value="25" <% if (request.getParameter("numGames") != null && request.getParameter("numGames").equals("25")) out.print("selected"); %>>25</option>
                 <option value="<%= totalGames %>" <% if (request.getParameter("numGames") != null && request.getParameter("numGames").equals(String.valueOf(totalGames))) out.print("selected"); %>>Lifetime</option>
             </select>
-            <input type="submit" value="Update">
-
-        	<ul>
-	        	<h3>Shot Statistics:</h3>
-	            <li><span class="highlight">Strike Percentage:</span> <%= strPer %>%</li>
-	            <li><span class="highlight">Spares Percentage:</span> <%= spaPer %>%</li>
-	            <li><span class="highlight">Open Percentage:</span> <%= openPer %>%</li>
-	            <li><span class="highlight">Converted Splits:</span> <%= cSpl %></li>
-        	</ul>          
+            <input type="submit" value="Update"> 
+            <br>
+            <br>   
+            <div id="myPlot" style="width:100%;max-width:700px"></div>    
         </div>
     </form>
-    
-    <div class="infoSection">
-	    <div class="dropdown">
-		    <button class="dropbtn">Select # of Games</button>
-			    <div class="dropdown-content">
-			        <a href="#" data-value="5">past 5</a>
-		        	<a href="#" data-value="50">past 50</a>
-		        	<a href="#" data-value="100">past 100</a>
-			    </div>
-    </div>
     
     
 </div>
 
-    <!-- Graph section -->
-    <div class="infoSectionGraph">
-        <div id="myPlot" style="width:100%;max-width:700px"></div>
-    </div>
 
     <!-- JavaScript code to generate the graph -->
     <script>

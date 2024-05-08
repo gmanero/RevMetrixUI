@@ -296,93 +296,6 @@ public class StatsController {
 		return turkeyCount;
 	}
 	
-	public int splitsConversion()
-	{
-		List<Shot> shotList = db.findAllShots();
-		int convertSplits = 0;
-		int shotNum = 0;
-		
-		for (Shot shot : shotList)
-		{
-			if (shot.getSplit() == true && shot.getShotNumber() == 1)
-			{
-				shotNum++;
-			}
-			if (shot.getShotScore() == "/" && shotNum == 1)
-			{
-					convertSplits++;
-			}
-			if (shotNum == 1 && shot.getShotNumber() == 2)
-			{
-				shotNum--;
-			}
-		}
-		return convertSplits;
-	}
-	/*public int getTotalStrikesForSetGames()
-	{
-		List<Game> gameList = db.findAllGames();
-		List<Shot> shotList = db.findAllShots();
-		int StrikesInGame = 0;
-		int aveGameCount = 0;
-		
-		if (gameList.isEmpty() || shotList.isEmpty())
-		{
-			System.out.print("game list is empty");
-			return 0;
-		}else {
-			for (Game game : gameList) 
-			{
-				aveGameCount++;
-				if(aveGameCount == num || aveGameCount == gameList.size())
-				{
-					break;
-				}
-			}
-			
-			for(Shot shot: shotList)
-			{
-				if(shot.getShotScore().equals("X"))
-				{
-					StrikesInGame++;
-				}
-			}
-			return StrikesInGame /= aveGameCount;
-		}
-		
-	}
-	
-	public int getTotalSparesForSetGames(List<Game> gameList, List<Shot> shotList, int num)
-	{
-		List<Game> gameList_ = gameList;
-		List<Shot> shotList_ = shotList;
-		int SparesInGame = 0;
-		int aveGameCount = 0;
-		
-		if (gameList_.isEmpty() || shotList_.isEmpty())
-		{
-			System.out.print("game list is empty");
-			return 0;
-		}else {
-			for (Game game : gameList_) 
-			{
-				aveGameCount++;
-				if(aveGameCount == num || aveGameCount == gameList_.size())
-				{
-					break;
-				}
-			}
-			for(Shot shot: shotList_)
-			{
-				if(shot.getShotScore().equals("/"))
-				{
-					SparesInGame++;
-				}
-			}
-			return SparesInGame /= aveGameCount;
-		}
-	}*/
-	
 	public int[] getGraphData(int numGames) {
         List<Game> gameList = db.findAllGames();
         int[] graphData = new int[numGames];
@@ -414,4 +327,54 @@ public class StatsController {
 		String FV = String.format("%.2f", convert);
 		return Double.parseDouble(FV);
 	}
+	
+	public int splitsConversion() {
+        List<Shot> shotList = db.findAllShots();
+        int convertSplits = 0;
+        boolean splitOccurred = false;
+
+        for (Shot shot : shotList) {
+            // Check if a split occurred in the shot
+            if (shot.getSplit() && shot.getShotNumber() == 1) {
+                splitOccurred = true;
+            }
+
+            // Check if the shot after a split is a spare
+            if (splitOccurred && shot.getShotNumber() == 2 && shot.getShotScore().equals("/")) {
+                convertSplits++;
+                splitOccurred = false; // Reset split flag after counting
+            }
+        }
+        return convertSplits;
+    }
+
+    public int numSplit()
+    {
+        List<Shot> shotList = db.findAllShots();
+        int splits = 0;
+
+        for (Shot shot : shotList)
+        {
+            if (shot.getSplit() == true)
+            {
+                splits++;
+            }
+        }
+        return splits;
+    }
+
+    public int numWashout()
+    {
+        List<Shot> shotList = db.findAllShots();
+        int wash = 0;
+
+        for (Shot shot : shotList)
+        {
+            if (shot.getWashout() == true)
+            {
+                wash++;
+            }
+        }
+        return wash;
+    }
 }
