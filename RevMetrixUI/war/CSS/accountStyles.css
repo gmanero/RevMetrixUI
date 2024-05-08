@@ -1,3 +1,4 @@
+/* General styles */
 body {
     margin: 0;
     padding: 0;
@@ -6,7 +7,7 @@ body {
     color: #fff;
 }
 
-/* Header Styles */
+/* Header styles */
 .topPage {
     text-align: center;
     background: linear-gradient(to bottom, #562d7f, #26acca);
@@ -20,97 +21,179 @@ body {
     color: #fff;
 }
 
-/* Main Text Styles */
+/* Page title styles */
+.pageTitle {
+    max-width: fit-content;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+h1 {
+    text-align: center;
+    font-size: 60px;
+}
+
+h2 {
+    margin-bottom: 30px;
+    font-size: 36px;
+    margin: 0px;
+    color: #fff;
+}
+
+.ball-name {
+    color: white;
+}
+
+/* Main text styles */
 .mainText {
     text-align: center;
-    margin: 50px auto;
+    margin: 20px auto;
     max-width: 800px;
 }
 
-.mainText p {
-    font-size: 18px;
-    line-height: 1.5;
+.mainText {
+    font-size: 20px;
+    line-height: 1.6;
+    color: #fff;
 }
 
-/* Bowling Balls Styles */
+/* Bowling balls container styles */
 .bowlingBalls {
+    text-align: center;
+    margin-top: 50px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
+/* Individual bowling ball styles */
 .bowlingBall {
-    width: 120px;
-    height: 120px;
-    background-color: #555;
+    width: 200px;
+    height: 200px;
+    background-color: #555; /* Adjusted color for a lighter shade */
+      background-image: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 100%); /* Lighter gradient */
+    position: relative;
+    overflow: hidden;
     border-radius: 50%;
     margin: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 24px;
+    font-size: 14px;
     color: #fff;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Added box-shadow transition */
+    flex-shrink: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    animation: spin 8s infinite linear; /* Keep spinning */
+}
+/* Darken the ball on hover */
+.bowlingBall:hover {
+    background-color: #d7d7d7; /* Slightly darker color on hover */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
 }
 
-.bowlingBall:hover {
-    background-color: #777;
+/* Pseudo-element for darkening effect */
+.bowlingBall::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjusted opacity for darkening effect */
+    transition: opacity 0.3s ease; /* Transition for opacity change */
+    pointer-events: none; /* Ensure the pseudo-element doesn't interfere with hover events */
+    border-radius: 50%; /* Ensure the darkening effect covers the entire ball */
+    opacity: 0; /* Initially invisible */
+}
+
+/* Darken the ball on hover */
+.bowlingBall:hover::before {
+    opacity: 2; /* Make the darkening effect visible on hover */
 }
 
 .addBall {
-    width: 120px;
-    height: 120px;
-    background-color: #555;
+    /* Adjusted background color and gradient */
+    background-color: #26acca; /* Light blue color */
     border-radius: 50%;
+    border: none;
+    color: #fff;
+    width: 200px;
+    height: 200px;
     margin: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 48px;
-    color: #fff;
+    font-size: 36px;
     cursor: pointer;
+    position: relative; /* Added position relative for pseudo-element */
+    overflow: hidden; /* Hide overflowing pseudo-element */
     transition: background-color 0.3s ease;
+    
+    
 }
 
-.addBall:hover {
-    background-color: #777;
+/* Darken the ball on hover */
+.addBall:hover{
+      background-color: #3d7b93; /* Darker blue on hover */
 }
 
+
+/* Define the spinning animation */
+@keyframes spin {
+    from {
+        transform: rotateY(0deg);
+    }
+    to {
+        transform: rotateY(360deg);
+    }
+}
 
 .addBallForm {
+    /* Adjusted styles for the Add Ball form */
     display: none;
     text-align: center;
-    margin-top: 50px;
+    margin: 50px auto; /* Center horizontally and add space around the form */
+    width: 60%; /* Set a wider width for the form */
+    max-width: 600px; /* Limit the maximum width for larger screens */
+    background-color: #333;
+    padding: 30px; /* Increased padding for better spacing */
+    border-radius: 10px; /* Set border-radius to 10px */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .addBallForm.show {
     display: block;
 }
 
-.addBallForm h2 {
-    font-size: 24px;
+.addBallForm h3 {
+    margin-top: 0;
     margin-bottom: 20px;
-}
-
-.addBallForm form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    font-size: 24px;
+    color: #fff;
 }
 
 .addBallForm label {
-    margin-bottom: 10px;
+    display: block;
+    margin-bottom: 15px; /* Increased margin for better spacing */
+    color: #fff;
 }
 
 .addBallForm input {
-    margin-bottom: 20px;
-    padding: 5px;
+    width: 100%; /* Set input width to 100% for better responsiveness */
+    padding: 12px; /* Increased padding for better appearance */
+    margin-bottom: 20px; /* Increased margin for better spacing */
+    border-radius: 5px;
+    border: 1px solid #ccc;
 }
 
 .addBallForm button {
-    padding: 10px 20px;
+    width: calc(100% - 300px); /* Set button width to 100% for better responsiveness */
+    padding: 12px; /* Increased padding for better appearance */
     background-color: #26acca;
     color: #fff;
     border: none;
@@ -120,5 +203,112 @@ body {
 }
 
 .addBallForm button:hover {
-    background-color: #4891ac;
+    background-color: #3d7b93; /* Darker blue on hover */
 }
+
+a:link {
+    text-decoration: none;
+}
+table {
+    width: 90%;
+    margin: 40px auto;
+    border-collapse: collapse;
+    border: 2px solid #ddd;
+    background-color: #333;
+ }
+ th, td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+  }
+
+  th {
+    background-color: #333;
+  }
+
+  tr:nth-child(even) {
+    background-color: #474747;
+  }
+
+  tr:hover {
+    background-color: #797979;
+  }
+.addEstablishment {
+    /* Adjusted styles for the Add Establishment button */
+    width: 250px;
+    height: 55px;
+    background-color: #26acca;
+    border-radius: 13px;
+    border: none;
+    margin: 10px auto; /* Set margin to auto to center horizontally */
+    margin-bottom: 80px;
+    display: flex; /* Use flexbox for alignment */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    font-size: 18px; /* Reduced font size for a professional look */
+    font-family: Arial, sans-serif; /* Use a professional font */
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    flex-shrink: 0;
+}
+
+.addEstablishment:hover {
+    background-color: #3d7b93; /* Darker blue on hover */
+}
+
+/* Add Establishment form styles */
+.addEstablishmentForm {
+    /* Adjust the background color and border-radius */
+    display: none;
+    text-align: center;
+    margin: 50px;
+    margin-left: 550px;
+    margin-right: 550px;
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px; /* Set border-radius to 10px */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.addEstablishmentForm.show {
+    display: block;
+}
+
+.addEstablishmentForm h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #fff;
+}
+
+.addEstablishmentForm label {
+    display: block;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.addEstablishmentForm input {
+    width: calc(100% - 20px);
+    margin: 0 auto 20px auto;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.addEstablishmentForm button {
+    width: calc(100% - 300px);
+    padding: 10px;
+    background-color: #26acca;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 15px;
+}
+
+.addEstablishmentForm button:hover {
+    background-color: #3d7b93;
+}
+ 

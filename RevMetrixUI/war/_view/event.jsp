@@ -21,27 +21,27 @@
 
 <%
     EventController controller = new EventController();
-    List<Event> events = controller.getAllEvents();
+    List<Event> events = controller.getAllOngoingEvents();
 %>
 
 <% if (!events.isEmpty()) { %>
 <form method="get">
     <div class="eventCards">
-        <% for (Event event : events) { %>
+        <% for (Event event : events) { if(event.getEventId()!=6){%>
             <a href="index?destination=eventDetails&id=<%= event.getEventId() %>">
                 <div class="eventCard">
                     <h2><%= event.getName() %></h2>
                     <p><strong>Establishment:</strong> <%= event.getEstablishmentName() %></p>
                     <p><strong>Type:</strong> <%= event.getTypeString() %></p>
                     <p><strong>Description:</strong> <%= event.getDescription() %></p>
+                    <p><strong>Start Date:</strong> <%= event.getStartdate() %></p>
                 </div>
             </a>
-        <% } %>
+        <% }} %>
     </div>
     </form>
 <% } else { %>
     <p>No events found.</p>
 <% } %>
-
 </body>
 </html>

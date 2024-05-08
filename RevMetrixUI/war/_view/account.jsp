@@ -1,7 +1,8 @@
 <%@ page import="java.util.List" %>
-<%@ page import="revMetrix.db.model.Account" %>
 <%@ page import="revMetrix.db.model.Ball" %>
+<%@ page import="revMetrix.db.model.Establishment" %>
 <%@ page import="revMetrix.controller.AllAccountsController" %>
+<%@ page import="revMetrix.controller.EstablishmentController" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,68 +20,137 @@
     <h1>Account</h1>
 </div>
 
+<h1>Welcome, ${loggedInName}!</h1>
+
 <div class="mainText">
-    <p>Welcome to your account page! Here you can manage your profile, view your bowling balls collection, and more.</p>
+    <p>Here you can manage your profile, view your bowling balls collection, establishments and more.</p>
 </div>
 
 <%
     // Create a new instance of AllAccountsController
     AllAccountsController controller = new AllAccountsController();
+	EstablishmentController Econtroller = new EstablishmentController();
     
-    // Retrieve all accounts
-    List<Account> accounts = controller.getAllAccounts();
-%>
-
-<div class="accountSection">
-    <h2>Your Accounts</h2>
-    <% if (accounts != null && !accounts.isEmpty()) { %>
-        <div class="accountCards">
-            <% for (Account account : accounts) { %>
-                <div class="accountCard">
-                    <h3>Email: <%= account.getEmail() %></h3>
-                    <p>Password: <%= account.getPassword() %></p>
-                    <p>First Name: <%= account.getFirstname() %></p>
-                    <p>Last Name: <%= account.getLastname() %></p>
-                    <p>Logged In: <%= account.isLoggedIn() %></p>
-                </div>
-            <% } %>
-        </div>
-    <% } else { %>
-        <p>No accounts found.</p>
-    <% } %>
-</div>
-
-<%
     // Retrieve all bowling balls
     List<Ball> balls = controller.findAllBalls();
+    
+   
 %>
+<div class="pageTitle">
+    <span class="loggedInName"><h2>Your Establishments</h2></span>
+    </div>
+    <div>
+    <hr>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Phone Number</th>
+            <th>Lanes</th>
+        </tr>
+        <%
+        List<Establishment> establishments = Econtroller.getAllEstablishments();
+            for (int i = 0; i < establishments.size(); i++) {
+                Establishment establishment = establishments.get(i);
+        %>
+            <tr>
+                <td>
+                    <form action="${pageContext.request.contextPath}/account" method="post">
+                        <input type="hidden" name="action" value="updateEstablishment">
+                        <input type="hidden" name="establishmentId" value="<%= establishment.getEstablishmentId() %>">
+                        <input type="hidden" name="fieldName" value="name">
+                        <input type="text" name="newValue" value="<%= establishment.getName() %>" onchange="this.form.submit()">
+                    </form>
+                </td>
+                <td>
+                    <form action="${pageContext.request.contextPath}/account" method="post">
+                        <input type="hidden" name="action" value="updateEstablishment">
+                        <input type="hidden" name="establishmentId" value="<%= establishment.getEstablishmentId() %>">
+                        <input type="hidden" name="fieldName" value="address">
+                        <input type="text" name="newValue" value="<%= establishment.getAddress() %>" onchange="this.form.submit()">
+                    </form>
+                </td>
+                <td>
+                    <form action="${pageContext.request.contextPath}/account" method="post">
+                        <input type="hidden" name="action" value="updateEstablishment">
+                        <input type="hidden" name="establishmentId" value="<%= establishment.getEstablishmentId() %>">
+                        <input type="hidden" name="fieldName" value="phoneNumber">
+                        <input type="text" name="newValue" value="<%= establishment.getPhoneNumber() %>" onchange="this.form.submit()">
+                    </form>
+                </td>
+                <td>
+                    <form action="${pageContext.request.contextPath}/account" method="post">
+                        <input type="hidden" name="action" value="updateEstablishment">
+                        <input type="hidden" name="establishmentId" value="<%= establishment.getEstablishmentId() %>">
+                        <input type="hidden" name="fieldName" value="lanes">
+                        <input type="number" name="newValue" value="<%= establishment.getLanes() %>" onchange="this.form.submit()">
+                    </form>
+                </td>
+            </tr>
+        <% } %>
+    </table>
+</div>
+<button class="addEstablishment">Add Establishment</button>
+    <div class="addEstablishmentForm" id="addEstablishmentForm">
+        <h3>New Establishment</h3>
+    <form action="${pageContext.request.contextPath}/account" method="post">
+        <input type="hidden" name="action" value="addEstablishment">
+        <label for="establishmentName">Name:</label>
+        <input type="text" id="establishmentName" name="establishmentName" required>
+        <br>
+        <label for="establishmentAddress">Address:</label>
+        <input type="text" id="establishmentAddress" name="establishmentAddress" required>
+        <br>
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="text" id="phoneNumber" name="phoneNumber" required>
+        <br>
+        <label for="lanes">Lanes:</label>
+        <input type="number" id="lanes" name="lanes" min="1" required>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+
+<form method="get">
+    <% Boolean loggedIn = (Boolean) request.getAttribute("loggedIn"); %>
+    <% if (loggedIn != null && loggedIn) { %>
+        <div class="pageTitle"><span class="loggedInName"><h2>Your Bowling Arsenal</h2></span></div>
+        <hr>
+    <% } else { %>
+            
+    <% } %>
+</form>
 
 <div class="bowlingBalls" id="bowlingBalls">
-    <h2>Your Bowling Balls</h2>
     <% if (balls != null && !balls.isEmpty()) { %>
         <% for (Ball ball : balls) { %>
-            <div class="bowlingBall" style="background-color: <%= ball.getColor() %>;">
-                <p>Name: <%= ball.getName() %></p>
-                <p>Weight: <%= ball.getWeight() %> lbs</p>
-                <p>Color: <%= ball.getColor() %></p>
-            </div>
+          <a href="index?destination=ballDetails&id=<%= ball.getBallId() %>">
+                <div class="bowlingBall" style="background-color: <%= ball.getColor() %>;">
+                   
+                </div>
+                 <p class="ball-name"><%= ball.getName() %></p>
+            </a>
         <% } %>
     <% } else { %>
         <p>No bowling balls found.</p>
     <% } %>
-    <h2>Add a New Bowling Ball</h2>
-    <form action="account" method="post">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
-        <br>
-        <label for="weight">Weight (lbs):</label>
-        <input type="number" id="weight" name="weight" min="10" max="16" required>
-        <br>
-        <label for="color">Color:</label>
-        <input type="text" id="color" name="color" required>
-        <br>
-        <button type="submit">Add Ball</button>
-    </form>
+    <button class="addBall">+</button>
+    <div class="addBallForm" id="addBallForm">
+        <h3>Add Ball</h3>
+        <form action="${pageContext.request.contextPath}/account" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <br>
+            <label for="weight">Weight (lbs):</label>
+            <input type="number" id="weight" name="weight" min="10" max="16" required>
+            <br>
+            <label for="color">Color:</label>
+            <input type="text" id="color" name="color" required>
+            <br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
 </div>
 
 <script>
@@ -92,37 +162,17 @@ document.addEventListener('DOMContentLoaded', function() {
     addBallButton.addEventListener('click', function() {
         addBallForm.classList.toggle('show');
     });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const addEstablishmentButton = document.querySelector('.addEstablishment');
+    const addEstablishmentForm = document.getElementById('addEstablishmentForm');
 
-    // Add ball form submission
-    addBallForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        const name = document.getElementById('name').value;
-        const weight = document.getElementById('weight').value;
-        const color = document.getElementById('color').value;
-
-        if (name && weight && color) {
-            addBowlingBall(name, weight, color);
-            addBallForm.classList.remove('show');
-            addBallForm.reset();
-        } else {
-            alert('Please enter name, weight, and color.');
-        }
+    // Display or hide add ball form
+    addEstablishmentButton.addEventListener('click', function() {
+        addEstablishmentForm.classList.toggle('show');
     });
-
-    // Function to add a new bowling ball
-    function addBowlingBall(name, weight, color) {
-        const ball = document.createElement('div');
-        ball.classList.add('bowlingBall');
-        ball.style.backgroundColor = color;
-        ball.innerHTML = `
-            <p>Name: ${name}</p>
-            <p>Weight: ${weight} lbs</p>
-            <p>Color: ${color}</p>
-        `;
-        const bowlingBalls = document.getElementById('bowlingBalls');
-        bowlingBalls.appendChild(ball);
-    }
 });
 </script>
 

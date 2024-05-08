@@ -6,6 +6,7 @@ public class Game {
     private int startingLane;
     private String opponent;
     private int handicap;
+    private boolean done;
     
     public Game() {
     	
@@ -49,5 +50,18 @@ public class Game {
     
     public int getHandicap() {
         return handicap;
+    }
+    public void setdone(boolean done) {
+    	this.done=done;
+    }
+    
+    public boolean getdone() {
+    	return done;
+    }
+    public String getdoneBox() {
+    	if(done) {
+    		return "\u2713";
+    	}
+    	return"";
     }
 }

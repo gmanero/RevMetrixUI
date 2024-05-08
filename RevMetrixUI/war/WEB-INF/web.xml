@@ -27,8 +27,8 @@
         <servlet-class>revMetrix.servlet.StatsServlet</servlet-class>
     </servlet>
      <servlet>
- <servlet-name>YourGamesServlet</servlet-name>
-        <servlet-class>revMetrix.servlet.YourGamesServlet</servlet-class>
+ <servlet-name>ArchiveServlet</servlet-name>
+        <servlet-class>revMetrix.servlet.ArchiveServlet</servlet-class>
     </servlet>
     <servlet>
  <servlet-name>AccountServlet</servlet-name>
@@ -66,7 +66,14 @@
         <servlet-name>EventDetailsServlet</servlet-name>
         <servlet-class>revMetrix.servlet.EventDetailsServlet</servlet-class>
     </servlet>
-    
+    <servlet>
+        <servlet-name>LeagueSheetServlet</servlet-name>
+        <servlet-class>revMetrix.servlet.LeagueSheetServlet</servlet-class>
+    </servlet>
+     <servlet>
+        <servlet-name>BallDetailsServlet</servlet-name>
+        <servlet-class>revMetrix.servlet.BallDetailsServlet</servlet-class>
+    </servlet>
     <!-- Servlet mappings -->
     <servlet-mapping>
         <servlet-name>IndexServlet</servlet-name>
@@ -94,8 +101,8 @@
     </servlet-mapping>
     
      <servlet-mapping>
-        <servlet-name>YourGamesServlet</servlet-name>
-        <url-pattern>/YourGames</url-pattern>
+        <servlet-name>ArchiveServlet</servlet-name>
+        <url-pattern>/Archive</url-pattern>
     </servlet-mapping>
     
      <servlet-mapping>
@@ -141,6 +148,16 @@
      <servlet-mapping>
         <servlet-name>EventDetailsServlet</servlet-name>
         <url-pattern>/eventDetails</url-pattern>
+    </servlet-mapping>
+    
+     <servlet-mapping>
+        <servlet-name>LeagueSheetServlet</servlet-name>
+        <url-pattern>/leagueSheet</url-pattern>
+     </servlet-mapping>
+     
+     <servlet-mapping>
+        <servlet-name>BallDetailsServlet</servlet-name>
+        <url-pattern>/ballDetails</url-pattern>
     </servlet-mapping>
 
     <welcome-file-list>

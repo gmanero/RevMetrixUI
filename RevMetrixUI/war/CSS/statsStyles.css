@@ -1,65 +1,81 @@
-		body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: #1f1f1f;
-            color: #fff;
-        }
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #1f1f1f;
+    color: #fff;
+}
 
-        /* Header Styles */
-        .topPage {
-             background: linear-gradient(to bottom,  #562d7f, #26acca);
-            color: #fff;
-            text-align: center;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
+.topPage {
+    background: linear-gradient(to bottom, #562d7f, #26acca);
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 20px;
+}
 
-        .topPage h1 {
-            margin: 0;
-            font-size: 36px;
-        }
+.infoSection {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    float: left;
+    width: calc(50% - 20px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
 
-      
+.graphSection {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    float: left;
+    width: calc(50% - 20px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    text-align: center; /* Center the text */
+}
 
-        /* Main Content Styles */
-        .mainText {
-            text-align: center;
-            margin: 20px auto;
-            max-width: 800px;
-        }
+.infoSectionGraph {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    float: right;
+    width: calc(50% - 20px);
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    text-align: center; /* Center the text */
+}
 
-        /* Additional Styles */
-        .infoSection {
-            background-color: #333;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
+.infoSection:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
 
-        .infoSection h2 {
-            margin-top: 0;
-            font-size: 24px;
-        }
+.infoSection h3 {
+    margin-top: 0;
+    font-size: 24px;
+}
 
-        .infoSection p {
-            font-size: 16px;
-            line-height: 1.6;
-            margin: 0;
-            color: #fff;
-        }
+.infoSection p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+    color: #fff;
+}
 
-        .infoSection ul {
-            list-style: none;
-            padding-left: 20px;
-            margin: 0;
-        }
+.infoSection ul {
+    list-style: none;
+    padding-left: 20px;
+    margin: 0;
+}
 
-        .infoSection li {
-            margin-bottom: 5px;
-        }
+.infoSection li {
+    margin-bottom: 5px;
+}
 
-        .highlight {
-            color: #fffff;
-            font-weight: bold;
-        }
+.infoSectionGraph:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}

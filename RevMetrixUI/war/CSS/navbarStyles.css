@@ -42,21 +42,28 @@ body {
     color: #553180; /* Change color on hover */
 }
 
-.login-btn,
-.account-btn {
-	 background-color:  #553180; 
-	 border: none;
+.account,
+.login {
+    display: flex;
+    align-items: center; /* Align items vertically */
+}
+
+.account-btn,
+.login-btn {
+    background-color: #553180;
+    border: none;
     color: #fff;
     padding: 8px 20px;
     font-size: 16px;
-    margin-left: 20px;
+   margin-left: 20px;
+   margin-top: 9px;
     cursor: pointer;
     transition: all 0.3s;
 }
 
-.login-btn:hover,
-.account-btn:hover {
-    background-color:  #412562; 
+.account-btn:hover,
+.login-btn:hover {
+    background-color: #412562;
     color: #fff; /* White text color */
 }
 
@@ -84,7 +91,7 @@ body {
     background-color: #222; /* Dark background */
     min-width: 160px;
     z-index: 1;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
 .dropdown-content button {
@@ -95,9 +102,25 @@ body {
 }
 
 .dropdown-content button:hover {
-    background-color: #553180; 
+    background-color: #553180;
 }
 
 .dropdown:hover .dropdown-content {
     display: block;
+}
+.loggedInName{
+    padding: 8px 20px;
+    font-size: 16px;
+    margin-right: 20px;
+}
+.left {
+    float: left;
+}
+
+.center {
+    float: left; 
+}
+
+.right {
+    float: right;
 }

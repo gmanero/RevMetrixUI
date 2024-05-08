@@ -34,25 +34,25 @@
     <h1>Sign Up</h1>
     <p>${errorMessage}</p>
         <p>Enter your Email Address</p>
-    <input type="text" id="email" name="email" placeholder="Email">
+    <input type="email" id="email" name="email" placeholder="Email" required>
 
     <p>Enter your First Name</p>
-    <input type="text" id="firstname" name="firstname" placeholder="First Name">
+    <input type="text" id="firstname" name="firstname" placeholder="First Name" required>
     <p>Enter your Last Name</p>
-    <input type="text" id="lastname" name="lastname" placeholder="Last Name">
+    <input type="text" id="lastname" name="lastname" placeholder="Last Name" required>
 
     <p>Enter your Password</p>
-    <input type="password" id="password" name="password" placeholder="Password">
+    <input type="password" id="password" name="password" placeholder="Password" required>
 
     <p>Confirm your Password</p>
-    <input type="password" id="password2" name="password2" placeholder="Password"><br><br>
+    <input type="password" id="password2" name="password2" placeholder="Password"required><br><br>
 
     <button type="submit" class="signUpBtn" onclick="submitForm()">Sign Up</button>
-    
-    
+
     <div class="linkToAccount">
-    <button type="submit" class="linkToAccount" name="destination" value="login" >Already have a login?</button>
-</div>
+        <a href="${pageContext.servletContext.contextPath}/index?destination=login" class="linkToAccount">Already have a login?</a>
+    </div>
+    
 
 </form>
 

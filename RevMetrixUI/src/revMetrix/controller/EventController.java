@@ -1,6 +1,8 @@
 package revMetrix.controller;
 
 import revMetrix.db.model.Event;
+import revMetrix.db.model.Game;
+import revMetrix.db.model.Session;
 import revMetrix.db.model.Establishment;
 import revMetrix.db.persist.DatabaseProvider;
 import revMetrix.db.persist.DerbyDatabase;
@@ -18,7 +20,7 @@ public class EventController {
         DatabaseProvider.setInstance(new DerbyDatabase());
         db = DatabaseProvider.getInstance();
     }
-
+    
     public ArrayList<Event> getAllEvents() {
         List<Event> eventList = db.findAllEvents();
         List<Establishment> establishmentList = db.findAllEstablishments(); // Fetch all establishments
@@ -41,6 +43,53 @@ public class EventController {
         }
 
         return events;
+    }
+    public ArrayList<Event> getAllOngoingEvents(){
+    	 List<Event> eventList = db.findAllOngoingEvents();
+         List<Establishment> establishmentList = db.findAllEstablishments(); // Fetch all establishments
+
+         ArrayList<Event> events = new ArrayList<>();
+
+         if (eventList.isEmpty()) {
+             System.out.println("No events found");
+             return events;
+         } else {
+             for (Event event : eventList) {
+                 // Set establishment name for each event
+                 event.setEstablishmentName(getEstablishmentName(event.getEstablishmentId(), establishmentList));
+                 events.add(event);
+                 System.out.println("Event Name: " + event.getName() + ", Establishment: " +
+                         event.getEstablishmentName() +
+                         ", Type: " + eventTypeToString(event.getType()) +
+                         ", Description: " + event.getDescription());
+             }
+         }
+         return events;
+    }
+    public ArrayList<Event> getAllDoneEvents(){
+   	 	List<Event> eventList = db.findAllDoneEvents();
+        List<Establishment> establishmentList = db.findAllEstablishments(); // Fetch all establishments
+
+        ArrayList<Event> events = new ArrayList<>();
+
+        if (eventList.isEmpty()) {
+            System.out.println("No events found");
+            return events;
+        } else {
+            for (Event event : eventList) {
+                // Set establishment name for each event
+                event.setEstablishmentName(getEstablishmentName(event.getEstablishmentId(), establishmentList));
+                events.add(event);
+                System.out.println("Event Name: " + event.getName() + ", Establishment: " +
+                        event.getEstablishmentName() +
+                        ", Type: " + eventTypeToString(event.getType()) +
+                        ", Description: " + event.getDescription());
+            }
+        }
+        return events;
+   }
+    public void finnishEvent(int id) {
+    	db.updateEventDone(id);
     }
 
     private String getEstablishmentName(int establishmentId, List<Establishment> establishments) {
@@ -156,4 +205,50 @@ public class EventController {
     }
 
     return events;
-}}
+}
+	
+	private int eventId = -1;
+	public int findEventIdByInfo(String name, String description) {
+		eventId = db.findEventIdByInfo(name, description);
+		return eventId;
+	}
+	public void updateSessionScore(int id) {
+		ArrayList<Game> games = db.GetGamesBySession(id);
+		int total = 0;
+		for(Game game:games) {
+			total+= game.getGameScore();
+		}
+		db.updateSessionScore(id, total);
+		
+	}
+	  public ArrayList<Session> getSessionsByEvent(int eventId) {
+	        List<Session> sessionList = db.getSessionByEvent(eventId);
+	        ArrayList<Session> sessions = new ArrayList<>();
+
+	        if (sessionList.isEmpty()) {
+	            System.out.println("No sessions found for this event");
+	            return sessions;
+	        } else {
+	            for (Session session : sessionList) {
+	                sessions.add(session);
+	                System.out.println("Session ID: " + session.getSessionId() + ", Event ID: " +
+	                        session.getEventId() +
+	                        ", Score: " + session.getSessionScore() +
+	                        ", Lanes: " + session.getLanes() +
+	                        ", Date: " + session.getDate() +
+	                        ", User ID: " + session.getUserId());
+	            }
+	        }
+
+	        return sessions;
+	    }
+	  public void removeSession(int id) {
+		  db.RemoveSession(id);
+	  }
+	  public void addSessions(int eventId, int num) {
+		  for (int i = 0; i<num;i++) {
+			  db.insertSessionIntoSessionsTable(0, eventId, "", "0", 0);
+		  }
+	  }
+	
+	}
