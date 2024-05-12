@@ -27,7 +27,7 @@ public class LeaguesServlet extends HttpServlet {
         System.out.println("Leagues Servlet: doGet");
 
         // Get all tournaments from the EventController
-        List<Event> leagues = eventController.getAllLeagueEvents();
+        List<Event> leagues = eventController.getAllOngoingLeagueEvents();
 
         req.setAttribute("tournaments", leagues);
 

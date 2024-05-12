@@ -930,6 +930,122 @@ public class DerbyDatabase implements IDatabase {
 	        }
 	    });
 	}
+	
+	public List<Event> findAllOngoingPracticeEvents() {
+	    return executeTransaction(new Transaction<List<Event>>() {
+	        @Override
+	        public List<Event> execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            try {
+	                stmt = conn.prepareStatement("SELECT * FROM events where done = false AND type = ?");
+	                stmt.setInt(1, 1);
+	                
+	                List<Event> result = new ArrayList<Event>();
+	                
+	                resultSet = stmt.executeQuery();
+	                
+	                Boolean found = false;
+	                
+	                while (resultSet.next()) {
+	                    found = true;
+	                    
+	                    Event event = new Event();
+	                    System.out.println(result);
+	                    loadEvent(event, resultSet, 1);
+	                    
+	                    result.add(event);
+	                }
+	                
+	                if (!found) {
+	                    System.out.println("No events were found in the database");
+	                }
+	                
+	                return result;
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
+	public List<Event> findAllOngoingTournamentEvents() {
+	    return executeTransaction(new Transaction<List<Event>>() {
+	        @Override
+	        public List<Event> execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            try {
+	                stmt = conn.prepareStatement("SELECT * FROM events where done = false and type = ?");
+	                stmt.setInt(1, 3);
+	                
+	                List<Event> result = new ArrayList<Event>();
+	                
+	                resultSet = stmt.executeQuery();
+	                
+	                Boolean found = false;
+	                
+	                while (resultSet.next()) {
+	                    found = true;
+	                    
+	                    Event event = new Event();
+	                    loadEvent(event, resultSet, 1);
+	                    
+	                    result.add(event);
+	                }
+	                
+	                if (!found) {
+	                    System.out.println("No events were found in the database");
+	                }
+	                
+	                return result;
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
+	public List<Event> findAllOngoingLeagueEvents() {
+	    return executeTransaction(new Transaction<List<Event>>() {
+	        @Override
+	        public List<Event> execute(Connection conn) throws SQLException {
+	            PreparedStatement stmt = null;
+	            ResultSet resultSet = null;
+	            
+	            try {
+	                stmt = conn.prepareStatement("SELECT * FROM events where done = false and type = ?");
+	                stmt.setInt(1, 2);
+	                
+	                List<Event> result = new ArrayList<Event>();
+	                
+	                resultSet = stmt.executeQuery();
+	                
+	                Boolean found = false;
+	                
+	                while (resultSet.next()) {
+	                    found = true;
+	                    
+	                    Event event = new Event();
+	                    loadEvent(event, resultSet, 1);
+	                    
+	                    result.add(event);
+	                }
+	                
+	                if (!found) {
+	                    System.out.println("No events were found in the database");
+	                }
+	                
+	                return result;
+	            } finally {
+	                DBUtil.closeQuietly(resultSet);
+	                DBUtil.closeQuietly(stmt);
+	            }
+	        }
+	    });
+	}
 	public Boolean updateEventDone(int id) {
 		return executeTransaction(new Transaction<Boolean>() {
 	        @Override

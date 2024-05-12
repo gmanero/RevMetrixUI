@@ -25,6 +25,9 @@ public interface IDatabase {
 	public List<Event> findEventById(final int eventId);
 	public int findEventIdByInfo(final String name, final String description);
 	public Boolean updateEventDone(int id);
+	public List<Event> findAllOngoingLeagueEvents();
+	public List<Event> findAllOngoingTournamentEvents();
+	public List<Event> findAllOngoingPracticeEvents();
 	//Establishments
 	public Establishment findEstablishmentById(int establishmentId);
 	public List<Establishment> findAllEstablishments();
